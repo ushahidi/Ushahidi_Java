@@ -23,6 +23,6 @@ package com.ushahidi.java.sdk.api;
  * @author eyedol
  *
  */
-public class Categories {
+public class Category {
 
 }

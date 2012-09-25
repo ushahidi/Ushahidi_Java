@@ -19,10 +19,37 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.tasks;
 
+import java.util.List;
+
+import com.ushahidi.java.sdk.api.Category;
+
 /**
+ * Implements all tasks related to Categories. 
+ * 
+ * See <a href="https://wiki.ushahidi.com/display/WIKI/Ushahidi+Public+API#UshahidiPublicAPI-Categories">Ushahidi Public API for Categories</a>
+ * for more details
+ * 
  * @author eyedol
  *
  */
 public class CategoriesTask {
-
+	
+	/**
+	 * Gets all visible categories submitted to the Ushahidi deployment. 
+	 * 
+	 * 
+	 * @return The fetched categories
+	 */
+	public List<Category> all() {
+		return null;
+	}
+	/**
+	 * Get a visible category by it's ID.
+	 * 
+	 * @param id The category's ID
+	 * @return The fetched category
+	 */
+	public Category catId(int id) {
+		return null;
+	}
 }

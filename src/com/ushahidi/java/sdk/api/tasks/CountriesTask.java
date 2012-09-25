@@ -19,10 +19,56 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.tasks;
 
+import java.util.List;
+
+import com.ushahidi.java.sdk.api.Country;
+
 /**
+ * Implements all tasks related to countries.
+ * 
+ * See <a href="https://wiki.ushahidi.com/display/WIKI/Ushahidi+Public+API#UshahidiPublicAPI-Countries">Ushahidi Public API for Countries</a>
+ * for more details
  * @author eyedol
  *
  */
 public class CountriesTask {
 
+	/**
+	 * Gets all countries.
+	 * 
+	 * @return The countries retrieves
+	 */
+	public List<Country> all() {
+		return null;
+	}
+	
+	/**
+	 * Get a country by it's ID
+	 * @param id The ID of the country
+	 * @return The country retrieved
+	 */
+	public Country countryId(int id) {
+		return null;
+	}
+	
+	/**
+	 * Get a country by it's ISO code. 
+	 * 
+	 * @param iso The country's ISO code. Eg gh for Ghana.
+	 * @return The country retrieved
+	 */
+	public Country countryIso(String iso) {
+		return null;
+	}
+	
+	/**
+	 * Get a country by it's name
+	 * 
+	 * @param name The name of the country to be used to retrieve the details of 
+	 * that country. Eg. ghana
+	 * @return The country retrieved
+	 */
+	public Country countryName(String name) {
+		return null;
+	}
 }

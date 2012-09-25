@@ -19,10 +19,63 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.tasks;
 
+import java.util.List;
+
+import com.ushahidi.java.sdk.api.Comment;
+
 /**
+ * Implements all tasks related to comments.
+ * 
+ * See <a href="https://wiki.ushahidi.com/display/WIKI/Ushahidi+Public+API#UshahidiPublicAPI-Comments">Ushahidi Public API for Comments</a>
+ * for more details
  * @author eyedol
  *
  */
 public class CommentsTask {
 
+	/**
+	 * Get all comments.
+	 * 
+	 * @return The fetched comments
+	 */
+	public List<Comment>all() {
+		return null;
+	}
+	
+	/**
+	 * Get all comments for a specific report.
+	 * 
+	 * @param id The report id
+	 * @return The comments associated to the specified report id
+	 */
+	public List<Comment> reportId(int id) {
+		return null;
+	}
+	
+	/**
+	 * Get all comment marked as spam.
+	 * 
+	 * @return The spam comments
+	 */
+	public List<Comment> spam() {
+		return null;
+	}
+	
+	/**
+	 * Get all pending comment
+	 * 
+	 * @return The pending comment
+	 */
+	public List<Comment> pending() {
+		return null;
+	}
+	
+	/**
+	 * Get all approved comments
+	 * 
+	 * @return The approved comments
+	 */
+	public List<Comment> approved() {
+		return null;
+	}
 }
