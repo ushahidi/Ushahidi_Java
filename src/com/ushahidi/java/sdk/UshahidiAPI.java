@@ -17,48 +17,28 @@
  ** Ushahidi developers at team@ushahidi.com.
  **
  *****************************************************************************/
-package com.ushahidi.java.sdk.api.tasks;
-
-import java.util.List;
-
-import com.ushahidi.java.sdk.api.Location;
+package com.ushahidi.java.sdk;
 
 /**
- * The Location Task Implements all tasks related to the Location API.
+ * This is the root of all API calls.
  * 
- * See <a href="https://wiki.ushahidi.com/display/WIKI/Ushahidi+Public+API#UshahidiPublicAPI-Locations">Ushahidi Public API for Location</a>
- * for more details
  * @author eyedol
  *
  */
-public class LocationTask {
+public class UshahidiAPI {
+
+	// URL for the ushahidi deployment
+	private String url;
 	
-	/**
-	 *  Gets all locations
-	 *  
-	 * @return All location
-	 */
-	public List<Location> all() {
-		return null;
+	private int timeout;
+	
+	private UshahidiAPI(String url, int timeout) {
+		this.url = url;
+		this.timeout = timeout;
 	}
 	
-	/**
-	 * Get a specific location by it's ID
-	 * 
-	 * @param id The ID of the location
-	 * @return The location retrieved by ID
-	 */
-	public Location locationId(int id) {
-		return null;
+	public static void main(String args[]) {
+		
 	}
 	
-	/**
-	 * Get a specific location by a country's ID
-	 * 
-	 * @param id The ID of the country to be used to retrieve the location.
-	 * @return The location retrieved by the country's ID
-	 */
-	public Location countryId(int id) {
-		return null;
-	}
 }

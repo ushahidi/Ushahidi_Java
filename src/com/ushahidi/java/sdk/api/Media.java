@@ -17,28 +17,12 @@
  ** Ushahidi developers at team@ushahidi.com.
  **
  *****************************************************************************/
-package com.ushahidi.java.sdk;
+package com.ushahidi.java.sdk.api;
 
 /**
- * This is the root of all API calls.
- * 
  * @author eyedol
  *
  */
-public class Ushahidi {
+public class Media {
 
-	// URL for the ushahidi deployment
-	private String url;
-	
-	private int timeout;
-	
-	private Ushahidi(String url, int timeout) {
-		this.url = url;
-		this.timeout = timeout;
-	}
-	
-	public static void main(String args[]) {
-		
-	}
-	
 }
