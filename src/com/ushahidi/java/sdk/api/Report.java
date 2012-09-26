@@ -190,7 +190,7 @@ public class Report {
 	/**
 	 * Get the verification status of the report. 1 for verified and 0 for unverified
 	 * 
-	 * @return
+	 * @return The verification status
 	 */
 	public int getVerified() {
 		return verified;
