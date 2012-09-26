@@ -52,12 +52,12 @@ public class Report {
 	/**
 	 * The mode of the report
 	 */
-	private String mode;
+	private int mode;
 
 	/**
 	 * The verification status of the report. 1 for verified and 0 for unverified.
 	 */
-	private String verified;
+	private int verified;
 
 	/**
 	 * The location name
@@ -67,12 +67,12 @@ public class Report {
 	/**
 	 * The latitude attached to the report
 	 */
-	private String latitude;
+	private double latitude;
 
 	/**
 	 * The longitude attached to the report
 	 */
-	private String longitude;
+	private double longitude;
 
 	
 	/**
@@ -80,118 +80,214 @@ public class Report {
 	 */
 	private List<Category> categories;
 
-	private String media;
+	/**
+	 * The media attached to the report
+	 */
+	private List<Media> media;
 
+	/**
+	 * The default constructor. It initializes no variables.
+	 */
 	public Report() {
 
 	}
+	
+	/**
+	 * Get the report ID
+	 * 
+	 * @return The report ID 
+	 */
+	public int getId() {
+		return id;
+	}
+	
+	/**
+	 * Set the report ID
+	 * 
+	 * @param id The ID of the report
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
 
+	/**
+	 * Get the title of the report
+	 * 
+	 * @return The report's title
+	 */
 	public String getTitle() {
 		return title;
 	}
 
+	/**
+	 * Set the title of the report
+	 * 
+	 * @param title The title of the report
+	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+	/**
+	 * Get the description of the report
+	 * 
+	 * @return The description of the report
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * Set the description of the report
+	 * 
+	 * @param description The report description
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public String getReportDate() {
+	/**
+	 * Get the date of the report
+	 * 
+	 * @return The date attached to the report
+	 */
+	public String getDate() {
 		return date;
 	}
 
-	public void setReportDate(String reportdate) {
-		this.date = reportdate;
+	/**
+	 * Set the date attached to the report
+	 * 
+	 * @param date The date in the format 2012-09-20 15:06:00
+	 */
+	public void setDate(String date) {
+		this.date = date;
 	}
 
-	public String getMode() {
+	/**
+	 * Get the mode for the report
+	 * 
+	 * @return The mode of the report
+	 */
+	public int getMode() {
 		return mode;
 	}
 
-	public void setMode(String mode) {
+	/**
+	 * Set the mode of the report
+	 * 
+	 * @param mode
+	 */
+	public void setMode(int mode) {
 		this.mode = mode;
 	}
 
-	public String getVerified() {
+	/**
+	 * Get the verification status of the report. 1 for verified and 0 for unverified
+	 * 
+	 * @return
+	 */
+	public int getVerified() {
 		return verified;
 	}
 
-	public void setVerified(String verified) {
+	/**
+	 * Set the verification status of the report.
+	 * 
+	 * @param verified The verification status. 1 for verified and 0 for unverified
+	 */
+	public void setVerified(int verified) {
 		this.verified = verified;
 	}
 
+	/**
+	 * Get the location name attached to the report
+	 * 
+	 * @return The name of the location
+	 */
 	public String getLocationName() {
 		return locationname;
 	}
 
+	/**
+	 * Set the location name of the location.
+	 * 
+	 * @param locationname The name of the location
+	 */
 	public void setLocationName(String locationname) {
 		this.locationname = locationname;
 	}
 
-	public String getLongitude() {
+	/**
+	 * Get the longitude attached to the report
+	 * 
+	 * @return The longitude tagged with the report
+	 */
+	public double getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(String longitude) {
+	/**
+	 * Set the longitude attached to the report
+	 * 
+	 * @param longitude The longitude of the report
+	 */
+	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
 
-	public String getLatitude() {
+	/**
+	 * Get the latitude attached to the report
+	 * 
+	 * @return The latitude of the report
+	 */
+	public double getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(String latitude) {
+	/**
+	 * Set the latitude attached to the report
+	 * 
+	 * @param latitude The latitude attached to the report
+	 */
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 
-	public String getCategories() {
+	/**
+	 * Get a list of categories tagged to the report
+	 * 
+	 * @return The list of categories attached to the report.
+	 */
+	public List<Category> getCategories() {
 		return categories;
 	}
 
-	public void setCategories(String categories) {
+	/**
+	 * Set the list of categories.
+	 * 
+	 * @param categories The categories attached to the report
+	 */
+	public void setCategories(List<Category> categories) {
 		this.categories = categories;
 	}
 
-	public String getMedia() {
+	/**
+	 * Get the media attached to the report
+	 * 
+	 * @return The media attached to the report
+	 */
+	public List<Media> getMedia() {
 		return this.media;
 	}
 
-	public void setMedia(String media) {
+	/**
+	 * Set the media attached to the report.
+	 * 
+	 * @param media The media attached to the report
+	 */
+	public void setMedia( List <Media> media) {
 		this.media = media;
 	}
 
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	@Override
-	public void setDbId(int id) {
-		this.id = id;
-	}
-
-	public void setReportId(int reportId) {
-		this.reportId = reportId;
-	}
-
-	public int getReportId() {
-		return this.reportId;
-	}
-	
-	public void setPending(int pending) {
-		this.pending = pending;
-	}
-
-	public int getPending() {
-		return this.pending;
-	}
 }
