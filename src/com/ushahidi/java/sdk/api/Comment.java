@@ -20,9 +20,147 @@
 package com.ushahidi.java.sdk.api;
 
 /**
+ * This Comment class has all properties and methods of a comment
+ * 
  * @author eyedol
- *
+ * 
  */
 public class Comment {
+	
+	/**
+	 * The unique ID for the comment
+	 */
+	private int id;
+	
+	/**
+	 * The unique ID of a checking
+	 */
+	private int checkinId;
 
+	/**
+	 * The unique ID of a report
+	 */
+	private int reportId;
+
+	/**
+	 * The name of the person who submitted the comment
+	 */
+	private String author;
+
+	/**
+	 * The description of the comment. This in fact the actual comment passed 
+	 */
+	private String description;
+
+	/**
+	 * The date the comment was submitted.
+	 */
+	private String date;
+
+	/**
+	 * Get the ID of the comment
+	 * @return The comment ID
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * Set the comment ID
+	 * 
+	 * @param id The comment ID
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * Get the checkin ID the comment was posted to.
+	 * 
+	 * @return The checkin ID
+	 */
+	public int getCheckinId() {
+		return checkinId;
+	}
+
+	/**
+	 * Set the checkin ID the comment was posted to.
+	 * 
+	 * @param checkinId
+	 */
+	public void setCheckinId(int checkinId) {
+		this.checkinId = checkinId;
+	}
+
+	/**
+	 * Get the report ID which the comment was posted to.
+	 * 
+	 * @return The report ID
+	 */
+	public int getReportId() {
+		return reportId;
+	}
+
+	/**
+	 * Set the report ID which the comment was posted to
+	 * 
+	 * @param reportId The report ID
+	 */
+	public void setReportId(int reportId) {
+		this.reportId = reportId;
+	}
+
+	/**
+	 * Get the author of the comment
+	 * 
+	 * @return The name of the commenter
+	 */
+	public String getAuthor() {
+		return this.author;
+	}
+
+	/**
+	 * Set the author of the comment
+	 * 
+	 * @param author The name of the commenter
+	 */
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	/**
+	 * Get the description of the comment. The actual comment passed
+	 * 
+	 * @return The comment passed.
+	 */
+	public String getDescription() {
+		return this.description;
+	}
+
+	/**
+	 *  Set the description of the comment. 
+	 *  
+	 * @param description The comment
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
+	 * Get the date the comment was submitted
+	 * 
+	 * @return The submission date
+	 */
+	public String getDate() {
+		return this.date;
+	}
+
+	/**
+	 * Set the date the commented was submitted
+	 * 
+	 * @param date The submission date.
+	 */
+	public void setDate(String date) {
+		this.date = date;
+	}
 }

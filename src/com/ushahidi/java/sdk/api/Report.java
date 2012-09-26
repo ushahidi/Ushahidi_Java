@@ -22,7 +22,7 @@ package com.ushahidi.java.sdk.api;
 import java.util.List;
 
 /**
- * The report class has all the properties and methods of a particular class
+ * The Report class has all the properties and methods of a particular report
  * 
  * @author eyedol
  *
