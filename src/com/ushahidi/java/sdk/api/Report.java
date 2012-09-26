@@ -84,6 +84,11 @@ public class Report {
 	 * The media attached to the report
 	 */
 	private List<Media> media;
+	
+	/**
+	 * The comments attached to the report
+	 */
+	private List<Comment> comments;
 
 	/**
 	 * The default constructor. It initializes no variables.
@@ -290,4 +295,21 @@ public class Report {
 		this.media = media;
 	}
 
+	/**
+	 * Get the comments attached to the report
+	 * 
+	 * @return The comment attached to the report
+	 */
+	public List<Comment> getComments() {
+		return this.comments;
+	}
+
+	/**
+	 * Set the comments attached to the report.
+	 * 
+	 * @param comments The media attached to the report
+	 */
+	public void setComments( List <Comment> comments) {
+		this.comments = comments;
+	}
 }
