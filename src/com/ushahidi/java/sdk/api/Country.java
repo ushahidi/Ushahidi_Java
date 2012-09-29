@@ -20,9 +20,148 @@
 package com.ushahidi.java.sdk.api;
 
 /**
+ * The Country class implements all the properties and methods of a country
+ * 
  * @author eyedol
- *
+ * 
  */
 public class Country {
+	
+	/**
+	 * The country id
+	 */
+	private int id;
 
+	/**
+	 * The name of the country. Eg. Ghana
+	 */
+	private String name;
+
+	/**
+	 * The ISO code for the country. Eg. gh for Ghana
+	 */
+	private String iso;
+
+	/**
+	 * The country
+	 */
+	private String country;
+
+	/**
+	 * The capital city of the captital. Eg. Accra, Ghana's capital city.
+	 */
+	private String capital;
+
+	/**
+	 * The total number of cities retrieved for the country
+	 */
+	private int cities;
+
+	/**
+	 * Get the unique ID of the country
+	 * 
+	 * @return The ID
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * Set the unique ID of the country
+	 * 
+	 * @param id The country unique ID
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * Get the name of the country.
+	 * 
+	 * @return Country's name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Set the name of the country
+	 * 
+	 * @param name The name of the country
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * Set the ISO code of the country
+	 * 
+	 * @return The ISO code
+	 */
+	public String getIso() {
+		return iso;
+	}
+
+	/**
+	 * Set the ISO code of the country 
+	 * 
+	 * @param iso The country's ISO code
+	 */
+	public void setIso(String iso) {
+		this.iso = iso;
+	}
+
+	/**
+	 * Get the country retrieved via the API call
+	 * 
+	 * @return The ccountry
+	 */
+	public String getCountry() {
+		return country;
+	}
+
+	/**
+	 * Set the country retrieved via the API call
+	 * 
+	 * @param country The country
+	 */
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	/**
+	 * Get the capital town of the country
+	 * 
+	 * @return The capital town
+	 */
+	public String getCapital() {
+		return this.capital;
+	}
+
+	/**
+	 * Set the capital town of the country as retrieved from the API call
+	 * 
+	 * @param capital The capital town of the country
+	 */
+	public void setCapital(String capital) {
+		this.capital = capital;
+	}
+
+	/**
+	 * Get the total number cities as retrieved via the API call
+	 * 
+	 * @return The total number cities
+	 */
+	public int getCities() {
+		return cities;
+	}
+
+	/**
+	 * Set the total number cities as retrieved via the API call
+	 * 
+	 * @param cities The total number of cities
+	 */
+	public void setCities(int cities) {
+		this.cities = cities;
+	}
 }
