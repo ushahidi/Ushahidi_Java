@@ -17,14 +17,26 @@
  ** Ushahidi developers at team@ushahidi.com.
  **
  *****************************************************************************/
-package com.ushahidi.java.sdk.net;
+package com.ushahidi.java.sdk.api;
 
 /**
- * This class implements an HTTP client for interacting with Ushahidi Restful API
- * 
  * @author eyedol
- *
+ * 
  */
-public class MainHttpClient {
+public abstract class Model {
 
+	/**
+	 * Set the ID of the category
+	 * 
+	 * @param id
+	 *            The ID
+	 */
+	protected abstract void setId(int id);
+
+	/**
+	 * Get the ID of the category
+	 * 
+	 * @return The ID
+	 */
+	public abstract int getId();
 }

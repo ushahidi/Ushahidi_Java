@@ -25,7 +25,7 @@ package com.ushahidi.java.sdk.api;
  * @author eyedol
  *
  */
-public class Category {
+public class Category extends Model{
 
 	/**
 	 * The category ID
@@ -157,6 +157,7 @@ public class Category {
 	 * 
 	 * @param id The ID
 	 */
+	@Override
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -166,6 +167,7 @@ public class Category {
 	 * 
 	 * @return The ID
 	 */
+	@Override
 	public int getId() {
 		return this.id;
 	}

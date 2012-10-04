@@ -19,22 +19,123 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk;
 
+import java.util.List;
+
+import com.ushahidi.java.sdk.api.Model;
+import com.ushahidi.java.sdk.net.HttpClient;
+
 /**
- * An abstract class to be implemented by all API calls
+ * An abstract class to be implemented by all API calls. This is the actual
+ * payload as received from the server via an API call.
  * 
  * @author eyedol
- *
+ * 
  */
-public abstract class Payload {
-	
-	// The domain of the Ushahidi deployment
+public abstract class Payload<M extends Model> extends HttpClient {
+
+	/** The domain of the Ushahidi deployment */
 	private String domain;
-	
-	// The status code
+
+	/** The error code */
 	private int code;
-	
-	// The status message
+
+	/** The error message */
 	private String message;
-	
-	
+
+	/** The JSON String retrieved as a result of an API call */
+	private String jsonString;
+
+	// private JSONObject jsonObject;
+
+	public void setJsonString(String jsonString) {
+		this.jsonString = jsonString;
+	}
+
+	public String getJsonString() {
+		return this.jsonString;
+	}
+
+	/**
+	 * Set the domain received from the server
+	 * 
+	 * @param domain
+	 *            the domain from the server.
+	 */
+	public void setDomain(String domain) {
+		this.domain = domain;
+	}
+
+	/**
+	 * Get the domain received from the server
+	 * 
+	 * @return The domain received from the server
+	 */
+	public String getDomain() {
+		return domain;
+	}
+
+	/**
+	 * Set the error code received from the server
+	 * 
+	 * @param code
+	 *            The code from the server.
+	 */
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+	/**
+	 * Get the error code received from the server
+	 * 
+	 * @return The status code received from the server.
+	 */
+	public int getCode() {
+		return code;
+	}
+
+	/**
+	 * Set the error message received from the server
+	 * 
+	 * @param message
+	 *            The error message from the server.
+	 * 
+	 */
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	/**
+	 * Get the status message received from the server
+	 * 
+	 * @return The status message as returned from the server
+	 */
+	public String getMessage() {
+		return this.message;
+	}
+
+	/**
+	 * Abstract method to be implemented by all subclasses so they set the
+	 * actual data retrieved from the server via the API. This is the content
+	 * most people are interested in.
+	 * 
+	 * @param List
+	 *            <M>
+	 * 
+	 * @param models
+	 *            The items retrieved from the server
+	 */
+	public abstract void setModels(List<M> models);
+
+	/**
+	 * Abstract method to be implemented by all subclasses so they get the
+	 * actual data received from the server via the api call.
+	 * 
+	 * 
+	 * @return The list of items
+	 */
+	public abstract List<M> getModels();
+
+	private void processJson(String jsonString) {
+
+	}
 }

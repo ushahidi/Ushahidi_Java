@@ -25,8 +25,8 @@ package com.ushahidi.java.sdk.api;
  * @author eyedol
  * 
  */
-public class Country {
-	
+public class Country extends Model {
+
 	/**
 	 * The country id
 	 */
@@ -62,6 +62,7 @@ public class Country {
 	 * 
 	 * @return The ID
 	 */
+	@Override
 	public int getId() {
 		return id;
 	}
@@ -69,8 +70,10 @@ public class Country {
 	/**
 	 * Set the unique ID of the country
 	 * 
-	 * @param id The country unique ID
+	 * @param id
+	 *            The country unique ID
 	 */
+	@Override
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -87,7 +90,8 @@ public class Country {
 	/**
 	 * Set the name of the country
 	 * 
-	 * @param name The name of the country
+	 * @param name
+	 *            The name of the country
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -103,9 +107,10 @@ public class Country {
 	}
 
 	/**
-	 * Set the ISO code of the country 
+	 * Set the ISO code of the country
 	 * 
-	 * @param iso The country's ISO code
+	 * @param iso
+	 *            The country's ISO code
 	 */
 	public void setIso(String iso) {
 		this.iso = iso;
@@ -123,7 +128,8 @@ public class Country {
 	/**
 	 * Set the country retrieved via the API call
 	 * 
-	 * @param country The country
+	 * @param country
+	 *            The country
 	 */
 	public void setCountry(String country) {
 		this.country = country;
@@ -141,7 +147,8 @@ public class Country {
 	/**
 	 * Set the capital town of the country as retrieved from the API call
 	 * 
-	 * @param capital The capital town of the country
+	 * @param capital
+	 *            The capital town of the country
 	 */
 	public void setCapital(String capital) {
 		this.capital = capital;
@@ -159,7 +166,8 @@ public class Country {
 	/**
 	 * Set the total number cities as retrieved via the API call
 	 * 
-	 * @param cities The total number of cities
+	 * @param cities
+	 *            The total number of cities
 	 */
 	public void setCities(int cities) {
 		this.cities = cities;

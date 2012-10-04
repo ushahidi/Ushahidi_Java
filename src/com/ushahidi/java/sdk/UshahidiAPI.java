@@ -19,26 +19,31 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk;
 
+import com.ushahidi.java.sdk.net.HttpClient;
+
 /**
  * This is the root of all API calls.
  * 
  * @author eyedol
- *
+ * 
  */
 public class UshahidiAPI {
 
 	// URL for the ushahidi deployment
 	private String url;
-	
+
 	private int timeout;
-	
+
 	private UshahidiAPI(String url, int timeout) {
 		this.url = url;
 		this.timeout = timeout;
 	}
-	
+
 	public static void main(String args[]) {
-		
+		System.out.println("making a get request");
+		HttpClient httpClient = new HttpClient();
+		final int status = httpClient.getAllReportFromWeb();
+		System.out.println("HTTPClient Status: " + status);
 	}
-	
+
 }

@@ -21,21 +21,23 @@ package com.ushahidi.java.sdk.api.tasks;
 
 import java.util.List;
 
+import com.ushahidi.java.sdk.Payload;
 import com.ushahidi.java.sdk.api.Category;
 
 /**
- * Implements all tasks related to Categories. 
+ * Implements all tasks related to Categories.
  * 
- * See <a href="https://wiki.ushahidi.com/display/WIKI/Ushahidi+Public+API#UshahidiPublicAPI-Categories">Ushahidi Public API for Categories</a>
- * for more details
+ * See <a href=
+ * "https://wiki.ushahidi.com/display/WIKI/Ushahidi+Public+API#UshahidiPublicAPI-Categories"
+ * >Ushahidi Public API for Categories</a> for more details
  * 
  * @author eyedol
- *
+ * 
  */
-public class CategoriesTask {
-	
+public class CategoriesTask extends Payload<Category> {
+
 	/**
-	 * Gets all visible categories submitted to the Ushahidi deployment. 
+	 * Gets all visible categories submitted to the Ushahidi deployment.
 	 * 
 	 * 
 	 * @return The fetched categories
@@ -43,13 +45,35 @@ public class CategoriesTask {
 	public List<Category> all() {
 		return null;
 	}
+
 	/**
 	 * Get a visible category by it's ID.
 	 * 
-	 * @param id The category's ID
+	 * @param id
+	 *            The category's ID
 	 * @return The fetched category
 	 */
 	public Category catId(int id) {
+		return null;
+	}
+
+	/**
+	 * Set the API entities as retrieved from the API call
+	 * 
+	 * @see com.ushahidi.java.sdk.Payload#setModels(java.util.List)
+	 */
+	@Override
+	public void setModels(List<Category> models) {
+		// TODO Auto-generated method stub
+	}
+
+	/**
+	 * Get the API entities as retrieved from the API call
+	 * 
+	 * @see com.ushahidi.java.sdk.Payload#getEntities()
+	 */
+	@Override
+	public List<Category> getModels() {
 		return null;
 	}
 }

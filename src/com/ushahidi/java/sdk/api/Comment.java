@@ -25,7 +25,7 @@ package com.ushahidi.java.sdk.api;
  * @author eyedol
  * 
  */
-public class Comment {
+public class Comment extends Model{
 	
 	/**
 	 * The unique ID for the comment
@@ -61,6 +61,7 @@ public class Comment {
 	 * Get the ID of the comment
 	 * @return The comment ID
 	 */
+	@Override
 	public int getId() {
 		return id;
 	}
@@ -70,6 +71,7 @@ public class Comment {
 	 * 
 	 * @param id The comment ID
 	 */
+	@Override
 	public void setId(int id) {
 		this.id = id;
 	}
