@@ -45,7 +45,35 @@ public abstract class Payload<M extends Model> extends HttpClient {
 	/** The JSON String retrieved as a result of an API call */
 	private String jsonString;
 
-	// private JSONObject jsonObject;
+	protected final HttpClient client;
+
+	/**
+	 * Create a payload using the default {@link HttpClient}
+	 */
+	public Payload() {
+		this.client = new HttpClient();
+	}
+
+	/**
+	 * Create the payload for client
+	 * 
+	 * @param client
+	 *            must be non-null
+	 */
+	public Payload(HttpClient client) {
+		if (client == null)
+			throw new IllegalArgumentException("Client cannot be null");
+		this.client = client;
+	}
+
+	/**
+	 * Get configured http client
+	 * 
+	 * @return non-null client
+	 */
+	public HttpClient getClient() {
+		return client;
+	}
 
 	public void setJsonString(String jsonString) {
 		this.jsonString = jsonString;

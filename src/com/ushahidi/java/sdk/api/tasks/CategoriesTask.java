@@ -35,6 +35,14 @@ import com.ushahidi.java.sdk.api.Category;
  * 
  */
 public class CategoriesTask extends Payload<Category> {
+	
+	/**
+	 * Create the Categories task
+	 */
+	
+	public CategoriesTask() {
+		super();
+	}
 
 	/**
 	 * Gets all visible categories submitted to the Ushahidi deployment.
