@@ -1,5 +1,17 @@
 # Ushahidi Java SDK #
 
-A Java wrapper for the Ushahidi API. For more information on the Ushahidi API, see; 
+A Java wrapper for the Ushahidi API. The goal of this SDK is to support all the Ushahidi public API that are there. 
+For more information on the Ushahidi API, see; https://wiki.ushahidi.com/display/WIKI/Ushahidi+Public+API
 
-http://wiki.ushahidi.com/doku.php?id=ushahidi_api
+## Building
+The Ushahidi Java SDK is built using [Apache Ant]()
+
+Run the following command to build a JAR file of the SDK with all the dependencies.
+`ant dist` 
+
+And to compile all the source codes, run
+`ant compile`
+
+## Javadoc 
+You can find the Javadoc which contains all the relevant documentation on the classes 
+and the packages in the doc directory found in the root folder of the project.

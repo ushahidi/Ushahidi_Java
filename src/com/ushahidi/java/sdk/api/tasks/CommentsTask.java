@@ -21,37 +21,45 @@ package com.ushahidi.java.sdk.api.tasks;
 
 import java.util.List;
 
+import com.ushahidi.java.sdk.Payload;
 import com.ushahidi.java.sdk.api.Comment;
 
 /**
  * Implements all tasks related to comments.
  * 
- * See <a href="https://wiki.ushahidi.com/display/WIKI/Ushahidi+Public+API#UshahidiPublicAPI-Comments">Ushahidi Public API for Comments</a>
- * for more details
+ * See <a href=
+ * "https://wiki.ushahidi.com/display/WIKI/Ushahidi+Public+API#UshahidiPublicAPI-Comments"
+ * >Ushahidi Public API for Comments</a> for more details
+ * 
  * @author eyedol
- *
+ * 
  */
-public class CommentsTask {
+public class CommentsTask extends Payload<Comment> {
+
+	public CommentsTask() {
+		super();
+	}
 
 	/**
 	 * Get all comments.
 	 * 
 	 * @return The fetched comments
 	 */
-	public List<Comment>all() {
+	public List<Comment> all() {
 		return null;
 	}
-	
+
 	/**
 	 * Get all comments for a specific report.
 	 * 
-	 * @param id The report id
+	 * @param id
+	 *            The report id
 	 * @return The comments associated to the specified report id
 	 */
 	public List<Comment> reportId(int id) {
 		return null;
 	}
-	
+
 	/**
 	 * Get all comment marked as spam.
 	 * 
@@ -60,7 +68,7 @@ public class CommentsTask {
 	public List<Comment> spam() {
 		return null;
 	}
-	
+
 	/**
 	 * Get all pending comment
 	 * 
@@ -69,13 +77,35 @@ public class CommentsTask {
 	public List<Comment> pending() {
 		return null;
 	}
-	
+
 	/**
 	 * Get all approved comments
 	 * 
 	 * @return The approved comments
 	 */
 	public List<Comment> approved() {
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.ushahidi.java.sdk.Payload#setModels(java.util.List)
+	 */
+	@Override
+	public void setModels(List<Comment> models) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.ushahidi.java.sdk.Payload#getModels()
+	 */
+	@Override
+	public List<Comment> getModels() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

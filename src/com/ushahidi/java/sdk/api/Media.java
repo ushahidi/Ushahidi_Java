@@ -23,6 +23,24 @@ package com.ushahidi.java.sdk.api;
  * @author eyedol
  *
  */
-public class Media {
+public class Media extends Model {
+
+	/* (non-Javadoc)
+	 * @see com.ushahidi.java.sdk.api.Model#setId(int)
+	 */
+	@Override
+	protected void setId(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see com.ushahidi.java.sdk.api.Model#getId()
+	 */
+	@Override
+	public int getId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

@@ -27,7 +27,7 @@ import java.util.List;
  * @author eyedol
  *
  */
-public class Report {
+public class Report extends Model {
 	
 	/**
 	 * The id of the report
