@@ -19,7 +19,12 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.tasks;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import com.ushahidi.java.sdk.Payload;
 import com.ushahidi.java.sdk.api.Category;
@@ -35,13 +40,13 @@ import com.ushahidi.java.sdk.api.Category;
  * 
  */
 public class CategoriesTask extends Payload<Category> {
-	
+
 	/**
 	 * Create the Categories task
 	 */
-	
-	public CategoriesTask() {
-		super();
+
+	public CategoriesTask(String url) {
+		super(url);
 	}
 
 	/**
@@ -49,9 +54,18 @@ public class CategoriesTask extends Payload<Category> {
 	 * 
 	 * 
 	 * @return The fetched categories
+	 * @throws IOException
+	 * @throws JSONException
 	 */
-	public List<Category> all() {
-		return null;
+	public List<Category> all() throws JSONException, IOException {
+
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=categories");
+		uriBuilder.append("&resp=json");
+
+		// fetch all categories
+		return getCategories(uriBuilder.toString());
+
 	}
 
 	/**
@@ -61,27 +75,103 @@ public class CategoriesTask extends Payload<Category> {
 	 *            The category's ID
 	 * @return The fetched category
 	 */
-	public Category catId(int id) {
+	public Category catId(int id) throws JSONException, IOException {
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=categories");
+		uriBuilder.append("&by=catid");
+		uriBuilder.append("&id="+String.valueOf(id));
+		uriBuilder.append("&resp=json");
+		List<Category> categories = getCategories(uriBuilder.toString());
+		if (categories != null && categories.size() > 0) {
+			for (Category category : categories) {
+				return category;
+			}
+		}
+		return null;
+	}
+
+	private List<Category> getCategories(String url) throws JSONException,
+			IOException {
+		return processPayload(client.sendGetRequest(url));
+	}
+
+	private List<Category> processPayload(String jsonString)
+			throws JSONException, IOException {
+		setJsonObject(jsonString);
+		if (getJsonObject() != null) {
+			setDomain(getPayloadObj().getString("domain"));
+			setCode(getJsonObject().getJSONObject("error").getInt("code"));
+			setMessage(getJsonObject().getJSONObject("error").getString(
+					"message"));
+			return processModels();
+		}
 		return null;
 	}
 
 	/**
-	 * Set the API entities as retrieved from the API call
+	 * Process the JSON data to get the categories data
 	 * 
-	 * @see com.ushahidi.java.sdk.Payload#setModels(java.util.List)
+	 * @see com.ushahidi.java.sdk.Payload#processModels()
+	 * 
+	 * 
+	 * @throws JSONException
 	 */
 	@Override
-	public void setModels(List<Category> models) {
-		// TODO Auto-generated method stub
-	}
+	public List<Category> processModels() {
 
-	/**
-	 * Get the API entities as retrieved from the API call
-	 * 
-	 * @see com.ushahidi.java.sdk.Payload#getEntities()
-	 */
-	@Override
-	public List<Category> getModels() {
+		List<Category> listCategory = new ArrayList<Category>();
+
+		try {
+			JSONArray categoriesArr = getPayloadObj()
+					.getJSONArray("categories");
+			int id = 0;
+			if (categoriesArr != null) {
+
+				for (int i = 0; i < categoriesArr.length(); i++) {
+					Category category = new Category();
+
+					id = categoriesArr.getJSONObject(i)
+							.getJSONObject("category").getInt("id");
+					category.setId(id);
+					if (!categoriesArr.getJSONObject(i)
+							.getJSONObject("category").isNull("color")) {
+						category.setColor(categoriesArr.getJSONObject(i)
+								.getJSONObject("category").getString("color"));
+					}
+
+					if (!categoriesArr.getJSONObject(i)
+							.getJSONObject("category").isNull("parent_id")) {
+						category.setParentId(categoriesArr.getJSONObject(i)
+								.getJSONObject("category").getInt("parent_id"));
+					}
+
+					if (!categoriesArr.getJSONObject(i)
+							.getJSONObject("category").isNull("description")) {
+						category.setDescription(categoriesArr.getJSONObject(i)
+								.getJSONObject("category")
+								.getString("description"));
+					}
+
+					if (!categoriesArr.getJSONObject(i)
+							.getJSONObject("category").isNull("title")) {
+
+						category.setTitle(categoriesArr.getJSONObject(i)
+								.getJSONObject("category").getString("title"));
+					}
+
+					if (!categoriesArr.getJSONObject(i)
+							.getJSONObject("category").isNull("position")) {
+						category.setPosition(categoriesArr.getJSONObject(i)
+								.getJSONObject("category").getInt("position"));
+					}
+
+					listCategory.add(category);
+					return listCategory;
+				}
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 }

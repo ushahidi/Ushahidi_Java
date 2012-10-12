@@ -21,6 +21,9 @@ package com.ushahidi.java.sdk;
 
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.ushahidi.java.sdk.api.Model;
 import com.ushahidi.java.sdk.net.HttpClient;
 
@@ -42,15 +45,22 @@ public abstract class Payload<M extends Model> extends HttpClient {
 	/** The error message */
 	private String message;
 
-	/** The JSON String retrieved as a result of an API call */
-	private String jsonString;
-
 	protected final HttpClient client;
+
+	private JSONObject jsonObject;
+
+	protected String url;
+
+	protected int timeout;
 
 	/**
 	 * Create a payload using the default {@link HttpClient}
 	 */
-	public Payload() {
+	public Payload(String url) {
+		if (url == null) {
+			throw new IllegalArgumentException("URL cannot be null");
+		}
+		this.url = url;
 		this.client = new HttpClient();
 	}
 
@@ -60,10 +70,12 @@ public abstract class Payload<M extends Model> extends HttpClient {
 	 * @param client
 	 *            must be non-null
 	 */
-	public Payload(HttpClient client) {
-		if (client == null)
+	public Payload(String url, HttpClient client) {
+		if (client == null) {
 			throw new IllegalArgumentException("Client cannot be null");
+		}
 		this.client = client;
+		this.url = url;
 	}
 
 	/**
@@ -73,14 +85,6 @@ public abstract class Payload<M extends Model> extends HttpClient {
 	 */
 	public HttpClient getClient() {
 		return client;
-	}
-
-	public void setJsonString(String jsonString) {
-		this.jsonString = jsonString;
-	}
-
-	public String getJsonString() {
-		return this.jsonString;
 	}
 
 	/**
@@ -142,28 +146,40 @@ public abstract class Payload<M extends Model> extends HttpClient {
 	}
 
 	/**
-	 * Abstract method to be implemented by all subclasses so they set the
-	 * actual data retrieved from the server via the API. This is the content
-	 * most people are interested in.
-	 * 
-	 * @param List
-	 *            <M>
-	 * 
-	 * @param models
-	 *            The items retrieved from the server
-	 */
-	public abstract void setModels(List<M> models);
-
-	/**
 	 * Abstract method to be implemented by all subclasses so they get the
 	 * actual data received from the server via the api call.
 	 * 
 	 * 
-	 * @return The list of items
+	 * @return The list of model data
 	 */
-	public abstract List<M> getModels();
+	public abstract List<M> processModels();
 
-	private void processJson(String jsonString) {
+	/**
+	 * 
+	 * @param jsonString
+	 */
+	public void setJsonObject(String jsonString) throws JSONException {
+		if (jsonString != null && jsonString.length() > 0) {
+			jsonObject = new JSONObject(jsonString);
+		}
 
 	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public JSONObject getJsonObject() {
+		return jsonObject;
+	}
+
+	/**
+	 * 
+	 * @return
+	 * @throws JSONException
+	 */
+	public JSONObject getPayloadObj() throws JSONException {
+		return jsonObject.getJSONObject("payload");
+	}
+
 }

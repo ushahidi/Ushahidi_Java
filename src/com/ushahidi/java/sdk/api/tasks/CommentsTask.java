@@ -36,8 +36,8 @@ import com.ushahidi.java.sdk.api.Comment;
  */
 public class CommentsTask extends Payload<Comment> {
 
-	public CommentsTask() {
-		super();
+	public CommentsTask(String url) {
+		super(url);
 	}
 
 	/**
@@ -90,22 +90,12 @@ public class CommentsTask extends Payload<Comment> {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.ushahidi.java.sdk.Payload#setModels(java.util.List)
+	 * @see com.ushahidi.java.sdk.Payload#processModels()
 	 */
 	@Override
-	public void setModels(List<Comment> models) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ushahidi.java.sdk.Payload#getModels()
-	 */
-	@Override
-	public List<Comment> getModels() {
+	public List<Comment> processModels() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

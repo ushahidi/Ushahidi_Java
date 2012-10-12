@@ -26,17 +26,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
 import java.util.List;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
@@ -66,7 +63,7 @@ public class HttpClient {
 	 * The default connection timeout is 3 secs. You can override this value by
 	 * initializing this variable with your own.
 	 */
-	protected int timeoutConnection = 3000;
+	public int timeoutConnection = 3000;
 
 	/**
 	 * The default socket timeout is 3 secs. You can override this value by
@@ -85,7 +82,10 @@ public class HttpClient {
 	private static final int SSL_SOCKET_FACTORY_PORT = 443;
 
 	/** Default user agent request header value */
-	protected static final String USER_AGENT = "Ushahidi-Java/1.0.0";
+	private static final String USER_AGENT = "Ushahidi-Java/1.0.0";
+
+	/** The user agent to use */
+	private String userAgent;
 
 	/** The charset encoding type */
 	private static final String CHARSET_UTF8 = "UTF-8";
@@ -130,18 +130,42 @@ public class HttpClient {
 	}
 
 	/**
+	 * Set the value to set as the user agent header on every request created.
+	 * Specifying a null or empty agent parameter will reset this client to use
+	 * the default user agent header value.
+	 * 
+	 * @param agent
+	 */
+	public void setUserAgent(String agent) {
+		if (agent != null && agent.length() > 0) {
+			userAgent = agent;
+		} else {
+			userAgent = USER_AGENT;
+		}
+	}
+
+	/**
+	 * Get the set user agent
+	 * 
+	 * @return The set user agent
+	 */
+	public String getUserAgent() {
+		return this.userAgent;
+	}
+
+	/**
 	 * Sends a GET request to supplied URL
 	 * 
 	 * @param url
 	 *            The URL to send the GET request to.
 	 * 
-	 * @return The HTTP response as returned from the server
+	 * @return The HTTP response object as returned from the server
 	 * @throws IOException
 	 */
 	protected HttpResponse getRequest(String url) throws IOException {
 
 		final HttpGet httpget = new HttpGet(url);
-		httpget.addHeader("User-Agent", USER_AGENT);
+		httpget.addHeader("User-Agent", getUserAgent());
 
 		// Post, check and show the result (not really spectacular, but
 		// works):
@@ -160,7 +184,7 @@ public class HttpClient {
 	 *            The data to send to the URL
 	 * @param Referer
 	 *            The referer
-	 * @return The HTTP reponse as returned from the server
+	 * @return The HTTP response object as returned from the server
 	 * @throws IOException
 	 */
 	protected HttpResponse postRequest(String url, List<NameValuePair> data,
@@ -169,6 +193,7 @@ public class HttpClient {
 		try {
 			// wrap try around because this constructor can throw Error
 			final HttpPost httpost = new HttpPost(url);
+			httpost.addHeader("User-Agent", getUserAgent());
 			// org.apache.http.client.methods.
 			if (Referer.length() > 0) {
 				httpost.addHeader("Referer", Referer);
@@ -218,39 +243,33 @@ public class HttpClient {
 		return postRequest(url, data, "");
 	}
 
-	public String multiPartRequest(String URL, MultipartEntity postData)
+	/**
+	 * Make multi part post request
+	 * 
+	 * @param URL
+	 * @param postData
+	 * @return
+	 * @throws IOException
+	 */
+	protected HttpResponse multiPartRequest(String URL, MultipartEntity postData)
 			throws IOException {
-		try {
-			// wrap try around because this constructor can throw Error
-			final HttpPost httpost = new HttpPost(URL);
+		// wrap try around because this constructor can throw Error
+		final HttpPost httpost = new HttpPost(URL);
 
-			if (postData != null) {
-				// NEED THIS NOW TO FIX ERROR 417
-				httpost.getParams().setBooleanParameter(
-						"http.protocol.expect-continue", false);
-				httpost.setEntity(postData);
-				// Header
-				// httpost.addHeader("Authorization","Basic "+
-				// getCredentials(userName, userPassword));
-				HttpResponse response = httpClient.execute(httpost);
+		if (postData != null) {
+			// NEED THIS NOW TO FIX ERROR 417
+			httpost.getParams().setBooleanParameter(
+					"http.protocol.expect-continue", false);
+			httpost.setEntity(postData);
+			httpost.addHeader("User-Agent", getUserAgent());
+			// Header
+			// httpost.addHeader("Authorization","Basic "+
+			// getCredentials(userName, userPassword));
+			HttpResponse response = httpClient.execute(httpost);
+			return response;
 
-				HttpEntity respEntity = response.getEntity();
-				if (respEntity != null) {
-					InputStream serverInput = respEntity.getContent();
-
-					return getText(serverInput);
-
-				}
-			}
-
-		} catch (MalformedURLException ex) {
-			ex.printStackTrace();
-			return "";
-			// fall through and return false
-		} catch (Exception ex) {
-			return "";
 		}
-		return "";
+		return null;
 	}
 
 	protected String getText(HttpResponse response) {
@@ -328,57 +347,62 @@ public class HttpClient {
 		return null;
 	}
 
-	public int getAllReportFromWeb() {
-		HttpResponse response;
-		String incidents = "";
+	/**
+	 * Sends a GET request to supplied URL. Converts the input stream as
+	 * received from the server to string.
+	 * 
+	 * @param url
+	 *            The URL to send the GET request to.
+	 * 
+	 * @return The HTTP response string as returned from the server
+	 * @throws IOException
+	 */
+	public String sendGetRequest(String url) throws IOException {
 
-		// get the right domain to work
-		StringBuilder uriBuilder = new StringBuilder("http://localhost/develop");
-		uriBuilder.append("/api?task=incidents");
-		uriBuilder.append("&by=all");
-		uriBuilder.append("&limit=" + 20);
-		uriBuilder.append("&resp=json");
-		System.out.println("URL: " + uriBuilder.toString());
-		try {
-			response = getRequest(uriBuilder.toString());
-
-			// if (response == null) {
-			// Network is down
-			// return 100;
-			// }
-
-			final int statusCode = response.getStatusLine().getStatusCode();
-			System.out.println("status code: "
-					+ response.getStatusLine().getReasonPhrase());
-			if (statusCode == 200) {
-
-				incidents = getText(response);
-				System.out.println(incidents);
-
-				// bad json string
-				return 99;
-			}
-			return 100; // network down?
-		} catch (SocketTimeoutException e) {
-			System.out.println(e.getMessage());
-			return 110;
-		} catch (ConnectTimeoutException e) {
-			System.out.println(e.getMessage());
-			return 110;
-		} catch (MalformedURLException ex) {
-			ex.printStackTrace();
-			// invalid URL
-			return 111;
-		} catch (IllegalArgumentException ex) {
-			ex.printStackTrace();
-			// invalid URI
-			return 120;
-		} catch (IOException e) {
-			e.printStackTrace();
-			// connection refused
-			return 112;
+		final HttpResponse response = getRequest(url);
+		if (response != null) {
+			return getText(response);
 		}
+		return null;
+	}
 
+	/**
+	 * Sends a POST request to supplied URL
+	 * 
+	 * @param url
+	 *            The URL to send the POST request to
+	 * @param data
+	 *            The data to send to the URL
+	 * 
+	 * @return The HTTP reponse as returned from the server
+	 * @throws IOException
+	 */
+	public String sendPostRequest(String url, List<NameValuePair> data)
+			throws IOException {
+		final HttpResponse response = postRequest(url, data, "");
+
+		if (response != null) {
+			return getText(response);
+		}
+		return null;
+	}
+
+	/**
+	 * Sends multi part post request
+	 * 
+	 * @param URL
+	 * @param postData
+	 * @return
+	 * @throws IOException
+	 */
+	public String sendmultiPartRequest(String url, MultipartEntity postData)
+			throws IOException {
+		final HttpResponse response = multiPartRequest(url, postData);
+
+		if (response != null) {
+			return getText(response);
+		}
+		return null;
 	}
 
 }

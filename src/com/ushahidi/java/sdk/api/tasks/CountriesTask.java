@@ -36,8 +36,8 @@ import com.ushahidi.java.sdk.api.Country;
  */
 public class CountriesTask extends Payload<Country> {
 
-	public CountriesTask() {
-		super();
+	public CountriesTask(String url) {
+		super(url);
 	}
 
 	/**
@@ -83,25 +83,13 @@ public class CountriesTask extends Payload<Country> {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ushahidi.java.sdk.Payload#setModels(java.util.List)
+	/* (non-Javadoc)
+	 * @see com.ushahidi.java.sdk.Payload#processModels()
 	 */
 	@Override
-	public void setModels(List<Country> models) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ushahidi.java.sdk.Payload#getModels()
-	 */
-	@Override
-	public List<Country> getModels() {
+	public List<Country> processModels() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

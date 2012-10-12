@@ -44,7 +44,8 @@ public class ReportsTask extends Payload<Report> {
 	/**
 	 * Default constructor for ReportsTask. Sets the limit default value to 20.
 	 */
-	public ReportsTask() {
+	public ReportsTask(String url) {
+		super(url);
 		this.limit = 20;
 	}
 
@@ -136,24 +137,11 @@ public class ReportsTask extends Payload<Report> {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ushahidi.java.sdk.Payload#setModels(java.util.List)
+	/* (non-Javadoc)
+	 * @see com.ushahidi.java.sdk.Payload#processModels()
 	 */
 	@Override
-	public void setModels(List<Report> models) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ushahidi.java.sdk.Payload#getModels()
-	 */
-	@Override
-	public List<Report> getModels() {
+	public List<Report> processModels() {
 		// TODO Auto-generated method stub
 		return null;
 	}

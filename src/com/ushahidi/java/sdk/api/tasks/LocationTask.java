@@ -36,8 +36,8 @@ import com.ushahidi.java.sdk.api.Location;
  */
 public class LocationTask extends Payload<Location> {
 
-	public LocationTask() {
-		super();
+	public LocationTask(String url) {
+		super(url);
 	}
 
 	/**
@@ -71,25 +71,13 @@ public class LocationTask extends Payload<Location> {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ushahidi.java.sdk.Payload#setModels(java.util.List)
+	/* (non-Javadoc)
+	 * @see com.ushahidi.java.sdk.Payload#processModels()
 	 */
 	@Override
-	public void setModels(List<Location> models) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ushahidi.java.sdk.Payload#getModels()
-	 */
-	@Override
-	public List<Location> getModels() {
+	public List<Location> processModels() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }

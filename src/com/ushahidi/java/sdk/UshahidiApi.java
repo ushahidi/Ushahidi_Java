@@ -19,7 +19,11 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk;
 
-import com.ushahidi.java.sdk.net.HttpClient;
+import java.io.IOException;
+
+import org.json.JSONException;
+
+import com.ushahidi.java.sdk.api.tasks.UshahidiApiTaskFactory;
 
 /**
  * This is the root of all API calls.
@@ -27,23 +31,32 @@ import com.ushahidi.java.sdk.net.HttpClient;
  * @author eyedol
  * 
  */
-public class UshahidiAPI {
+public class UshahidiApi {
 
 	// URL for the ushahidi deployment
 	private String url;
 
-	private int timeout;
-
-	private UshahidiAPI(String url, int timeout) {
+	public UshahidiApiTaskFactory task;
+	private UshahidiApi(String url) {
 		this.url = url;
-		this.timeout = timeout;
+		task = UshahidiApiTaskFactory.newInstance(url);
 	}
 
 	public static void main(String args[]) {
 		System.out.println("making a get request");
-		HttpClient httpClient = new HttpClient();
-		final int status = httpClient.getAllReportFromWeb();
-		System.out.println("HTTPClient Status: " + status);
+		String url = "http://demo.ushahidi.com";
+		UshahidiApi ushahidiApi = new UshahidiApi(url);
+		try {
+			System.out.println(ushahidiApi.task.categories().all().get(0).getColor());
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//final int status = httpClient.getAllReportFromWeb();
+		//System.out.println("HTTPClient Status: " + status);
 	}
 
 }
