@@ -19,7 +19,12 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.tasks;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import com.ushahidi.java.sdk.Payload;
 import com.ushahidi.java.sdk.api.Comment;
@@ -44,9 +49,16 @@ public class CommentsTask extends Payload<Comment> {
 	 * Get all comments.
 	 * 
 	 * @return The fetched comments
+	 * @throws IOException
+	 * @throws JSONException
 	 */
-	public List<Comment> all() {
-		return null;
+	public List<Comment> all() throws JSONException, IOException {
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=comments");
+		uriBuilder.append("&resp=json");
+
+		// fetch all categories
+		return getComments(uriBuilder.toString());
 	}
 
 	/**
@@ -56,25 +68,36 @@ public class CommentsTask extends Payload<Comment> {
 	 *            The report id
 	 * @return The comments associated to the specified report id
 	 */
-	public List<Comment> reportId(int id) {
-		return null;
+	public List<Comment> reportId(int id) throws JSONException, IOException {
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=comments");
+		uriBuilder.append("&by=reportid");
+		uriBuilder.append("&id=" + String.valueOf(id));
+		uriBuilder.append("&resp=json");
+
+		// fetch all categories
+		return getComments(uriBuilder.toString());
 	}
 
 	/**
 	 * Get all comment marked as spam.
 	 * 
 	 * @return The spam comments
+	 * @throws IOException
+	 * @throws JSONException
 	 */
-	public List<Comment> spam() {
+	public List<Comment> spam() throws JSONException, IOException {
 		return null;
 	}
 
 	/**
-	 * Get all pending comment
+	 * Get all pending comments
 	 * 
 	 * @return The pending comment
+	 * @throws IOException
+	 * @throws JSONException
 	 */
-	public List<Comment> pending() {
+	public List<Comment> pending() throws JSONException, IOException {
 		return null;
 	}
 
@@ -82,6 +105,8 @@ public class CommentsTask extends Payload<Comment> {
 	 * Get all approved comments
 	 * 
 	 * @return The approved comments
+	 * @throws IOException
+	 * @throws JSONException
 	 */
 	public List<Comment> approved() {
 		return null;
@@ -94,7 +119,72 @@ public class CommentsTask extends Payload<Comment> {
 	 */
 	@Override
 	public List<Comment> processModels() {
-		// TODO Auto-generated method stub
+		List<Comment> listcomment = new ArrayList<Comment>();
+		try {
+			JSONArray commentsArr = getPayloadObj().getJSONArray("comments");
+			int id = 0;
+			if (commentsArr != null) {
+
+				for (int i = 0; i < commentsArr.length(); i++) {
+					Comment comment = new Comment();
+
+					id = commentsArr.getJSONObject(i).getJSONObject("comment")
+							.getInt("id");
+					comment.setId(id);
+
+					if (!commentsArr.getJSONObject(i).getJSONObject("comment")
+							.isNull("incident_id")) {
+						comment.setReportId(commentsArr.getJSONObject(i)
+								.getJSONObject("comment").getInt("incident_id"));
+					}
+
+					if (!commentsArr.getJSONObject(i).getJSONObject("comment")
+							.isNull("comment_description")) {
+						comment.setDescription(commentsArr.getJSONObject(i)
+								.getJSONObject("comment")
+								.getString("comment_description"));
+					}
+
+					if (!commentsArr.getJSONObject(i).getJSONObject("comment")
+							.isNull("comment_author")) {
+
+						comment.setAuthor(commentsArr.getJSONObject(i)
+								.getJSONObject("comment")
+								.getString("comment_author"));
+					}
+
+					if (!commentsArr.getJSONObject(i).getJSONObject("comment")
+							.isNull("comment_date")) {
+						comment.setDate(commentsArr.getJSONObject(i)
+								.getJSONObject("comment")
+								.getString("comment_date"));
+					}
+
+					listcomment.add(comment);
+				}
+				return listcomment;
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private List<Comment> getComments(String url) throws JSONException,
+			IOException {
+		return processPayload(client.sendGetRequest(url));
+	}
+
+	private List<Comment> processPayload(String jsonString)
+			throws JSONException, IOException {
+		setJsonObject(jsonString);
+		if (getJsonObject() != null) {
+			setDomain(getPayloadObj().getString("domain"));
+			setCode(getJsonObject().getJSONObject("error").getInt("code"));
+			setMessage(getJsonObject().getJSONObject("error").getString(
+					"message"));
+			return processModels();
+		}
 		return null;
 	}
 

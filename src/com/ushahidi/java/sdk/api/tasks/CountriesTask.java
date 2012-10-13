@@ -19,7 +19,10 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.tasks;
 
+import java.io.IOException;
 import java.util.List;
+
+import org.json.JSONException;
 
 import com.ushahidi.java.sdk.Payload;
 import com.ushahidi.java.sdk.api.Country;
@@ -44,6 +47,8 @@ public class CountriesTask extends Payload<Country> {
 	 * Gets all countries.
 	 * 
 	 * @return The countries retrieves
+	 * @throws IOException
+	 * @throws JSONException
 	 */
 	public List<Country> all() {
 		return null;
@@ -55,6 +60,9 @@ public class CountriesTask extends Payload<Country> {
 	 * @param id
 	 *            The ID of the country
 	 * @return The country retrieved
+	 * 
+	 * @throws IOException
+	 * @throws JSONException
 	 */
 	public Country countryId(int id) {
 		return null;
@@ -66,6 +74,8 @@ public class CountriesTask extends Payload<Country> {
 	 * @param iso
 	 *            The country's ISO code. Eg gh for Ghana.
 	 * @return The country retrieved
+	 * @throws IOException
+	 * @throws JSONException
 	 */
 	public Country countryIso(String iso) {
 		return null;
@@ -78,12 +88,16 @@ public class CountriesTask extends Payload<Country> {
 	 *            The name of the country to be used to retrieve the details of
 	 *            that country. Eg. ghana
 	 * @return The country retrieved
+	 * @throws IOException
+	 * @throws JSONException
 	 */
 	public Country countryName(String name) {
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ushahidi.java.sdk.Payload#processModels()
 	 */
 	@Override

@@ -73,7 +73,7 @@ public class Category extends Model{
 
 	/**
 	 * Set the title of the category
-	 * 
+	 *  
 	 * @param title The title to be set
 	 */
 	public void setTitle(String title) {

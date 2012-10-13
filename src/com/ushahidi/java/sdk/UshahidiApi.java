@@ -23,6 +23,7 @@ import java.io.IOException;
 
 import org.json.JSONException;
 
+import com.ushahidi.java.sdk.api.tasks.CategoriesTask;
 import com.ushahidi.java.sdk.api.tasks.UshahidiApiTaskFactory;
 
 /**
@@ -34,20 +35,22 @@ import com.ushahidi.java.sdk.api.tasks.UshahidiApiTaskFactory;
 public class UshahidiApi {
 
 	// URL for the ushahidi deployment
-	private String url;
+	public UshahidiApiTaskFactory taskFactory;
 
-	public UshahidiApiTaskFactory task;
+	public CategoriesTask categoriesTask;
+
 	private UshahidiApi(String url) {
-		this.url = url;
-		task = UshahidiApiTaskFactory.newInstance(url);
+		taskFactory = UshahidiApiTaskFactory.newInstance(url);
+		categoriesTask = taskFactory.categories();
 	}
 
 	public static void main(String args[]) {
 		System.out.println("making a get request");
-		String url = "http://demo.ushahidi.com";
+		String url = "https://syrianspring.crowdmap.com";
 		UshahidiApi ushahidiApi = new UshahidiApi(url);
 		try {
-			System.out.println(ushahidiApi.task.categories().all().get(0).getColor());
+			ushahidiApi.categoriesTask.all();
+			System.out.println(ushahidiApi.categoriesTask.all().get(0).getTitle());
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -55,8 +58,7 @@ public class UshahidiApi {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//final int status = httpClient.getAllReportFromWeb();
-		//System.out.println("HTTPClient Status: " + status);
+
 	}
 
 }

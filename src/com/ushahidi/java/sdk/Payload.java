@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 import com.ushahidi.java.sdk.api.Model;
 import com.ushahidi.java.sdk.net.HttpClient;
+import com.ushahidi.java.sdk.net.UshahidiHttpClient;
 
 /**
  * An abstract class to be implemented by all API calls. This is the actual
@@ -34,7 +35,7 @@ import com.ushahidi.java.sdk.net.HttpClient;
  * @author eyedol
  * 
  */
-public abstract class Payload<M extends Model> extends HttpClient {
+public abstract class Payload<M extends Model> extends UshahidiHttpClient {
 
 	/** The domain of the Ushahidi deployment */
 	private String domain;
@@ -45,7 +46,7 @@ public abstract class Payload<M extends Model> extends HttpClient {
 	/** The error message */
 	private String message;
 
-	protected final HttpClient client;
+	protected final UshahidiHttpClient client;
 
 	private JSONObject jsonObject;
 
@@ -61,7 +62,7 @@ public abstract class Payload<M extends Model> extends HttpClient {
 			throw new IllegalArgumentException("URL cannot be null");
 		}
 		this.url = url;
-		this.client = new HttpClient();
+		this.client = new UshahidiHttpClient();
 	}
 
 	/**
@@ -70,7 +71,7 @@ public abstract class Payload<M extends Model> extends HttpClient {
 	 * @param client
 	 *            must be non-null
 	 */
-	public Payload(String url, HttpClient client) {
+	public Payload(String url, UshahidiHttpClient client) {
 		if (client == null) {
 			throw new IllegalArgumentException("Client cannot be null");
 		}
@@ -83,7 +84,7 @@ public abstract class Payload<M extends Model> extends HttpClient {
 	 * 
 	 * @return non-null client
 	 */
-	public HttpClient getClient() {
+	public UshahidiHttpClient getClient() {
 		return client;
 	}
 
@@ -94,6 +95,9 @@ public abstract class Payload<M extends Model> extends HttpClient {
 	 *            the domain from the server.
 	 */
 	public void setDomain(String domain) {
+		if(domain ==null) {
+			throw new IllegalArgumentException("domain cannot be null");
+		}
 		this.domain = domain;
 	}
 
@@ -160,7 +164,7 @@ public abstract class Payload<M extends Model> extends HttpClient {
 	 */
 	public void setJsonObject(String jsonString) throws JSONException {
 		if (jsonString != null && jsonString.length() > 0) {
-			jsonObject = new JSONObject(jsonString);
+			this.jsonObject = new JSONObject(jsonString);
 		}
 
 	}
@@ -170,7 +174,7 @@ public abstract class Payload<M extends Model> extends HttpClient {
 	 * @return
 	 */
 	public JSONObject getJsonObject() {
-		return jsonObject;
+		return this.jsonObject;
 	}
 
 	/**

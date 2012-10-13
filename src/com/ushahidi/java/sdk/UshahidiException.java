@@ -25,7 +25,7 @@ package com.ushahidi.java.sdk;
  * @author eyedol
  * 
  */
-public class Exception extends RuntimeException {
+public class UshahidiException extends RuntimeException {
 
 	/**
 	 * 
@@ -33,19 +33,38 @@ public class Exception extends RuntimeException {
 	private static final long serialVersionUID = -6639204130451563983L;
 
 	/**
-	 * 
-	 * @param message The message be shown
+	 * Instantiates a new Ushahidi exception.
 	 */
-	public Exception(String message) {
+	public UshahidiException() {
+	}
+
+	/**
+	 * Instantiates a new Ushahidi exception.
+	 * 
+	 * @param cause
+	 *            the cause
+	 */
+	public UshahidiException(Throwable cause) {
+		super(cause);
+	}
+
+	/**
+	 * 
+	 * @param message
+	 *            The message be shown
+	 */
+	public UshahidiException(String message) {
 		super(message);
 	}
 
 	/**
 	 * 
-	 * @param message The message to be shown.
-	 * @param cause The cause of the exception.
+	 * @param message
+	 *            The message to be shown.
+	 * @param cause
+	 *            The cause of the exception.
 	 */
-	public Exception(String message, Throwable cause) {
+	public UshahidiException(String message, Throwable cause) {
 		super(message, cause);
 	}
 }

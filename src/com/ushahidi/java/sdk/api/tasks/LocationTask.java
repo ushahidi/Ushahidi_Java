@@ -19,7 +19,10 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.tasks;
 
+import java.io.IOException;
 import java.util.List;
+
+import org.json.JSONException;
 
 import com.ushahidi.java.sdk.Payload;
 import com.ushahidi.java.sdk.api.Location;
@@ -44,6 +47,9 @@ public class LocationTask extends Payload<Location> {
 	 * Gets all locations
 	 * 
 	 * @return All location
+	 * 
+	 * @throws IOException
+	 * @throws JSONException
 	 */
 	public List<Location> all() {
 		return null;
@@ -55,6 +61,9 @@ public class LocationTask extends Payload<Location> {
 	 * @param id
 	 *            The ID of the location
 	 * @return The location retrieved by ID
+	 * 
+	 * @throws IOException
+	 * @throws JSONException
 	 */
 	public Location locationId(int id) {
 		return null;
@@ -66,12 +75,16 @@ public class LocationTask extends Payload<Location> {
 	 * @param id
 	 *            The ID of the country to be used to retrieve the location.
 	 * @return The location retrieved by the country's ID
+	 * @throws IOException
+	 * @throws JSONException
 	 */
 	public Location countryId(int id) {
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ushahidi.java.sdk.Payload#processModels()
 	 */
 	@Override

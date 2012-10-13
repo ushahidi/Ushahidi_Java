@@ -79,7 +79,7 @@ public class CategoriesTask extends Payload<Category> {
 		final StringBuilder uriBuilder = new StringBuilder(url);
 		uriBuilder.append("/api?task=categories");
 		uriBuilder.append("&by=catid");
-		uriBuilder.append("&id="+String.valueOf(id));
+		uriBuilder.append("&id=" + String.valueOf(id));
 		uriBuilder.append("&resp=json");
 		List<Category> categories = getCategories(uriBuilder.toString());
 		if (categories != null && categories.size() > 0) {
@@ -109,7 +109,7 @@ public class CategoriesTask extends Payload<Category> {
 	}
 
 	/**
-	 * Process the JSON data to get the categories data
+	 * Process the JSON data to get the data associated with the categories
 	 * 
 	 * @see com.ushahidi.java.sdk.Payload#processModels()
 	 * 
@@ -118,9 +118,7 @@ public class CategoriesTask extends Payload<Category> {
 	 */
 	@Override
 	public List<Category> processModels() {
-
 		List<Category> listCategory = new ArrayList<Category>();
-
 		try {
 			JSONArray categoriesArr = getPayloadObj()
 					.getJSONArray("categories");
@@ -166,8 +164,8 @@ public class CategoriesTask extends Payload<Category> {
 					}
 
 					listCategory.add(category);
-					return listCategory;
 				}
+				return listCategory;
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
