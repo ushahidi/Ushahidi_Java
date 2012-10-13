@@ -24,6 +24,7 @@ import java.io.IOException;
 import org.json.JSONException;
 
 import com.ushahidi.java.sdk.api.tasks.CategoriesTask;
+import com.ushahidi.java.sdk.api.tasks.CommentsTask;
 import com.ushahidi.java.sdk.api.tasks.UshahidiApiTaskFactory;
 
 /**
@@ -39,18 +40,24 @@ public class UshahidiApi {
 
 	public CategoriesTask categoriesTask;
 
+	public CommentsTask commentsTask;
 	private UshahidiApi(String url) {
 		taskFactory = UshahidiApiTaskFactory.newInstance(url);
 		categoriesTask = taskFactory.categories();
+		commentsTask = taskFactory.comment();
 	}
 
 	public static void main(String args[]) {
 		System.out.println("making a get request");
-		String url = "https://syrianspring.crowdmap.com";
+		String url = "http://demo.ushahidi.com";
 		UshahidiApi ushahidiApi = new UshahidiApi(url);
 		try {
-			ushahidiApi.categoriesTask.all();
-			System.out.println(ushahidiApi.categoriesTask.all().get(0).getTitle());
+			if(ushahidiApi.commentsTask.all() != null) {
+				System.out.println(ushahidiApi.commentsTask.all().get(0).getAuthor());
+			} else {
+				
+				System.out.println(ushahidiApi.commentsTask.getMessage());
+			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -27,6 +27,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
@@ -143,6 +144,7 @@ public class HttpClient {
 			userAgent = USER_AGENT;
 		}
 	}
+	
 
 	/**
 	 * Get the set user agent

@@ -120,52 +120,59 @@ public class CategoriesTask extends Payload<Category> {
 	public List<Category> processModels() {
 		List<Category> listCategory = new ArrayList<Category>();
 		try {
-			JSONArray categoriesArr = getPayloadObj()
-					.getJSONArray("categories");
-			int id = 0;
-			if (categoriesArr != null) {
+			if (!getPayloadObj().isNull("categories")) {
+				JSONArray categoriesArr = getPayloadObj().getJSONArray(
+						"categories");
+				int id = 0;
+				if (categoriesArr != null) {
 
-				for (int i = 0; i < categoriesArr.length(); i++) {
-					Category category = new Category();
+					for (int i = 0; i < categoriesArr.length(); i++) {
+						Category category = new Category();
 
-					id = categoriesArr.getJSONObject(i)
-							.getJSONObject("category").getInt("id");
-					category.setId(id);
-					if (!categoriesArr.getJSONObject(i)
-							.getJSONObject("category").isNull("color")) {
-						category.setColor(categoriesArr.getJSONObject(i)
-								.getJSONObject("category").getString("color"));
-					}
+						id = categoriesArr.getJSONObject(i)
+								.getJSONObject("category").getInt("id");
+						category.setId(id);
+						if (!categoriesArr.getJSONObject(i)
+								.getJSONObject("category").isNull("color")) {
+							category.setColor(categoriesArr.getJSONObject(i)
+									.getJSONObject("category")
+									.getString("color"));
+						}
 
-					if (!categoriesArr.getJSONObject(i)
-							.getJSONObject("category").isNull("parent_id")) {
-						category.setParentId(categoriesArr.getJSONObject(i)
-								.getJSONObject("category").getInt("parent_id"));
-					}
+						if (!categoriesArr.getJSONObject(i)
+								.getJSONObject("category").isNull("parent_id")) {
+							category.setParentId(categoriesArr.getJSONObject(i)
+									.getJSONObject("category")
+									.getInt("parent_id"));
+						}
 
-					if (!categoriesArr.getJSONObject(i)
-							.getJSONObject("category").isNull("description")) {
-						category.setDescription(categoriesArr.getJSONObject(i)
+						if (!categoriesArr.getJSONObject(i)
 								.getJSONObject("category")
-								.getString("description"));
+								.isNull("description")) {
+							category.setDescription(categoriesArr
+									.getJSONObject(i).getJSONObject("category")
+									.getString("description"));
+						}
+
+						if (!categoriesArr.getJSONObject(i)
+								.getJSONObject("category").isNull("title")) {
+
+							category.setTitle(categoriesArr.getJSONObject(i)
+									.getJSONObject("category")
+									.getString("title"));
+						}
+
+						if (!categoriesArr.getJSONObject(i)
+								.getJSONObject("category").isNull("position")) {
+							category.setPosition(categoriesArr.getJSONObject(i)
+									.getJSONObject("category")
+									.getInt("position"));
+						}
+
+						listCategory.add(category);
 					}
-
-					if (!categoriesArr.getJSONObject(i)
-							.getJSONObject("category").isNull("title")) {
-
-						category.setTitle(categoriesArr.getJSONObject(i)
-								.getJSONObject("category").getString("title"));
-					}
-
-					if (!categoriesArr.getJSONObject(i)
-							.getJSONObject("category").isNull("position")) {
-						category.setPosition(categoriesArr.getJSONObject(i)
-								.getJSONObject("category").getInt("position"));
-					}
-
-					listCategory.add(category);
+					return listCategory;
 				}
-				return listCategory;
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
