@@ -25,7 +25,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.ushahidi.java.sdk.api.Model;
-import com.ushahidi.java.sdk.net.HttpClient;
 import com.ushahidi.java.sdk.net.UshahidiHttpClient;
 
 /**
@@ -51,8 +50,6 @@ public abstract class Payload<M extends Model> extends UshahidiHttpClient {
 	private JSONObject jsonObject;
 
 	protected String url;
-
-	protected int timeout;
 
 	/**
 	 * Create a payload using the default {@link HttpClient}

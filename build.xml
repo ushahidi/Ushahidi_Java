@@ -17,12 +17,7 @@
     </target>
     <path id="compile.classpath">
         <pathelement location="bin"/>
-        <pathelement location="libs/commons-codec-1.6.jar"/>
-        <pathelement location="libs/commons-logging-1.1.1.jar"/>
-        <pathelement location="libs/httpclient-4.2.1.jar"/>
-        <pathelement location="libs/httpclient-cache-4.2.1.jar"/>
-        <pathelement location="libs/httpcore-4.2.1.jar"/>
-        <pathelement location="libs/httpmime-4.2.1.jar"/>
+        
     </path>
     
     <target name="compile" depends="init" description="Compile the Java code from ${src} into ${bin}">

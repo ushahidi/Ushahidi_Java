@@ -20,8 +20,10 @@
 package com.ushahidi.java.sdk.api.tasks;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 
 import com.ushahidi.java.sdk.Payload;
@@ -95,14 +97,29 @@ public class CountriesTask extends Payload<Country> {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Process the JSON data to get the data associated with a country
 	 * 
 	 * @see com.ushahidi.java.sdk.Payload#processModels()
 	 */
 	@Override
 	public List<Country> processModels() {
-		// TODO Auto-generated method stub
+		List<Country> countries = new ArrayList<Country>();
+		try {
+			if(!getPayloadObj().isNull("countries")) {
+				JSONArray countriesArr = getPayloadObj()
+						.getJSONArray("countries");
+				if(countriesArr != null) {
+					for(int i = 0; i < countriesArr.length();i++) {
+						Country country = new Country();
+						country.setId( countriesArr.getJSONObject(i)
+						.getJSONObject("country").getInt("id"));
+					}
+				}
+			}
+		}catch (JSONException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 

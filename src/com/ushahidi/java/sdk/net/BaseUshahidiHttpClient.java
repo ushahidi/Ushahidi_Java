@@ -22,9 +22,6 @@ package com.ushahidi.java.sdk.net;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -36,6 +33,7 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
@@ -260,9 +258,8 @@ public abstract class BaseUshahidiHttpClient {
 	 * @return the input stream
 	 */
 	protected InputStream postMultipartRequest(String url,
-			Map<String, String> parameters, String fileName) {
-		return postMultipartRequest(url, parameters, fileName,
-				HttpURLConnection.HTTP_OK);
+			Map<String, Object> parameters) {
+		return postMultipartRequest(url, parameters, HttpURLConnection.HTTP_OK);
 	}
 
 	/**
@@ -411,20 +408,12 @@ public abstract class BaseUshahidiHttpClient {
 	 * @return the input stream
 	 */
 	protected InputStream postMultipartRequest(String apiUrl,
-			Map<String, String> parameters, String fileName, int expected) {
+			Map<String, Object> parts, int expected) {
 		try {
 			URL url = new URL(apiUrl);
 			HttpURLConnection request = (HttpURLConnection) url
 					.openConnection();
-
-			DataOutputStream dos = null;
-			String lineEnd = "\r\n";
-			String twoHyphens = "--";
-			String boundary = "*****";
-			int bytesRead, bytesAvailable, bufferSize;
-			byte[] buffer;
-			int maxBufferSize = 1 * 1024 * 1024;
-
+			String boundary = "00content0boundary00";
 			request.setConnectTimeout(getConnectionTimeout());
 			request.setReadTimeout(getSocketTimeout());
 
@@ -433,52 +422,44 @@ public abstract class BaseUshahidiHttpClient {
 						requestHeaders.get(headerName));
 			}
 
-			parameters.putAll(requestParameters);
-
 			request.setRequestMethod("POST");
 			request.setRequestProperty("Content-Type",
-					"multipart/form-data;boundary=" + boundary);
+					"multipart/form-data; boundary=" + boundary);
 			request.setDoOutput(true);
-			// Allow Inputs
-			request.setDoInput(true);
 
-			// upload files
-			if (fileName != null && fileName.length() > 0) {
-				FileInputStream fileInputStream = new FileInputStream(new File(
-						fileName));
-				dos = new DataOutputStream(request.getOutputStream());
-				dos.writeBytes(twoHyphens + boundary + lineEnd);
-
-				dos.writeBytes("Content-Disposition: form-data; name=\"uploadedfile\";filename=\""
-						+ fileName + "\"" + lineEnd); // uploaded_file_name
-														// is the Name
-														// of the File
-														// to be
-														// uploaded
-				dos.writeBytes(lineEnd);
-				bytesAvailable = fileInputStream.available();
-				bufferSize = Math.min(bytesAvailable, maxBufferSize);
-				buffer = new byte[bufferSize];
-				bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-				while (bytesRead > 0) {
-					dos.write(buffer, 0, bufferSize);
-					bytesAvailable = fileInputStream.available();
-					bufferSize = Math.min(bytesAvailable, maxBufferSize);
-					bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+			BufferedOutputStream output = new BufferedOutputStream(
+					request.getOutputStream());
+			byte[] buffer = new byte[8192];
+			byte[] boundarySeparator = ("--" + boundary + "\r\n")
+					.getBytes(CHARSET_UTF8);
+			byte[] newline = "\r\n".getBytes(CHARSET_UTF8);
+			try {
+				for (Entry<String, Object> part : parts.entrySet()) {
+					output.write(boundarySeparator);
+					StringBuilder partBuffer = new StringBuilder(
+							"Content-Disposition: ");
+					partBuffer.append("form-data; name=\"");
+					partBuffer.append(part.getKey());
+					partBuffer.append('"');
+					output.write(partBuffer.toString().getBytes(CHARSET_UTF8));
+					output.write(newline);
+					output.write(newline);
+					final Object value = part.getValue();
+					if (value instanceof InputStream) {
+						InputStream input = (InputStream) value;
+						int read;
+						while ((read = input.read(buffer)) != -1)
+							output.write(buffer, 0, read);
+						input.close();
+					} else
+						output.write(part.getValue().toString()
+								.getBytes(CHARSET_UTF8));
+					output.write(newline);
 				}
-				dos.writeBytes(lineEnd);
-				dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
-				fileInputStream.close();
-				dos.flush();
-				dos.close();
+				output.write(("--" + boundary + "--\r\n").getBytes(CHARSET_UTF8)); //$NON-NLS-1$ //$NON-NLS-2$
+			} finally {
+				output.close();
 			}
-
-			PrintStream out = new PrintStream(new BufferedOutputStream(
-					request.getOutputStream()));
-
-			out.print(getParametersString(parameters));
-			out.flush();
-			out.close();
 
 			request.connect();
 
