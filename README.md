@@ -15,3 +15,10 @@ And to compile all the source codes, run
 ## Javadoc 
 You can find the Javadoc which contains all the relevant documentation on the classes 
 and the packages in the doc directory found in the root folder of the project.
+
+To generate recent version of the Javadoc, run 
+`ant javadoc`
+
+## Clean up
+To clean up the generated distribution file and Javadoc in the root folder, run 
+`ant clean`
