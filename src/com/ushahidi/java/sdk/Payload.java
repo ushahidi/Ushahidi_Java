@@ -45,14 +45,16 @@ public abstract class Payload<M extends Model> extends UshahidiHttpClient {
 	/** The error message */
 	private String message;
 
+	/** The HTTP client */
 	protected final UshahidiHttpClient client;
 
 	private JSONObject jsonObject;
 
+	/** The Ushahidi deployment URL */
 	protected String url;
 
 	/**
-	 * Create a payload using the default {@link HttpClient}
+	 * Create a payload using the default {@link UshahidiHttpClient}
 	 */
 	public Payload(String url) {
 		if (url == null) {
@@ -92,14 +94,15 @@ public abstract class Payload<M extends Model> extends UshahidiHttpClient {
 	 *            the domain from the server.
 	 */
 	public void setDomain(String domain) {
-		if(domain ==null) {
+		if (domain == null) {
 			throw new IllegalArgumentException("domain cannot be null");
 		}
 		this.domain = domain;
 	}
 
 	/**
-	 * Get the domain received from the server
+	 * Get the domain received from the server. This is the Ushahidi deployment
+	 * URL
 	 * 
 	 * @return The domain received from the server
 	 */
@@ -156,8 +159,11 @@ public abstract class Payload<M extends Model> extends UshahidiHttpClient {
 	public abstract List<M> processModels();
 
 	/**
+	 * The JSON string as received from the server as a result of a successful
+	 * API call.
 	 * 
 	 * @param jsonString
+	 *            The JSON string
 	 */
 	public void setJsonObject(String jsonString) throws JSONException {
 		if (jsonString != null && jsonString.length() > 0) {
@@ -167,6 +173,7 @@ public abstract class Payload<M extends Model> extends UshahidiHttpClient {
 	}
 
 	/**
+	 * The JSONObject
 	 * 
 	 * @return
 	 */
@@ -175,8 +182,9 @@ public abstract class Payload<M extends Model> extends UshahidiHttpClient {
 	}
 
 	/**
+	 * Retrieve the payload object
 	 * 
-	 * @return
+	 * @return The payload object
 	 * @throws JSONException
 	 */
 	public JSONObject getPayloadObj() throws JSONException {

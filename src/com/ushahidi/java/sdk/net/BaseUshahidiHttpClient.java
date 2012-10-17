@@ -41,6 +41,13 @@ import java.util.zip.GZIPInputStream;
 import com.ushahidi.java.sdk.UshahidiException;
 
 /**
+ * This is a custom implementation of an HTTP client based on the existing
+ * classes provided the Standard java.net package.
+ * <p>
+ * It implements POST and GET request. Also support multi-part POST request to
+ * allow file uploads.
+ * </p>
+ * 
  * @author eyedol
  * 
  */
@@ -62,19 +69,20 @@ public abstract class BaseUshahidiHttpClient {
 	/** The charset encoding type */
 	private static final String CHARSET_UTF8 = "UTF-8";
 
+	/** The default time to timeout both connection and socket reads */
+	private static final int TIMEOUT = 3000;
+	
 	/**
 	 * The default connection timeout is 3 secs. You can override this value by
-	 * initializing this variable with your own.
+	 * calling the {@link BaseUshahidiHttpClient#setConnectionTimeout(int)}.
 	 */
 	private int connectionTimeout = 0;
 
 	/**
 	 * The default socket timeout is 3 secs. You can override this value by
-	 * initializing this variable with your own.
+	 * calling the {@link BaseUshahidiHttpClient#setSocketTimeout(int)}
 	 */
 	private int socketTimeout = 0;
-
-	private static final int TIMEOUT = 3000;
 
 	/**
 	 * Sets the request headers.
