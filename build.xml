@@ -2,7 +2,7 @@
 <project name="Ushahidi-SDK" default="compile" basedir=".">
     <description>Ushahidi SDK build file</description>
     <!-- Set global properties for this build -->
-    <property name="src" location="src"/>
+    <property name="src" location="src/main/java"/>
     <property name="bin" location="bin" />
     <property name="doc" location="doc"/>
     <property name="dist" location="dist"/>
