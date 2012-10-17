@@ -175,7 +175,7 @@ public abstract class Payload<M extends Model> extends UshahidiHttpClient {
 	/**
 	 * The JSONObject
 	 * 
-	 * @return
+	 * @return The JSONObject
 	 */
 	public JSONObject getJsonObject() {
 		return this.jsonObject;

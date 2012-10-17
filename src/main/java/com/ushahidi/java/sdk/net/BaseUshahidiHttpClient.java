@@ -71,7 +71,7 @@ public abstract class BaseUshahidiHttpClient {
 
 	/** The default time to timeout both connection and socket reads */
 	private static final int TIMEOUT = 3000;
-	
+
 	/**
 	 * The default connection timeout is 3 secs. You can override this value by
 	 * calling the {@link BaseUshahidiHttpClient#setConnectionTimeout(int)}.
@@ -139,7 +139,7 @@ public abstract class BaseUshahidiHttpClient {
 	 * Set the default connection timeout. The default connection timeout is 3
 	 * secs.
 	 * 
-	 * @param timeoutConnection
+	 * @param connectionTimeout
 	 *            The connection timeout in miliseconds
 	 */
 	public void setConnectionTimeout(int connectionTimeout) {
@@ -162,8 +162,9 @@ public abstract class BaseUshahidiHttpClient {
 	/**
 	 * Set the default socket timeout. The default socket timeout is 3 secs.
 	 * 
-	 * @param timeoutConnection
-	 *            An int that specifies the socket timeout value in milliseconds
+	 * @param socketTimeout
+	 *            An <code>int</code> that specifies the socket timeout value in
+	 *            milliseconds
 	 */
 	public void setSocketTimeout(int socketTimeout) {
 		if (socketTimeout > 0) {
@@ -176,7 +177,7 @@ public abstract class BaseUshahidiHttpClient {
 	/**
 	 * Get the default socket timeout.
 	 * 
-	 * @return
+	 * @return The socket timeout in milliseconds
 	 */
 	public int getSocketTimeout() {
 		return this.socketTimeout;
@@ -407,11 +408,11 @@ public abstract class BaseUshahidiHttpClient {
 	 * Make a POST request.
 	 * 
 	 * @param apiUrl
-	 *            the api url
-	 * @param parameters
-	 *            the parameters
+	 *            The API URL
+	 * @param parts
+	 *            The parameters to be passed to the multipart request
 	 * @param expected
-	 *            the expected
+	 *            The expected output
 	 * 
 	 * @return the input stream
 	 */
@@ -489,18 +490,17 @@ public abstract class BaseUshahidiHttpClient {
 	}
 
 	/**
-	 * Call api method.
+	 * A generic HTTP method 
 	 * 
 	 * @param apiUrl
-	 *            the api url
-	 * @param xmlContent
-	 *            the xml content
+	 *            the API URL
+	 * 
 	 * @param contentType
-	 *            the content type
+	 *            The content type
 	 * @param method
-	 *            the method
+	 *            The HTTP method
 	 * @param expected
-	 *            the expected
+	 *            The expected output
 	 * 
 	 * @return the input stream
 	 */
