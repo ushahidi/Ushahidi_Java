@@ -126,7 +126,7 @@ public class SystemInfo extends Model {
 	 * Set the plugins that are enabled on the Ushahidi deployments.
 	 * 
 	 * @param plugins
-	 *            An array containing enabled plugins
+	 *            An <code>Array</code> containing enabled plugins
 	 */
 	public void setPlugins(String[] plugins) {
 		this.plugins = plugins;

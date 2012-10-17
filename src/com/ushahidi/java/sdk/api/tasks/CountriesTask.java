@@ -116,6 +116,7 @@ public class CountriesTask extends Payload<Country> {
 						.getJSONObject("country").getInt("id"));
 					}
 				}
+				return countries;
 			}
 		}catch (JSONException e) {
 			e.printStackTrace();

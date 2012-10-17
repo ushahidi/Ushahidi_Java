@@ -53,7 +53,7 @@ public class UshahidiApiTaskFactory {
 	 * 
 	 * @return The categories task
 	 */
-	public CategoriesTask categories() {
+	public CategoriesTask createCategoriesTask() {
 		return new CategoriesTask(url);
 	}
 
@@ -62,7 +62,7 @@ public class UshahidiApiTaskFactory {
 	 * 
 	 * @return The comment task
 	 */
-	public CommentsTask comment() {
+	public CommentsTask createCommentTask() {
 		return new CommentsTask(url);
 	}
 
@@ -71,7 +71,7 @@ public class UshahidiApiTaskFactory {
 	 * 
 	 * @return The countries task
 	 */
-	public CountriesTask countries() {
+	public CountriesTask createCountriesTask() {
 		return new CountriesTask(url);
 	}
 
@@ -80,7 +80,7 @@ public class UshahidiApiTaskFactory {
 	 * 
 	 * @return The location task
 	 */
-	public LocationTask location() {
+	public LocationTask createLocationTask() {
 		return new LocationTask(url);
 	}
 
@@ -89,7 +89,16 @@ public class UshahidiApiTaskFactory {
 	 * 
 	 * @return The report task
 	 */
-	public ReportsTask reports() {
+	public ReportsTask createReportsTask() {
 		return new ReportsTask(url);
+	}
+	
+	/**
+	 * Create the system task object
+	 * 
+	 * @return The system task
+	 */
+	public SystemInfoTask createSystemInfoTask() {
+		return new SystemInfoTask(url);
 	}
 }

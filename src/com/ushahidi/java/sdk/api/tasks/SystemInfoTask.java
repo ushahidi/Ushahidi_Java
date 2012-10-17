@@ -17,24 +17,35 @@
  ** Ushahidi developers at team@ushahidi.com.
  **
  *****************************************************************************/
-package com.ushahidi.java.sdk;
+package com.ushahidi.java.sdk.api.tasks;
 
-import com.ushahidi.java.sdk.api.tasks.UshahidiApiTaskFactory;
+import java.util.List;
+
+import com.ushahidi.java.sdk.Payload;
+import com.ushahidi.java.sdk.api.SystemInfo;
 
 /**
- * This is the root of all API calls.
- * 
  * @author eyedol
  * 
  */
-public class UshahidiApi {
+public class SystemInfoTask extends Payload<SystemInfo> {
 
-	/** A factory object for creating the various Ushahidi API tasks */
+	/**
+	 * @param url
+	 */
+	public SystemInfoTask(String url) {
+		super(url);
+	}
 
-	public UshahidiApiTaskFactory factory;
-
-	public UshahidiApi(String url) {
-		factory = UshahidiApiTaskFactory.newInstance(url);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.ushahidi.java.sdk.Payload#processModels()
+	 */
+	@Override
+	public List<SystemInfo> processModels() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
