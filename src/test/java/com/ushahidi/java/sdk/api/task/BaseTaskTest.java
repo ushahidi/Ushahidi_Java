@@ -19,72 +19,66 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.task;
 
-import java.io.IOException;
-import java.util.List;
+import java.util.Collection;
 
-import org.json.JSONException;
+import junit.framework.TestCase;
+
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 
-import com.ushahidi.java.sdk.api.Category;
-import com.ushahidi.java.sdk.api.tasks.CategoriesTask;
+import com.ushahidi.java.sdk.api.tasks.UshahidiApiTaskFactory;
 
 /**
+ * The base class for testing all the task supported by the Ushahidi API
+ * 
  * @author eyedol
  * 
  */
-public class CategoriesTaskTest extends BaseTaskTest {
+public class BaseTaskTest extends TestCase {
 
-	/** The categories task */
-	private CategoriesTask task;
+	/** The factory class */
+	protected UshahidiApiTaskFactory factory;
 
-	/** Test category ID */
-	private static final int CAT_ID = 1;
+	/** Use the Ushahidi deployment to test */
+	private static final String DEMO_DEPLOYMENT = "http://demo.ushahidi.com";
 
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		task = factory.createCategoriesTask();
+		factory = UshahidiApiTaskFactory.newInstance(DEMO_DEPLOYMENT);
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		super.tearDown();
-		task = null;
+		// null the factory object
+		factory = null;
 	}
 
 	/**
-	 * Test method for
-	 * {@link com.ushahidi.java.sdk.api.tasks.CategoriesTask#all()}.
+	 * Assert not null or empty.
+	 * 
+	 * @param message
+	 *            the message
+	 * @param value
+	 *            the value
 	 */
-	@Test
-	public void testAll() {
-		try {
-			List<Category> categories = task.all();
-			assertNotNullOrEmpty("Categories list cannot be null or empty",
-					categories);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	protected static void assertNotNullOrEmpty(String message, String value) {
+		assertNotNull(message, value);
+		assertFalse(message, "".equals(value));
 	}
 
 	/**
-	 * Test method for
-	 * {@link com.ushahidi.java.sdk.api.tasks.CategoriesTask#catId(int)}.
+	 * Assert not null or empty.
+	 * 
+	 * @param message
+	 *            the message
+	 * @param value
+	 *            the value
 	 */
-	@Test
-	public void testCatId() {
-		try {
-			Category category = task.catId(CAT_ID);
-			assertNotNull("Category cannot be null ", category);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	protected static void assertNotNullOrEmpty(String message,
+			Collection<?> value) {
+		assertNotNull(message, value);
+		assertFalse(message, value.isEmpty());
 	}
-
 }
