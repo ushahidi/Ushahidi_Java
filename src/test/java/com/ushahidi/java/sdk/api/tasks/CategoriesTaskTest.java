@@ -17,7 +17,7 @@
  ** Ushahidi developers at team@ushahidi.com.
  **
  *****************************************************************************/
-package com.ushahidi.java.sdk.api.task;
+package com.ushahidi.java.sdk.api.tasks;
 
 import java.io.IOException;
 import java.util.List;
