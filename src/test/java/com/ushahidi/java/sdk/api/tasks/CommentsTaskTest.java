@@ -27,29 +27,36 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ushahidi.java.sdk.api.Category;
-import com.ushahidi.java.sdk.api.tasks.CategoriesTask;
+import com.ushahidi.java.sdk.api.Comment;
 
 /**
- * This class tests Ushahidi API categories task
+ * This class tests Ushahidi API comments test
  * 
  * @author eyedol
  * 
  */
-public class CategoriesTaskTest extends BaseTaskTest {
+public class CommentsTaskTest extends BaseTaskTest {
 
-	/** The categories task */
-	private CategoriesTask task;
+	/** The comment task */
+	private CommentsTask task;
 
-	/** The default category ID used in testing */
-	private static final int CAT_ID = 1;
+	/** The default report ID to use in testing */
+	private static final int REPORT_ID = 68;
 
+	/**
+	 * @throws java.lang.Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		task = factory.createCategoriesTask();
+		task = factory.createCommentTask();
 	}
 
+	/**
+	 * Free up the task object
+	 * 
+	 * @throws java.lang.Exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 		super.tearDown();
@@ -58,14 +65,14 @@ public class CategoriesTaskTest extends BaseTaskTest {
 
 	/**
 	 * Test method for
-	 * {@link com.ushahidi.java.sdk.api.tasks.CategoriesTask#all()}.
+	 * {@link com.ushahidi.java.sdk.api.tasks.CommentsTask#all()}.
 	 */
 	@Test
 	public void testAll() {
 		try {
-			List<Category> categories = task.all();
-			assertNotNullOrEmpty("Categories list cannot be null or empty",
-					categories);
+			List<Comment> comments = task.all();
+			assertNotNullOrEmpty("Comments list cannot be null or empty",
+					comments);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -75,18 +82,46 @@ public class CategoriesTaskTest extends BaseTaskTest {
 
 	/**
 	 * Test method for
-	 * {@link com.ushahidi.java.sdk.api.tasks.CategoriesTask#catId(int)}.
+	 * {@link com.ushahidi.java.sdk.api.tasks.CommentsTask#reportId(int)}.
 	 */
 	@Test
-	public void testCatId() {
+	public void testReportId() {
 		try {
-			Category category = task.catId(CAT_ID);
-			assertNotNull("Category cannot be null ", category);
+			List<Comment> comments = task.reportId(REPORT_ID);
+			assertNotNullOrEmpty("Comments list cannot be null or empty",
+					comments);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Test method for
+	 * {@link com.ushahidi.java.sdk.api.tasks.CommentsTask#spam()}.
+	 */
+	@Test
+	public void testSpam() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for
+	 * {@link com.ushahidi.java.sdk.api.tasks.CommentsTask#pending()}.
+	 */
+	@Test
+	public void testPending() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for
+	 * {@link com.ushahidi.java.sdk.api.tasks.CommentsTask#approved()}.
+	 */
+	@Test
+	public void testApproved() {
+		fail("Not yet implemented");
 	}
 
 }
