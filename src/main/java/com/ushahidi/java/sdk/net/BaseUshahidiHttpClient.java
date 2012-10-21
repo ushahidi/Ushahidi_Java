@@ -59,7 +59,6 @@ public abstract class BaseUshahidiHttpClient {
 
 	/** The Constant REFERRER. */
 	private static final String REFERRER = "Referer";
-	
 
 	/** The request headers. */
 	protected Map<String, String> requestHeaders = new HashMap<String, String>();
@@ -191,7 +190,6 @@ public abstract class BaseUshahidiHttpClient {
 		return TIMEOUT;
 	}
 
-
 	/**
 	 * Convert stream to string.
 	 * 
@@ -290,14 +288,12 @@ public abstract class BaseUshahidiHttpClient {
 					.openConnection();
 			request.setConnectTimeout(getConnectionTimeout());
 			request.setReadTimeout(getSocketTimeout());
-			
+
 			for (String headerName : requestHeaders.keySet()) {
-				System.out.println("header: " + headerName + " == "
-						+ requestHeaders.get(headerName));
 				request.setRequestProperty(headerName,
 						requestHeaders.get(headerName));
 			}
-			
+
 			request.connect();
 
 			if (request.getResponseCode() != expected) {
@@ -538,20 +534,21 @@ public abstract class BaseUshahidiHttpClient {
 			throw new UshahidiException(e);
 		}
 	}
-	
+
 	/**
 	 * Sets the authentication.
 	 * 
 	 * @param authentication
 	 *            the new authentication
 	 */
-    public void setAuthentication(Authentication authentication) {
+	public void setAuthentication(Authentication authentication) {
 		if (authentication != null) {
-			if(authentication instanceof HeaderAuthentication) {
-			requestHeaders.putAll(((HeaderAuthentication) authentication).getHeaders());
+			if (authentication instanceof HeaderAuthentication) {
+				requestHeaders.putAll(((HeaderAuthentication) authentication)
+						.getHeaders());
 			}
 		}
-    }
+	}
 
 	/**
 	 * Gets the wrapped input stream.

@@ -48,6 +48,7 @@ public class CommentsTaskTest extends BaseTaskTest {
 	public void setUp() throws Exception {
 		super.setUp();
 		task = factory.createCommentTask();
+		task.getClient().setAuthentication(authentication);
 	}
 
 	/**
@@ -85,14 +86,17 @@ public class CommentsTaskTest extends BaseTaskTest {
 	/**
 	 * Test method for
 	 * {@link com.ushahidi.java.sdk.api.tasks.CommentsTask#spam()}.
+	 * <p>
+	 * For this test to pass, make sure a comment has been marked spam in the
+	 * Ushahidi deployment.
+	 * </p>
 	 */
 	@Test
 	public void testSpam() {
-		//authenticate 
-		task.getClient().setAuthentication(authentication);
-		
+		// authenticate
 		List<Comment> comments = task.spam();
-		assertNotNullOrEmpty("Comments list cannot be null or empty", comments);
+		assertNotNullOrEmpty("Spam comments list cannot be null or empty",
+				comments);
 	}
 
 	/**
@@ -101,7 +105,9 @@ public class CommentsTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testPending() {
-		fail("Not yet implemented");
+		List<Comment> comments = task.pending();
+		assertNotNullOrEmpty("Pending comments list cannot be null or empty",
+				comments);
 	}
 
 	/**
@@ -110,7 +116,9 @@ public class CommentsTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testApproved() {
-		fail("Not yet implemented");
+		List<Comment> comments = task.approved();
+		assertNotNullOrEmpty("Approved comments list cannot be null or empty",
+				comments);
 	}
 
 }
