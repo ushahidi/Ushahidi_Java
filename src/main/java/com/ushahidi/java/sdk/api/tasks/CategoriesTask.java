@@ -83,9 +83,7 @@ public class CategoriesTask extends Payload<Category> {
 		uriBuilder.append("&resp=json");
 		List<Category> categories = getCategories(uriBuilder.toString());
 		if (categories != null && categories.size() > 0) {
-			for (Category category : categories) {
-				return category;
-			}
+			return categories.get(0);
 		}
 		return null;
 	}

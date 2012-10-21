@@ -19,10 +19,8 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.tasks;
 
-import java.io.IOException;
 import java.util.List;
 
-import org.json.JSONException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -69,15 +67,9 @@ public class CommentsTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testAll() {
-		try {
-			List<Comment> comments = task.all();
-			assertNotNullOrEmpty("Comments list cannot be null or empty",
-					comments);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		List<Comment> comments = task.all();
+		assertNotNullOrEmpty("Comments list cannot be null or empty", comments);
+
 	}
 
 	/**
@@ -86,15 +78,8 @@ public class CommentsTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testReportId() {
-		try {
-			List<Comment> comments = task.reportId(REPORT_ID);
-			assertNotNullOrEmpty("Comments list cannot be null or empty",
-					comments);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		List<Comment> comments = task.reportId(REPORT_ID);
+		assertNotNullOrEmpty("Comments list cannot be null or empty", comments);
 	}
 
 	/**
@@ -103,7 +88,11 @@ public class CommentsTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testSpam() {
-		fail("Not yet implemented");
+		//authenticate 
+		task.getClient().setAuthentication(authentication);
+		
+		List<Comment> comments = task.spam();
+		assertNotNullOrEmpty("Comments list cannot be null or empty", comments);
 	}
 
 	/**

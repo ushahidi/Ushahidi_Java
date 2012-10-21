@@ -27,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import com.ushahidi.java.sdk.Payload;
+import com.ushahidi.java.sdk.UshahidiException;
 import com.ushahidi.java.sdk.api.Comment;
 
 /**
@@ -52,7 +53,7 @@ public class CommentsTask extends Payload<Comment> {
 	 * @throws IOException
 	 * @throws JSONException
 	 */
-	public List<Comment> all() throws JSONException, IOException {
+	public List<Comment> all() {
 		final StringBuilder uriBuilder = new StringBuilder(url);
 		uriBuilder.append("/api?task=comments");
 		uriBuilder.append("&by=all");
@@ -70,48 +71,69 @@ public class CommentsTask extends Payload<Comment> {
 	 *            The report id
 	 * @return The comments associated to the specified report id
 	 */
-	public List<Comment> reportId(int id) throws JSONException, IOException {
+	public List<Comment> reportId(int id) {
 		final StringBuilder uriBuilder = new StringBuilder(url);
 		uriBuilder.append("/api?task=comments");
 		uriBuilder.append("&by=reportid");
 		uriBuilder.append("&id=" + String.valueOf(id));
 		uriBuilder.append("&resp=json");
 
-		// fetch all categories
+		// fetch all comment
 		return getComments(uriBuilder.toString());
 	}
 
 	/**
-	 * Get all comment marked as spam.
+	 * Get all comment marked as spam. This Method requires authentication so
+	 * make sure
+	 * {@link #setAuthentication(com.ushahidi.java.sdk.net.Authentication)} is
+	 * set before calling this method.
 	 * 
 	 * @return The spam comments
 	 * @throws IOException
 	 * @throws JSONException
 	 */
-	public List<Comment> spam() throws JSONException, IOException {
-		return null;
+	public List<Comment> spam() {
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=comments");
+		uriBuilder.append("&by=spam");
+		uriBuilder.append("&resp=json");
+		return process(client.sendGetRequest(uriBuilder.toString()));
+
 	}
 
 	/**
-	 * Get all pending comments
+	 * Get all pending comments. This Method requires authentication so make
+	 * sure {@link #setAuthentication(com.ushahidi.java.sdk.net.Authentication)}
+	 * is set.
 	 * 
 	 * @return The pending comment
 	 * @throws IOException
 	 * @throws JSONException
 	 */
-	public List<Comment> pending() throws JSONException, IOException {
-		return null;
+	public List<Comment> pending() {
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=comments");
+		uriBuilder.append("&by=pending");
+		uriBuilder.append("&resp=json");
+		return getComments(uriBuilder.toString());
+
 	}
 
 	/**
-	 * Get all approved comments
+	 * Get all approved comments. This Method requires authentication so make
+	 * sure {@link #setAuthentication(com.ushahidi.java.sdk.net.Authentication)}
+	 * is set.
 	 * 
 	 * @return The approved comments
 	 * @throws IOException
 	 * @throws JSONException
 	 */
 	public List<Comment> approved() {
-		return null;
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=comments");
+		uriBuilder.append("&by=approved");
+		uriBuilder.append("&resp=json");
+		return getComments(uriBuilder.toString());
 	}
 
 	/*
@@ -175,7 +197,7 @@ public class CommentsTask extends Payload<Comment> {
 			}
 
 		} catch (JSONException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 		return null;
 	}
@@ -186,6 +208,7 @@ public class CommentsTask extends Payload<Comment> {
 		Comment comment = new Comment();
 
 		try {
+
 			if (getPayloadObj().getJSONObject("comments").isNull("id")) {
 				comment.setId(getPayloadObj().getJSONObject("comments").getInt(
 						"id"));
@@ -219,15 +242,19 @@ public class CommentsTask extends Payload<Comment> {
 
 			listcomment.add(comment);
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new UshahidiException(e.getCause());
 		}
 		return listcomment;
 	}
 
-	private List<Comment> getComments(String url) throws JSONException,
-			IOException {
-		return processPayload(client.sendGetRequest(url));
+	private List<Comment> getComments(String url) {
+		try {
+			return processPayload(client.sendGetRequest(url));
+		} catch (JSONException e) {
+			throw new UshahidiException(e.getCause());
+		} catch (IOException e) {
+			throw new UshahidiException(e.getCause());
+		}
 	}
 
 	private List<Comment> processPayload(String jsonString)
@@ -247,19 +274,24 @@ public class CommentsTask extends Payload<Comment> {
 		return null;
 	}
 
-	private List<Comment> process(String jsonString) throws JSONException,
-			IOException {
-		setJsonObject(jsonString);
-		if (getJsonObject() != null) {
-			if (!getPayloadObj().isNull("domain")) {
-				setDomain(getPayloadObj().getString("domain"));
+	private List<Comment> process(String jsonString) {
+		try {
+			setJsonObject(jsonString);
+
+			if (getJsonObject() != null) {
+				if (!getPayloadObj().isNull("domain")) {
+					setDomain(getPayloadObj().getString("domain"));
+				}
+				if (!getJsonObject().isNull("error")) {
+					setCode(getJsonObject().getJSONObject("error").getInt(
+							"code"));
+					setMessage(getJsonObject().getJSONObject("error")
+							.getString("message"));
+				}
+				return processModel();
 			}
-			if (!getJsonObject().isNull("error")) {
-				setCode(getJsonObject().getJSONObject("error").getInt("code"));
-				setMessage(getJsonObject().getJSONObject("error").getString(
-						"message"));
-			}
-			return processModel();
+		} catch (JSONException e) {
+			throw new UshahidiException(e.getCause());
 		}
 		return null;
 	}

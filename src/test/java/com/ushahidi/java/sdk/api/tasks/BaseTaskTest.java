@@ -27,6 +27,8 @@ import org.junit.After;
 import org.junit.Before;
 
 import com.ushahidi.java.sdk.api.tasks.UshahidiApiTaskFactory;
+import com.ushahidi.java.sdk.net.Authentication;
+import com.ushahidi.java.sdk.net.PasswordAuthentication;
 
 /**
  * The base class for testing all the task supported by the Ushahidi API
@@ -39,12 +41,22 @@ public class BaseTaskTest extends TestCase {
 	/** The factory class */
 	protected UshahidiApiTaskFactory factory;
 
-	/** Use the Ushahidi deployment to test */
+	/** Use the Ushahidi demo deployment to test */
 	private static final String DEMO_DEPLOYMENT = "http://demo.ushahidi.com";
+
+	/** Test username */
+	protected static final String USERNAME = "admin";
+
+	/** Test password */
+	protected static final String PASSWORD = "admin";
+
+	/** The Authentication class */
+	protected Authentication authentication;
 
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
+		authentication = new PasswordAuthentication(USERNAME, PASSWORD);
 		factory = UshahidiApiTaskFactory.newInstance(DEMO_DEPLOYMENT);
 	}
 

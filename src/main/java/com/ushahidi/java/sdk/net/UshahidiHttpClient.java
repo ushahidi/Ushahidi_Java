@@ -37,11 +37,11 @@ public class UshahidiHttpClient extends BaseUshahidiHttpClient {
 
 	/** The user agent to use */
 	private String userAgent;
-	
+
 	public UshahidiHttpClient() {
 		requestHeaders.put("Accept-Encoding", "gzip, deflate");
 	}
-	
+
 	/**
 	 * Set the value to set as the user agent header on every request created.
 	 * Specifying a null or empty agent parameter will reset this client to use
@@ -63,7 +63,10 @@ public class UshahidiHttpClient extends BaseUshahidiHttpClient {
 	 * @return The set user agent
 	 */
 	public String getUserAgent() {
-		return this.userAgent;
+		if (userAgent != null && userAgent.length() > 0) {
+			return this.userAgent;
+		}
+		return USER_AGENT;
 	}
 
 	/**
@@ -95,5 +98,5 @@ public class UshahidiHttpClient extends BaseUshahidiHttpClient {
 		}
 
 	}
-	
+
 }

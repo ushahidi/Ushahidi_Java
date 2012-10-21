@@ -59,6 +59,7 @@ public abstract class BaseUshahidiHttpClient {
 
 	/** The Constant REFERRER. */
 	private static final String REFERRER = "Referer";
+	
 
 	/** The request headers. */
 	protected Map<String, String> requestHeaders = new HashMap<String, String>();
@@ -156,7 +157,11 @@ public abstract class BaseUshahidiHttpClient {
 	 * @return The set connection timeout
 	 */
 	public int getConnectionTimeout() {
-		return this.connectionTimeout;
+		if (connectionTimeout > 0) {
+			return this.connectionTimeout;
+		}
+		return TIMEOUT;
+
 	}
 
 	/**
@@ -180,25 +185,12 @@ public abstract class BaseUshahidiHttpClient {
 	 * @return The socket timeout in milliseconds
 	 */
 	public int getSocketTimeout() {
-		return this.socketTimeout;
+		if (socketTimeout > 0) {
+			return this.socketTimeout;
+		}
+		return TIMEOUT;
 	}
 
-	/**
-	 * Sets the authentication.
-	 * 
-	 * @param authentication
-	 *            the new authentication
-	 */
-	/*
-	 * public void setAuthentication(Authentication authentication) { if
-	 * (authentication != null) { if (authentication instanceof
-	 * ParameterBasedAuthentication) { requestParameters
-	 * .putAll(((ParameterBasedAuthentication) authentication)
-	 * .getParameters()); } else if (authentication instanceof
-	 * HeaderBasedAuthentication) { requestHeaders
-	 * .putAll(((HeaderBasedAuthentication) authentication) .getHeaders()); } }*
-	 * }
-	 */
 
 	/**
 	 * Convert stream to string.
@@ -298,12 +290,14 @@ public abstract class BaseUshahidiHttpClient {
 					.openConnection();
 			request.setConnectTimeout(getConnectionTimeout());
 			request.setReadTimeout(getSocketTimeout());
-
+			
 			for (String headerName : requestHeaders.keySet()) {
+				System.out.println("header: " + headerName + " == "
+						+ requestHeaders.get(headerName));
 				request.setRequestProperty(headerName,
 						requestHeaders.get(headerName));
 			}
-
+			
 			request.connect();
 
 			if (request.getResponseCode() != expected) {
@@ -490,7 +484,7 @@ public abstract class BaseUshahidiHttpClient {
 	}
 
 	/**
-	 * A generic HTTP method 
+	 * A generic HTTP method
 	 * 
 	 * @param apiUrl
 	 *            the API URL
@@ -544,6 +538,20 @@ public abstract class BaseUshahidiHttpClient {
 			throw new UshahidiException(e);
 		}
 	}
+	
+	/**
+	 * Sets the authentication.
+	 * 
+	 * @param authentication
+	 *            the new authentication
+	 */
+    public void setAuthentication(Authentication authentication) {
+		if (authentication != null) {
+			if(authentication instanceof HeaderAuthentication) {
+			requestHeaders.putAll(((HeaderAuthentication) authentication).getHeaders());
+			}
+		}
+    }
 
 	/**
 	 * Gets the wrapped input stream.
