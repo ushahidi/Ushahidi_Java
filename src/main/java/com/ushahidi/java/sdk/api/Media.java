@@ -20,26 +20,31 @@
 package com.ushahidi.java.sdk.api;
 
 /**
+ * This Media class has all properties and methods of the Ushahidi API's media
+ * resource
+ * 
  * @author eyedol
- *
+ * 
  */
 public class Media extends Model {
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ushahidi.java.sdk.api.Model#setId(int)
 	 */
 	@Override
 	protected void setId(int id) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.ushahidi.java.sdk.api.Model#getId()
 	 */
 	@Override
 	public int getId() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

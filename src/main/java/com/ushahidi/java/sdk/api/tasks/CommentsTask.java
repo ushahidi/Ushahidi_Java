@@ -35,7 +35,7 @@ import com.ushahidi.java.sdk.api.Comment;
  * 
  * See <a href=
  * "https://wiki.ushahidi.com/display/WIKI/Ushahidi+Public+API#UshahidiPublicAPI-Comments"
- * >Ushahidi Public API for Comments</a> for more details
+ * >Ushahidi Public API</a> for more details
  * 
  * @author eyedol
  * 

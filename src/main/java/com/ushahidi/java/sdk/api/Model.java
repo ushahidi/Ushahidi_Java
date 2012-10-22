@@ -20,6 +20,8 @@
 package com.ushahidi.java.sdk.api;
 
 /**
+ * The Model class representing all the resource the Ushahidi API provides.
+ * 
  * @author eyedol
  * 
  */

@@ -42,10 +42,10 @@ import com.ushahidi.java.sdk.UshahidiException;
 
 /**
  * This is a custom implementation of an HTTP client based on the existing
- * classes provided the Standard java.net package.
+ * classes provided by the standard java.net package.
  * <p>
- * It implements POST and GET request. Also support multi-part POST request to
- * allow file uploads.
+ * It implements both POST and GET requests. In addition it supports multi-part
+ * POST request to allow file uploads.
  * </p>
  * 
  * @author eyedol
@@ -191,12 +191,12 @@ public abstract class BaseUshahidiHttpClient {
 	}
 
 	/**
-	 * Convert stream to string.
+	 * Convert stream to string
 	 * 
 	 * @param is
-	 *            the is
+	 *            the input stream to be converted to string
 	 * 
-	 * @return the string
+	 * @return the converted string
 	 */
 	protected static String streamToString(InputStream is) {
 		/*
@@ -230,7 +230,7 @@ public abstract class BaseUshahidiHttpClient {
 	 * Call a GET request.
 	 * 
 	 * @param url
-	 *            the api url
+	 *            the API url
 	 * 
 	 * @return the input stream
 	 */
@@ -239,20 +239,26 @@ public abstract class BaseUshahidiHttpClient {
 	}
 
 	/**
-	 * Call a POST request
+	 * Make a POST request
 	 * 
 	 * @param url
-	 * 
-	 * @return the input stream
+	 *            The API URL
+	 * @param parameters
+	 *            The parameters to be passed to the URL
+	 * @return The input stream
 	 */
 	protected InputStream postRequest(String url, Map<String, String> parameters) {
 		return postRequest(url, parameters, HttpURLConnection.HTTP_OK);
 	}
 
 	/**
-	 * Call a POST request
+	 * Make a Multi-part POST request. This request makes it possible to upload
+	 * files.
 	 * 
 	 * @param url
+	 *            The API URL
+	 * @param parameters
+	 *            The parameters to be passed to the URL
 	 * 
 	 * @return the input stream
 	 */
@@ -264,27 +270,27 @@ public abstract class BaseUshahidiHttpClient {
 	/**
 	 * Make a GET request.
 	 * 
-	 * @param apiUrl
-	 *            the api url
+	 * @param url
+	 *            The API URL
 	 * @param expected
-	 *            the expected
+	 *            The expected
 	 * 
-	 * @return the input stream
+	 * @return The input stream
 	 */
-	protected InputStream getRequest(String apiUrl, int expected) {
+	protected InputStream getRequest(String url, int expected) {
 		try {
-			URL url = new URL(apiUrl);
+			URL apiUrl = new URL(url);
 			if (!requestParameters.isEmpty()) {
-				if (url.getQuery() == null) {
-					url = new URL(apiUrl + "?"
+				if (apiUrl.getQuery() == null) {
+					apiUrl = new URL(url + "?"
 							+ getParametersString(requestParameters));
 				} else {
-					url = new URL(apiUrl + "&"
+					apiUrl = new URL(url + "&"
 							+ getParametersString(requestParameters));
 				}
 			}
 
-			HttpURLConnection request = (HttpURLConnection) url
+			HttpURLConnection request = (HttpURLConnection) apiUrl
 					.openConnection();
 			request.setConnectTimeout(getConnectionTimeout());
 			request.setReadTimeout(getSocketTimeout());
@@ -316,13 +322,13 @@ public abstract class BaseUshahidiHttpClient {
 	 * Make a POST request.
 	 * 
 	 * @param apiUrl
-	 *            the api url
+	 *            The API URL
 	 * @param parameters
-	 *            the parameters
+	 *            The parameters
 	 * @param expected
-	 *            the expected
+	 *            The expected
 	 * 
-	 * @return the input stream
+	 * @return The input stream
 	 */
 	protected InputStream postRequest(String apiUrl,
 			Map<String, String> parameters, int expected) {

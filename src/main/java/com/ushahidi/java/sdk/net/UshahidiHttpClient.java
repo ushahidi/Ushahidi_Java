@@ -58,9 +58,9 @@ public class UshahidiHttpClient extends BaseUshahidiHttpClient {
 	}
 
 	/**
-	 * Get the set user agent
+	 * Get the user agent
 	 * 
-	 * @return The set user agent
+	 * @return The user agent
 	 */
 	public String getUserAgent() {
 		if (userAgent != null && userAgent.length() > 0) {

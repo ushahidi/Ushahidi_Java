@@ -32,7 +32,7 @@ import com.ushahidi.java.sdk.api.Report;
  * 
  * See <a href=
  * "https://wiki.ushahidi.com/display/WIKI/Ushahidi+Public+API#UshahidiPublicAPI-Reports"
- * >Ushahidi Public API for Reports</a>
+ * >Ushahidi Public API</a>
  * 
  * @author eyedol
  * 

@@ -20,7 +20,8 @@
 package com.ushahidi.java.sdk.api;
 
 /**
- * This class implements all methods and properties related to the Version API
+ * This class implements all methods and properties related to the Ushahidi
+ * API's version resource
  * 
  * @author eyedol
  * 

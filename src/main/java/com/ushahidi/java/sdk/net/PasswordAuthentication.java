@@ -25,7 +25,7 @@ import java.util.Map;
 import com.ushahidi.java.sdk.util.Base64;
 
 /**
- * This class handles HTTP base Authentication mechanism
+ * This class handles HTTP header base Authentication mechanism
  * 
  * @author eyedol
  * 

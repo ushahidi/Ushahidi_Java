@@ -20,6 +20,8 @@
 package com.ushahidi.java.sdk.api;
 
 /**
+ * The Location class has all the properties and methods of the Ushahidi API's location resource
+ * 
  * @author eyedol
  * 
  */

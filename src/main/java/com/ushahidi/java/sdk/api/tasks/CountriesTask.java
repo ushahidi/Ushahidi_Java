@@ -34,7 +34,7 @@ import com.ushahidi.java.sdk.api.Country;
  * 
  * See <a href=
  * "https://wiki.ushahidi.com/display/WIKI/Ushahidi+Public+API#UshahidiPublicAPI-Countries"
- * >Ushahidi Public API for Countries</a> for more details
+ * >Ushahidi Public API</a> for more details
  * 
  * @author eyedol
  * 

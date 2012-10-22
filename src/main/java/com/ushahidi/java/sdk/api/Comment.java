@@ -20,7 +20,7 @@
 package com.ushahidi.java.sdk.api;
 
 /**
- * This Comment class has all properties and methods of a comment
+ * This Comment class has all properties and methods of the Ushahidi API's comment resource
  * 
  * @author eyedol
  * 
@@ -59,6 +59,7 @@ public class Comment extends Model{
 
 	/**
 	 * Get the ID of the comment
+	 * 
 	 * @return The comment ID
 	 */
 	@Override

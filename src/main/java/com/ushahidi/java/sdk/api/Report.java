@@ -22,13 +22,14 @@ package com.ushahidi.java.sdk.api;
 import java.util.List;
 
 /**
- * The Report class has all the properties and methods of a particular report
+ * The Report class has all the properties and methods of a particular Ushahidi
+ * API report resource
  * 
  * @author eyedol
- *
+ * 
  */
 public class Report extends Model {
-	
+
 	/**
 	 * The id of the report
 	 */
@@ -55,7 +56,8 @@ public class Report extends Model {
 	private int mode;
 
 	/**
-	 * The verification status of the report. 1 for verified and 0 for unverified.
+	 * The verification status of the report. 1 for verified and 0 for
+	 * unverified.
 	 */
 	private int verified;
 
@@ -74,7 +76,6 @@ public class Report extends Model {
 	 */
 	private double longitude;
 
-	
 	/**
 	 * The list of categories attached to the report
 	 */
@@ -84,7 +85,7 @@ public class Report extends Model {
 	 * The media attached to the report
 	 */
 	private List<Media> media;
-	
+
 	/**
 	 * The comments attached to the report
 	 */
@@ -96,20 +97,21 @@ public class Report extends Model {
 	public Report() {
 
 	}
-	
+
 	/**
 	 * Get the report ID
 	 * 
-	 * @return The report ID 
+	 * @return The report ID
 	 */
 	public int getId() {
 		return id;
 	}
-	
+
 	/**
 	 * Set the report ID
 	 * 
-	 * @param id The ID of the report
+	 * @param id
+	 *            The ID of the report
 	 */
 	public void setId(int id) {
 		this.id = id;
@@ -127,7 +129,8 @@ public class Report extends Model {
 	/**
 	 * Set the title of the report
 	 * 
-	 * @param title The title of the report
+	 * @param title
+	 *            The title of the report
 	 */
 	public void setTitle(String title) {
 		this.title = title;
@@ -145,7 +148,8 @@ public class Report extends Model {
 	/**
 	 * Set the description of the report
 	 * 
-	 * @param description The report description
+	 * @param description
+	 *            The report description
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -163,7 +167,8 @@ public class Report extends Model {
 	/**
 	 * Set the date attached to the report
 	 * 
-	 * @param date The date in the format 2012-09-20 15:06:00
+	 * @param date
+	 *            The date in the format 2012-09-20 15:06:00
 	 */
 	public void setDate(String date) {
 		this.date = date;
@@ -188,7 +193,8 @@ public class Report extends Model {
 	}
 
 	/**
-	 * Get the verification status of the report. 1 for verified and 0 for unverified
+	 * Get the verification status of the report. 1 for verified and 0 for
+	 * unverified
 	 * 
 	 * @return The verification status
 	 */
@@ -199,7 +205,8 @@ public class Report extends Model {
 	/**
 	 * Set the verification status of the report.
 	 * 
-	 * @param verified The verification status. 1 for verified and 0 for unverified
+	 * @param verified
+	 *            The verification status. 1 for verified and 0 for unverified
 	 */
 	public void setVerified(int verified) {
 		this.verified = verified;
@@ -217,7 +224,8 @@ public class Report extends Model {
 	/**
 	 * Set the location name of the location.
 	 * 
-	 * @param locationname The name of the location
+	 * @param locationname
+	 *            The name of the location
 	 */
 	public void setLocationName(String locationname) {
 		this.locationname = locationname;
@@ -235,7 +243,8 @@ public class Report extends Model {
 	/**
 	 * Set the longitude attached to the report
 	 * 
-	 * @param longitude The longitude of the report
+	 * @param longitude
+	 *            The longitude of the report
 	 */
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
@@ -253,7 +262,8 @@ public class Report extends Model {
 	/**
 	 * Set the latitude attached to the report
 	 * 
-	 * @param latitude The latitude attached to the report
+	 * @param latitude
+	 *            The latitude attached to the report
 	 */
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
@@ -271,7 +281,8 @@ public class Report extends Model {
 	/**
 	 * Set the list of categories.
 	 * 
-	 * @param categories The categories attached to the report
+	 * @param categories
+	 *            The categories attached to the report
 	 */
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
@@ -289,9 +300,10 @@ public class Report extends Model {
 	/**
 	 * Set the media attached to the report.
 	 * 
-	 * @param media The media attached to the report
+	 * @param media
+	 *            The media attached to the report
 	 */
-	public void setMedia( List <Media> media) {
+	public void setMedia(List<Media> media) {
 		this.media = media;
 	}
 
@@ -307,9 +319,10 @@ public class Report extends Model {
 	/**
 	 * Set the comments attached to the report.
 	 * 
-	 * @param comments The media attached to the report
+	 * @param comments
+	 *            The media attached to the report
 	 */
-	public void setComments( List <Comment> comments) {
+	public void setComments(List<Comment> comments) {
 		this.comments = comments;
 	}
 }

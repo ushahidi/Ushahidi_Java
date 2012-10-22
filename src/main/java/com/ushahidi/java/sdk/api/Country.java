@@ -20,7 +20,8 @@
 package com.ushahidi.java.sdk.api;
 
 /**
- * The Country class implements all the properties and methods of a country
+ * The Country class implements all the properties and methods of the Ushahidi
+ * API's country resource
  * 
  * @author eyedol
  * 

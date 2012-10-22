@@ -25,6 +25,8 @@ import com.ushahidi.java.sdk.Payload;
 import com.ushahidi.java.sdk.api.SystemInfo;
 
 /**
+ * The system info task
+ * 
  * @author eyedol
  * 
  */

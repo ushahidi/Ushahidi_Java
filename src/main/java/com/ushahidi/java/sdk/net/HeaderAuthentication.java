@@ -22,7 +22,7 @@ package com.ushahidi.java.sdk.net;
 import java.util.Map;
 
 /**
- * The interface to be implemented for heard based authentication
+ * The interface to be implemented for header based authentication
  * 
  * @author eyedol
  * 

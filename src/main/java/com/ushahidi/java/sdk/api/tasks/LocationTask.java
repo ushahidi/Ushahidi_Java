@@ -32,7 +32,7 @@ import com.ushahidi.java.sdk.api.Location;
  * 
  * See <a href=
  * "https://wiki.ushahidi.com/display/WIKI/Ushahidi+Public+API#UshahidiPublicAPI-Locations"
- * >Ushahidi Public API for Location</a> for more details
+ * >Ushahidi Public API</a> for more details
  * 
  * @author eyedol
  * 

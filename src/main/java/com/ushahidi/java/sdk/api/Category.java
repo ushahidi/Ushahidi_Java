@@ -20,7 +20,7 @@
 package com.ushahidi.java.sdk.api;
 
 /**
- *  The Category class has all the properties and methods of a particular category
+ *  The Category class has all the properties and methods of the Ushahidi API's category resource
  *  
  * @author eyedol
  *
@@ -43,7 +43,7 @@ public class Category extends Model{
 	private String description;
 
 	/**
-	 * The hex color code for the category
+	 * The hexadecimal color code for the category
 	 */
 	private String color;
 	

@@ -34,7 +34,7 @@ import com.ushahidi.java.sdk.api.Category;
  * 
  * See <a href=
  * "https://wiki.ushahidi.com/display/WIKI/Ushahidi+Public+API#UshahidiPublicAPI-Categories"
- * >Ushahidi Public API for Categories</a> for more details
+ * >Ushahidi Public API </a> for more details
  * 
  * @author eyedol
  * 
