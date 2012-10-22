@@ -19,23 +19,41 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.tasks;
 
-import static org.junit.Assert.*;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.ushahidi.java.sdk.api.Country;
+
 /**
+ * This class tests {@link CountriesTask}CountriesTask
+ * 
  * @author eyedol
- *
+ * 
  */
-public class CountriesTaskTest {
+public class CountriesTaskTest extends BaseTaskTest {
+
+	/** The countries task */
+	private CountriesTask task;
+
+	/** The default country id to use */
+	private static final int ID = 1;
+
+	/** The default country ISO to use */
+	private static final String ISO = "gh";
+
+	/** The default country name to use */
+	private static final String NAME = "ghana";
 
 	/**
+	 * 
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
+		task = factory.createCountriesTask();
 	}
 
 	/**
@@ -43,38 +61,50 @@ public class CountriesTaskTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
+		task = null;
 	}
 
 	/**
-	 * Test method for {@link com.ushahidi.java.sdk.api.tasks.CountriesTask#all()}.
+	 * Test method for
+	 * {@link com.ushahidi.java.sdk.api.tasks.CountriesTask#all()}.
 	 */
 	@Test
 	public void testAll() {
-		fail("Not yet implemented");
+		List<Country> countries = task.all();
+		assertNotNullOrEmpty("Countries list cannot be null or empty",
+				countries);
 	}
 
 	/**
-	 * Test method for {@link com.ushahidi.java.sdk.api.tasks.CountriesTask#countryId(int)}.
+	 * Test method for
+	 * {@link com.ushahidi.java.sdk.api.tasks.CountriesTask#countryId(int)}.
 	 */
 	@Test
 	public void testCountryId() {
-		fail("Not yet implemented");
+		Country country = task.countryId(ID);
+		assertNotNull("Country by id cannot be null or empty", country);
 	}
 
 	/**
-	 * Test method for {@link com.ushahidi.java.sdk.api.tasks.CountriesTask#countryIso(java.lang.String)}.
+	 * Test method for
+	 * {@link com.ushahidi.java.sdk.api.tasks.CountriesTask#countryIso(java.lang.String)}
+	 * .
 	 */
 	@Test
 	public void testCountryIso() {
-		fail("Not yet implemented");
+		Country country = task.countryIso(ISO);
+		assertNotNull("Country by iso cannot be null or empty", country);
 	}
 
 	/**
-	 * Test method for {@link com.ushahidi.java.sdk.api.tasks.CountriesTask#countryName(java.lang.String)}.
+	 * Test method for
+	 * {@link com.ushahidi.java.sdk.api.tasks.CountriesTask#countryName(java.lang.String)}
+	 * .
 	 */
 	@Test
 	public void testCountryName() {
-		fail("Not yet implemented");
+		Country country = task.countryName(NAME);
+		assertNotNull("Country by name cannot be null or empty", country);
 	}
 
 }

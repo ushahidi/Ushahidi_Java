@@ -28,7 +28,7 @@ import org.junit.Test;
 import com.ushahidi.java.sdk.api.Comment;
 
 /**
- * This class tests Ushahidi API comments test
+ * This class tests Ushahidi API comments
  * 
  * @author eyedol
  * 
@@ -70,7 +70,6 @@ public class CommentsTaskTest extends BaseTaskTest {
 	public void testAll() {
 		List<Comment> comments = task.all();
 		assertNotNullOrEmpty("Comments list cannot be null or empty", comments);
-
 	}
 
 	/**
