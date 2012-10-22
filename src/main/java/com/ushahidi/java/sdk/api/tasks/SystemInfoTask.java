@@ -33,6 +33,7 @@ import com.ushahidi.java.sdk.api.SystemInfo;
 public class SystemInfoTask extends Payload<SystemInfo> {
 
 	/**
+	 * 
 	 * @param url
 	 */
 	public SystemInfoTask(String url) {

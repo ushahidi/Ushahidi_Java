@@ -33,11 +33,14 @@ import org.junit.Test;
  */
 public class SystemInfoTaskTest extends BaseTaskTest {
 
+	private SystemInfoTask task;
+	
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
+		task = factory.createSystemInfoTask();
 	}
 
 	/**
@@ -45,6 +48,7 @@ public class SystemInfoTaskTest extends BaseTaskTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
+		task = null;
 	}
 
 	@Test
