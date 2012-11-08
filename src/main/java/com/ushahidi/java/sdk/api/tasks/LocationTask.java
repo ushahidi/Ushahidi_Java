@@ -37,7 +37,7 @@ import com.ushahidi.java.sdk.api.Location;
  * @author eyedol
  * 
  */
-public class LocationTask extends Payload<Location> {
+public class LocationTask extends BaseTask {
 
 	public LocationTask(String url) {
 		super(url);

@@ -25,12 +25,7 @@ package com.ushahidi.java.sdk.api;
  * @author eyedol
  * 
  */
-public class Location extends Model {
-
-	/**
-	 * The location's unique ID as retrieved via the API
-	 */
-	private int id;
+public class Location {
 
 	/**
 	 * The name of the location. Eg. Accra.
@@ -62,16 +57,6 @@ public class Location extends Model {
 	 * The date and time the location was saved. Eg. 2009-06-30 00:00:00
 	 */
 	private String date;
-
-	@Override
-	public int getId() {
-		return id;
-	}
-
-	@Override
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public int getCountryId() {
 		return countryId;
@@ -120,4 +105,5 @@ public class Location extends Model {
 	public void setDate(String date) {
 		this.date = date;
 	}
+	
 }

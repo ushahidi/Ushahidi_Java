@@ -19,41 +19,35 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.tasks;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import com.ushahidi.java.sdk.api.System;
 
 /**
- * The SystemInfoTask to be tested
- * 
- * TODO: test the various methods as defined in the SystemInfoTask class
+ * The system info task
  * 
  * @author eyedol
- *
+ * 
  */
-public class SystemInfoTaskTest extends BaseTaskTest {
-
-	private SystemInfoTask task;
-	
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-		task = factory.createSystemInfoTask();
-	}
+public class SystemTask extends BaseTask {
 
 	/**
-	 * @throws java.lang.Exception
+	 * Default constructor
+	 * 
+	 * @param url The Ushahidi deployment
 	 */
-	@After
-	public void tearDown() throws Exception {
-		task = null;
+	public SystemTask(String url) {
+		super(url);
 	}
 
-	@Test
-	public void test() {
-		fail("Not yet implemented");
+	/**
+	 * Get the version task API call
+	 * 
+	 * @return The {@link com.ushahidi.java.sdk.api.System}
+	 */
+	public System fetch() {
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=version");
+		uriBuilder.append("&resp=json");
+		return fromString(client.sendGetRequest(uriBuilder.toString()),
+				System.class);
 	}
-
 }

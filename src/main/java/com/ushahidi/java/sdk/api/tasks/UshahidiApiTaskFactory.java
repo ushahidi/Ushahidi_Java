@@ -98,7 +98,7 @@ public class UshahidiApiTaskFactory {
 	 * 
 	 * @return The system task
 	 */
-	public SystemInfoTask createSystemInfoTask() {
-		return new SystemInfoTask(url);
+	public SystemTask createSystemTask() {
+		return new SystemTask(url);
 	}
 }

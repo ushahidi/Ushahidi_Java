@@ -79,7 +79,7 @@ public class Report extends Model {
 	/**
 	 * The list of categories attached to the report
 	 */
-	private List<Category> categories;
+	private List<Categories> categories;
 
 	/**
 	 * The media attached to the report
@@ -274,7 +274,7 @@ public class Report extends Model {
 	 * 
 	 * @return The list of categories attached to the report.
 	 */
-	public List<Category> getCategories() {
+	public List<Categories> getCategories() {
 		return categories;
 	}
 
@@ -284,7 +284,7 @@ public class Report extends Model {
 	 * @param categories
 	 *            The categories attached to the report
 	 */
-	public void setCategories(List<Category> categories) {
+	public void setCategories(List<Categories> categories) {
 		this.categories = categories;
 	}
 

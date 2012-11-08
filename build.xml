@@ -6,7 +6,7 @@
     <property name="bin" location="bin" />
     <property name="doc" location="doc"/>
     <property name="dist" location="dist"/>
-    
+    <property name="libs" path="libs"/>
     <property environment="env"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.6"/>
@@ -17,7 +17,7 @@
     </target>
     <path id="compile.classpath">
         <pathelement location="bin"/>
-        
+        <pathelement location="libs/gson-2.2.2.jar"/>
     </path>
     
     <target name="compile" depends="init" description="Compile the Java code from ${src} into ${bin}">

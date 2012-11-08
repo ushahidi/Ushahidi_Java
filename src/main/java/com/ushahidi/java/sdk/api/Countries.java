@@ -19,12 +19,38 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * The Model class representing all the resource the Ushahidi API provides.
- * 
  * @author eyedol
  * 
  */
-public abstract class Model {
+public class Countries extends Response {
 
+	private static class Payload extends Response.Payload {
+
+		private static class _Country {
+			private Country country;
+		}
+
+		private List<_Country> countries;
+
+		private Country country;
+	}
+
+	private Payload payload;
+
+	public List<Country> getCountries() {
+		List<Country> comt = new ArrayList<Country>();
+		for (Payload._Country item : payload.countries) {
+			Country c = item.country;
+			comt.add(c);
+		}
+		return comt;
+	}
+
+	public Country getCountry() {
+		return payload.country;
+	}
 }

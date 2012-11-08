@@ -19,16 +19,13 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.tasks;
 
-import java.io.IOException;
 import java.util.List;
 
-import org.json.JSONException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.ushahidi.java.sdk.api.Category;
-import com.ushahidi.java.sdk.api.tasks.CategoriesTask;
 
 /**
  * This class tests Ushahidi API categories task
@@ -62,15 +59,9 @@ public class CategoriesTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testAll() {
-		try {
-			List<Category> categories = task.all();
-			assertNotNullOrEmpty("Categories list cannot be null or empty",
-					categories);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		List<Category> categories = task.all();
+		assertNotNullOrEmpty("Categories list cannot be null or empty",
+				categories);
 	}
 
 	/**
@@ -79,14 +70,9 @@ public class CategoriesTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testCatId() {
-		try {
-			Category category = task.catId(CAT_ID);
-			assertNotNull("Category cannot be null ", category);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Category category = task.catId(CAT_ID);
+		assertNotNull("Category cannot be null ", category);
+
 	}
 
 }

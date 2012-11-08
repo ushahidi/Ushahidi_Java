@@ -19,12 +19,38 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * The Model class representing all the resource the Ushahidi API provides.
- * 
  * @author eyedol
  * 
  */
-public abstract class Model {
+public class Comments extends Response {
 
+	private static class Payload extends Response.Payload {
+
+		private static class _Comment {
+			private Comment comment;
+		}
+
+		private List<_Comment> comments;
+
+		private Comment comment;
+	}
+
+	private Payload payload;
+
+	public List<Comment> getComments() {
+		List<Comment> comt = new ArrayList<Comment>();
+		for (Payload._Comment item : payload.comments) {
+			Comment c = item.comment;
+			comt.add(c);
+		}
+		return comt;
+	}
+
+	public Comment getComment() {
+		return payload.comment;
+	}
 }

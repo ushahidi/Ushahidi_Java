@@ -20,18 +20,19 @@
 package com.ushahidi.java.sdk.api;
 
 /**
- * This Comment class has all properties and methods of the Ushahidi API's comment resource
+ * This Comment class has all properties and methods of the Ushahidi API's
+ * comment resource
  * 
  * @author eyedol
  * 
  */
-public class Comment extends Model{
-	
+public class Comment {
+
 	/**
 	 * The unique ID for the comment
 	 */
 	private int id;
-	
+
 	/**
 	 * The unique ID of a checking
 	 */
@@ -48,7 +49,7 @@ public class Comment extends Model{
 	private String author;
 
 	/**
-	 * The description of the comment. This in fact the actual comment passed 
+	 * The description of the comment. This in fact the actual comment passed
 	 */
 	private String description;
 
@@ -56,26 +57,6 @@ public class Comment extends Model{
 	 * The date the comment was submitted.
 	 */
 	private String date;
-
-	/**
-	 * Get the ID of the comment
-	 * 
-	 * @return The comment ID
-	 */
-	@Override
-	public int getId() {
-		return id;
-	}
-
-	/**
-	 * Set the comment ID
-	 * 
-	 * @param id The comment ID
-	 */
-	@Override
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	/**
 	 * Get the checkin ID the comment was posted to.
@@ -107,7 +88,8 @@ public class Comment extends Model{
 	/**
 	 * Set the report ID which the comment was posted to
 	 * 
-	 * @param reportId The report ID
+	 * @param reportId
+	 *            The report ID
 	 */
 	public void setReportId(int reportId) {
 		this.reportId = reportId;
@@ -125,7 +107,8 @@ public class Comment extends Model{
 	/**
 	 * Set the author of the comment
 	 * 
-	 * @param author The name of the commenter
+	 * @param author
+	 *            The name of the commenter
 	 */
 	public void setAuthor(String author) {
 		this.author = author;
@@ -141,9 +124,10 @@ public class Comment extends Model{
 	}
 
 	/**
-	 *  Set the description of the comment. 
-	 *  
-	 * @param description The comment
+	 * Set the description of the comment.
+	 * 
+	 * @param description
+	 *            The comment
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -161,9 +145,24 @@ public class Comment extends Model{
 	/**
 	 * Set the date the commented was submitted
 	 * 
-	 * @param date The submission date.
+	 * @param date
+	 *            The submission date.
 	 */
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	/**
+	 * Get the comment id
+	 */
+	public int getId() {
+		return this.id;
+	}
+
+	/**
+	 * Set the comment id
+	 */
+	public int setId(int id) {
+		return this.id = id;
 	}
 }

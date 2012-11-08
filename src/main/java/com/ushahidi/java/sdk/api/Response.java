@@ -17,14 +17,40 @@
  ** Ushahidi developers at team@ushahidi.com.
  **
  *****************************************************************************/
+
 package com.ushahidi.java.sdk.api;
 
 /**
- * The Model class representing all the resource the Ushahidi API provides.
+ * The class represents the Main response returned as a result of 
+ * an Ushahidi API call.
  * 
  * @author eyedol
- * 
+ *
  */
-public abstract class Model {
-
+public class Response {
+	
+	protected static class Payload {
+		protected String domain;
+	}
+	
+	/**
+	 * Error object
+	 * 
+	 * @author eyedol
+	 *
+	 */
+	protected static class Error {
+		protected int code;
+		protected String message;
+	}
+	
+	protected Error error;
+	
+	public int getErrorCode() {
+		return error.code;
+	}
+	
+	public String getErrorMessage() {
+		return error.message;
+	}
 }

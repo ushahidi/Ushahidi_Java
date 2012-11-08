@@ -28,24 +28,4 @@ package com.ushahidi.java.sdk.api;
  */
 public class Media extends Model {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ushahidi.java.sdk.api.Model#setId(int)
-	 */
-	@Override
-	protected void setId(int id) {
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ushahidi.java.sdk.api.Model#getId()
-	 */
-	@Override
-	public int getId() {
-		return 0;
-	}
-
 }

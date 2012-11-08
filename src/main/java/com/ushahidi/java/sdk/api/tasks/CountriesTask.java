@@ -39,7 +39,7 @@ import com.ushahidi.java.sdk.api.Country;
  * @author eyedol
  * 
  */
-public class CountriesTask extends Payload<Country> {
+public class CountriesTask extends BaseTask{
 
 	public CountriesTask(String url) {
 		super(url);
@@ -112,8 +112,8 @@ public class CountriesTask extends Payload<Country> {
 				if(countriesArr != null) {
 					for(int i = 0; i < countriesArr.length();i++) {
 						Country country = new Country();
-						country.setId( countriesArr.getJSONObject(i)
-						.getJSONObject("country").getInt("id"));
+						/*country.setId( countriesArr.getJSONObject(i)
+						.getJSONObject("country").getInt("id"));*/
 					}
 				}
 				return countries;

@@ -26,7 +26,7 @@ package com.ushahidi.java.sdk.api;
  * @author eyedol
  * 
  */
-public class Country extends Model {
+public class Country{
 
 	/**
 	 * The country id
@@ -57,27 +57,6 @@ public class Country extends Model {
 	 * The total number of cities retrieved for the country
 	 */
 	private int cities;
-
-	/**
-	 * Get the unique ID of the country
-	 * 
-	 * @return The ID
-	 */
-	@Override
-	public int getId() {
-		return id;
-	}
-
-	/**
-	 * Set the unique ID of the country
-	 * 
-	 * @param id
-	 *            The country unique ID
-	 */
-	@Override
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	/**
 	 * Get the name of the country.
@@ -172,5 +151,19 @@ public class Country extends Model {
 	 */
 	public void setCities(int cities) {
 		this.cities = cities;
+	}
+	
+	/**
+	 * Get the comment id
+	 */
+	public int getId() {
+		return this.id;
+	}
+
+	/**
+	 * Set the comment id
+	 */
+	public int setId(int id) {
+		return this.id = id;
 	}
 }

@@ -20,12 +20,10 @@
 package com.ushahidi.java.sdk.api;
 
 /**
- *  The Category class has all the properties and methods of the Ushahidi API's category resource
- *  
  * @author eyedol
- *
+ * 
  */
-public class Category extends Model{
+public class Category {
 
 	/**
 	 * The category ID
@@ -46,7 +44,7 @@ public class Category extends Model{
 	 * The hexadecimal color code for the category
 	 */
 	private String color;
-	
+
 	/**
 	 * The icon attached to the category
 	 */
@@ -61,7 +59,7 @@ public class Category extends Model{
 	 * The parent category
 	 */
 	private int parentId;
-	
+
 	/**
 	 * Get the title of the category
 	 * 
@@ -73,8 +71,9 @@ public class Category extends Model{
 
 	/**
 	 * Set the title of the category
-	 *  
-	 * @param title The title to be set
+	 * 
+	 * @param title
+	 *            The title to be set
 	 */
 	public void setTitle(String title) {
 		this.title = title;
@@ -92,7 +91,8 @@ public class Category extends Model{
 	/**
 	 * Set the description of the category
 	 * 
-	 * @param description The description of the category
+	 * @param description
+	 *            The description of the category
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -110,12 +110,13 @@ public class Category extends Model{
 	/**
 	 * Set the color of the category
 	 * 
-	 * @param color The hex color code of the category
+	 * @param color
+	 *            The hex color code of the category
 	 */
 	public void setColor(String color) {
 		this.color = color;
 	}
-	
+
 	/**
 	 * Get the position of the category
 	 * 
@@ -137,7 +138,8 @@ public class Category extends Model{
 	/**
 	 * Set the parent ID of the category
 	 * 
-	 * @param parentId The parent ID
+	 * @param parentId
+	 *            The parent ID
 	 */
 	public void setParentId(int parentId) {
 		this.parentId = parentId;
@@ -151,13 +153,13 @@ public class Category extends Model{
 	public int getParentId() {
 		return this.parentId;
 	}
-	
+
 	/**
-	 * Set the  ID of the category
+	 * Set the ID of the category
 	 * 
-	 * @param id The ID
+	 * @param id
+	 *            The ID
 	 */
-	@Override
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -167,20 +169,20 @@ public class Category extends Model{
 	 * 
 	 * @return The ID
 	 */
-	@Override
 	public int getId() {
 		return this.id;
 	}
-	
+
 	/**
 	 * Set the icon of the category
 	 * 
-	 * @param icon The icon of the category
+	 * @param icon
+	 *            The icon of the category
 	 */
 	public void setIcon(String icon) {
 		this.icon = icon;
 	}
-	
+
 	/**
 	 * Get the icon attached to the category
 	 * 
@@ -191,4 +193,3 @@ public class Category extends Model{
 	}
 
 }
-

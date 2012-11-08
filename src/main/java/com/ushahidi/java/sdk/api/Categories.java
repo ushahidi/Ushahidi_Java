@@ -17,38 +17,54 @@
  ** Ushahidi developers at team@ushahidi.com.
  **
  *****************************************************************************/
-package com.ushahidi.java.sdk.api.tasks;
+package com.ushahidi.java.sdk.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.ushahidi.java.sdk.Payload;
-import com.ushahidi.java.sdk.api.SystemInfo;
-
 /**
- * The system info task
+ * The Category class has all the properties and methods of the Ushahidi API's
+ * category resource
  * 
  * @author eyedol
  * 
  */
-public class SystemInfoTask extends Payload<SystemInfo> {
+public class Categories extends Response {
+
+	private static class Payload extends Response.Payload {
+
+		private static class _Category {
+			private Category category;
+		}
+
+		private List<_Category> categories;
+
+		private Category category;
+
+	}
+
+	private Payload payload;
 
 	/**
+	 * Get list of categories
 	 * 
-	 * @param url
+	 * @return The list of categories
 	 */
-	public SystemInfoTask(String url) {
-		super(url);
+	public List<Category> getCategories() {
+		List<Category> cat = new ArrayList<Category>();
+		for(Payload._Category c: payload.categories) {
+			Category category = c.category;
+			cat.add(category);
+		}
+		return cat;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Get a particular category
 	 * 
-	 * @see com.ushahidi.java.sdk.Payload#processModels()
+	 * @return The category
 	 */
-	@Override
-	public List<SystemInfo> processModels() {
-		// TODO Auto-generated method stub
-		return null;
+	public Category getCategory() {
+		return payload.category;
 	}
-
 }
