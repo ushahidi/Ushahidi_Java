@@ -56,6 +56,7 @@ public class ReportTaskTest extends BaseTaskTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		super.setUp();
 		task = factory.createReportsTask();
 	}
 
@@ -64,6 +65,7 @@ public class ReportTaskTest extends BaseTaskTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
+		super.tearDown();
 		task = null;
 	}
 

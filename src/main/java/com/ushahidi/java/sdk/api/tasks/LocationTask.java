@@ -19,13 +19,10 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.tasks;
 
-import java.io.IOException;
 import java.util.List;
 
-import org.json.JSONException;
-
-import com.ushahidi.java.sdk.Payload;
 import com.ushahidi.java.sdk.api.Location;
+import com.ushahidi.java.sdk.api.Locations;
 
 /**
  * The Location Task Implements all tasks related to the Location API.
@@ -52,7 +49,13 @@ public class LocationTask extends BaseTask {
 	 * @throws JSONException
 	 */
 	public List<Location> all() {
-		return null;
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=locations");
+		uriBuilder.append("&resp=json");
+
+		final Locations locations = fromString(
+				client.sendGetRequest(uriBuilder.toString()), Locations.class);
+		return locations.getLocations();
 	}
 
 	/**
@@ -65,8 +68,16 @@ public class LocationTask extends BaseTask {
 	 * @throws IOException
 	 * @throws JSONException
 	 */
-	public Location locationId(int id) {
-		return null;
+	public List<Location> locationId(int id) {
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=location");
+		uriBuilder.append("&by=locid");
+		uriBuilder.append("&id=" + String.valueOf(id));
+		uriBuilder.append("&resp=json");
+
+		final Locations locations = fromString(
+				client.sendGetRequest(uriBuilder.toString()), Locations.class);
+		return locations.getLocations();
 	}
 
 	/**
@@ -78,19 +89,16 @@ public class LocationTask extends BaseTask {
 	 * @throws IOException
 	 * @throws JSONException
 	 */
-	public Location countryId(int id) {
-		return null;
-	}
+	public List<Location> countryId(int id) {
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=location");
+		uriBuilder.append("&by=country");
+		uriBuilder.append("&id=" + String.valueOf(id));
+		uriBuilder.append("&resp=json");
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ushahidi.java.sdk.Payload#processModels()
-	 */
-	@Override
-	public List<Location> processModels() {
-		// TODO Auto-generated method stub
-		return null;
+		final Locations locations = fromString(
+				client.sendGetRequest(uriBuilder.toString()), Locations.class);
+		return locations.getLocations();
 	}
 
 }

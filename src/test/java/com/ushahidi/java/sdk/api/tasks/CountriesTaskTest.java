@@ -53,6 +53,7 @@ public class CountriesTaskTest extends BaseTaskTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		super.setUp();
 		task = factory.createCountriesTask();
 	}
 
@@ -61,6 +62,7 @@ public class CountriesTaskTest extends BaseTaskTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
+		super.setUp();
 		task = null;
 	}
 

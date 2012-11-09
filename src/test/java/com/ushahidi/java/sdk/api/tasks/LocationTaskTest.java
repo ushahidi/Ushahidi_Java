@@ -38,15 +38,16 @@ public class LocationTaskTest extends BaseTaskTest {
 	private LocationTask task;
 
 	/** The default location ID */
-	private static final int LOCATION_ID = 1;
+	private static final int LOCATION_ID = 455;
 
-	private static final int COUNTRY_ID = 1;
+	private static final int COUNTRY_ID = 115;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
+		super.setUp();
 		task = factory.createLocationTask();
 	}
 
@@ -55,6 +56,7 @@ public class LocationTaskTest extends BaseTaskTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
+		super.tearDown();
 		task = null;
 	}
 
@@ -74,8 +76,8 @@ public class LocationTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testLocationId() {
-		Location location = task.locationId(LOCATION_ID);
-		assertNotNull("Location by ID cannot be null", location);
+		List<Location> locations = task.locationId(LOCATION_ID);
+		assertNotNull("Location by ID cannot be null", locations);
 	}
 
 	/**
@@ -84,8 +86,8 @@ public class LocationTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testCountryId() {
-		Location location = task.countryId(COUNTRY_ID);
-		assertNotNull("Location by country ID cannot be null", location);
+		List<Location> locations = task.countryId(COUNTRY_ID);
+		assertNotNull("Location by country ID cannot be null", locations);
 	}
 
 }

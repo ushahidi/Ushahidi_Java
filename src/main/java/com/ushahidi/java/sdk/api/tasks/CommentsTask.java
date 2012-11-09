@@ -54,7 +54,7 @@ public class CommentsTask extends BaseTask {
 		uriBuilder.append("&by=all");
 		uriBuilder.append("&resp=json");
 
-		// fetch all categories
+		// fetch all comments
 		Comments comments = fromString(
 				client.sendGetRequest(uriBuilder.toString()), Comments.class);
 		return comments.getComments();

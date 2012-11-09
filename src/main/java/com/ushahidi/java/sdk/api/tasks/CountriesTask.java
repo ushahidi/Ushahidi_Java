@@ -19,14 +19,8 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.tasks;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import com.ushahidi.java.sdk.Payload;
+import com.ushahidi.java.sdk.api.Countries;
 import com.ushahidi.java.sdk.api.Country;
 
 /**
@@ -39,7 +33,7 @@ import com.ushahidi.java.sdk.api.Country;
  * @author eyedol
  * 
  */
-public class CountriesTask extends BaseTask{
+public class CountriesTask extends BaseTask {
 
 	public CountriesTask(String url) {
 		super(url);
@@ -53,7 +47,13 @@ public class CountriesTask extends BaseTask{
 	 * @throws JSONException
 	 */
 	public List<Country> all() {
-		return null;
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=countries");
+		uriBuilder.append("&resp=json");
+
+		final Countries countries = fromString(
+				client.sendGetRequest(uriBuilder.toString()), Countries.class);
+		return countries.getCountries();
 	}
 
 	/**
@@ -67,7 +67,15 @@ public class CountriesTask extends BaseTask{
 	 * @throws JSONException
 	 */
 	public Country countryId(int id) {
-		return null;
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=country");
+		uriBuilder.append("&by=countryid");
+		uriBuilder.append("&id=" + String.valueOf(id));
+		uriBuilder.append("&resp=json");
+
+		final Countries countries = fromString(
+				client.sendGetRequest(uriBuilder.toString()), Countries.class);
+		return countries.getCountry();
 	}
 
 	/**
@@ -80,7 +88,15 @@ public class CountriesTask extends BaseTask{
 	 * @throws JSONException
 	 */
 	public Country countryIso(String iso) {
-		return null;
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=country");
+		uriBuilder.append("&by=countryiso");
+		uriBuilder.append("&iso=" + iso);
+		uriBuilder.append("&resp=json");
+
+		final Countries countries = fromString(
+				client.sendGetRequest(uriBuilder.toString()), Countries.class);
+		return countries.getCountry();
 	}
 
 	/**
@@ -94,34 +110,15 @@ public class CountriesTask extends BaseTask{
 	 * @throws JSONException
 	 */
 	public Country countryName(String name) {
-		return null;
-	}
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=country");
+		uriBuilder.append("&by=countryname");
+		uriBuilder.append("&name=" + name);
+		uriBuilder.append("&resp=json");
 
-	/**
-	 * Process the JSON data to get the data associated with a country
-	 * 
-	 * @see com.ushahidi.java.sdk.Payload#processModels()
-	 */
-	@Override
-	public List<Country> processModels() {
-		List<Country> countries = new ArrayList<Country>();
-		try {
-			if(!getPayloadObj().isNull("countries")) {
-				JSONArray countriesArr = getPayloadObj()
-						.getJSONArray("countries");
-				if(countriesArr != null) {
-					for(int i = 0; i < countriesArr.length();i++) {
-						Country country = new Country();
-						/*country.setId( countriesArr.getJSONObject(i)
-						.getJSONObject("country").getInt("id"));*/
-					}
-				}
-				return countries;
-			}
-		}catch (JSONException e) {
-			e.printStackTrace();
-		}
-		return null;
+		final Countries countries = fromString(
+				client.sendGetRequest(uriBuilder.toString()), Countries.class);
+		return countries.getCountry();
 	}
 
 }
