@@ -21,6 +21,7 @@ package com.ushahidi.java.sdk.api.tasks;
 
 import java.util.List;
 
+import com.ushahidi.java.sdk.UshahidiException;
 import com.ushahidi.java.sdk.api.Location;
 import com.ushahidi.java.sdk.api.Locations;
 
@@ -77,6 +78,11 @@ public class LocationTask extends BaseTask {
 
 		final Locations locations = fromString(
 				client.sendGetRequest(uriBuilder.toString()), Locations.class);
+		if (locations.getLocations() == null) {
+			throw new UshahidiException("Error code "
+					+ locations.getErrorCode() + " with message "
+					+ locations.getErrorMessage());
+		}
 		return locations.getLocations();
 	}
 
