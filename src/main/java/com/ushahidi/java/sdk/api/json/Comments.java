@@ -17,14 +17,42 @@
  ** Ushahidi developers at team@ushahidi.com.
  **
  *****************************************************************************/
-package com.ushahidi.java.sdk.api;
+package com.ushahidi.java.sdk.api.json;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ushahidi.java.sdk.api.Comment;
 
 /**
- * The Model class representing all the resource the Ushahidi API provides.
- * 
  * @author eyedol
  * 
  */
-public abstract class Model {
+public class Comments extends Response {
 
+	private static class Payload extends Response.Payload {
+
+		private static class _Comment {
+			private Comment comment;
+		}
+
+		private List<_Comment> comments;
+
+		private Comment comment;
+	}
+
+	private Payload payload;
+
+	public List<Comment> getComments() {
+		List<Comment> comt = new ArrayList<Comment>();
+		for (Payload._Comment item : payload.comments) {
+			Comment c = item.comment;
+			comt.add(c);
+		}
+		return comt;
+	}
+
+	public Comment getComment() {
+		return payload.comment;
+	}
 }

@@ -26,6 +26,7 @@ import org.json.JSONException;
 
 import com.ushahidi.java.sdk.api.Incident;
 import com.ushahidi.java.sdk.api.json.Reports;
+import com.ushahidi.java.sdk.api.json.Reports.Payload.Incidents;
 
 /**
  * The ReportsTask implements all the task related to Reports task.
@@ -44,6 +45,8 @@ public class ReportsTask extends BaseTask {
 	 */
 	public int limit;
 
+	public Reports reports;
+
 	/**
 	 * Default constructor for ReportsTask. Sets the limit default value to 20.
 	 */
@@ -57,17 +60,16 @@ public class ReportsTask extends BaseTask {
 	 * 
 	 * @return A List containing all approved reports
 	 * 
-	 * @throws IOException
-	 * @throws JSONException
 	 */
-	public List<Incident> all() {
+	public List<Incidents> all() {
 		final StringBuilder uriBuilder = new StringBuilder(url);
 		uriBuilder.append("/api?task=incidents");
+		uriBuilder.append("&comments=1");
 		uriBuilder.append("&resp=json");
-		
-		final Reports reports = fromString(
-				client.sendGetRequest(uriBuilder.toString()), Reports.class);
-		return reports.getReports();
+
+		reports = fromString(client.sendGetRequest(uriBuilder.toString()),
+				Reports.class);
+		return reports.getPayload().incidents;
 	}
 
 	/**

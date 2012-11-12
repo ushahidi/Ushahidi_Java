@@ -33,7 +33,7 @@ public class Incident {
 	/**
 	 * The id of the report
 	 */
-
+	@SerializedName("incidentid")
 	private int id;
 
 	/**
@@ -94,20 +94,20 @@ public class Incident {
 	/**
 	 * The list of categories attached to the report
 	 *
-	//@SerializedName("categories")
-	private Categories categories;
+	//@SerializedName("categories")*
+	private List<Category> categories;
 
 	/**
 	 * The media attached to the report
 	 *
-	//@SerializedName("media")
-	private Media media;
+	//@SerializedName("media")*
+	private List<Media> media;
 
 	/**
 	 * The comments attached to the report
 	 *
-	//@SerializedName("comments")
-	private Comment comments;*/
+	//@SerializedName("comments")*
+	private List<Comment> comments;*/
 
 	/**
 	 * The default constructor. It initializes no variables.

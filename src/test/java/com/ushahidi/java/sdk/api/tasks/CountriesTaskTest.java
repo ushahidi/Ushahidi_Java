@@ -39,7 +39,7 @@ public class CountriesTaskTest extends BaseTaskTest {
 	private CountriesTask task;
 
 	/** The default country id to use */
-	private static final int ID = 1;
+	private static final int ID = 247;
 
 	/** The default country ISO to use */
 	private static final String ISO = "gh";
@@ -83,8 +83,8 @@ public class CountriesTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testCountryId() {
-		Country country = task.countryId(ID);
-		assertNotNull("Country by id cannot be null or empty", country);
+		List<Country> countries = task.countryId(ID);
+		assertNotNull("Country by id cannot be null or empty", countries);
 	}
 
 	/**
@@ -94,8 +94,8 @@ public class CountriesTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testCountryIso() {
-		Country country = task.countryIso(ISO);
-		assertNotNull("Country by iso cannot be null or empty", country);
+		List<Country> countries = task.countryIso(ISO);
+		assertNotNull("Country by iso cannot be null or empty", countries);
 	}
 
 	/**
@@ -105,8 +105,8 @@ public class CountriesTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testCountryName() {
-		Country country = task.countryName(NAME);
-		assertNotNull("Country by name cannot be null or empty", country);
+		List<Country> countries = task.countryName(NAME);
+		assertNotNull("Country by name cannot be null or empty", countries);
 	}
 
 }

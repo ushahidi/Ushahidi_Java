@@ -26,6 +26,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.ushahidi.java.sdk.api.Incident;
+import com.ushahidi.java.sdk.api.json.Reports.Payload.Incidents;
 
 /**
  * The report task test
@@ -75,7 +76,7 @@ public class ReportTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testAll() {
-		List<Incident> reports = task.all();
+		List<Incidents> reports = task.all();
 		assertNotNullOrEmpty("List report all cannot be null or empty", reports);
 	}
 

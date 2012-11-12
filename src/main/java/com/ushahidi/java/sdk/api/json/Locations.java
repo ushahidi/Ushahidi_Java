@@ -38,7 +38,6 @@ public class Locations extends Response {
 
 		private List<_Location> locations;
 
-		private Location location;
 	}
 
 	private Payload payload;

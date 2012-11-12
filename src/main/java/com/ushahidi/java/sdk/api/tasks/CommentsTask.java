@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.ushahidi.java.sdk.api.Comment;
-import com.ushahidi.java.sdk.api.Comments;
+import com.ushahidi.java.sdk.api.json.Comments;
 
 /**
  * Implements all tasks related to comments.

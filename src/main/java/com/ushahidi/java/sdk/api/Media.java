@@ -43,10 +43,10 @@ public class Media {
 	private String thumb;
 
 	@SerializedName("thumb_url")
-	private String thumbUrl;
+	private transient String thumbUrl;
 
 	@SerializedName("link_url")
-	private String linkUrl;
+	private transient String linkUrl;
 
 	public void setId(int id) {
 		this.id = id;

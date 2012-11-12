@@ -19,7 +19,6 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.json;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.ushahidi.java.sdk.api.Category;
@@ -33,50 +32,43 @@ import com.ushahidi.java.sdk.api.Media;
  */
 public class Reports extends Response {
 
-	private static class Payload extends Response.Payload {
+	public static class Payload extends Response.Payload {
 
-		private static class Incidents {
+		public static class Incidents {
 
-			private static class _Incident {
-				private Incident report;
+			public static class _Incident {
+				public Incident report;
 			}
 
-			private static class Categories {
-				private static class _Category {
-					private Category category;
-				}
+			public static class _Categories {
+				public Category category;
 			}
 
-			private static class _Comment {
-				private Comment comment;
+			public static class _Comment {
+				public Comment comment;
 			}
 
-			private static class _Media {
-				private Media media;
-			}
+			public Incident incident;
+
+			public List<Incidents._Categories> categories;
+
+			public List<Media> media;
+
+			public List<Incidents._Comment> comments;
+
 		}
 
-		private List<Incidents> reports;
-
-		// private Incident report;
+		public List<Incidents> incidents;
 
 	}
 
 	private Payload payload;
 
-	/**
-	 * Get the list of fetched reports
-	 * 
-	 * @return
-	 */
-	public List<Incident> getReports() {
-		java.lang.System.out.println("Size: " + payload.reports);
-		List<Incident> rep = new ArrayList<Incident>();
-		/*
-		 * for (Payload._Incident item : payload.reports) { Incident r =
-		 * item.report; rep.add(r); }
-		 */
-		return rep;
+	public Reports getReport() {
+		return this;
 	}
 
+	public Payload getPayload() {
+		return payload;
+	}
 }

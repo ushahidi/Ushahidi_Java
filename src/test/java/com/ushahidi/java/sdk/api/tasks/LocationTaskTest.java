@@ -38,7 +38,7 @@ public class LocationTaskTest extends BaseTaskTest {
 	private LocationTask task;
 
 	/** The default location ID */
-	private static final int LOCATION_ID = 1;
+	private static final int LOCATION_ID = 455;
 
 	private static final int COUNTRY_ID = 115;
 

@@ -53,7 +53,7 @@ public class Categories extends Response {
 	 * @return The list of categories
 	 */
 	public List<Category> getCategories() {
-
+		
 		List<Category> cat = new ArrayList<Category>();
 		for (Payload._Category c : payload.categories) {
 			Category category = c.category;
