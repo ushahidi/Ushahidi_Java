@@ -19,7 +19,7 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api;
 
-import java.util.List;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * The Report class has all the properties and methods of a particular Ushahidi
@@ -28,73 +28,91 @@ import java.util.List;
  * @author eyedol
  * 
  */
-public class Report extends Model {
+public class Incident {
 
 	/**
 	 * The id of the report
 	 */
+
 	private int id;
 
 	/**
 	 * The title of the report
 	 */
+	@SerializedName("incidenttitle")
 	private String title;
 
 	/**
 	 * The description of the report
 	 */
+	@SerializedName("incidentdescription")
 	private String description;
 
 	/**
 	 * The date of the report
 	 */
+	@SerializedName("incidentdate")
 	private String date;
 
 	/**
 	 * The mode of the report
 	 */
+	@SerializedName("incidentmode")
 	private int mode;
 
 	/**
 	 * The verification status of the report. 1 for verified and 0 for
 	 * unverified.
 	 */
+	@SerializedName("incidentverified")
 	private int verified;
 
 	/**
 	 * The location name
 	 */
+	@SerializedName("locationame")
 	private String locationname;
 
 	/**
 	 * The latitude attached to the report
 	 */
+	@SerializedName("locationlatitude")
 	private double latitude;
 
 	/**
 	 * The longitude attached to the report
 	 */
+	@SerializedName("locationlongitude")
 	private double longitude;
 
 	/**
-	 * The list of categories attached to the report
+	 * Report active
 	 */
-	private List<Categories> categories;
+	@SerializedName("incidentactive")
+	private int active;
+
+	/**
+	 * The list of categories attached to the report
+	 *
+	//@SerializedName("categories")
+	private Categories categories;
 
 	/**
 	 * The media attached to the report
-	 */
-	private List<Media> media;
+	 *
+	//@SerializedName("media")
+	private Media media;
 
 	/**
 	 * The comments attached to the report
-	 */
-	private List<Comment> comments;
+	 *
+	//@SerializedName("comments")
+	private Comment comments;*/
 
 	/**
 	 * The default constructor. It initializes no variables.
 	 */
-	public Report() {
+	public Incident() {
 
 	}
 
@@ -269,60 +287,55 @@ public class Report extends Model {
 		this.latitude = latitude;
 	}
 
+	public void setActive(int active) {
+		this.active = active;
+	}
+
+	public int getActive() {
+		return this.active;
+	}
+
 	/**
 	 * Get a list of categories tagged to the report
 	 * 
 	 * @return The list of categories attached to the report.
-	 */
-	public List<Categories> getCategories() {
-		return categories;
-	}
-
-	/**
-	 * Set the list of categories.
+	 * 
+	 *         public List<Categories> getCategories() { return categories; }
+	 * 
+	 *         /** Set the list of categories.
 	 * 
 	 * @param categories
 	 *            The categories attached to the report
-	 */
-	public void setCategories(List<Categories> categories) {
-		this.categories = categories;
-	}
-
-	/**
-	 * Get the media attached to the report
+	 * 
+	 *            public void setCategories(List<Categories> categories) {
+	 *            this.categories = categories; }
+	 * 
+	 *            /** Get the media attached to the report
 	 * 
 	 * @return The media attached to the report
-	 */
-	public List<Media> getMedia() {
-		return this.media;
-	}
-
-	/**
-	 * Set the media attached to the report.
+	 * 
+	 *         public List<Media> getMedia() { return this.media; }
+	 * 
+	 *         /** Set the media attached to the report.
 	 * 
 	 * @param media
 	 *            The media attached to the report
-	 */
-	public void setMedia(List<Media> media) {
-		this.media = media;
-	}
-
-	/**
-	 * Get the comments attached to the report
+	 * 
+	 *            public void setMedia(List<Media> media) { this.media = media;
+	 *            }
+	 * 
+	 *            /** Get the comments attached to the report
 	 * 
 	 * @return The comment attached to the report
-	 */
-	public List<Comment> getComments() {
-		return this.comments;
-	}
-
-	/**
-	 * Set the comments attached to the report.
+	 * 
+	 *         public List<Comment> getComments() { return this.comments; }
+	 * 
+	 *         /** Set the comments attached to the report.
 	 * 
 	 * @param comments
 	 *            The media attached to the report
+	 * 
+	 *            public void setComments(List<Comment> comments) {
+	 *            this.comments = comments; }
 	 */
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
 }

@@ -17,40 +17,39 @@
  ** Ushahidi developers at team@ushahidi.com.
  **
  *****************************************************************************/
-package com.ushahidi.java.sdk.api;
+package com.ushahidi.java.sdk.api.json;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.ushahidi.java.sdk.api.Location;
 
 /**
  * @author eyedol
  * 
  */
-public class Countries extends Response {
+public class Locations extends Response {
 
 	private static class Payload extends Response.Payload {
 
-		private static class _Country {
-			private Country country;
+		private static class _Location {
+			private Location location;
 		}
 
-		private List<_Country> countries;
+		private List<_Location> locations;
 
-		private Country country;
+		private Location location;
 	}
 
 	private Payload payload;
 
-	public List<Country> getCountries() {
-		List<Country> count = new ArrayList<Country>();
-		for (Payload._Country item : payload.countries) {
-			Country c = item.country;
-			count.add(c);
+	public List<Location> getLocations() {
+		List<Location> loc = new ArrayList<Location>();
+		for (Payload._Location item : payload.locations) {
+			Location l = item.location;
+			loc.add(l);
 		}
-		return count;
+		return loc;
 	}
 
-	public Country getCountry() {
-		return payload.country;
-	}
 }

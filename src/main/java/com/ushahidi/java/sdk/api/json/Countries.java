@@ -17,37 +17,42 @@
  ** Ushahidi developers at team@ushahidi.com.
  **
  *****************************************************************************/
-package com.ushahidi.java.sdk.api.tasks;
+package com.ushahidi.java.sdk.api.json;
 
-import com.ushahidi.java.sdk.api.json.System;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ushahidi.java.sdk.api.Country;
 
 /**
- * The system info task
- * 
  * @author eyedol
  * 
  */
-public class SystemTask extends BaseTask {
+public class Countries extends Response {
 
-	/**
-	 * Default constructor
-	 * 
-	 * @param url The Ushahidi deployment
-	 */
-	public SystemTask(String url) {
-		super(url);
+	private static class Payload extends Response.Payload {
+
+		private static class _Country {
+			private Country country;
+		}
+
+		private List<_Country> countries;
+
+		private Country country;
 	}
 
-	/**
-	 * Get the version task API call
-	 * 
-	 * @return The {@link com.ushahidi.java.sdk.api.json.System}
-	 */
-	public System fetch() {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=version");
-		uriBuilder.append("&resp=json");
-		return fromString(client.sendGetRequest(uriBuilder.toString()),
-				System.class);
+	private Payload payload;
+
+	public List<Country> getCountries() {
+		List<Country> count = new ArrayList<Country>();
+		for (Payload._Country item : payload.countries) {
+			Country c = item.country;
+			count.add(c);
+		}
+		return count;
+	}
+
+	public Country getCountry() {
+		return payload.country;
 	}
 }

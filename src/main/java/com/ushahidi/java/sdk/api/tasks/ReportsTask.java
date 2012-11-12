@@ -24,8 +24,8 @@ import java.util.List;
 
 import org.json.JSONException;
 
-import com.ushahidi.java.sdk.Payload;
-import com.ushahidi.java.sdk.api.Report;
+import com.ushahidi.java.sdk.api.Incident;
+import com.ushahidi.java.sdk.api.json.Reports;
 
 /**
  * The ReportsTask implements all the task related to Reports task.
@@ -37,7 +37,7 @@ import com.ushahidi.java.sdk.api.Report;
  * @author eyedol
  * 
  */
-public class ReportsTask extends Payload<Report> {
+public class ReportsTask extends BaseTask {
 
 	/**
 	 * The amount of reports to return at a time. 20 by default
@@ -60,8 +60,14 @@ public class ReportsTask extends Payload<Report> {
 	 * @throws IOException
 	 * @throws JSONException
 	 */
-	public List<Report> all() {
-		return null;
+	public List<Incident> all() {
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=incidents");
+		uriBuilder.append("&resp=json");
+		
+		final Reports reports = fromString(
+				client.sendGetRequest(uriBuilder.toString()), Reports.class);
+		return reports.getReports();
 	}
 
 	/**
@@ -75,7 +81,7 @@ public class ReportsTask extends Payload<Report> {
 	 * @throws IOException
 	 * @throws JSONException
 	 */
-	public List<Report> sinceId(int id) {
+	public List<Incident> sinceId(int id) {
 		return null;
 	}
 
@@ -90,7 +96,7 @@ public class ReportsTask extends Payload<Report> {
 	 * @throws IOException
 	 * @throws JSONException
 	 */
-	public List<Report> maxId(int id) {
+	public List<Incident> maxId(int id) {
 		return null;
 	}
 
@@ -104,7 +110,7 @@ public class ReportsTask extends Payload<Report> {
 	 * @throws IOException
 	 * @throws JSONException
 	 */
-	public Report reportId(int id) {
+	public Incident reportId(int id) {
 		return null;
 	}
 
@@ -118,7 +124,7 @@ public class ReportsTask extends Payload<Report> {
 	 * @throws IOException
 	 * @throws JSONException
 	 */
-	public List<Report> locationName(String name) {
+	public List<Incident> locationName(String name) {
 		return null;
 	}
 
@@ -132,7 +138,7 @@ public class ReportsTask extends Payload<Report> {
 	 * @throws IOException
 	 * @throws JSONException
 	 */
-	public List<Report> locationId(int id) {
+	public List<Incident> locationId(int id) {
 		return null;
 	}
 
@@ -146,7 +152,7 @@ public class ReportsTask extends Payload<Report> {
 	 * @throws IOException
 	 * @throws JSONException
 	 */
-	public List<Report> categoryName(String category) {
+	public List<Incident> categoryName(String category) {
 		return null;
 	}
 
@@ -160,18 +166,8 @@ public class ReportsTask extends Payload<Report> {
 	 * @throws IOException
 	 * @throws JSONException
 	 */
-	public List<Report> categoryId(int id) {
+	public List<Incident> categoryId(int id) {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ushahidi.java.sdk.Payload#processModels()
-	 */
-	@Override
-	public List<Report> processModels() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

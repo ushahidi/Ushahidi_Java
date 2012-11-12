@@ -26,7 +26,7 @@ package com.ushahidi.java.sdk.api;
  * @author eyedol
  * 
  */
-public class Country{
+public class Country {
 
 	/**
 	 * The country id
@@ -152,7 +152,7 @@ public class Country{
 	public void setCities(int cities) {
 		this.cities = cities;
 	}
-	
+
 	/**
 	 * Get the comment id
 	 */

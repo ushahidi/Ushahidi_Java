@@ -17,37 +17,57 @@
  ** Ushahidi developers at team@ushahidi.com.
  **
  *****************************************************************************/
-package com.ushahidi.java.sdk.api.tasks;
+package com.ushahidi.java.sdk.api.json;
 
-import com.ushahidi.java.sdk.api.json.System;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ushahidi.java.sdk.api.Category;
 
 /**
- * The system info task
+ * The Category class has all the properties and methods of the Ushahidi API's
+ * category resource
  * 
  * @author eyedol
  * 
  */
-public class SystemTask extends BaseTask {
+public class Categories extends Response {
+
+	private static class Payload extends Response.Payload {
+
+		private static class _Category {
+			private Category category;
+		}
+
+		private List<_Category> categories;
+
+		private Category category;
+
+	}
+
+	private Payload payload;
 
 	/**
-	 * Default constructor
+	 * Get list of categories
 	 * 
-	 * @param url The Ushahidi deployment
+	 * @return The list of categories
 	 */
-	public SystemTask(String url) {
-		super(url);
+	public List<Category> getCategories() {
+
+		List<Category> cat = new ArrayList<Category>();
+		for (Payload._Category c : payload.categories) {
+			Category category = c.category;
+			cat.add(category);
+		}
+		return cat;
 	}
 
 	/**
-	 * Get the version task API call
+	 * Get a particular category
 	 * 
-	 * @return The {@link com.ushahidi.java.sdk.api.json.System}
+	 * @return The category
 	 */
-	public System fetch() {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=version");
-		uriBuilder.append("&resp=json");
-		return fromString(client.sendGetRequest(uriBuilder.toString()),
-				System.class);
+	public Category getCategory() {
+		return payload.category;
 	}
 }

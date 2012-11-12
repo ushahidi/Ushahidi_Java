@@ -23,7 +23,7 @@ import java.util.List;
 
 import com.ushahidi.java.sdk.UshahidiException;
 import com.ushahidi.java.sdk.api.Location;
-import com.ushahidi.java.sdk.api.Locations;
+import com.ushahidi.java.sdk.api.json.Locations;
 
 /**
  * The Location Task Implements all tasks related to the Location API.

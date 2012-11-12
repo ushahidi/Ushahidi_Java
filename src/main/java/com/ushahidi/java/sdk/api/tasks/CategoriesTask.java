@@ -24,8 +24,8 @@ import java.util.List;
 
 import org.json.JSONException;
 
-import com.ushahidi.java.sdk.api.Categories;
 import com.ushahidi.java.sdk.api.Category;
+import com.ushahidi.java.sdk.api.json.Categories;
 
 /**
  * Implements all tasks related to Categories.

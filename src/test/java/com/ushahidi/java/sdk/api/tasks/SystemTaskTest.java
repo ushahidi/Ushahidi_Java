@@ -23,7 +23,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ushahidi.java.sdk.api.System;
+import com.ushahidi.java.sdk.api.json.System;
 
 /**
  * The SystemInfoTask to be tested

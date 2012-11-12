@@ -17,54 +17,66 @@
  ** Ushahidi developers at team@ushahidi.com.
  **
  *****************************************************************************/
-package com.ushahidi.java.sdk.api;
+package com.ushahidi.java.sdk.api.json;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ushahidi.java.sdk.api.Category;
+import com.ushahidi.java.sdk.api.Comment;
+import com.ushahidi.java.sdk.api.Incident;
+import com.ushahidi.java.sdk.api.Media;
+
 /**
- * The Category class has all the properties and methods of the Ushahidi API's
- * category resource
- * 
  * @author eyedol
  * 
  */
-public class Categories extends Response {
+public class Reports extends Response {
 
 	private static class Payload extends Response.Payload {
 
-		private static class _Category {
-			private Category category;
+		private static class Incidents {
+
+			private static class _Incident {
+				private Incident report;
+			}
+
+			private static class Categories {
+				private static class _Category {
+					private Category category;
+				}
+			}
+
+			private static class _Comment {
+				private Comment comment;
+			}
+
+			private static class _Media {
+				private Media media;
+			}
 		}
 
-		private List<_Category> categories;
+		private List<Incidents> reports;
 
-		private Category category;
+		// private Incident report;
 
 	}
 
 	private Payload payload;
 
 	/**
-	 * Get list of categories
+	 * Get the list of fetched reports
 	 * 
-	 * @return The list of categories
+	 * @return
 	 */
-	public List<Category> getCategories() {
-		List<Category> cat = new ArrayList<Category>();
-		for(Payload._Category c: payload.categories) {
-			Category category = c.category;
-			cat.add(category);
-		}
-		return cat;
+	public List<Incident> getReports() {
+		java.lang.System.out.println("Size: " + payload.reports);
+		List<Incident> rep = new ArrayList<Incident>();
+		/*
+		 * for (Payload._Incident item : payload.reports) { Incident r =
+		 * item.report; rep.add(r); }
+		 */
+		return rep;
 	}
 
-	/**
-	 * Get a particular category
-	 * 
-	 * @return The category
-	 */
-	public Category getCategory() {
-		return payload.category;
-	}
 }

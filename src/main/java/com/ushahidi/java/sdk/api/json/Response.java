@@ -17,37 +17,40 @@
  ** Ushahidi developers at team@ushahidi.com.
  **
  *****************************************************************************/
-package com.ushahidi.java.sdk.api;
 
-import java.util.ArrayList;
-import java.util.List;
+package com.ushahidi.java.sdk.api.json;
 
 /**
- * @author eyedol
+ * The class represents the Main response returned as a result of 
+ * an Ushahidi API call.
  * 
+ * @author eyedol
+ *
  */
-public class Locations extends Response {
-
-	private static class Payload extends Response.Payload {
-
-		private static class _Location {
-			private Location location;
-		}
-
-		private List<_Location> locations;
-
-		private Location location;
+public class Response {
+	
+	protected static class Payload {
+		protected String domain;
 	}
-
-	private Payload payload;
-
-	public List<Location> getLocations() {
-		List<Location> loc = new ArrayList<Location>();
-		for (Payload._Location item : payload.locations) {
-			Location l = item.location;
-			loc.add(l);
-		}
-		return loc;
+	
+	/**
+	 * Error object
+	 * 
+	 * @author eyedol
+	 *
+	 */
+	protected static class Error {
+		protected int code;
+		protected String message;
 	}
-
+	
+	protected Error error;
+	
+	public int getErrorCode() {
+		return error.code;
+	}
+	
+	public String getErrorMessage() {
+		return error.message;
+	}
 }

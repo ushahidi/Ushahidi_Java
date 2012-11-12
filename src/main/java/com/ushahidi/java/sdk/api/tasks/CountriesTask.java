@@ -20,8 +20,8 @@
 package com.ushahidi.java.sdk.api.tasks;
 
 import java.util.List;
-import com.ushahidi.java.sdk.api.Countries;
 import com.ushahidi.java.sdk.api.Country;
+import com.ushahidi.java.sdk.api.json.Countries;
 
 /**
  * Implements all tasks related to countries.

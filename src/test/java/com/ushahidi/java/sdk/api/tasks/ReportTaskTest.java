@@ -25,7 +25,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ushahidi.java.sdk.api.Report;
+import com.ushahidi.java.sdk.api.Incident;
 
 /**
  * The report task test
@@ -75,7 +75,7 @@ public class ReportTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testAll() {
-		List<Report> reports = task.all();
+		List<Incident> reports = task.all();
 		assertNotNullOrEmpty("List report all cannot be null or empty", reports);
 	}
 
@@ -85,7 +85,7 @@ public class ReportTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testSinceId() {
-		List<Report> reports = task.sinceId(SINCE_ID);
+		List<Incident> reports = task.sinceId(SINCE_ID);
 		assertNotNullOrEmpty("Reports by since id cannot be null or empty",
 				reports);
 	}
@@ -96,7 +96,7 @@ public class ReportTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testMaxId() {
-		List<Report> reports = task.maxId(MAX_ID);
+		List<Incident> reports = task.maxId(MAX_ID);
 		assertNotNullOrEmpty("Reports by max id cannot be null or empty",
 				reports);
 	}
@@ -107,7 +107,7 @@ public class ReportTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testReportId() {
-		Report report = task.reportId(REPORT_ID);
+		Incident report = task.reportId(REPORT_ID);
 		assertNotNull("Report by id cannot be null or empty", report);
 	}
 
@@ -118,7 +118,7 @@ public class ReportTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testLocationName() {
-		List<Report> reports = task.locationName(LOCATION_NAME);
+		List<Incident> reports = task.locationName(LOCATION_NAME);
 		assertNotNullOrEmpty("Report by location name", reports);
 	}
 
@@ -128,7 +128,7 @@ public class ReportTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testLocationId() {
-		List<Report> reports = task.locationId(LOCATION_ID);
+		List<Incident> reports = task.locationId(LOCATION_ID);
 		assertNotNullOrEmpty("Reports by location ID", reports);
 	}
 
@@ -139,7 +139,7 @@ public class ReportTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testCategoryName() {
-		List<Report> reports = task.categoryName(CATEGORY_NAME);
+		List<Incident> reports = task.categoryName(CATEGORY_NAME);
 		assertNotNullOrEmpty("Report by category name cannot be null or empty",
 				reports);
 	}
@@ -150,7 +150,7 @@ public class ReportTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testCategoryId() {
-		List<Report> reports = task.categoryId(CATEGORY_ID);
+		List<Incident> reports = task.categoryId(CATEGORY_ID);
 		assertNotNullOrEmpty("Report by category ID", reports);
 	}
 

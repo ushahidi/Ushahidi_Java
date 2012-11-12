@@ -17,7 +17,7 @@
  ** Ushahidi developers at team@ushahidi.com.
  **
  *****************************************************************************/
-package com.ushahidi.java.sdk.api;
+package com.ushahidi.java.sdk.api.json;
 
 import java.util.List;
 

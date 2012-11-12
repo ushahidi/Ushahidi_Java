@@ -19,6 +19,8 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * This Media class has all properties and methods of the Ushahidi API's media
  * resource
@@ -26,6 +28,71 @@ package com.ushahidi.java.sdk.api;
  * @author eyedol
  * 
  */
-public class Media extends Model {
+public class Media {
 
+	@SerializedName("id")
+	private int id;
+
+	@SerializedName("type")
+	private int type;
+
+	@SerializedName("link")
+	private String link;
+
+	@SerializedName("thumb")
+	private String thumb;
+
+	@SerializedName("thumb_url")
+	private String thumbUrl;
+
+	@SerializedName("link_url")
+	private String linkUrl;
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getId() {
+		return this.id;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public int getType() {
+		return this.type;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	public String getLink() {
+		return this.link;
+	}
+
+	public void setThumb(String thumb) {
+		this.thumb = thumb;
+	}
+
+	public String getThumb() {
+		return this.thumb;
+	}
+
+	public void setLinkUrl(String linkUrl) {
+		this.linkUrl = linkUrl;
+	}
+
+	public String getLinkUrl() {
+		return this.linkUrl;
+	}
+
+	public void setThumbUrl(String thumbUrl) {
+		this.thumbUrl = thumbUrl;
+	}
+
+	public String getThumbUrl() {
+		return this.thumbUrl;
+	}
 }
