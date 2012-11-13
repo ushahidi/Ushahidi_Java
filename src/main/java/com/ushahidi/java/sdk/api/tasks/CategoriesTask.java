@@ -39,6 +39,8 @@ public class CategoriesTask extends BaseTask {
 
 	/**
 	 * Create the Categories task
+	 * 
+	 * @param url The URL of the Ushahidi deployment
 	 */
 	public CategoriesTask(String url) {
 		super(url);

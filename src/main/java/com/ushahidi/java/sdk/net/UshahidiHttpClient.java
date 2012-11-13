@@ -21,6 +21,7 @@ package com.ushahidi.java.sdk.net;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 import com.ushahidi.java.sdk.UshahidiException;
 
@@ -70,7 +71,7 @@ public class UshahidiHttpClient extends BaseUshahidiHttpClient {
 	}
 
 	/**
-	 * Sends a GET request to supplied URL. Converts the input stream as
+	 * Sends a GET request to the supplied URL. Converts the input stream as
 	 * received from the server to string.
 	 * 
 	 * @param url
@@ -99,4 +100,64 @@ public class UshahidiHttpClient extends BaseUshahidiHttpClient {
 
 	}
 
+	/**
+	 * Sends a POST request to the supplied URL. Converts the input stream as
+	 * received from the server to string.
+	 * 
+	 * @param url
+	 *            The URL to send the POST request to.
+	 * 
+	 * @return The HTTP response string as returned from the server
+	 * @throws IOException
+	 */
+	public String sendPostRequest(String url, Map<String, String> parameters) {
+		InputStream inputStream = null;
+		try {
+			addRequestHeader("User-Agent:", getUserAgent());
+			inputStream = postRequest(url, parameters);
+
+			if (inputStream != null) {
+				return streamToString(inputStream);
+			} else {
+				throw new UshahidiException(
+						"Unknown content found in response.");
+			}
+		} catch (Exception e) {
+			throw new UshahidiException(e);
+		} finally {
+			closeStream(inputStream);
+		}
+
+	}
+
+	/**
+	 * Sends a Multipart POST request to the supplied URL. Converts the input stream as
+	 * received from the server to string.
+	 * 
+	 * @param url
+	 *            The URL to send the POST request to.
+	 * 
+	 * @return The HTTP response string as returned from the server
+	 * @throws IOException
+	 */
+	public String sendMultipartPostRequest(String url,
+			Map<String, Object> parameters) {
+		InputStream inputStream = null;
+		try {
+			addRequestHeader("User-Agent:", getUserAgent());
+			inputStream = postMultipartRequest(url, parameters);
+
+			if (inputStream != null) {
+				return streamToString(inputStream);
+			} else {
+				throw new UshahidiException(
+						"Unknown content found in response.");
+			}
+		} catch (Exception e) {
+			throw new UshahidiException(e);
+		} finally {
+			closeStream(inputStream);
+		}
+
+	}
 }
