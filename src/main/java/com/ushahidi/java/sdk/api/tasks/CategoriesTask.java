@@ -22,8 +22,6 @@ package com.ushahidi.java.sdk.api.tasks;
 import java.io.IOException;
 import java.util.List;
 
-import org.json.JSONException;
-
 import com.ushahidi.java.sdk.api.Category;
 import com.ushahidi.java.sdk.api.json.Categories;
 
