@@ -24,7 +24,6 @@ import java.util.List;
 
 import org.json.JSONException;
 
-import com.ushahidi.java.sdk.api.Incident;
 import com.ushahidi.java.sdk.api.json.Reports;
 import com.ushahidi.java.sdk.api.json.Reports.Payload.Incidents;
 
@@ -79,12 +78,18 @@ public class ReportsTask extends BaseTask {
 	 *            The report ID
 	 * @return A List containing all the report since a particular report ID was
 	 *         created.
-	 * 
-	 * @throws IOException
-	 * @throws JSONException
 	 */
-	public List<Incident> sinceId(int id) {
-		return null;
+	public List<Incidents> sinceId(int id) {
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=incidents");
+		uriBuilder.append("&comments=1");
+		uriBuilder.append("&by=sinceid");
+		uriBuilder.append("&id=" + String.valueOf(id));
+		uriBuilder.append("&resp=json");
+
+		reports = fromString(client.sendGetRequest(uriBuilder.toString()),
+				Reports.class);
+		return reports.getPayload().incidents;
 	}
 
 	/**
@@ -94,12 +99,18 @@ public class ReportsTask extends BaseTask {
 	 *            The report maximum report ID
 	 * @return A List containing all the reports within the specified maximum
 	 *         report ID.
-	 * 
-	 * @throws IOException
-	 * @throws JSONException
 	 */
-	public List<Incident> maxId(int id) {
-		return null;
+	public List<Incidents> maxId(int id) {
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=incidents");
+		uriBuilder.append("&comments=1");
+		uriBuilder.append("&by=maxid");
+		uriBuilder.append("&id=" + String.valueOf(id));
+		uriBuilder.append("&resp=json");
+
+		reports = fromString(client.sendGetRequest(uriBuilder.toString()),
+				Reports.class);
+		return reports.getPayload().incidents;
 	}
 
 	/**
@@ -112,7 +123,20 @@ public class ReportsTask extends BaseTask {
 	 * @throws IOException
 	 * @throws JSONException
 	 */
-	public Incident reportId(int id) {
+	public Incidents reportId(int id) {
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=incidents");
+		uriBuilder.append("&comments=1");
+		uriBuilder.append("&by=incidentid");
+		uriBuilder.append("&id=" + String.valueOf(id));
+		uriBuilder.append("&resp=json");
+
+		reports = fromString(client.sendGetRequest(uriBuilder.toString()),
+				Reports.class);
+		if (reports.getPayload().incidents != null
+				&& reports.getPayload().incidents.size() > 0) {
+			return reports.getPayload().incidents.get(0);
+		}
 		return null;
 	}
 
@@ -123,11 +147,18 @@ public class ReportsTask extends BaseTask {
 	 *            The name of the location
 	 * @return The report retrieved.
 	 * 
-	 * @throws IOException
-	 * @throws JSONException
 	 */
-	public List<Incident> locationName(String name) {
-		return null;
+	public List<Incidents> locationName(String name) {
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=incidents");
+		uriBuilder.append("&by=locname");
+		uriBuilder.append("&name=" + name);
+		uriBuilder.append("&comments=1");
+		uriBuilder.append("&resp=json");
+
+		reports = fromString(client.sendGetRequest(uriBuilder.toString()),
+				Reports.class);
+		return reports.getPayload().incidents;
 	}
 
 	/**
@@ -137,11 +168,18 @@ public class ReportsTask extends BaseTask {
 	 *            The location ID to use to retrieve the report
 	 * @return The reports retrieved.
 	 * 
-	 * @throws IOException
-	 * @throws JSONException
 	 */
-	public List<Incident> locationId(int id) {
-		return null;
+	public List<Incidents> locationId(int id) {
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=incidents");
+		uriBuilder.append("&comments=1");
+		uriBuilder.append("&by=locid");
+		uriBuilder.append("&id=" + String.valueOf(id));
+		uriBuilder.append("&resp=json");
+
+		reports = fromString(client.sendGetRequest(uriBuilder.toString()),
+				Reports.class);
+		return reports.getPayload().incidents;
 	}
 
 	/**
@@ -151,11 +189,18 @@ public class ReportsTask extends BaseTask {
 	 *            The name of the category to use to retrieve the report
 	 * @return The reports retrieved.
 	 * 
-	 * @throws IOException
-	 * @throws JSONException
 	 */
-	public List<Incident> categoryName(String category) {
-		return null;
+	public List<Incidents> categoryName(String category) {
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=incidents");
+		uriBuilder.append("&comments=1");
+		uriBuilder.append("&by=catname");
+		uriBuilder.append("&name=" + category);
+		uriBuilder.append("&resp=json");
+
+		reports = fromString(client.sendGetRequest(uriBuilder.toString()),
+				Reports.class);
+		return reports.getPayload().incidents;
 	}
 
 	/**
@@ -168,8 +213,17 @@ public class ReportsTask extends BaseTask {
 	 * @throws IOException
 	 * @throws JSONException
 	 */
-	public List<Incident> categoryId(int id) {
-		return null;
+	public List<Incidents> categoryId(int id) {
+		final StringBuilder uriBuilder = new StringBuilder(url);
+		uriBuilder.append("/api?task=incidents");
+		uriBuilder.append("&comments=1");
+		uriBuilder.append("&by=catid");
+		uriBuilder.append("&id=" + String.valueOf(id));
+		uriBuilder.append("&resp=json");
+
+		reports = fromString(client.sendGetRequest(uriBuilder.toString()),
+				Reports.class);
+		return reports.getPayload().incidents;
 	}
 
 }
