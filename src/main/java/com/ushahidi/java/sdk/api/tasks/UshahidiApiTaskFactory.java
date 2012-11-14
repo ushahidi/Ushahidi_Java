@@ -92,7 +92,7 @@ public class UshahidiApiTaskFactory {
 	public ReportsTask createReportsTask() {
 		return new ReportsTask(url);
 	}
-	
+
 	/**
 	 * Create the system task object
 	 * 
@@ -100,5 +100,14 @@ public class UshahidiApiTaskFactory {
 	 */
 	public SystemTask createSystemTask() {
 		return new SystemTask(url);
+	}
+
+	/**
+	 * Create the tag news task object
+	 * 
+	 * @return The tag news task
+	 */
+	public TagNewsTask createTagNewsTask() {
+		return new TagNewsTask(url);
 	}
 }
