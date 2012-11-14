@@ -60,11 +60,10 @@ public class TagNewsTask extends BaseTask {
 		uriBuilder.append("&resp=json");
 
 		tagNewsFields = new TagNewsFields(id, newsArticleUrl);
-
-		response = fromString(
-				client.sendPostRequest(newsArticleUrl,
-						tagNewsFields.getFormParameters(tagNewsFields)),
-				Response.class);
+		String rep = client.sendPostRequest(url,
+				tagNewsFields.getFormParameters(tagNewsFields));
+		System.out.println(rep);
+		response = fromString(rep, Response.class);
 
 	}
 }
