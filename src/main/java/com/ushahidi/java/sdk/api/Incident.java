@@ -91,23 +91,6 @@ public class Incident {
 	@SerializedName("incidentactive")
 	private int active;
 
-	/**
-	 * The list of categories attached to the report
-	 *
-	//@SerializedName("categories")*
-	private List<Category> categories;
-
-	/**
-	 * The media attached to the report
-	 *
-	//@SerializedName("media")*
-	private List<Media> media;
-
-	/**
-	 * The comments attached to the report
-	 *
-	//@SerializedName("comments")*
-	private List<Comment> comments;*/
 
 	/**
 	 * The default constructor. It initializes no variables.
@@ -295,47 +278,4 @@ public class Incident {
 		return this.active;
 	}
 
-	/**
-	 * Get a list of categories tagged to the report
-	 * 
-	 * @return The list of categories attached to the report.
-	 * 
-	 *         public List<Categories> getCategories() { return categories; }
-	 * 
-	 *         /** Set the list of categories.
-	 * 
-	 * @param categories
-	 *            The categories attached to the report
-	 * 
-	 *            public void setCategories(List<Categories> categories) {
-	 *            this.categories = categories; }
-	 * 
-	 *            /** Get the media attached to the report
-	 * 
-	 * @return The media attached to the report
-	 * 
-	 *         public List<Media> getMedia() { return this.media; }
-	 * 
-	 *         /** Set the media attached to the report.
-	 * 
-	 * @param media
-	 *            The media attached to the report
-	 * 
-	 *            public void setMedia(List<Media> media) { this.media = media;
-	 *            }
-	 * 
-	 *            /** Get the comments attached to the report
-	 * 
-	 * @return The comment attached to the report
-	 * 
-	 *         public List<Comment> getComments() { return this.comments; }
-	 * 
-	 *         /** Set the comments attached to the report.
-	 * 
-	 * @param comments
-	 *            The media attached to the report
-	 * 
-	 *            public void setComments(List<Comment> comments) {
-	 *            this.comments = comments; }
-	 */
 }
