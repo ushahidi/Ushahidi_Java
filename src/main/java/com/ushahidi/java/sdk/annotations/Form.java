@@ -35,8 +35,8 @@ public class Form {
 	 * @param obj
 	 * @return The Map objection that has the forms variable names and values
 	 */
-	protected Map<String, Object> getFormParameters(Object obj) {
-		Map<String, Object> parameters = new HashMap<String, Object>();
+	public Map<String, String> getFormParameters(Object obj) {
+		Map<String, String> parameters = new HashMap<String, String>();
 		// get all declared files
 		Field[] fields = obj.getClass().getDeclaredFields();
 		for (Field field : fields) {
@@ -50,7 +50,7 @@ public class Form {
 							field.setAccessible(true);
 						}
 						// build the pareamters map
-						parameters.put(formField.name(), field.get(this));
+						parameters.put(formField.name(), field.get(this).toString());
 					}
 				}
 			} catch (IllegalArgumentException e) {

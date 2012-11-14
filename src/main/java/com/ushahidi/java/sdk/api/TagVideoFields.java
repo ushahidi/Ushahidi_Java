@@ -17,21 +17,39 @@
  ** Ushahidi developers at team@ushahidi.com.
  **
  *****************************************************************************/
-package com.ushahidi.java.sdk.annotations;
+package com.ushahidi.java.sdk.api;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.ushahidi.java.sdk.annotations.Form;
+import com.ushahidi.java.sdk.annotations.FormField;
 
 /**
- * FormField Annotation
+ * Holds form fields for tagging a video article to an existing report
  * 
  * @author eyedol
- *
+ * 
  */
-@Target(ElementType.FIELD)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface FormField {
-	public String name();
+public class TagVideoFields extends Form {
+
+	/**
+	 * The ID of the report to tag the video
+	 */
+	@FormField(name = "id")
+	private int id;
+
+	/**
+	 * The URL of the video to be tagged to the existing report
+	 */
+	@FormField(name = "url")
+	private String url;
+
+	/**
+	 * Tag video
+	 * 
+	 * @param id The report id
+	 * @param url The video URL
+	 */
+	public TagVideoFields(int id, String url) {
+		this.id = id;
+		this.url = url;
+	}
 }

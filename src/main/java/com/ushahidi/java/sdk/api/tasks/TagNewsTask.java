@@ -19,38 +19,52 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.tasks;
 
-import com.ushahidi.java.sdk.api.json.Categories;
+import com.ushahidi.java.sdk.api.TagNewsFields;
+import com.ushahidi.java.sdk.api.json.Response;
 
 /**
- * Implements all task related to tagging an existing report with 
- * news item
+ * Implements all task related to tagging an existing report with news item
  * 
  * @author eyedol
- *
+ * 
  */
 public class TagNewsTask extends BaseTask {
+
+	/** Form values */
+	private TagNewsFields tagNewsFields;
+
+	/** The response received from the server as a result of making an API call. */
+	public Response response;
 
 	/**
 	 * Creates the tagnews task
 	 * 
-	 * @param url The Ushahidi deployment.
+	 * @param url
+	 *            The Ushahidi deployment.
 	 */
 	public TagNewsTask(String url) {
 		super(url);
 	}
-	
+
 	/**
 	 * Tag an existing report with a news article
 	 * 
-	 * @param id The ID of the existing report
-	 * @param url A valid URL that links to an article related to the report
+	 * @param id
+	 *            The ID of the existing report
+	 * @param newsArticleUrl
+	 *            A valid URL that links to an article related to the report
 	 */
-	public void tagNews(int id, String url) {
+	public void tagNews(int id, String newsArticleUrl) {
 		final StringBuilder uriBuilder = new StringBuilder(url);
 		uriBuilder.append("/api?task=tagnews");
 		uriBuilder.append("&resp=json");
-		
-		final Categories categories = fromString(
-				client.sendGetRequest(uriBuilder.toString()), Categories.class);
+
+		tagNewsFields = new TagNewsFields(id, newsArticleUrl);
+
+		response = fromString(
+				client.sendPostRequest(newsArticleUrl,
+						tagNewsFields.getFormParameters(tagNewsFields)),
+				Response.class);
+
 	}
 }

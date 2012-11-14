@@ -131,7 +131,7 @@ public class UshahidiHttpClient extends BaseUshahidiHttpClient {
 	}
 
 	/**
-	 * Sends a Multipart POST request to the supplied URL. Converts the input stream as
+	 * Sends a POST request to the supplied URL. Converts the input stream as
 	 * received from the server to string.
 	 * 
 	 * @param url

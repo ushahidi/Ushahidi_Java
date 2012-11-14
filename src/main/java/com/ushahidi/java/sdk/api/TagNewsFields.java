@@ -17,21 +17,39 @@
  ** Ushahidi developers at team@ushahidi.com.
  **
  *****************************************************************************/
-package com.ushahidi.java.sdk.annotations;
+package com.ushahidi.java.sdk.api;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.ushahidi.java.sdk.annotations.Form;
+import com.ushahidi.java.sdk.annotations.FormField;
 
 /**
- * FormField Annotation
+ * Holds form fields for tagging a news article to an existing report
  * 
  * @author eyedol
- *
+ * 
  */
-@Target(ElementType.FIELD)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface FormField {
-	public String name();
+public class TagNewsFields extends Form {
+
+	/**
+	 * The ID of the report to tag the news article
+	 */
+	@FormField(name = "id")
+	private int id;
+
+	/**
+	 * The URL of the new article to be tagged to the existing report
+	 */
+	@FormField(name = "url")
+	private String url;
+
+	/**
+	 * Tag news
+	 * 
+	 * @param id The report ID
+	 * @param url The news article URL
+	 */
+	public TagNewsFields(int id, String url) {
+		this.id = id;
+		this.url = url;
+	}
 }
