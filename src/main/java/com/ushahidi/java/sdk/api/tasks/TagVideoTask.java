@@ -56,7 +56,7 @@ public class TagVideoTask extends BaseTask {
 	 * @param videoUrl
 	 *            A valid URL that links to a video related to the report
 	 */
-	public void tagNews(int id, String videoUrl) {
+	public void tagVideo(int id, String videoUrl) {
 
 		tagVideoFields = new TagMediaFields(id, videoUrl);
 

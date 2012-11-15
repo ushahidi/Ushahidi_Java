@@ -19,44 +19,10 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.tasks;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 /**
  * @author eyedol
- * 
+ *
  */
-public class TagNewsTaskTest extends BaseTaskTest {
-
-	private TagNewsTask task;
-
-	private static final int REPORT_ID = 475;
-
-	private static final String URL = "http://www.android.com/whatsnew/";
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-		super.setUp();
-		task = factory.createTagNewsTask();
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@After
-	public void tearDown() throws Exception {
-		super.tearDown();
-		task = null;
-	}
-
-	@Test
-	public void testTagNews() {
-		task.tagNews(REPORT_ID, URL);
-		assertNotNull("Category cannot be null ", task.response);
-	}
+public class TagVideoTaskTest {
 
 }
