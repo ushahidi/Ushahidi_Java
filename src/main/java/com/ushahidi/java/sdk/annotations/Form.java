@@ -21,8 +21,8 @@ package com.ushahidi.java.sdk.annotations;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
+
+import com.ushahidi.java.sdk.net.content.Body;
 
 /**
  * @author eyedol
@@ -35,8 +35,8 @@ public class Form {
 	 * @param obj
 	 * @return The Map objection that has the forms variable names and values
 	 */
-	public Map<String, String> getFormParameters(Object obj) {
-		Map<String, String> parameters = new HashMap<String, String>();
+	public Body getFormParameters(Object obj) {
+		Body body = new Body();
 		// get all declared files
 		Field[] fields = obj.getClass().getDeclaredFields();
 		for (Field field : fields) {
@@ -49,8 +49,8 @@ public class Form {
 						if (!field.isAccessible()) {
 							field.setAccessible(true);
 						}
-						// build the pareamters map
-						parameters.put(formField.name(), field.get(this).toString());
+						// add the form fields
+						body.addField(formField.name(), field.get(obj));
 					}
 				}
 			} catch (IllegalArgumentException e) {
@@ -59,7 +59,7 @@ public class Form {
 				e.printStackTrace();
 			}
 		}
-		return parameters;
+		return body;
 	}
 
 }

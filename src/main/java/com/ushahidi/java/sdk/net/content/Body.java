@@ -17,46 +17,46 @@
  ** Ushahidi developers at team@ushahidi.com.
  **
  *****************************************************************************/
-package com.ushahidi.java.sdk.api.tasks;
+package com.ushahidi.java.sdk.net.content;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
+ * This class represents a form body that can be used as a part of multi-part
+ * encoded entities for making a mulit-part HTTP request
+ * 
  * @author eyedol
  * 
  */
-public class TagNewsTaskTest extends BaseTaskTest {
+public class Body {
 
-	private TagNewsTask task;
+	private List<Field> formField;
 
-	private static final int REPORT_ID = 475;
-
-	private static final String URL = "http://www.android.com/whatsnew/";
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-		super.setUp();
-		task = factory.createTagNewsTask();
+	public Body() {
+		formField = new ArrayList<Field>();
 	}
 
 	/**
-	 * @throws java.lang.Exception
+	 * Add a form field for them to be submitted via a HTTP request
+	 * 
+	 * @param name
+	 *            The form field name
+	 * @param value
+	 *            The form field value
 	 */
-	@After
-	public void tearDown() throws Exception {
-		super.tearDown();
-		task = null;
+	public void addField(String name, Object value) {
+		Field field = new Field(name, value);
+		formField.add(field);
 	}
 
-	@Test
-	public void testTagNews() {
-		task.tagNews(REPORT_ID, URL);
-		assertNotNull("Category cannot be null ", task.response);
+	/**
+	 * Get The form fields to be submitted via a HTTP request
+	 * 
+	 * @return The form fields
+	 */
+	public List<Field> getFields() {
+		return formField;
 	}
 
 }

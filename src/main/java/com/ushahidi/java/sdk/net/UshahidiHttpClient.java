@@ -21,9 +21,9 @@ package com.ushahidi.java.sdk.net;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
 
 import com.ushahidi.java.sdk.UshahidiException;
+import com.ushahidi.java.sdk.net.content.Body;
 
 /**
  * The main HTTP Client to interact with the Ushahidi API
@@ -106,15 +106,17 @@ public class UshahidiHttpClient extends BaseUshahidiHttpClient {
 	 * 
 	 * @param url
 	 *            The URL to send the POST request to.
+	 * @param body
+	 *            The form fields to be sent
 	 * 
 	 * @return The HTTP response string as returned from the server
 	 * @throws IOException
 	 */
-	public String sendPostRequest(String url, Map<String, String> parameters) {
+	public String sendPostRequest(String url, Body body) {
 		InputStream inputStream = null;
 		try {
 			addRequestHeader("User-Agent:", getUserAgent());
-			inputStream = postRequest(url, parameters);
+			inputStream = postRequest(url, body);
 
 			if (inputStream != null) {
 				return streamToString(inputStream);
@@ -136,16 +138,17 @@ public class UshahidiHttpClient extends BaseUshahidiHttpClient {
 	 * 
 	 * @param url
 	 *            The URL to send the POST request to.
+	 * @param body
+	 *            The parameters to
 	 * 
 	 * @return The HTTP response string as returned from the server
 	 * @throws IOException
 	 */
-	public String sendMultipartPostRequest(String url,
-			Map<String, Object> parameters) {
+	public String sendMultipartPostRequest(String url, Body body) {
 		InputStream inputStream = null;
 		try {
 			addRequestHeader("User-Agent:", getUserAgent());
-			inputStream = postMultipartRequest(url, parameters);
+			inputStream = postMultipartRequest(url, body);
 
 			if (inputStream != null) {
 				return streamToString(inputStream);

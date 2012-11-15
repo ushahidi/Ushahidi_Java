@@ -17,46 +17,60 @@
  ** Ushahidi developers at team@ushahidi.com.
  **
  *****************************************************************************/
-package com.ushahidi.java.sdk.api.tasks;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+package com.ushahidi.java.sdk.net.content;
 
 /**
+ * This class represents form fields.
+ * 
  * @author eyedol
  * 
  */
-public class TagNewsTaskTest extends BaseTaskTest {
+public class Field {
 
-	private TagNewsTask task;
+	/** The name of the form field */
+	private String name;
 
-	private static final int REPORT_ID = 475;
+	/** The value of the form field. Note the use of object */
+	private Object value;
 
-	private static final String URL = "http://www.android.com/whatsnew/";
+	public Field(String name, Object value) {
 
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-		super.setUp();
-		task = factory.createTagNewsTask();
+		if (name == null) {
+			throw new IllegalArgumentException("Name may not be null");
+		}
+
+		if (value == null) {
+			throw new IllegalArgumentException("Value may not be null");
+		}
+
+		this.name = name;
+		this.value = value;
 	}
 
 	/**
-	 * @throws java.lang.Exception
+	 * Get the form field name
+	 * 
+	 * @return the field name
 	 */
-	@After
-	public void tearDown() throws Exception {
-		super.tearDown();
-		task = null;
+	public String getName() {
+		return this.name;
 	}
 
-	@Test
-	public void testTagNews() {
-		task.tagNews(REPORT_ID, URL);
-		assertNotNull("Category cannot be null ", task.response);
+	/**
+	 * Get the form field value
+	 * 
+	 * @return the field value
+	 */
+	public Object getValue() {
+		return this.value;
 	}
 
+	@Override
+	public String toString() {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(this.name);
+		buffer.append(": ");
+		buffer.append(this.value.toString());
+		return buffer.toString();
+	}
 }

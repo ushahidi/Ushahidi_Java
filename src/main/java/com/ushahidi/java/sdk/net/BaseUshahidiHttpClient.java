@@ -33,12 +33,13 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
 
 import com.ushahidi.java.sdk.UshahidiException;
+import com.ushahidi.java.sdk.net.content.Body;
+import com.ushahidi.java.sdk.net.content.Field;
 
 /**
  * This is a custom implementation of an HTTP client based on the existing
@@ -243,12 +244,12 @@ public abstract class BaseUshahidiHttpClient {
 	 * 
 	 * @param url
 	 *            The API URL
-	 * @param parameters
+	 * @param body
 	 *            The parameters to be passed to the URL
 	 * @return The input stream
 	 */
-	protected InputStream postRequest(String url, Map<String, String> parameters) {
-		return postRequest(url, parameters, HttpURLConnection.HTTP_OK);
+	protected InputStream postRequest(String url, Body body) {
+		return postRequest(url, body, HttpURLConnection.HTTP_OK);
 	}
 
 	/**
@@ -257,14 +258,13 @@ public abstract class BaseUshahidiHttpClient {
 	 * 
 	 * @param url
 	 *            The API URL
-	 * @param parameters
+	 * @param body
 	 *            The parameters to be passed to the URL
 	 * 
 	 * @return the input stream
 	 */
-	protected InputStream postMultipartRequest(String url,
-			Map<String, Object> parameters) {
-		return postMultipartRequest(url, parameters, HttpURLConnection.HTTP_OK);
+	protected InputStream postMultipartRequest(String url, Body body) {
+		return postMultipartRequest(url, body, HttpURLConnection.HTTP_OK);
 	}
 
 	/**
@@ -323,20 +323,19 @@ public abstract class BaseUshahidiHttpClient {
 	 * 
 	 * @param apiUrl
 	 *            The API URL
-	 * @param parameters
+	 * @param body
 	 *            The parameters
 	 * @param expected
 	 *            The expected
 	 * 
 	 * @return The input stream
 	 */
-	protected InputStream postRequest(String apiUrl,
-			Map<String, String> parameters, int expected) {
+	protected InputStream postRequest(String apiUrl, Body body, int expected) {
 		try {
 			URL url = new URL(apiUrl);
 			HttpURLConnection request = (HttpURLConnection) url
 					.openConnection();
-
+			StringBuilder builder = new StringBuilder();
 			request.setConnectTimeout(getConnectionTimeout());
 			request.setReadTimeout(getSocketTimeout());
 
@@ -345,7 +344,10 @@ public abstract class BaseUshahidiHttpClient {
 						requestHeaders.get(headerName));
 			}
 
-			parameters.putAll(requestParameters);
+			// for request header passed earlier on
+			builder.append(getParametersString(requestParameters));
+			// for request passed via body object
+			builder.append(getBodyString(body));
 
 			request.setRequestMethod("POST");
 			request.setDoOutput(true);
@@ -353,7 +355,7 @@ public abstract class BaseUshahidiHttpClient {
 			PrintStream out = new PrintStream(new BufferedOutputStream(
 					request.getOutputStream()));
 
-			out.print(getParametersString(parameters));
+			out.print(builder.toString());
 			out.flush();
 			out.close();
 
@@ -401,19 +403,43 @@ public abstract class BaseUshahidiHttpClient {
 	}
 
 	/**
+	 * Gets the Body string.
+	 * 
+	 * @param body
+	 *            the parameters
+	 * 
+	 * @return the parameters string
+	 */
+	protected String getBodyString(Body body) {
+		StringBuilder builder = new StringBuilder();
+		for (Iterator<Field> iterator = body.getFields().iterator(); iterator
+				.hasNext();) {
+			Field field = iterator.next();
+			builder.append(field.getName());
+			builder.append("=");
+			builder.append(encodeUrl(field.getValue().toString()));
+			if (iterator.hasNext()) {
+				builder.append("&");
+			}
+		}
+
+		return builder.toString();
+	}
+
+	/**
 	 * Make a POST request.
 	 * 
 	 * @param apiUrl
 	 *            The API URL
-	 * @param parts
+	 * @param body
 	 *            The parameters to be passed to the multipart request
 	 * @param expected
 	 *            The expected output
 	 * 
 	 * @return the input stream
 	 */
-	protected InputStream postMultipartRequest(String apiUrl,
-			Map<String, Object> parts, int expected) {
+	protected InputStream postMultipartRequest(String apiUrl, Body body,
+			int expected) {
 		try {
 			URL url = new URL(apiUrl);
 			HttpURLConnection request = (HttpURLConnection) url
@@ -439,17 +465,17 @@ public abstract class BaseUshahidiHttpClient {
 					.getBytes(CHARSET_UTF8);
 			byte[] newline = "\r\n".getBytes(CHARSET_UTF8);
 			try {
-				for (Entry<String, Object> part : parts.entrySet()) {
+				for (Field field : body.getFields()) {
 					output.write(boundarySeparator);
 					StringBuilder partBuffer = new StringBuilder(
 							"Content-Disposition: ");
 					partBuffer.append("form-data; name=\"");
-					partBuffer.append(part.getKey());
+					partBuffer.append(field.getName());
 					partBuffer.append('"');
 					output.write(partBuffer.toString().getBytes(CHARSET_UTF8));
 					output.write(newline);
 					output.write(newline);
-					final Object value = part.getValue();
+					final Object value = field.getValue();
 					if (value instanceof InputStream) {
 						InputStream input = (InputStream) value;
 						int read;
@@ -457,7 +483,7 @@ public abstract class BaseUshahidiHttpClient {
 							output.write(buffer, 0, read);
 						input.close();
 					} else
-						output.write(part.getValue().toString()
+						output.write(field.getValue().toString()
 								.getBytes(CHARSET_UTF8));
 					output.write(newline);
 				}
