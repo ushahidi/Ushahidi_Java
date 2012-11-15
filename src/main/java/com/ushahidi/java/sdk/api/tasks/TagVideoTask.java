@@ -28,12 +28,12 @@ import com.ushahidi.java.sdk.api.json.Response;
  * @author eyedol
  * 
  */
-public class TagNewsTask extends BaseTask {
+public class TagVideoTask extends BaseTask {
 
 	/** Form values */
-	private TagMediaFields tagNewsFields;
+	private TagMediaFields tagVideoFields;
 
-	private static final String TASK = "tagnews";
+	private static final String TASK = "tagvideo";
 
 	/** The response received from the server as a result of making an API call. */
 	public Response response;
@@ -44,7 +44,7 @@ public class TagNewsTask extends BaseTask {
 	 * @param url
 	 *            The Ushahidi deployment.
 	 */
-	public TagNewsTask(String url) {
+	public TagVideoTask(String url) {
 		super(url, TASK);
 	}
 
@@ -53,16 +53,16 @@ public class TagNewsTask extends BaseTask {
 	 * 
 	 * @param id
 	 *            The ID of the existing report
-	 * @param newsArticleUrl
-	 *            A valid URL that links to an article related to the report
+	 * @param videoUrl
+	 *            A valid URL that links to a video related to the report
 	 */
-	public void tagNews(int id, String newsArticleUrl) {
+	public void tagNews(int id, String videoUrl) {
 
-		tagNewsFields = new TagMediaFields(id, newsArticleUrl);
+		tagVideoFields = new TagMediaFields(id, videoUrl);
 
 		response = fromString(
 				client.sendPostRequest(url,
-						tagNewsFields.getFormParameters(tagNewsFields)),
+						tagVideoFields.getFormParameters(tagVideoFields)),
 				Response.class);
 
 	}

@@ -23,32 +23,34 @@ import com.ushahidi.java.sdk.annotations.Form;
 import com.ushahidi.java.sdk.annotations.FormField;
 
 /**
- * Holds form fields for tagging a video article to an existing report
+ * Holds form fields for tagging a media item to an existing report
  * 
  * @author eyedol
  * 
  */
-public class TagVideoFields extends Form {
+public class TagMediaFields extends Form {
 
 	/**
-	 * The ID of the report to tag the video
+	 * The ID of the report
 	 */
 	@FormField(name = "id")
 	private int id;
 
 	/**
-	 * The URL of the video to be tagged to the existing report
+	 * The URL of the media to be tagged to the existing report
 	 */
 	@FormField(name = "url")
 	private String url;
 
 	/**
-	 * Tag video
+	 * Tag news
 	 * 
-	 * @param id The report id
-	 * @param url The video URL
+	 * @param id
+	 *            The report ID
+	 * @param url
+	 *            The news article URL
 	 */
-	public TagVideoFields(int id, String url) {
+	public TagMediaFields(int id, String url) {
 		this.id = id;
 		this.url = url;
 	}
