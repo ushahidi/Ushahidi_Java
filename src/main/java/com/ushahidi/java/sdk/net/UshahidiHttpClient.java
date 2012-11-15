@@ -163,4 +163,13 @@ public class UshahidiHttpClient extends BaseUshahidiHttpClient {
 		}
 
 	}
+
+	/**
+	 * Set the request parameters
+	 * 
+	 * @param parameters
+	 */
+	public void setRequestParameters(String key, String value) {
+		requestParameters.put(key, value);
+	}
 }

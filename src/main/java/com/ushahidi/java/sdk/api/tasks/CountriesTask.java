@@ -35,8 +35,10 @@ import com.ushahidi.java.sdk.api.json.Countries;
  */
 public class CountriesTask extends BaseTask {
 
+	private static final String TASK = "countries";
+
 	public CountriesTask(String url) {
-		super(url);
+		super(url, TASK);
 	}
 
 	/**
@@ -47,13 +49,9 @@ public class CountriesTask extends BaseTask {
 	 * @throws JSONException
 	 */
 	public List<Country> all() {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=countries");
-		uriBuilder.append("&resp=json");
 
-		final Countries countries = fromString(
-				client.sendGetRequest(uriBuilder.toString()), Countries.class);
-		return countries.getCountries();
+		return fromString(client.sendGetRequest(url), Countries.class)
+				.getCountries();
 	}
 
 	/**
@@ -67,15 +65,12 @@ public class CountriesTask extends BaseTask {
 	 * @throws JSONException
 	 */
 	public List<Country> countryId(int id) {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=country");
-		uriBuilder.append("&by=countryid");
-		uriBuilder.append("&id=" + String.valueOf(id));
-		uriBuilder.append("&resp=json");
 
-		final Countries countries = fromString(
-				client.sendGetRequest(uriBuilder.toString()), Countries.class);
-		return countries.getCountries();
+		client.setRequestParameters("by", "countryid");
+		client.setRequestParameters("id", String.valueOf(id));
+
+		return fromString(client.sendGetRequest(url), Countries.class)
+				.getCountries();
 	}
 
 	/**
@@ -88,15 +83,11 @@ public class CountriesTask extends BaseTask {
 	 * @throws JSONException
 	 */
 	public List<Country> countryIso(String iso) {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=country");
-		uriBuilder.append("&by=countryiso");
-		uriBuilder.append("&iso=" + iso);
-		uriBuilder.append("&resp=json");
 
-		final Countries countries = fromString(
-				client.sendGetRequest(uriBuilder.toString()), Countries.class);
-		return countries.getCountries();
+		client.setRequestParameters("by", "countryiso");
+		client.setRequestParameters("iso", iso);
+		return fromString(client.sendGetRequest(url), Countries.class)
+				.getCountries();
 	}
 
 	/**
@@ -110,15 +101,10 @@ public class CountriesTask extends BaseTask {
 	 * @throws JSONException
 	 */
 	public List<Country> countryName(String name) {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=country");
-		uriBuilder.append("&by=countryname");
-		uriBuilder.append("&name=" + name);
-		uriBuilder.append("&resp=json");
-
-		final Countries countries = fromString(
-				client.sendGetRequest(uriBuilder.toString()), Countries.class);
-		return countries.getCountries();
+		client.setRequestParameters("by", "countryname");
+		client.setRequestParameters("name", name);
+		return fromString(client.sendGetRequest(url), Countries.class)
+				.getCountries();
 	}
 
 }

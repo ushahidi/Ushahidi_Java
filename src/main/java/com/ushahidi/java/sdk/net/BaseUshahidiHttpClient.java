@@ -345,10 +345,14 @@ public abstract class BaseUshahidiHttpClient {
 			}
 
 			// for request header passed earlier on
-			builder.append(getParametersString(requestParameters));
+			final String strParams = getParametersString(requestParameters);
+			builder.append(strParams);
 			// for request passed via body object
+			// couldn't figure out a better way of doing this
+			if (!strParams.isEmpty()) {
+				builder.append("&");
+			}
 			builder.append(getBodyString(body));
-
 			request.setRequestMethod("POST");
 			request.setDoOutput(true);
 

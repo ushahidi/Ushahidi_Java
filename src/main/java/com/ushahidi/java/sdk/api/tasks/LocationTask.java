@@ -19,9 +19,9 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.tasks;
 
+import java.io.IOException;
 import java.util.List;
 
-import com.ushahidi.java.sdk.UshahidiException;
 import com.ushahidi.java.sdk.api.Location;
 import com.ushahidi.java.sdk.api.json.Locations;
 
@@ -37,8 +37,10 @@ import com.ushahidi.java.sdk.api.json.Locations;
  */
 public class LocationTask extends BaseTask {
 
+	private static final String TASK = "locations";
+
 	public LocationTask(String url) {
-		super(url);
+		super(url, TASK);
 	}
 
 	/**
@@ -50,13 +52,9 @@ public class LocationTask extends BaseTask {
 	 * @throws JSONException
 	 */
 	public List<Location> all() {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=locations");
-		uriBuilder.append("&resp=json");
 
-		final Locations locations = fromString(
-				client.sendGetRequest(uriBuilder.toString()), Locations.class);
-		return locations.getLocations();
+		return fromString(client.sendGetRequest(url), Locations.class)
+				.getLocations();
 	}
 
 	/**
@@ -70,20 +68,12 @@ public class LocationTask extends BaseTask {
 	 * @throws JSONException
 	 */
 	public List<Location> locationId(int id) {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=location");
-		uriBuilder.append("&by=locid");
-		uriBuilder.append("&id=" + String.valueOf(id));
-		uriBuilder.append("&resp=json");
 
-		final Locations locations = fromString(
-				client.sendGetRequest(uriBuilder.toString()), Locations.class);
-		if (locations.getLocations() == null) {
-			throw new UshahidiException("Error code "
-					+ locations.getErrorCode() + " with message "
-					+ locations.getErrorMessage());
-		}
-		return locations.getLocations();
+		client.setRequestParameters("by", "locid");
+		client.setRequestParameters("id", String.valueOf(id));
+		return fromString(client.sendGetRequest(url), Locations.class)
+				.getLocations();
+
 	}
 
 	/**
@@ -96,15 +86,11 @@ public class LocationTask extends BaseTask {
 	 * @throws JSONException
 	 */
 	public List<Location> countryId(int id) {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=location");
-		uriBuilder.append("&by=country");
-		uriBuilder.append("&id=" + String.valueOf(id));
-		uriBuilder.append("&resp=json");
 
-		final Locations locations = fromString(
-				client.sendGetRequest(uriBuilder.toString()), Locations.class);
-		return locations.getLocations();
+		client.setRequestParameters("by", "country");
+		client.setRequestParameters("id", String.valueOf(id));
+		return fromString(client.sendGetRequest(url), Locations.class)
+				.getLocations();
 	}
 
 }

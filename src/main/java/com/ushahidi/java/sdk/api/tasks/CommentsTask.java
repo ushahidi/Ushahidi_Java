@@ -37,8 +37,10 @@ import com.ushahidi.java.sdk.api.json.Comments;
  */
 public class CommentsTask extends BaseTask {
 
+	private static final String TASK = "comments";
+
 	public CommentsTask(String url) {
-		super(url);
+		super(url, TASK);
 	}
 
 	/**
@@ -49,14 +51,11 @@ public class CommentsTask extends BaseTask {
 	 * @throws JSONException
 	 */
 	public List<Comment> all() {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=comments");
-		uriBuilder.append("&by=all");
-		uriBuilder.append("&resp=json");
 
+		client.setRequestParameters("by", "all");
 		// fetch all comments
-		Comments comments = fromString(
-				client.sendGetRequest(uriBuilder.toString()), Comments.class);
+		Comments comments = fromString(client.sendGetRequest(url),
+				Comments.class);
 		return comments.getComments();
 	}
 
@@ -68,16 +67,13 @@ public class CommentsTask extends BaseTask {
 	 * @return The comments associated to the specified report id
 	 */
 	public List<Comment> reportId(int id) {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=comments");
-		uriBuilder.append("&by=reportid");
-		uriBuilder.append("&id=" + String.valueOf(id));
-		uriBuilder.append("&resp=json");
 
+		client.setRequestParameters("by", "reportid");
+		client.setRequestParameters("id", String.valueOf(id));
 		// fetch all comment
 		// fetch all categories
-		Comments comments = fromString(
-				client.sendGetRequest(uriBuilder.toString()), Comments.class);
+		Comments comments = fromString(client.sendGetRequest(url),
+				Comments.class);
 		return comments.getComments();
 	}
 
@@ -92,13 +88,11 @@ public class CommentsTask extends BaseTask {
 	 * @throws JSONException
 	 */
 	public List<Comment> spam() {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=comments");
-		uriBuilder.append("&by=spam");
-		uriBuilder.append("&resp=json");
+
+		client.setRequestParameters("by", "spam");
 		// fetch all categories
-		Comments comments = fromString(
-				client.sendGetRequest(uriBuilder.toString()), Comments.class);
+		Comments comments = fromString(client.sendGetRequest(url),
+				Comments.class);
 		return comments.getComments();
 
 	}
@@ -113,14 +107,11 @@ public class CommentsTask extends BaseTask {
 	 * @throws JSONException
 	 */
 	public List<Comment> pending() {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=comments");
-		uriBuilder.append("&by=pending");
-		uriBuilder.append("&resp=json");
 
+		client.setRequestParameters("by", "pending");
 		// fetch all categories
-		Comments comments = fromString(
-				client.sendGetRequest(uriBuilder.toString()), Comments.class);
+		Comments comments = fromString(client.sendGetRequest(url),
+				Comments.class);
 		return comments.getComments();
 
 	}
@@ -135,13 +126,11 @@ public class CommentsTask extends BaseTask {
 	 * @throws JSONException
 	 */
 	public List<Comment> approved() {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=comments");
-		uriBuilder.append("&by=approved");
-		uriBuilder.append("&resp=json");
+
+		client.setRequestParameters("by", "approved");
 		// fetch all categories
-		Comments comments = fromString(
-				client.sendGetRequest(uriBuilder.toString()), Comments.class);
+		Comments comments = fromString(client.sendGetRequest(url),
+				Comments.class);
 		return comments.getComments();
 	}
 

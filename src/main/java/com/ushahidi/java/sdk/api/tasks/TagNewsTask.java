@@ -33,6 +33,8 @@ public class TagNewsTask extends BaseTask {
 	/** Form values */
 	private TagNewsFields tagNewsFields;
 
+	private static final String TASK = "tagnews";
+
 	/** The response received from the server as a result of making an API call. */
 	public Response response;
 
@@ -43,7 +45,7 @@ public class TagNewsTask extends BaseTask {
 	 *            The Ushahidi deployment.
 	 */
 	public TagNewsTask(String url) {
-		super(url);
+		super(url, TASK);
 	}
 
 	/**
@@ -55,9 +57,6 @@ public class TagNewsTask extends BaseTask {
 	 *            A valid URL that links to an article related to the report
 	 */
 	public void tagNews(int id, String newsArticleUrl) {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=tagnews");
-		uriBuilder.append("&resp=json");
 
 		tagNewsFields = new TagNewsFields(id, newsArticleUrl);
 		String rep = client.sendPostRequest(url,

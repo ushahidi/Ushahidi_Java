@@ -45,8 +45,10 @@ public class TagNewsFields extends Form {
 	/**
 	 * Tag news
 	 * 
-	 * @param id The report ID
-	 * @param url The news article URL
+	 * @param id
+	 *            The report ID
+	 * @param url
+	 *            The news article URL
 	 */
 	public TagNewsFields(int id, String url) {
 		this.id = id;

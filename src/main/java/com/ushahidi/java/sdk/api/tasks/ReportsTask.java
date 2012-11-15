@@ -44,12 +44,15 @@ public class ReportsTask extends BaseTask {
 
 	public Reports reports;
 
+	private static final String TASK = "incidents";
+
 	/**
 	 * Default constructor for ReportsTask. Sets the limit default value to 20.
 	 */
 	public ReportsTask(String url) {
-		super(url);
+		super(url, TASK);
 		this.limit = 20;
+		client.setRequestParameters("comments", "1");
 	}
 
 	/**
@@ -59,14 +62,9 @@ public class ReportsTask extends BaseTask {
 	 * 
 	 */
 	public List<Incidents> all() {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=incidents");
-		uriBuilder.append("&comments=1");
-		uriBuilder.append("&resp=json");
 
-		reports = fromString(client.sendGetRequest(uriBuilder.toString()),
-				Reports.class);
-		return reports.getPayload().incidents;
+		return fromString(client.sendGetRequest(url), Reports.class)
+				.getPayload().incidents;
 	}
 
 	/**
@@ -78,16 +76,11 @@ public class ReportsTask extends BaseTask {
 	 *         created.
 	 */
 	public List<Incidents> sinceId(int id) {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=incidents");
-		uriBuilder.append("&comments=1");
-		uriBuilder.append("&by=sinceid");
-		uriBuilder.append("&id=" + String.valueOf(id));
-		uriBuilder.append("&resp=json");
 
-		reports = fromString(client.sendGetRequest(uriBuilder.toString()),
-				Reports.class);
-		return reports.getPayload().incidents;
+		client.setRequestParameters("by", "sinceid");
+		client.setRequestParameters("id", String.valueOf(id));
+		return fromString(client.sendGetRequest(url), Reports.class)
+				.getPayload().incidents;
 	}
 
 	/**
@@ -99,16 +92,10 @@ public class ReportsTask extends BaseTask {
 	 *         report ID.
 	 */
 	public List<Incidents> maxId(int id) {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=incidents");
-		uriBuilder.append("&comments=1");
-		uriBuilder.append("&by=maxid");
-		uriBuilder.append("&id=" + String.valueOf(id));
-		uriBuilder.append("&resp=json");
-
-		reports = fromString(client.sendGetRequest(uriBuilder.toString()),
-				Reports.class);
-		return reports.getPayload().incidents;
+		client.setRequestParameters("by", "maxid");
+		client.setRequestParameters("id", String.valueOf(id));
+		return fromString(client.sendGetRequest(url), Reports.class)
+				.getPayload().incidents;
 	}
 
 	/**
@@ -118,19 +105,12 @@ public class ReportsTask extends BaseTask {
 	 *            The ID of the report
 	 * @return The details of the reports retrieved.
 	 * 
-	 * @throws IOException
-	 * @throws JSONException
 	 */
 	public Incidents reportId(int id) {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=incidents");
-		uriBuilder.append("&comments=1");
-		uriBuilder.append("&by=incidentid");
-		uriBuilder.append("&id=" + String.valueOf(id));
-		uriBuilder.append("&resp=json");
 
-		reports = fromString(client.sendGetRequest(uriBuilder.toString()),
-				Reports.class);
+		client.setRequestParameters("by", "incidentid");
+		client.setRequestParameters("id", String.valueOf(id));
+		reports = fromString(client.sendGetRequest(url), Reports.class);
 		if (reports.getPayload().incidents != null
 				&& reports.getPayload().incidents.size() > 0) {
 			return reports.getPayload().incidents.get(0);
@@ -147,16 +127,11 @@ public class ReportsTask extends BaseTask {
 	 * 
 	 */
 	public List<Incidents> locationName(String name) {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=incidents");
-		uriBuilder.append("&by=locname");
-		uriBuilder.append("&name=" + name);
-		uriBuilder.append("&comments=1");
-		uriBuilder.append("&resp=json");
 
-		reports = fromString(client.sendGetRequest(uriBuilder.toString()),
-				Reports.class);
-		return reports.getPayload().incidents;
+		client.setRequestParameters("by", "locname");
+		client.setRequestParameters("name", name);
+		return fromString(client.sendGetRequest(url), Reports.class)
+				.getPayload().incidents;
 	}
 
 	/**
@@ -168,16 +143,11 @@ public class ReportsTask extends BaseTask {
 	 * 
 	 */
 	public List<Incidents> locationId(int id) {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=incidents");
-		uriBuilder.append("&comments=1");
-		uriBuilder.append("&by=locid");
-		uriBuilder.append("&id=" + String.valueOf(id));
-		uriBuilder.append("&resp=json");
 
-		reports = fromString(client.sendGetRequest(uriBuilder.toString()),
-				Reports.class);
-		return reports.getPayload().incidents;
+		client.setRequestParameters("by", "locid");
+		client.setRequestParameters("id", String.valueOf(id));
+		return fromString(client.sendGetRequest(url), Reports.class)
+				.getPayload().incidents;
 	}
 
 	/**
@@ -189,16 +159,11 @@ public class ReportsTask extends BaseTask {
 	 * 
 	 */
 	public List<Incidents> categoryName(String category) {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=incidents");
-		uriBuilder.append("&comments=1");
-		uriBuilder.append("&by=catname");
-		uriBuilder.append("&name=" + category);
-		uriBuilder.append("&resp=json");
 
-		reports = fromString(client.sendGetRequest(uriBuilder.toString()),
-				Reports.class);
-		return reports.getPayload().incidents;
+		client.setRequestParameters("by", "catname");
+		client.setRequestParameters("name", category);
+		return fromString(client.sendGetRequest(url), Reports.class)
+				.getPayload().incidents;
 	}
 
 	/**
@@ -212,16 +177,11 @@ public class ReportsTask extends BaseTask {
 	 * @throws JSONException
 	 */
 	public List<Incidents> categoryId(int id) {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=incidents");
-		uriBuilder.append("&comments=1");
-		uriBuilder.append("&by=catid");
-		uriBuilder.append("&id=" + String.valueOf(id));
-		uriBuilder.append("&resp=json");
 
-		reports = fromString(client.sendGetRequest(uriBuilder.toString()),
-				Reports.class);
-		return reports.getPayload().incidents;
+		client.setRequestParameters("by", "catid");
+		client.setRequestParameters("id", String.valueOf(id));
+		return fromString(client.sendGetRequest(url), Reports.class)
+				.getPayload().incidents;
 	}
 
 }

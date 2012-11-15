@@ -29,13 +29,16 @@ import com.ushahidi.java.sdk.api.json.System;
  */
 public class SystemTask extends BaseTask {
 
+	private static final String TASK = "version";
+
 	/**
 	 * Default constructor
 	 * 
-	 * @param url The Ushahidi deployment
+	 * @param url
+	 *            The Ushahidi deployment
 	 */
 	public SystemTask(String url) {
-		super(url);
+		super(url, TASK);
 	}
 
 	/**
@@ -44,10 +47,7 @@ public class SystemTask extends BaseTask {
 	 * @return The {@link com.ushahidi.java.sdk.api.json.System}
 	 */
 	public System fetch() {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=version");
-		uriBuilder.append("&resp=json");
-		return fromString(client.sendGetRequest(uriBuilder.toString()),
-				System.class);
+
+		return fromString(client.sendGetRequest(url), System.class);
 	}
 }

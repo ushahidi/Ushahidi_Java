@@ -37,29 +37,62 @@ public abstract class BaseTask extends UshahidiHttpClient {
 	/** The Ushahidi deployment URL */
 	protected String url;
 
+	/** The task to be performed */
+	protected String task;
+	
+	private static final String API = "/api";
+
 	/**
 	 * Create a the task using the default {@link UshahidiHttpClient}
+	 * 
+	 * @param url
+	 *            The Ushahidi deployment
+	 * @param task
+	 *            The task to be performed
 	 */
-	public BaseTask(String url) {
+	public BaseTask(String url, String task) {
 		if (url == null) {
 			throw new IllegalArgumentException("URL cannot be null");
 		}
-		this.url = url;
+
+		if (task == null) {
+			throw new IllegalArgumentException("Task cannot be null");
+		}
+
+		this.url = url+API;
+		this.task = task;
 		this.client = new UshahidiHttpClient();
+		this.client.setRequestParameters("task", task);
+		this.client.setRequestParameters("resp", "json");
 	}
 
 	/**
 	 * Create the payload for client
 	 * 
+	 * @param url
+	 *            The Ushahidi deployment
+	 * @param task
+	 *            The task to be performed
+	 * 
 	 * @param client
 	 *            must be non-null
 	 */
-	public BaseTask(String url, UshahidiHttpClient client) {
+	public BaseTask(String url, String task, UshahidiHttpClient client) {
+		if (url == null) {
+			throw new IllegalArgumentException("URL cannot be null");
+		}
+
+		if (task == null) {
+			throw new IllegalArgumentException("Task cannot be null");
+		}
+
 		if (client == null) {
 			throw new IllegalArgumentException("Client cannot be null");
 		}
 		this.client = client;
-		this.url = url;
+		this.client.setRequestParameters("?task", task);
+		this.client.setRequestParameters("resp", "json");
+		this.url = url+API;
 	}
 
 	/**
@@ -72,11 +105,13 @@ public abstract class BaseTask extends UshahidiHttpClient {
 	}
 
 	/**
-	 * Deserialize the JSON string into Java objects representing the various 
+	 * Deserialize the JSON string into Java objects representing the various
 	 * Ushahidi models.
 	 * 
-	 * @param json the json string to be converted
-	 * @param cls the class for the model
+	 * @param json
+	 *            the json string to be converted
+	 * @param cls
+	 *            the class for the model
 	 * @return
 	 */
 	protected static <T> T fromString(String json, Class<T> cls) {

@@ -37,13 +37,16 @@ import com.ushahidi.java.sdk.api.json.Categories;
  */
 public class CategoriesTask extends BaseTask {
 
+	private static final String TASK = "categories";
+
 	/**
 	 * Create the Categories task
 	 * 
-	 * @param url The URL of the Ushahidi deployment
+	 * @param url
+	 *            The URL of the Ushahidi deployment
 	 */
 	public CategoriesTask(String url) {
-		super(url);
+		super(url, TASK);
 	}
 
 	/**
@@ -56,12 +59,8 @@ public class CategoriesTask extends BaseTask {
 	 */
 	public List<Category> all() {
 
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=categories");
-		uriBuilder.append("&resp=json");
-
-		final Categories categories = fromString(
-				client.sendGetRequest(uriBuilder.toString()), Categories.class);
+		final Categories categories = fromString(client.sendGetRequest(url),
+				Categories.class);
 		return categories.getCategories();
 	}
 
@@ -73,13 +72,11 @@ public class CategoriesTask extends BaseTask {
 	 * @return The fetched category
 	 */
 	public Category catId(int id) {
-		final StringBuilder uriBuilder = new StringBuilder(url);
-		uriBuilder.append("/api?task=categories");
-		uriBuilder.append("&by=catid");
-		uriBuilder.append("&id=" + String.valueOf(id));
-		uriBuilder.append("&resp=json");
-		final Categories categories = fromString(
-				client.sendGetRequest(uriBuilder.toString()), Categories.class);
+
+		client.setRequestParameters("by", "catid");
+		client.setRequestParameters("id", String.valueOf(id));
+		final Categories categories = fromString(client.sendGetRequest(url),
+				Categories.class);
 		return categories.getCategory();
 	}
 
