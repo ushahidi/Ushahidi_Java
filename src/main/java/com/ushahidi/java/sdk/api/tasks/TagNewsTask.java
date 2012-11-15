@@ -62,7 +62,7 @@ public class TagNewsTask extends BaseTask {
 
 		response = fromString(
 				client.sendPostRequest(url,
-						tagNewsFields.getFormParameters(tagNewsFields)),
+						tagNewsFields.getParameters(tagNewsFields)),
 				Response.class);
 
 	}

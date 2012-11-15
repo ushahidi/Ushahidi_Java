@@ -62,7 +62,7 @@ public class TagVideoTask extends BaseTask {
 
 		response = fromString(
 				client.sendPostRequest(url,
-						tagVideoFields.getFormParameters(tagVideoFields)),
+						tagVideoFields.getParameters(tagVideoFields)),
 				Response.class);
 
 	}

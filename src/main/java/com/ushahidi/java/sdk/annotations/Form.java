@@ -31,11 +31,13 @@ import com.ushahidi.java.sdk.net.content.Body;
 public class Form {
 
 	/**
+	 * Get the form parameters to be submitted
 	 * 
-	 * @param obj
+	 * @param obj The form field
+	 * 
 	 * @return The Map objection that has the forms variable names and values
 	 */
-	public Body getFormParameters(Object obj) {
+	public Body getParameters(Object obj) {
 		Body body = new Body();
 		// get all declared files
 		Field[] fields = obj.getClass().getDeclaredFields();
