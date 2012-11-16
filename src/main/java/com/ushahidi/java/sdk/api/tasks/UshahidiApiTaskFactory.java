@@ -122,9 +122,10 @@ public class UshahidiApiTaskFactory {
 
 	/**
 	 * Create admin category object
+	 * 
+	 * @return The admin categories task
 	 */
-	public AdminCategoriesTask createAdminCategoriesTask(String username,
-			String password) {
-		return new AdminCategoriesTask(url, username, password);
+	public AdminCategoriesTask createAdminCategoriesTask() {
+		return new AdminCategoriesTask(url);
 	}
 }

@@ -20,6 +20,8 @@
 package com.ushahidi.java.sdk.api.tasks;
 
 import com.google.gson.Gson;
+import com.ushahidi.java.sdk.net.Authentication;
+import com.ushahidi.java.sdk.net.PasswordAuthentication;
 import com.ushahidi.java.sdk.net.UshahidiHttpClient;
 
 /**
@@ -38,8 +40,10 @@ public abstract class BaseTask extends UshahidiHttpClient {
 
 	/** The task to be performed */
 	protected String task;
-	
+
 	private static final String API = "/api";
+
+	private Authentication authentication;
 
 	/**
 	 * Create a the task using the default {@link UshahidiHttpClient}
@@ -58,7 +62,7 @@ public abstract class BaseTask extends UshahidiHttpClient {
 			throw new IllegalArgumentException("Task cannot be null");
 		}
 
-		this.url = url+API;
+		this.url = url + API;
 		this.task = task;
 		this.client = new UshahidiHttpClient();
 		this.client.setRequestParameters("task", task);
@@ -91,7 +95,7 @@ public abstract class BaseTask extends UshahidiHttpClient {
 		this.client = client;
 		this.client.setRequestParameters("?task", task);
 		this.client.setRequestParameters("resp", "json");
-		this.url = url+API;
+		this.url = url + API;
 	}
 
 	/**
@@ -101,6 +105,21 @@ public abstract class BaseTask extends UshahidiHttpClient {
 	 */
 	public UshahidiHttpClient getClient() {
 		return client;
+	}
+
+	public void setAuthentication(String username, String password) {
+		if (username == null || username.isEmpty()) {
+			throw new IllegalArgumentException(
+					"Username may not be null or empty");
+		}
+
+		if (password == null || password.isEmpty()) {
+			throw new IllegalArgumentException(
+					"Password may not be null or empty");
+		}
+
+		authentication = new PasswordAuthentication(username, password);
+		this.client.setAuthentication(authentication);
 	}
 
 	/**

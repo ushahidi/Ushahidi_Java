@@ -25,11 +25,12 @@ import com.ushahidi.java.sdk.api.json.Response;
 /**
  * Administrative tasks on categories
  */
-public class AdminCategoriesTask extends AdminBaseTask {
+public class AdminCategoriesTask extends BaseTask {
 
 	private static final String TASK = "category";
 
 	/**
+	 * This requires authentication
 	 * 
 	 * @param url
 	 * 
@@ -38,11 +39,14 @@ public class AdminCategoriesTask extends AdminBaseTask {
 	 * @param password
 	 *            the password
 	 */
-	public AdminCategoriesTask(String url, String username, String password) {
-		super(url, TASK, username, password);
+	public AdminCategoriesTask(String url) {
+		super(url, TASK);
 	}
 
 	/**
+	 * Add a new category to the Ushahidi deployment. This method requires
+	 * authentication. Perhaps set {@link #setAuthentication(String, String)} or
+	 * set {@link #getClient().setAuthentication()}
 	 * 
 	 * @param fields
 	 *            CategoryFields
@@ -55,6 +59,10 @@ public class AdminCategoriesTask extends AdminBaseTask {
 	}
 
 	/**
+	 * Delete an existing category in the Ushahidi deployment. This method
+	 * requires authentication. Perhaps set
+	 * {@link #setAuthentication(String, String)} or set {@link #getClient()
+	 * .setAuthentication()}
 	 * 
 	 * @param id
 	 *            Report ID
@@ -67,6 +75,7 @@ public class AdminCategoriesTask extends AdminBaseTask {
 	}
 
 	/**
+	 * Edit an existing category. Requires authentication
 	 * 
 	 * @param fields
 	 * @return

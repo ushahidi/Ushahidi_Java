@@ -93,4 +93,9 @@ public class BaseTaskTest extends TestCase {
 		assertNotNull(message, value);
 		assertFalse(message, value.isEmpty());
 	}
+
+	protected static void assetNotNullOrZero(String message, int value) {
+		assertNotNull(message, value);
+		assertFalse(message, (value > 0));
+	}
 }
