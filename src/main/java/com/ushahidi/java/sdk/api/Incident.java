@@ -19,7 +19,16 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api;
 
+import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
 import com.google.gson.annotations.SerializedName;
+import com.ushahidi.java.sdk.UshahidiException;
 
 /**
  * The Report class has all the properties and methods of a particular Ushahidi
@@ -52,7 +61,7 @@ public class Incident {
 	 * The date of the report
 	 */
 	@SerializedName("incidentdate")
-	private String date;
+	private Incident.Date date;
 
 	/**
 	 * The mode of the report
@@ -161,7 +170,7 @@ public class Incident {
 	 * 
 	 * @return The date attached to the report
 	 */
-	public String getDate() {
+	public java.util.Date getDate() {
 		return date;
 	}
 
@@ -171,8 +180,8 @@ public class Incident {
 	 * @param date
 	 *            The date in the format 2012-09-20 15:06:00
 	 */
-	public void setDate(String date) {
-		this.date = date;
+	public void setDate(java.util.Date date) {
+		this.date = new Incident.Date(date);
 	}
 
 	/**
@@ -278,4 +287,29 @@ public class Incident {
 		return this.active;
 	}
 
+	public static class Date extends java.util.Date {
+
+		private static final long serialVersionUID = -2667623647943795029L;
+
+		public Date(java.util.Date date) {
+			super(date.getTime());
+		}
+	}
+
+	public static class DateDeserializer implements JsonDeserializer<Date> {
+
+		private static final SimpleDateFormat PARSER = new SimpleDateFormat(
+				"yyyy-MM-dd HH:mm:ss");
+
+		@Override
+		public Incident.Date deserialize(JsonElement arg0, Type arg1,
+				JsonDeserializationContext arg2) throws JsonParseException {
+			try {
+				return new Incident.Date(PARSER.parse(arg0.getAsString()));
+			} catch (ParseException e) {
+				throw new UshahidiException(e);
+			}
+		}
+
+	}
 }
