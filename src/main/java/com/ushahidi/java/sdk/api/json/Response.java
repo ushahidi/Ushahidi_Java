@@ -40,14 +40,15 @@ public class Response {
 	 *
 	 */
 	protected static class Error {
-		protected int code;
+		protected String code;
 		protected String message;
 	}
 	
 	protected Error error;
 	
 	public int getErrorCode() {
-		return error.code;
+		
+		return Integer.valueOf(error.code);
 	}
 	
 	public String getErrorMessage() {
