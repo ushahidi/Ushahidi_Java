@@ -33,11 +33,6 @@ public class AdminCategoriesTask extends BaseTask {
 	 * This requires authentication
 	 * 
 	 * @param url
-	 * 
-	 * @param username
-	 *            the username
-	 * @param password
-	 *            the password
 	 */
 	public AdminCategoriesTask(String url) {
 		super(url, TASK);
@@ -53,6 +48,7 @@ public class AdminCategoriesTask extends BaseTask {
 	 * @return response
 	 */
 	public Response add(CategoryFields fields) {
+		client.setRequestParameters("action", "add");
 		return fromString(
 				client.sendPostRequest(url, fields.getParameters(fields)),
 				Response.class);
@@ -71,7 +67,7 @@ public class AdminCategoriesTask extends BaseTask {
 	public Response delete(int id) {
 		client.setRequestParameters("action", "delete");
 		client.setRequestParameters("category_id", String.valueOf(id));
-		return fromString(client.sendPostRequest(url, null), Response.class);
+		return fromString(client.sendPostRequest(url), Response.class);
 	}
 
 	/**

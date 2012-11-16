@@ -35,6 +35,12 @@ public class CategoryFields extends Form {
 	private int id;
 
 	/**
+	 * The category's parent ID
+	 */
+	@FormField(name = "parent_id")
+	private int parentId;
+
+	/**
 	 * Title of the category
 	 */
 	@FormField(name = "category_title")
@@ -59,19 +65,68 @@ public class CategoryFields extends Form {
 	private FileBody icon;
 
 	/**
+	 * The category for fields. Both the require and optional fields
 	 * 
 	 * @param id
+	 *            The category ID
+	 * @param parentId
+	 *            The category's parent ID
 	 * @param title
+	 *            The category's ttile
 	 * @param description
+	 *            The category's description
 	 * @param color
+	 *            The hex color code. eg. #000000
 	 * @param icon
+	 *            The category icon
 	 */
-	public CategoryFields(int id, String title, String description,
-			String color, FileBody icon) {
+	public CategoryFields(int id, int parentId, String title,
+			String description, String color, FileBody icon) {
 		this.id = id;
+		this.parentId = parentId;
 		this.title = title;
 		this.description = description;
 		this.color = color;
 		this.icon = icon;
+	}
+
+	/**
+	 * The category for fields. These are all the required required minus the
+	 * optional once
+	 * 
+	 * @param parentId
+	 *            The category's parent ID
+	 * @param title
+	 *            The category's ttile
+	 * @param description
+	 *            The category's description
+	 * @param color
+	 *            The hex color code. eg. #000000
+	 * @param icon
+	 *            The category icon
+	 */
+	public CategoryFields(int parentId, String title, String description,
+			String color) {
+		this(0, parentId, title, description, color, null);
+	}
+
+	/**
+	 * The category for fields. These are all the required required minus the
+	 * optional once
+	 * 
+	 * @param id
+	 *            The category ID
+	 * @param parentId
+	 *            The category's parent ID
+	 * @param title
+	 *            The category's ttile
+	 * @param description
+	 *            The category's description
+	 * @param color
+	 *            The hex color code. eg. #000000
+	 */
+	public CategoryFields(int id, int parentId, String title,
+			String description, String color) {
+		this(id, parentId, title, description, color, null);
 	}
 }

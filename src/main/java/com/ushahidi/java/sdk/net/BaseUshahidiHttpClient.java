@@ -254,6 +254,19 @@ public abstract class BaseUshahidiHttpClient {
 	}
 
 	/**
+	 * Make a POST request
+	 * 
+	 * @param url
+	 *            The API URL
+	 * @param body
+	 *            The parameters to be passed to the URL
+	 * @return The input stream
+	 */
+	protected InputStream postRequest(String url) {
+		return postRequest(url, HttpURLConnection.HTTP_OK);
+	}
+
+	/**
 	 * Make a Multi-part POST request. This request makes it possible to upload
 	 * files.
 	 * 
@@ -384,6 +397,60 @@ public abstract class BaseUshahidiHttpClient {
 	}
 
 	/**
+	 * Make a POST request.
+	 * 
+	 * @param apiUrl
+	 *            The API URL
+	 * @param body
+	 *            The parameters
+	 * @param expected
+	 *            The expected
+	 * 
+	 * @return The input stream
+	 */
+	protected InputStream postRequest(String apiUrl, int expected) {
+		try {
+			URL url = new URL(apiUrl);
+			HttpURLConnection request = (HttpURLConnection) url
+					.openConnection();
+			request.setConnectTimeout(getConnectionTimeout());
+			request.setReadTimeout(getSocketTimeout());
+
+			for (String headerName : requestHeaders.keySet()) {
+				request.setRequestProperty(headerName,
+						requestHeaders.get(headerName));
+			}
+
+			request.setRequestMethod("POST");
+			request.setDoOutput(true);
+
+			PrintStream out = new PrintStream(new BufferedOutputStream(
+					request.getOutputStream()));
+
+			out.print(getParametersString(requestParameters));
+			out.flush();
+			out.close();
+
+			request.connect();
+
+			if (request.getResponseCode() != expected) {
+				throw new UshahidiException(
+						streamToString(getWrappedInputStream(
+								request.getErrorStream(),
+								GZIP_ENCODING.equalsIgnoreCase(request
+										.getContentEncoding()))));
+			} else {
+				return getWrappedInputStream(request.getInputStream(),
+						GZIP_ENCODING.equalsIgnoreCase(request
+								.getContentEncoding()));
+			}
+		} catch (IOException e) {
+			throw new UshahidiException(e);
+		} finally {
+		}
+	}
+
+	/**
 	 * Gets the parameters string.
 	 * 
 	 * @param parameters
@@ -422,7 +489,9 @@ public abstract class BaseUshahidiHttpClient {
 			Field field = iterator.next();
 			builder.append(field.getName());
 			builder.append("=");
-			builder.append(encodeUrl(field.getValue().toString()));
+			if (field.getValue() != null) {
+				builder.append(encodeUrl(field.getValue().toString()));
+			}
 			if (iterator.hasNext()) {
 				builder.append("&");
 			}

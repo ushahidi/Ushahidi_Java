@@ -138,6 +138,36 @@ public class UshahidiHttpClient extends BaseUshahidiHttpClient {
 	 * 
 	 * @param url
 	 *            The URL to send the POST request to.
+	 * 
+	 * @return The HTTP response string as returned from the server
+	 * @throws IOException
+	 */
+	public String sendPostRequest(String url) {
+		InputStream inputStream = null;
+		try {
+			addRequestHeader("User-Agent:", getUserAgent());
+			inputStream = postRequest(url);
+
+			if (inputStream != null) {
+				return streamToString(inputStream);
+			} else {
+				throw new UshahidiException(
+						"Unknown content found in response.");
+			}
+		} catch (Exception e) {
+			throw new UshahidiException(e);
+		} finally {
+			closeStream(inputStream);
+		}
+
+	}
+
+	/**
+	 * Sends a POST request to the supplied URL. Converts the input stream as
+	 * received from the server to string.
+	 * 
+	 * @param url
+	 *            The URL to send the POST request to.
 	 * @param body
 	 *            The parameters to
 	 * 

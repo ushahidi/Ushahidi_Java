@@ -19,16 +19,20 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.tasks;
 
+import java.io.File;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.ushahidi.java.sdk.api.CategoryFields;
+import com.ushahidi.java.sdk.api.json.Response;
+import com.ushahidi.java.sdk.net.content.FileBody;
 
 /**
  * 
  */
-public class AdminCategoriesTest extends BaseTaskTest {
+public class AdminCategoriesTaskTest extends BaseTaskTest {
 
 	/** The admin categories task **/
 	private AdminCategoriesTask task;
@@ -38,7 +42,7 @@ public class AdminCategoriesTest extends BaseTaskTest {
 
 	private static final String USERNAME = "admin";
 
-	private static final String PASSWORD = "password";
+	private static final String PASSWORD = "admin";
 
 	/**
 	 * @throws java.lang.Exception
@@ -67,14 +71,15 @@ public class AdminCategoriesTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testAdd() {
-		String title = "hello";
+		String title = "New Category";
 		String description = "Description";
 		String color = "#00000";
-		CategoryFields fields = new CategoryFields(0, title, description,
-				color, null);
+		int parentId = 0;
 
-		assetNotNullOrZero("Add a report cannot fail ", task.add(fields)
-				.getErrorCode());
+		CategoryFields fields = new CategoryFields(parentId, title,
+				description, color);
+		Response response = task.add(fields);
+		assetNotNullOrZero(response.getErrorMessage(), response.getErrorCode());
 	}
 
 	/**
@@ -82,18 +87,21 @@ public class AdminCategoriesTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testEdit() {
-		String title = "hello";
+		String title = "hello 3";
 		String description = "Description";
 		String color = "#00000";
-		CategoryFields fields = new CategoryFields(1, title, description,
-				color, null);
-		assetNotNullOrZero("Delete a report cannot fail ", task.edit(fields)
-				.getErrorCode());
+		FileBody fileBody = new FileBody(new File(
+				"/home/eyedol/Pictures/google_wave.jpg"));
+		CategoryFields fields = new CategoryFields(1, 0, title, description,
+				color, fileBody);
+		Response response = task.edit(fields);
+
+		assetNotNullOrZero(response.getErrorMessage(), response.getErrorCode());
 	}
 
 	@Test
 	public void testDelete() {
-		assetNotNullOrZero("Delete a report cannot fail ",
-				task.delete(REPORT_ID).getErrorCode());
+		Response response = task.delete(REPORT_ID);
+		assetNotNullOrZero(response.getErrorMessage(), response.getErrorCode());
 	}
 }

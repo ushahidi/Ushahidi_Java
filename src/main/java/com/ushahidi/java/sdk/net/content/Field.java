@@ -39,10 +39,6 @@ public class Field {
 			throw new IllegalArgumentException("Name may not be null");
 		}
 
-		if (value == null) {
-			throw new IllegalArgumentException("Value may not be null");
-		}
-
 		this.name = name;
 		this.value = value;
 	}
