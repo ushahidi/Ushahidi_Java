@@ -20,7 +20,6 @@
 package com.ushahidi.java.sdk.api.tasks;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.ushahidi.java.sdk.net.UshahidiHttpClient;
 
 /**
@@ -29,7 +28,7 @@ import com.ushahidi.java.sdk.net.UshahidiHttpClient;
  */
 public abstract class BaseTask extends UshahidiHttpClient {
 
-	private static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	private static Gson gson = new Gson();
 
 	/** The HTTP client */
 	protected final UshahidiHttpClient client;

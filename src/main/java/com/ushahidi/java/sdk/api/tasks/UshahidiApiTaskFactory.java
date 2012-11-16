@@ -110,4 +110,21 @@ public class UshahidiApiTaskFactory {
 	public TagNewsTask createTagNewsTask() {
 		return new TagNewsTask(url);
 	}
+
+	/**
+	 * Create the tag video task object
+	 * 
+	 * @return The tag video task
+	 */
+	public TagVideoTask createTagVideoTask() {
+		return new TagVideoTask(url);
+	}
+
+	/**
+	 * Create admin category object
+	 */
+	public AdminCategoriesTask createAdminCategoriesTask(String username,
+			String password) {
+		return new AdminCategoriesTask(url, username, password);
+	}
 }

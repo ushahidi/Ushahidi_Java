@@ -40,6 +40,7 @@ import java.util.zip.GZIPInputStream;
 import com.ushahidi.java.sdk.UshahidiException;
 import com.ushahidi.java.sdk.net.content.Body;
 import com.ushahidi.java.sdk.net.content.Field;
+import com.ushahidi.java.sdk.net.content.FileBody;
 
 /**
  * This is a custom implementation of an HTTP client based on the existing
@@ -480,8 +481,11 @@ public abstract class BaseUshahidiHttpClient {
 					output.write(newline);
 					output.write(newline);
 					final Object value = field.getValue();
-					if (value instanceof InputStream) {
-						InputStream input = (InputStream) value;
+
+					// Get file to be uploaded
+					if (value instanceof FileBody) {
+						FileBody fileBody = (FileBody) value;
+						InputStream input = fileBody.getInputStream();
 						int read;
 						while ((read = input.read(buffer)) != -1)
 							output.write(buffer, 0, read);
