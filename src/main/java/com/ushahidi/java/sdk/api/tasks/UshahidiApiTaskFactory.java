@@ -120,12 +120,4 @@ public class UshahidiApiTaskFactory {
 		return new TagVideoTask(url);
 	}
 
-	/**
-	 * Create admin category object
-	 * 
-	 * @return The admin categories task
-	 */
-	public AdminCategoriesTask createAdminCategoriesTask() {
-		return new AdminCategoriesTask(url);
-	}
 }

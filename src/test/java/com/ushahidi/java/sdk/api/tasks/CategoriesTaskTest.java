@@ -19,6 +19,7 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.tasks;
 
+import java.io.File;
 import java.util.List;
 
 import org.junit.After;
@@ -26,6 +27,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.ushahidi.java.sdk.api.Category;
+import com.ushahidi.java.sdk.api.CategoryFields;
+import com.ushahidi.java.sdk.api.json.Response;
+import com.ushahidi.java.sdk.net.content.FileBody;
 
 /**
  * This class tests Ushahidi API categories task
@@ -40,6 +44,13 @@ public class CategoriesTaskTest extends BaseTaskTest {
 
 	/** The default category ID used in testing */
 	private static final int CAT_ID = 1;
+	
+	/** The default category ID to use in testing category delete task */
+	private static final int CATEGORY_ID = 68;
+
+	private static final String USERNAME = "admin";
+
+	private static final String PASSWORD = "admin";
 
 	@Before
 	public void setUp() throws Exception {
@@ -65,7 +76,7 @@ public class CategoriesTaskTest extends BaseTaskTest {
 	}
 
 	/**
-	 * Test method for
+	 * Test method for fetching a category by it's ID
 	 * {@link com.ushahidi.java.sdk.api.tasks.CategoriesTask#catId(int)}.
 	 */
 	@Test
@@ -73,6 +84,53 @@ public class CategoriesTaskTest extends BaseTaskTest {
 		Category category = task.catId(CAT_ID);
 		assertNotNull("Category cannot be null ", category);
 
+	}
+
+	/**
+	 * Test method for Add a new category
+	 * {@link com.ushahidi.java.sdk.api.tasks.CommentsTask#all()}.
+	 */
+	@Test
+	public void testAdd() {
+		String title = "New Category 2";
+		String description = "Description";
+		String color = "00ccff";
+		int parentId = 0;
+		FileBody fileBody = new FileBody(new File(
+				"/home/eyedol/Pictures/maputo.jpg"));
+		CategoryFields fields = new CategoryFields(0, parentId, title,
+				description, color, fileBody);
+		task.setAuthentication(USERNAME, PASSWORD);
+		Response response = task.add(fields);
+		assetNotNullOrZero(response.getErrorMessage(), response.getErrorCode());
+	}
+
+	/**
+	 * Test Edit category
+	 */
+	@Test
+	public void testEdit() {
+		String title = "Category Edited";
+		String description = "Description Edited";
+		String color = "000000";
+		FileBody fileBody = new FileBody(new File(
+				"/home/eyedol/Pictures/maputo.jpg"));
+		CategoryFields fields = new CategoryFields(11, 0, title, description,
+				color, fileBody);
+		task.setAuthentication(USERNAME, PASSWORD);
+		Response response = task.edit(fields);
+		System.out.println(response.getErrorMessage());
+		assetNotNullOrZero(response.getErrorMessage(), response.getErrorCode());
+	}
+
+	/**
+	 * Test delete category
+	 */
+	@Test
+	public void testDelete() {
+		task.setAuthentication(USERNAME, PASSWORD);
+		Response response = task.delete(CATEGORY_ID);
+		assetNotNullOrZero(response.getErrorMessage(), response.getErrorCode());
 	}
 
 }
