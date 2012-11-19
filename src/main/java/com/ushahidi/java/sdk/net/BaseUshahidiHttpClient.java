@@ -539,7 +539,7 @@ public abstract class BaseUshahidiHttpClient {
 					.getBytes(CHARSET_UTF8);
 			byte[] newline = "\r\n".getBytes(CHARSET_UTF8);
 
-			// process get request parameters if we have them
+			// process request parameters if we have them
 			if (!requestParameters.isEmpty() && requestParameters != null) {
 				for (Iterator<Map.Entry<String, String>> iterator = requestParameters
 						.entrySet().iterator(); iterator.hasNext();) {
