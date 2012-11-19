@@ -66,27 +66,44 @@ public class ReportFields extends Form {
 		longitude = String.valueOf(i.getLongitude());
 	}
 
+	public void addCategory(List<Category> cats) {
+		for (Category cat : cats) {
+			addCategory(cat.getId());
+		}
+	}
+
 	public void addCategory(int id) {
 		String idStr = String.valueOf(id);
 		category = null == category ? idStr : category + "," + idStr;
 	}
-	
-	public void addVideo(String...urls){
+
+	public void addVideo(String... urls) {
 		video.addAll(Arrays.asList(urls));
 	}
-	
-	public void addNews(String...urls){
-		news.addAll(Arrays.asList(urls));	
+
+	public void addVideo(List<String> urls) {
+		video.addAll(urls);
 	}
 
-	public void setPerson(String first, String last, String email) {
-		firstName = first;
-		lastName = last;
-		this.email = email;
+	public void addNews(String... urls) {
+		news.addAll(Arrays.asList(urls));
+	}
+
+	public void addNews(List<String> urls) {
+		news.addAll(urls);
+	}
+
+	public void setPerson(Person p) {
+		firstName = p.getFirstName();
+		lastName = p.getLastName();
+		email = p.getEmail();
 	}
 
 	public void addPhotos(File... photos) {
 		photo.addAll(Arrays.asList(photos));
 	}
 
+	public void addPhotos(List<File> photos) {
+		photo.addAll(photos);
+	}
 }

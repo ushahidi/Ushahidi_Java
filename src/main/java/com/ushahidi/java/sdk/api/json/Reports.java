@@ -19,6 +19,7 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.json;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ushahidi.java.sdk.api.Category;
@@ -55,6 +56,14 @@ public class Reports extends Response {
 			public List<Media> media;
 
 			public List<Incidents._Comment> comments;
+
+			public List<Category> getCategories() {
+				ArrayList<Category> ret = new ArrayList<Category>();
+				for (_Categories c : categories) {
+					ret.add(c.category);
+				}
+				return ret;
+			}
 
 		}
 

@@ -20,8 +20,12 @@
 package com.ushahidi.java.sdk.api.tasks;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
+import com.ushahidi.java.sdk.api.Category;
+import com.ushahidi.java.sdk.api.Incident;
+import com.ushahidi.java.sdk.api.Person;
 import com.ushahidi.java.sdk.api.ReportFields;
 import com.ushahidi.java.sdk.api.json.Reports;
 import com.ushahidi.java.sdk.api.json.Reports.Payload.Incidents;
@@ -196,25 +200,50 @@ public class ReportsTask extends BaseTask {
 		return resp.getErrorCode() == 0;
 	}
 
-	public boolean admin(int id, String action) {
-		Body body = new Body();
+	private Body adminBody(int id, String action, Body body) {
 		body.addField("task", "reports");
 		body.addField("action", action);
 		body.addField("incident_id", String.valueOf(id));
-		Response resp = fromString(this.client.sendPostRequest(url, body),
-				Response.class);
-		return resp.getErrorCode() == 0;
+		return body;
 	}
 
-	public boolean delete(int id) {
+	private Response admin(int id, String action) {
+		Body body = adminBody(id, action, new Body());
+		return fromString(this.client.sendPostRequest(url, body),
+				Response.class);
+
+	}
+
+	public Response delete(int id) {
 		return admin(id, "delete");
 	}
 
-	public boolean verify(int id) {
+	public Response verify(int id) {
 		return admin(id, "verify");
 	}
 
-	public boolean approve(int id) {
+	public Response approve(int id) {
 		return admin(id, "approve");
+	}
+
+	public Response edit(Incident i, List<Category> c, Person p,
+			List<String> news, List<String> video) {
+		ReportFields reportFields = new ReportFields();
+		reportFields.fill(i);
+		reportFields.addCategory(c);
+		if (p != null)
+			reportFields.setPerson(p);
+		if (news != null)
+			reportFields.addNews(news);
+		if (video != null)
+			reportFields.addVideo(video);
+		Body body = adminBody(i.getId(), "edit",
+				reportFields.getParameters(reportFields));
+
+		// workaround for 2.1
+		body.addField("incident_verified", i.getVerified());
+		body.addField("incident_active", i.getActive());
+		return fromString(client.sendMultipartPostRequest(url, body),
+				Response.class);
 	}
 }
