@@ -609,11 +609,12 @@ public abstract class BaseUshahidiHttpClient {
 						output.write(newline);
 						output.write(newline);
 
-						//fileBody.writeTo(output);
-						InputStream input = fileBody.getInputStream();
+						fileBody.writeTo(output);
+						//TODO remove this code
+						/**InputStream input = fileBody.getInputStream();
 						
 						 int read; while ((read = input.read(buffer)) != -1) {
-						 output.write(buffer, 0, read); } input.close();
+						 output.write(buffer, 0, read); } input.close();*/
 						 
 					} else {
 						// don't write null fields
