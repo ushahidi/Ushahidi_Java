@@ -28,6 +28,7 @@ import com.ushahidi.java.sdk.api.json.Reports.Payload.Incidents;
 import com.ushahidi.java.sdk.api.json.Response;
 import com.ushahidi.java.sdk.net.content.Body;
 
+
 /**
  * The ReportsTask implements all the task related to Reports task.
  * 
@@ -195,4 +196,25 @@ public class ReportsTask extends BaseTask {
 		return resp.getErrorCode() == 0;
 	}
 
+	public boolean admin(int id, String action) {
+		Body body = new Body();
+		body.addField("task", "reports");
+		body.addField("action", action);
+		body.addField("incident_id", String.valueOf(id));
+		Response resp = fromString(this.client.sendPostRequest(url, body),
+				Response.class);
+		return resp.getErrorCode() == 0;
+	}
+
+	public boolean delete(int id) {
+		return admin(id, "delete");
+	}
+
+	public boolean verify(int id) {
+		return admin(id, "verify");
+	}
+
+	public boolean approve(int id) {
+		return admin(id, "approve");
+	}
 }
