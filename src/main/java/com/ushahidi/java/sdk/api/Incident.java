@@ -80,7 +80,7 @@ public class Incident {
 	/**
 	 * The location name
 	 */
-	@SerializedName("locationame")
+	@SerializedName("locationname")
 	private String locationname;
 
 	/**
