@@ -37,7 +37,7 @@ public class UshahidiHttpClient extends BaseUshahidiHttpClient {
 	private static final String USER_AGENT = "Ushahidi-Java/1.0.0";
 
 	/** The user agent to use */
-	private String userAgent;
+	private String userAgent = null;
 
 	public UshahidiHttpClient() {
 		requestHeaders.put("Accept-Encoding", "gzip, deflate");
@@ -83,7 +83,7 @@ public class UshahidiHttpClient extends BaseUshahidiHttpClient {
 	public String sendGetRequest(String url) {
 		InputStream inputStream = null;
 		try {
-			addRequestHeader("User-Agent:", getUserAgent());
+			addRequestHeader("User-Agent", getUserAgent());
 			inputStream = getRequest(url);
 
 			if (inputStream != null) {
@@ -115,7 +115,7 @@ public class UshahidiHttpClient extends BaseUshahidiHttpClient {
 	public String sendPostRequest(String url, Body body) {
 		InputStream inputStream = null;
 		try {
-			addRequestHeader("User-Agent:", getUserAgent());
+			addRequestHeader("User-Agent", getUserAgent());
 			inputStream = postRequest(url, body);
 
 			if (inputStream != null) {
@@ -145,7 +145,7 @@ public class UshahidiHttpClient extends BaseUshahidiHttpClient {
 	public String sendPostRequest(String url) {
 		InputStream inputStream = null;
 		try {
-			addRequestHeader("User-Agent:", getUserAgent());
+			addRequestHeader("User-Agent", getUserAgent());
 			inputStream = postRequest(url);
 
 			if (inputStream != null) {
@@ -177,7 +177,8 @@ public class UshahidiHttpClient extends BaseUshahidiHttpClient {
 	public String sendMultipartPostRequest(String url, Body body) {
 		InputStream inputStream = null;
 		try {
-			addRequestHeader("User-Agent:", getUserAgent());
+			addRequestHeader("User-Agent", getUserAgent());
+			addRequestHeader("Connection", "Keep-Alive");
 			inputStream = postMultipartRequest(url, body);
 
 			if (inputStream != null) {
