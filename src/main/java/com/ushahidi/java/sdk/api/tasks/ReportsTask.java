@@ -192,12 +192,11 @@ public class ReportsTask extends BaseTask {
 				.getPayload().incidents;
 	}
 
-	public boolean submit(ReportFields report) {
+	public Response submit(ReportFields report) {
 		Body body = report.getParameters(report);
 		body.addField("task", "report");
-		Response resp = fromString(client.sendMultipartPostRequest(url, body),
+		return fromString(client.sendMultipartPostRequest(url, body),
 				Response.class);
-		return resp.getErrorCode() == 0;
 	}
 
 	private Body adminBody(int id, String action, Body body) {
