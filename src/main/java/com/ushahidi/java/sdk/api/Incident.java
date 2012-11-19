@@ -22,6 +22,7 @@ package com.ushahidi.java.sdk.api;
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -299,7 +300,7 @@ public class Incident {
 	public static class DateDeserializer implements JsonDeserializer<Date> {
 
 		private static final SimpleDateFormat PARSER = new SimpleDateFormat(
-				"yyyy-MM-dd HH:mm:ss");
+				"yyyy-MM-dd HH:mm:ss", Locale.US);
 
 		@Override
 		public Incident.Date deserialize(JsonElement arg0, Type arg1,
