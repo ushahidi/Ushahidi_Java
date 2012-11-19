@@ -22,8 +22,11 @@ package com.ushahidi.java.sdk.api.tasks;
 import java.io.IOException;
 import java.util.List;
 
+import com.ushahidi.java.sdk.api.ReportFields;
 import com.ushahidi.java.sdk.api.json.Reports;
 import com.ushahidi.java.sdk.api.json.Reports.Payload.Incidents;
+import com.ushahidi.java.sdk.api.json.Response;
+import com.ushahidi.java.sdk.net.content.Body;
 
 /**
  * The ReportsTask implements all the task related to Reports task.
@@ -182,6 +185,14 @@ public class ReportsTask extends BaseTask {
 		client.setRequestParameters("id", String.valueOf(id));
 		return fromString(client.sendGetRequest(url), Reports.class)
 				.getPayload().incidents;
+	}
+
+	public boolean submit(ReportFields report) {
+		Body body = report.getParameters(report);
+		body.addField("task", "report");
+		Response resp = fromString(client.sendMultipartPostRequest(url, body),
+				Response.class);
+		return resp.getErrorCode() == 0;
 	}
 
 }

@@ -19,6 +19,7 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.net.content;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,8 +47,23 @@ public class Body {
 	 *            The form field value
 	 */
 	public void addField(String name, Object value) {
-		Field field = new Field(name, value);
-		formField.add(field);
+		if ( value == null){
+			return;
+		}
+		List<Object> list ;
+		if (!( value instanceof List)){
+			list = new ArrayList<Object>();
+			list.add(value);
+		}else{
+			list = (List<Object>) value;
+		}
+		for (Object o : list) {
+			if ( o instanceof File){
+				o = new FileBody((File)o);
+			}
+			Field field = new Field(name, o);
+			formField.add(field);
+		}
 	}
 
 	/**

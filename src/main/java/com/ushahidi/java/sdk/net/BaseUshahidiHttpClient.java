@@ -541,15 +541,20 @@ public abstract class BaseUshahidiHttpClient {
 			try {
 				for (Field field : body.getFields()) {
 					output.write(boundarySeparator);
+					final Object value = field.getValue();
 					StringBuilder partBuffer = new StringBuilder(
 							"Content-Disposition: ");
 					partBuffer.append("form-data; name=\"");
 					partBuffer.append(field.getName());
 					partBuffer.append('"');
+					if (value instanceof FileBody) {
+						FileBody fileBody = (FileBody) value;
+						partBuffer.append("; filename=\"")
+								.append(fileBody.getFilename()).append('"');
+					}
 					output.write(partBuffer.toString().getBytes(CHARSET_UTF8));
 					output.write(newline);
 					output.write(newline);
-					final Object value = field.getValue();
 
 					// Get file to be uploaded
 					if (value instanceof FileBody) {

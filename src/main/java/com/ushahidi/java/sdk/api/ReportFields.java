@@ -78,11 +78,15 @@ public class ReportFields extends Form {
 	public void addNews(String...urls){
 		news.addAll(Arrays.asList(urls));	
 	}
-	
-	public void setPerson(String first, String last, String email){
+
+	public void setPerson(String first, String last, String email) {
 		firstName = first;
 		lastName = last;
 		this.email = email;
+	}
+
+	public void addPhotos(File... photos) {
+		photo.addAll(Arrays.asList(photos));
 	}
 
 }
