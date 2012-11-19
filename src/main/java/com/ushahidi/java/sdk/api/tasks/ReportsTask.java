@@ -20,10 +20,18 @@
 package com.ushahidi.java.sdk.api.tasks;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
+import com.ushahidi.java.sdk.api.Category;
+import com.ushahidi.java.sdk.api.Incident;
+import com.ushahidi.java.sdk.api.Person;
+import com.ushahidi.java.sdk.api.ReportFields;
 import com.ushahidi.java.sdk.api.json.Reports;
 import com.ushahidi.java.sdk.api.json.Reports.Payload.Incidents;
+import com.ushahidi.java.sdk.api.json.Response;
+import com.ushahidi.java.sdk.net.content.Body;
+
 
 /**
  * The ReportsTask implements all the task related to Reports task.
@@ -184,4 +192,57 @@ public class ReportsTask extends BaseTask {
 				.getPayload().incidents;
 	}
 
+	public Response submit(ReportFields report) {
+		Body body = report.getParameters(report);
+		body.addField("task", "report");
+		return fromString(client.sendMultipartPostRequest(url, body),
+				Response.class);
+	}
+
+	private Body adminBody(int id, String action, Body body) {
+		body.addField("task", "reports");
+		body.addField("action", action);
+		body.addField("incident_id", String.valueOf(id));
+		return body;
+	}
+
+	private Response admin(int id, String action) {
+		Body body = adminBody(id, action, new Body());
+		return fromString(this.client.sendPostRequest(url, body),
+				Response.class);
+
+	}
+
+	public Response delete(int id) {
+		return admin(id, "delete");
+	}
+
+	public Response verify(int id) {
+		return admin(id, "verify");
+	}
+
+	public Response approve(int id) {
+		return admin(id, "approve");
+	}
+
+	public Response edit(Incident i, List<Category> c, Person p,
+			List<String> news, List<String> video) {
+		ReportFields reportFields = new ReportFields();
+		reportFields.fill(i);
+		reportFields.addCategory(c);
+		if (p != null)
+			reportFields.setPerson(p);
+		if (news != null)
+			reportFields.addNews(news);
+		if (video != null)
+			reportFields.addVideo(video);
+		Body body = adminBody(i.getId(), "edit",
+				reportFields.getParameters(reportFields));
+
+		// workaround for 2.1
+		body.addField("incident_verified", i.getVerified());
+		body.addField("incident_active", i.getActive());
+		return fromString(client.sendMultipartPostRequest(url, body),
+				Response.class);
+	}
 }

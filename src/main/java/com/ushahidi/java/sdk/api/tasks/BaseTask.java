@@ -20,6 +20,8 @@
 package com.ushahidi.java.sdk.api.tasks;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.ushahidi.java.sdk.api.Incident;
 import com.ushahidi.java.sdk.net.Authentication;
 import com.ushahidi.java.sdk.net.PasswordAuthentication;
 import com.ushahidi.java.sdk.net.UshahidiHttpClient;
@@ -30,7 +32,13 @@ import com.ushahidi.java.sdk.net.UshahidiHttpClient;
  */
 public abstract class BaseTask extends UshahidiHttpClient {
 
-	private static Gson gson = new Gson();
+	private static Gson gson;
+	static {
+		GsonBuilder builder = new GsonBuilder();
+		builder.registerTypeAdapter(Incident.Date.class,
+				new Incident.DateDeserializer());
+		gson = builder.create();
+	}
 
 	/** The HTTP client */
 	protected final UshahidiHttpClient client;
