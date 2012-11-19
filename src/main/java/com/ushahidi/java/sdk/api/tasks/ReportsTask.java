@@ -19,8 +19,6 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.tasks;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import com.ushahidi.java.sdk.api.Category;
@@ -31,7 +29,6 @@ import com.ushahidi.java.sdk.api.json.Reports;
 import com.ushahidi.java.sdk.api.json.Reports.Payload.Incidents;
 import com.ushahidi.java.sdk.api.json.Response;
 import com.ushahidi.java.sdk.net.content.Body;
-
 
 /**
  * The ReportsTask implements all the task related to Reports task.
@@ -180,9 +177,6 @@ public class ReportsTask extends BaseTask {
 	 * @param id
 	 *            The category ID
 	 * @return The reports retrieved.
-	 * 
-	 * @throws IOException
-	 * @throws JSONException
 	 */
 	public List<Incidents> categoryId(int id) {
 
@@ -192,6 +186,13 @@ public class ReportsTask extends BaseTask {
 				.getPayload().incidents;
 	}
 
+	/**
+	 * Submit a new report
+	 * 
+	 * @param report
+	 *            The report fields to be submitted
+	 * @return The response received from the server
+	 */
 	public Response submit(ReportFields report) {
 		Body body = report.getParameters(report);
 		body.addField("task", "report");
@@ -199,6 +200,17 @@ public class ReportsTask extends BaseTask {
 				Response.class);
 	}
 
+	/**
+	 * Construct the content to be passed via the admin API calls
+	 * 
+	 * @param id
+	 *            The reports ID
+	 * @param action
+	 *            The action be performed
+	 * @param body
+	 *            The content to be submitted.
+	 * @return
+	 */
 	private Body adminBody(int id, String action, Body body) {
 		body.addField("task", "reports");
 		body.addField("action", action);
@@ -206,6 +218,15 @@ public class ReportsTask extends BaseTask {
 		return body;
 	}
 
+	/**
+	 * Make the HTTP post request
+	 * 
+	 * @param id
+	 *            The reports ID
+	 * @param action
+	 *            The action be performed
+	 * @return
+	 */
 	private Response admin(int id, String action) {
 		Body body = adminBody(id, action, new Body());
 		return fromString(this.client.sendPostRequest(url, body),
@@ -213,18 +234,56 @@ public class ReportsTask extends BaseTask {
 
 	}
 
+	/**
+	 * Delete an existing report.
+	 * 
+	 * @param id
+	 *            The ID of the report to be deleted
+	 * @return The response received from the server
+	 */
 	public Response delete(int id) {
 		return admin(id, "delete");
 	}
 
+	/**
+	 * Verify a report.
+	 * 
+	 * @param id
+	 *            The ID of the report to be verified
+	 * @return The response received from the server
+	 */
 	public Response verify(int id) {
 		return admin(id, "verify");
 	}
 
+	/**
+	 * Approve pending reports. Requires authentication.
+	 * 
+	 * @param id
+	 *            The ID of the pending report
+	 * @return The response received from the API call.
+	 */
 	public Response approve(int id) {
 		return admin(id, "approve");
 	}
 
+	/**
+	 * Edit an existing report. This method requires authentication. Set
+	 * {@link #setAuthentication(String, String)} or set {@link #getClient()
+	 * .setAuthentication()}
+	 * 
+	 * @param i
+	 *            The incident
+	 * @param c
+	 *            The categories
+	 * @param p
+	 *            Personal information
+	 * @param news
+	 *            Attach news article
+	 * @param video
+	 *            Attach video article
+	 * @return The response received from the API call
+	 */
 	public Response edit(Incident i, List<Category> c, Person p,
 			List<String> news, List<String> video) {
 		ReportFields reportFields = new ReportFields();

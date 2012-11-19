@@ -533,7 +533,6 @@ public abstract class BaseUshahidiHttpClient {
 
 			BufferedOutputStream output = new BufferedOutputStream(
 					request.getOutputStream());
-			byte[] buffer = new byte[8192];
 			byte[] boundarySeparator = ("--" + boundary + "\r\n")
 					.getBytes(CHARSET_UTF8);
 			byte[] newline = "\r\n".getBytes(CHARSET_UTF8);
@@ -564,7 +563,7 @@ public abstract class BaseUshahidiHttpClient {
 
 			}
 
-			// process fields names
+			// process field names
 			try {
 				for (Field field : body.getFields()) {
 					output.write(boundarySeparator);
@@ -587,12 +586,7 @@ public abstract class BaseUshahidiHttpClient {
 					if (value instanceof FileBody) {
 						FileBody fileBody = (FileBody) value;
 						fileBody.writeTo(output);
-						//TODO remove this code
-						/**InputStream input = fileBody.getInputStream();
-						
-						 int read; while ((read = input.read(buffer)) != -1) {
-						 output.write(buffer, 0, read); } input.close();*/
-						 
+
 					} else {
 						// don't write null fields
 						if (field.getValue() != null) {
