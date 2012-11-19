@@ -37,8 +37,8 @@ public class AdminCategoriesTaskTest extends BaseTaskTest {
 	/** The admin categories task **/
 	private AdminCategoriesTask task;
 
-	/** The default report ID to use in testing */
-	private static final int REPORT_ID = 68;
+	/** The default category ID to use in testing category delete task */
+	private static final int CATEGORY_ID = 68;
 
 	private static final String USERNAME = "admin";
 
@@ -71,13 +71,14 @@ public class AdminCategoriesTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testAdd() {
-		String title = "New Category";
+		String title = "New Category 2";
 		String description = "Description";
-		String color = "#00000";
+		String color = "00ccff";
 		int parentId = 0;
-
-		CategoryFields fields = new CategoryFields(parentId, title,
-				description, color);
+		FileBody fileBody = new FileBody(new File(
+				"/home/eyedol/Pictures/maputo.jpg"));
+		CategoryFields fields = new CategoryFields(0,parentId, title,
+				description, color,fileBody);
 		Response response = task.add(fields);
 		assetNotNullOrZero(response.getErrorMessage(), response.getErrorCode());
 	}
@@ -87,21 +88,22 @@ public class AdminCategoriesTaskTest extends BaseTaskTest {
 	 */
 	@Test
 	public void testEdit() {
-		String title = "hello 3";
-		String description = "Description";
-		String color = "#00000";
+		String title = "Category Edited";
+		String description = "Description Edited";
+		String color = "000000";
 		FileBody fileBody = new FileBody(new File(
-				"/home/eyedol/Pictures/google_wave.jpg"));
-		CategoryFields fields = new CategoryFields(1, 0, title, description,
+				"/home/eyedol/Pictures/maputo.jpg"));
+		CategoryFields fields = new CategoryFields(11, 0, title, description,
 				color, fileBody);
+		
 		Response response = task.edit(fields);
-
+		System.out.println(response.getErrorMessage());
 		assetNotNullOrZero(response.getErrorMessage(), response.getErrorCode());
 	}
 
-	@Test
-	public void testDelete() {
-		Response response = task.delete(REPORT_ID);
-		assetNotNullOrZero(response.getErrorMessage(), response.getErrorCode());
-	}
+	/*
+	 * @Test public void testDelete() { Response response =
+	 * task.delete(REPORT_ID); assetNotNullOrZero(response.getErrorMessage(),
+	 * response.getErrorCode()); }
+	 */
 }

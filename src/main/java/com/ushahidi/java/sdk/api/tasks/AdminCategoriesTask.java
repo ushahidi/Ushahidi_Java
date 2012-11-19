@@ -50,8 +50,21 @@ public class AdminCategoriesTask extends BaseTask {
 	public Response add(CategoryFields fields) {
 		client.setRequestParameters("action", "add");
 		return fromString(
-				client.sendPostRequest(url, fields.getParameters(fields)),
-				Response.class);
+				client.sendMultipartPostRequest(url,
+						fields.getParameters(fields)), Response.class);
+	}
+
+	/**
+	 * Edit an existing category. Requires authentication
+	 * 
+	 * @param fields
+	 * @return
+	 */
+	public Response edit(CategoryFields fields) {
+		client.setRequestParameters("action", "edit");
+		return fromString(
+				client.sendMultipartPostRequest(url,
+						fields.getParameters(fields)), Response.class);
 	}
 
 	/**
@@ -68,19 +81,6 @@ public class AdminCategoriesTask extends BaseTask {
 		client.setRequestParameters("action", "delete");
 		client.setRequestParameters("category_id", String.valueOf(id));
 		return fromString(client.sendPostRequest(url), Response.class);
-	}
-
-	/**
-	 * Edit an existing category. Requires authentication
-	 * 
-	 * @param fields
-	 * @return
-	 */
-	public Response edit(CategoryFields fields) {
-		client.setRequestParameters("action", "edit");
-		return fromString(
-				client.sendPostRequest(url, fields.getParameters(fields)),
-				Response.class);
 	}
 
 }

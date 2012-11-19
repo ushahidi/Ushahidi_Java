@@ -29,6 +29,7 @@ import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -515,19 +516,18 @@ public abstract class BaseUshahidiHttpClient {
 	protected InputStream postMultipartRequest(String apiUrl, Body body,
 			int expected) {
 		try {
+
 			URL url = new URL(apiUrl);
 			HttpURLConnection request = (HttpURLConnection) url
 					.openConnection();
 			String boundary = "00content0boundary00";
 			request.setConnectTimeout(getConnectionTimeout());
 			request.setReadTimeout(getSocketTimeout());
-
 			for (String headerName : requestHeaders.keySet()) {
 				request.setRequestProperty(headerName,
 						requestHeaders.get(headerName));
 			}
 
-			request.setRequestMethod("POST");
 			request.setRequestProperty("Content-Type",
 					"multipart/form-data; boundary=" + boundary);
 			request.setDoOutput(true);
@@ -538,6 +538,34 @@ public abstract class BaseUshahidiHttpClient {
 			byte[] boundarySeparator = ("--" + boundary + "\r\n")
 					.getBytes(CHARSET_UTF8);
 			byte[] newline = "\r\n".getBytes(CHARSET_UTF8);
+
+			// process get request parameters if we have them
+			if (!requestParameters.isEmpty() && requestParameters != null) {
+				for (Iterator<Map.Entry<String, String>> iterator = requestParameters
+						.entrySet().iterator(); iterator.hasNext();) {
+
+					Map.Entry<String, String> entry = iterator.next();
+
+					output.write(boundarySeparator);
+					StringBuilder partBuffer = new StringBuilder(
+							"Content-Disposition: ");
+					partBuffer.append("form-data; name=\"");
+					partBuffer.append(entry.getKey());
+					partBuffer.append('"');
+					output.write(partBuffer.toString().getBytes(CHARSET_UTF8));
+					output.write(newline);
+					output.write(newline);
+
+					output.write(entry.getValue().toString()
+							.getBytes(CHARSET_UTF8));
+
+					output.write(newline);
+
+				}
+
+			}
+
+			// process fields names
 			try {
 				for (Field field : body.getFields()) {
 					output.write(boundarySeparator);
@@ -554,14 +582,46 @@ public abstract class BaseUshahidiHttpClient {
 					// Get file to be uploaded
 					if (value instanceof FileBody) {
 						FileBody fileBody = (FileBody) value;
+						output.write(boundarySeparator);
+						StringBuilder partsBuffer = new StringBuilder(
+								"filename=\"");
+						partsBuffer.append(fileBody.getFilename());
+						partsBuffer.append('"');
+						output.write(partsBuffer.toString().getBytes(
+								CHARSET_UTF8));
+						output.write(newline);
+						output.write(newline);
+
+						StringBuilder cBuffer = new StringBuilder(
+								"Content-Type: ");
+
+						cBuffer.append(URLConnection
+								.guessContentTypeFromName(fileBody
+										.getFilename()));
+						output.write(cBuffer.toString().getBytes(CHARSET_UTF8));
+						output.write(newline);
+						output.write(newline);
+
+						StringBuilder tBuffer = new StringBuilder(
+								"Content-Transfer-Encoding: binary");
+
+						output.write(tBuffer.toString().getBytes(CHARSET_UTF8));
+						output.write(newline);
+						output.write(newline);
+
+						//fileBody.writeTo(output);
 						InputStream input = fileBody.getInputStream();
-						int read;
-						while ((read = input.read(buffer)) != -1)
-							output.write(buffer, 0, read);
-						input.close();
-					} else
-						output.write(field.getValue().toString()
-								.getBytes(CHARSET_UTF8));
+						
+						 int read; while ((read = input.read(buffer)) != -1) {
+						 output.write(buffer, 0, read); } input.close();
+						 
+					} else {
+						// don't write null fields
+						if (field.getValue() != null) {
+							output.write(field.getValue().toString()
+									.getBytes(CHARSET_UTF8));
+						}
+					}
 					output.write(newline);
 				}
 				output.write(("--" + boundary + "--\r\n").getBytes(CHARSET_UTF8)); //$NON-NLS-1$ //$NON-NLS-2$

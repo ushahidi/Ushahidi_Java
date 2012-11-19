@@ -19,10 +19,12 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.net.content;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 /**
  * Encapsulates the file to be uploaded
@@ -103,6 +105,23 @@ public class FileBody {
 	 */
 	public InputStream getInputStream() throws IOException {
 		return new FileInputStream(this.file);
+	}
+
+	public void writeTo(final BufferedOutputStream out) throws IOException {
+		if (out == null) {
+			throw new IllegalArgumentException("Output stream may not be null");
+		}
+		InputStream in = new FileInputStream(this.file);
+		try {
+			byte[] buffer = new byte[8192];
+			int read;
+			while ((read = in.read(buffer)) != -1) {
+				out.write(buffer, 0, read);
+			}
+			in.close();
+		} finally {
+			in.close();
+		}
 	}
 
 	public String getCharset() {

@@ -76,7 +76,7 @@ public class CategoryFields extends Form {
 	 * @param description
 	 *            The category's description
 	 * @param color
-	 *            The hex color code. eg. #000000
+	 *            The hex color code. eg. 000000
 	 * @param icon
 	 *            The category icon
 	 */
@@ -101,7 +101,7 @@ public class CategoryFields extends Form {
 	 * @param description
 	 *            The category's description
 	 * @param color
-	 *            The hex color code. eg. #000000
+	 *            The hex color code. eg. 000000
 	 * @param icon
 	 *            The category icon
 	 */
@@ -123,7 +123,7 @@ public class CategoryFields extends Form {
 	 * @param description
 	 *            The category's description
 	 * @param color
-	 *            The hex color code. eg. #000000
+	 *            The hex color code. eg. 000000
 	 */
 	public CategoryFields(int id, int parentId, String title,
 			String description, String color) {

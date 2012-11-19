@@ -42,7 +42,7 @@ public class BaseTaskTest extends TestCase {
 	protected UshahidiApiTaskFactory factory;
 
 	/** Use the Ushahidi demo deployment to test */
-	private static final String DEMO_DEPLOYMENT = "http://demo.ushahidi.com";
+	private static final String DEMO_DEPLOYMENT = "http://localhost/develop";
 
 	/** Test username */
 	protected static final String USERNAME = "admin";
@@ -96,6 +96,6 @@ public class BaseTaskTest extends TestCase {
 
 	protected static void assetNotNullOrZero(String message, int value) {
 		assertNotNull(message, value);
-		assertFalse(message, (value > 0));
+		assertEquals(message, 0, value );
 	}
 }
