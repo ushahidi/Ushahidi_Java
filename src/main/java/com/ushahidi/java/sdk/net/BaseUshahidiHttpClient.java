@@ -29,7 +29,6 @@ import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -569,46 +568,24 @@ public abstract class BaseUshahidiHttpClient {
 			try {
 				for (Field field : body.getFields()) {
 					output.write(boundarySeparator);
+					final Object value = field.getValue();
 					StringBuilder partBuffer = new StringBuilder(
 							"Content-Disposition: ");
 					partBuffer.append("form-data; name=\"");
 					partBuffer.append(field.getName());
 					partBuffer.append('"');
+					if (value instanceof FileBody) {
+						FileBody fileBody = (FileBody) value;
+						partBuffer.append("; filename=\"")
+								.append(fileBody.getFilename()).append('"');
+					}
 					output.write(partBuffer.toString().getBytes(CHARSET_UTF8));
 					output.write(newline);
 					output.write(newline);
-					final Object value = field.getValue();
 
 					// Get file to be uploaded
 					if (value instanceof FileBody) {
 						FileBody fileBody = (FileBody) value;
-						output.write(boundarySeparator);
-						StringBuilder partsBuffer = new StringBuilder(
-								"filename=\"");
-						partsBuffer.append(fileBody.getFilename());
-						partsBuffer.append('"');
-						output.write(partsBuffer.toString().getBytes(
-								CHARSET_UTF8));
-						output.write(newline);
-						output.write(newline);
-
-						StringBuilder cBuffer = new StringBuilder(
-								"Content-Type: ");
-
-						cBuffer.append(URLConnection
-								.guessContentTypeFromName(fileBody
-										.getFilename()));
-						output.write(cBuffer.toString().getBytes(CHARSET_UTF8));
-						output.write(newline);
-						output.write(newline);
-
-						StringBuilder tBuffer = new StringBuilder(
-								"Content-Transfer-Encoding: binary");
-
-						output.write(tBuffer.toString().getBytes(CHARSET_UTF8));
-						output.write(newline);
-						output.write(newline);
-
 						fileBody.writeTo(output);
 						//TODO remove this code
 						/**InputStream input = fileBody.getInputStream();
