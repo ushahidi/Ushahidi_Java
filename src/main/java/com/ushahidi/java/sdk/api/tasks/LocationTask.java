@@ -53,8 +53,7 @@ public class LocationTask extends BaseTask {
 	 */
 	public List<Location> all() {
 
-		return fromString(client.sendGetRequest(url), Locations.class)
-				.getLocations();
+		return fromString(sendGetRequest(url), Locations.class).getLocations();
 	}
 
 	/**
@@ -69,10 +68,9 @@ public class LocationTask extends BaseTask {
 	 */
 	public List<Location> locationId(int id) {
 
-		client.setRequestParameters("by", "locid");
-		client.setRequestParameters("id", String.valueOf(id));
-		return fromString(client.sendGetRequest(url), Locations.class)
-				.getLocations();
+		setRequestParameters("by", "locid");
+		setRequestParameters("id", String.valueOf(id));
+		return fromString(sendGetRequest(url), Locations.class).getLocations();
 
 	}
 
@@ -87,10 +85,9 @@ public class LocationTask extends BaseTask {
 	 */
 	public List<Location> countryId(int id) {
 
-		client.setRequestParameters("by", "country");
-		client.setRequestParameters("id", String.valueOf(id));
-		return fromString(client.sendGetRequest(url), Locations.class)
-				.getLocations();
+		setRequestParameters("by", "country");
+		setRequestParameters("id", String.valueOf(id));
+		return fromString(sendGetRequest(url), Locations.class).getLocations();
 	}
 
 }

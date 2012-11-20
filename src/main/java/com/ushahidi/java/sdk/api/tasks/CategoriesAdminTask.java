@@ -48,10 +48,10 @@ public class CategoriesAdminTask extends BaseTask {
 	 * @return response
 	 */
 	public Response add(CategoryFields fields) {
-		client.setRequestParameters("action", "add");
+		setRequestParameters("action", "add");
 		return fromString(
-				client.sendMultipartPostRequest(url,
-						fields.getParameters(fields)), Response.class);
+				sendMultipartPostRequest(url, fields.getParameters(fields)),
+				Response.class);
 	}
 
 	/**
@@ -61,10 +61,10 @@ public class CategoriesAdminTask extends BaseTask {
 	 * @return
 	 */
 	public Response edit(CategoryFields fields) {
-		client.setRequestParameters("action", "edit");
+		setRequestParameters("action", "edit");
 		return fromString(
-				client.sendMultipartPostRequest(url,
-						fields.getParameters(fields)), Response.class);
+				sendMultipartPostRequest(url, fields.getParameters(fields)),
+				Response.class);
 	}
 
 	/**
@@ -78,9 +78,9 @@ public class CategoriesAdminTask extends BaseTask {
 	 * @return
 	 */
 	public Response delete(int id) {
-		client.setRequestParameters("action", "delete");
-		client.setRequestParameters("category_id", String.valueOf(id));
-		return fromString(client.sendPostRequest(url), Response.class);
+		setRequestParameters("action", "delete");
+		setRequestParameters("category_id", String.valueOf(id));
+		return fromString(sendPostRequest(url), Response.class);
 	}
 
 }

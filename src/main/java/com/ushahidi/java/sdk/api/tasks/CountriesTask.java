@@ -50,8 +50,7 @@ public class CountriesTask extends BaseTask {
 	 */
 	public List<Country> all() {
 
-		return fromString(client.sendGetRequest(url), Countries.class)
-				.getCountries();
+		return fromString(sendGetRequest(url), Countries.class).getCountries();
 	}
 
 	/**
@@ -66,11 +65,10 @@ public class CountriesTask extends BaseTask {
 	 */
 	public List<Country> countryId(int id) {
 
-		client.setRequestParameters("by", "countryid");
-		client.setRequestParameters("id", String.valueOf(id));
+		setRequestParameters("by", "countryid");
+		setRequestParameters("id", String.valueOf(id));
 
-		return fromString(client.sendGetRequest(url), Countries.class)
-				.getCountries();
+		return fromString(sendGetRequest(url), Countries.class).getCountries();
 	}
 
 	/**
@@ -84,10 +82,9 @@ public class CountriesTask extends BaseTask {
 	 */
 	public List<Country> countryIso(String iso) {
 
-		client.setRequestParameters("by", "countryiso");
-		client.setRequestParameters("iso", iso);
-		return fromString(client.sendGetRequest(url), Countries.class)
-				.getCountries();
+		setRequestParameters("by", "countryiso");
+		setRequestParameters("iso", iso);
+		return fromString(sendGetRequest(url), Countries.class).getCountries();
 	}
 
 	/**
@@ -101,10 +98,9 @@ public class CountriesTask extends BaseTask {
 	 * @throws JSONException
 	 */
 	public List<Country> countryName(String name) {
-		client.setRequestParameters("by", "countryname");
-		client.setRequestParameters("name", name);
-		return fromString(client.sendGetRequest(url), Countries.class)
-				.getCountries();
+		setRequestParameters("by", "countryname");
+		setRequestParameters("name", name);
+		return fromString(sendGetRequest(url), Countries.class).getCountries();
 	}
 
 }

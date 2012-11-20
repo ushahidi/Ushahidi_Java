@@ -48,6 +48,6 @@ public class SystemTask extends BaseTask {
 	 */
 	public System fetch() {
 
-		return fromString(client.sendGetRequest(url), System.class);
+		return fromString(sendGetRequest(url), System.class);
 	}
 }

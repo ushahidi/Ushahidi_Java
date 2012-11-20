@@ -40,9 +40,6 @@ public abstract class BaseTask extends UshahidiHttpClient {
 		gson = builder.create();
 	}
 
-	/** The HTTP client */
-	protected final UshahidiHttpClient client;
-
 	/** The Ushahidi deployment URL */
 	protected String url;
 
@@ -72,38 +69,8 @@ public abstract class BaseTask extends UshahidiHttpClient {
 
 		this.url = url + API;
 		this.task = task;
-		this.client = new UshahidiHttpClient();
-		this.client.setRequestParameters("task", task);
-		this.client.setRequestParameters("resp", "json");
-	}
-
-	/**
-	 * Create the payload for client
-	 * 
-	 * @param url
-	 *            The Ushahidi deployment
-	 * @param task
-	 *            The task to be performed
-	 * 
-	 * @param client
-	 *            must be non-null
-	 */
-	public BaseTask(String url, String task, UshahidiHttpClient client) {
-		if (url == null) {
-			throw new IllegalArgumentException("URL cannot be null");
-		}
-
-		if (task == null) {
-			throw new IllegalArgumentException("Task cannot be null");
-		}
-
-		if (client == null) {
-			throw new IllegalArgumentException("Client cannot be null");
-		}
-		this.client = client;
-		this.client.setRequestParameters("?task", task);
-		this.client.setRequestParameters("resp", "json");
-		this.url = url + API;
+		setRequestParameters("task", task);
+		setRequestParameters("resp", "json");
 	}
 
 	/**
@@ -112,7 +79,7 @@ public abstract class BaseTask extends UshahidiHttpClient {
 	 * @return non-null client
 	 */
 	public UshahidiHttpClient getClient() {
-		return client;
+		return this.getClient();
 	}
 
 	public void setAuthentication(String username, String password) {
@@ -127,7 +94,7 @@ public abstract class BaseTask extends UshahidiHttpClient {
 		}
 
 		authentication = new PasswordAuthentication(username, password);
-		this.client.setAuthentication(authentication);
+		setAuthentication(authentication);
 	}
 
 	/**

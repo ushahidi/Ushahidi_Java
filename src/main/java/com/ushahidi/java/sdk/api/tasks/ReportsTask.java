@@ -57,7 +57,7 @@ public class ReportsTask extends BaseTask {
 	public ReportsTask(String url) {
 		super(url, TASK);
 		this.limit = 20;
-		client.setRequestParameters("comments", "1");
+		setRequestParameters("comments", "1");
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class ReportsTask extends BaseTask {
 	 */
 	public List<Incidents> all() {
 
-		return fromString(client.sendGetRequest(url), Reports.class)
+		return fromString(sendGetRequest(url), Reports.class)
 				.getPayload().incidents;
 	}
 
@@ -82,9 +82,9 @@ public class ReportsTask extends BaseTask {
 	 */
 	public List<Incidents> sinceId(int id) {
 
-		client.setRequestParameters("by", "sinceid");
-		client.setRequestParameters("id", String.valueOf(id));
-		return fromString(client.sendGetRequest(url), Reports.class)
+		setRequestParameters("by", "sinceid");
+		setRequestParameters("id", String.valueOf(id));
+		return fromString(sendGetRequest(url), Reports.class)
 				.getPayload().incidents;
 	}
 
@@ -97,9 +97,9 @@ public class ReportsTask extends BaseTask {
 	 *         report ID.
 	 */
 	public List<Incidents> maxId(int id) {
-		client.setRequestParameters("by", "maxid");
-		client.setRequestParameters("id", String.valueOf(id));
-		return fromString(client.sendGetRequest(url), Reports.class)
+		setRequestParameters("by", "maxid");
+		setRequestParameters("id", String.valueOf(id));
+		return fromString(sendGetRequest(url), Reports.class)
 				.getPayload().incidents;
 	}
 
@@ -113,9 +113,9 @@ public class ReportsTask extends BaseTask {
 	 */
 	public Incidents reportId(int id) {
 
-		client.setRequestParameters("by", "incidentid");
-		client.setRequestParameters("id", String.valueOf(id));
-		reports = fromString(client.sendGetRequest(url), Reports.class);
+		setRequestParameters("by", "incidentid");
+		setRequestParameters("id", String.valueOf(id));
+		reports = fromString(sendGetRequest(url), Reports.class);
 		if (reports.getPayload().incidents != null
 				&& reports.getPayload().incidents.size() > 0) {
 			return reports.getPayload().incidents.get(0);
@@ -133,9 +133,9 @@ public class ReportsTask extends BaseTask {
 	 */
 	public List<Incidents> locationName(String name) {
 
-		client.setRequestParameters("by", "locname");
-		client.setRequestParameters("name", name);
-		return fromString(client.sendGetRequest(url), Reports.class)
+		setRequestParameters("by", "locname");
+		setRequestParameters("name", name);
+		return fromString(sendGetRequest(url), Reports.class)
 				.getPayload().incidents;
 	}
 
@@ -149,9 +149,9 @@ public class ReportsTask extends BaseTask {
 	 */
 	public List<Incidents> locationId(int id) {
 
-		client.setRequestParameters("by", "locid");
-		client.setRequestParameters("id", String.valueOf(id));
-		return fromString(client.sendGetRequest(url), Reports.class)
+		setRequestParameters("by", "locid");
+		setRequestParameters("id", String.valueOf(id));
+		return fromString(sendGetRequest(url), Reports.class)
 				.getPayload().incidents;
 	}
 
@@ -165,9 +165,9 @@ public class ReportsTask extends BaseTask {
 	 */
 	public List<Incidents> categoryName(String category) {
 
-		client.setRequestParameters("by", "catname");
-		client.setRequestParameters("name", category);
-		return fromString(client.sendGetRequest(url), Reports.class)
+		setRequestParameters("by", "catname");
+		setRequestParameters("name", category);
+		return fromString(sendGetRequest(url), Reports.class)
 				.getPayload().incidents;
 	}
 
@@ -180,9 +180,9 @@ public class ReportsTask extends BaseTask {
 	 */
 	public List<Incidents> categoryId(int id) {
 
-		client.setRequestParameters("by", "catid");
-		client.setRequestParameters("id", String.valueOf(id));
-		return fromString(client.sendGetRequest(url), Reports.class)
+		setRequestParameters("by", "catid");
+		setRequestParameters("id", String.valueOf(id));
+		return fromString(sendGetRequest(url), Reports.class)
 				.getPayload().incidents;
 	}
 
@@ -196,7 +196,7 @@ public class ReportsTask extends BaseTask {
 	public Response submit(ReportFields report) {
 		Body body = report.getParameters(report);
 		body.addField("task", "report");
-		return fromString(client.sendMultipartPostRequest(url, body),
+		return fromString(sendMultipartPostRequest(url, body),
 				Response.class);
 	}
 
@@ -229,7 +229,7 @@ public class ReportsTask extends BaseTask {
 	 */
 	private Response admin(int id, String action) {
 		Body body = adminBody(id, action, new Body());
-		return fromString(this.client.sendPostRequest(url, body),
+		return fromString(this.sendPostRequest(url, body),
 				Response.class);
 
 	}
@@ -301,7 +301,7 @@ public class ReportsTask extends BaseTask {
 		// workaround for 2.1
 		body.addField("incident_verified", i.getVerified());
 		body.addField("incident_active", i.getActive());
-		return fromString(client.sendMultipartPostRequest(url, body),
+		return fromString(sendMultipartPostRequest(url, body),
 				Response.class);
 	}
 }

@@ -59,7 +59,7 @@ public class CategoriesTask extends BaseTask {
 	 */
 	public List<Category> all() {
 
-		final Categories categories = fromString(client.sendGetRequest(url),
+		final Categories categories = fromString(sendGetRequest(url),
 				Categories.class);
 		return categories.getCategories();
 	}
@@ -73,9 +73,9 @@ public class CategoriesTask extends BaseTask {
 	 */
 	public Category catId(int id) {
 
-		client.setRequestParameters("by", "catid");
-		client.setRequestParameters("id", String.valueOf(id));
-		final Categories categories = fromString(client.sendGetRequest(url),
+		setRequestParameters("by", "catid");
+		setRequestParameters("id", String.valueOf(id));
+		final Categories categories = fromString(sendGetRequest(url),
 				Categories.class);
 		return categories.getCategory();
 	}

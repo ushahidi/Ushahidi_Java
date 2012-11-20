@@ -52,9 +52,9 @@ public class CommentsTask extends BaseTask {
 	 */
 	public List<Comment> all() {
 
-		client.setRequestParameters("by", "all");
+		setRequestParameters("by", "all");
 		// fetch all comments
-		Comments comments = fromString(client.sendGetRequest(url),
+		Comments comments = fromString(sendGetRequest(url),
 				Comments.class);
 		return comments.getComments();
 	}
@@ -68,11 +68,11 @@ public class CommentsTask extends BaseTask {
 	 */
 	public List<Comment> reportId(int id) {
 
-		client.setRequestParameters("by", "reportid");
-		client.setRequestParameters("id", String.valueOf(id));
+		setRequestParameters("by", "reportid");
+		setRequestParameters("id", String.valueOf(id));
 		// fetch all comment
 		// fetch all categories
-		Comments comments = fromString(client.sendGetRequest(url),
+		Comments comments = fromString(sendGetRequest(url),
 				Comments.class);
 		return comments.getComments();
 	}
@@ -89,9 +89,9 @@ public class CommentsTask extends BaseTask {
 	 */
 	public List<Comment> spam() {
 
-		client.setRequestParameters("by", "spam");
+		setRequestParameters("by", "spam");
 		// fetch all categories
-		Comments comments = fromString(client.sendGetRequest(url),
+		Comments comments = fromString(sendGetRequest(url),
 				Comments.class);
 		return comments.getComments();
 
@@ -108,9 +108,9 @@ public class CommentsTask extends BaseTask {
 	 */
 	public List<Comment> pending() {
 
-		client.setRequestParameters("by", "pending");
+		setRequestParameters("by", "pending");
 		// fetch all categories
-		Comments comments = fromString(client.sendGetRequest(url),
+		Comments comments = fromString(sendGetRequest(url),
 				Comments.class);
 		return comments.getComments();
 
@@ -127,9 +127,9 @@ public class CommentsTask extends BaseTask {
 	 */
 	public List<Comment> approved() {
 
-		client.setRequestParameters("by", "approved");
+		setRequestParameters("by", "approved");
 		// fetch all categories
-		Comments comments = fromString(client.sendGetRequest(url),
+		Comments comments = fromString(sendGetRequest(url),
 				Comments.class);
 		return comments.getComments();
 	}
