@@ -12,6 +12,22 @@ Run the following command to build a JAR file of the SDK with all the dependenci
 And to compile all the source codes, run
 `ant compile`
 
+## Example
+Fetch all categories
+
+```java
+UshahidiApi ushahidi = new UshahidiApi("http://demo.ushahidi.com");
+CategoriesTask task = ushahidi.factory.createCategoriesTask();
+List<Category> categories = task.all();
+```
+
+Attach news article to an existing report
+
+```java
+TagNewsTask task = ushahidi.factory.createTagNewsTask();
+Response response = task.tagNews(4, "http://www.android.com/whatsnew/");
+```
+
 ## Javadoc 
 You can find the Javadoc which contains all the relevant documentation on the classes 
 and the packages in the doc directory found in the root folder of the project.

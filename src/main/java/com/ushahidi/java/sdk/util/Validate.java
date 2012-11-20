@@ -76,6 +76,14 @@ public class Validate {
 		return (start >= 0) && (end >= 0) && (start <= end) && (length > 0);
 	}
 
+	/**
+	 * Validate a URL
+	 * 
+	 * @param url
+	 *            The URL to be validated
+	 * 
+	 * @return True if the field is within range
+	 */
 	public static boolean url(String url) {
 		Pattern p = Pattern.compile("^(https?|ftp|file)://.+$");
 		Matcher m = p.matcher(url);

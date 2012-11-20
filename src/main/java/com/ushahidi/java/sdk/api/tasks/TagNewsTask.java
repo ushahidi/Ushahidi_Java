@@ -56,11 +56,11 @@ public class TagNewsTask extends BaseTask {
 	 * @param newsArticleUrl
 	 *            A valid URL that links to an article related to the report
 	 */
-	public void tagNews(int id, String newsArticleUrl) {
+	public Response tagNews(int id, String newsArticleUrl) {
 
 		tagNewsFields = new TagMediaFields(id, newsArticleUrl);
 
-		response = fromString(
+		return fromString(
 				sendPostRequest(url, tagNewsFields.getParameters(tagNewsFields)),
 				Response.class);
 

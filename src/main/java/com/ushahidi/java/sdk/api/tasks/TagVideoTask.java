@@ -35,9 +35,6 @@ public class TagVideoTask extends BaseTask {
 
 	private static final String TASK = "tagvideo";
 
-	/** The response received from the server as a result of making an API call. */
-	public Response response;
-
 	/**
 	 * Creates the tagnews task
 	 * 
@@ -56,11 +53,11 @@ public class TagVideoTask extends BaseTask {
 	 * @param videoUrl
 	 *            A valid URL that links to a video related to the report
 	 */
-	public void tagVideo(int id, String videoUrl) {
+	public Response tagVideo(int id, String videoUrl) {
 
 		tagVideoFields = new TagMediaFields(id, videoUrl);
 
-		response = fromString(
+		return fromString(
 				sendPostRequest(url,
 						tagVideoFields.getParameters(tagVideoFields)),
 				Response.class);
