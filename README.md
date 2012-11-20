@@ -13,15 +13,22 @@ And to compile all the source codes, run
 `ant compile`
 
 ## Example
-Fetch all categories
 
+### Create UshahidiApi object
 ```java
 UshahidiApi ushahidi = new UshahidiApi("http://demo.ushahidi.com");
+```
+
+### Fetch all categories
+Pull all visible categories that has been submitted to the Ushahidi platform
+
+```java
 CategoriesTask task = ushahidi.factory.createCategoriesTask();
 List<Category> categories = task.all();
 ```
 
-Attach news article to an existing report
+### Attach news article
+Add a news article to an existing report
 
 ```java
 TagNewsTask task = ushahidi.factory.createTagNewsTask();
