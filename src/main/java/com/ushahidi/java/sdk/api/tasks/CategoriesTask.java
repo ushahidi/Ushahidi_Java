@@ -23,10 +23,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.ushahidi.java.sdk.api.Category;
-import com.ushahidi.java.sdk.api.CategoryFields;
 import com.ushahidi.java.sdk.api.json.Categories;
-import com.ushahidi.java.sdk.api.json.Response;
-import com.ushahidi.java.sdk.net.content.Body;
 
 /**
  * Implements all tasks related to Categories.
@@ -81,73 +78,6 @@ public class CategoriesTask extends BaseTask {
 		final Categories categories = fromString(client.sendGetRequest(url),
 				Categories.class);
 		return categories.getCategory();
-	}
-
-	private Body adminBody(int id, String action, Body body) {
-		body.addField("task", "category");
-		body.addField("action", action);
-		body.addField("category_id", String.valueOf(id));
-		return body;
-	}
-
-	private Response admin(int id, String action) {
-		Body body = adminBody(id, action, new Body());
-		return fromString(this.client.sendPostRequest(url, body),
-				Response.class);
-	}
-
-	/**
-	 * Make a multipart post request
-	 * 
-	 * @param body
-	 *            The fields to be submitted
-	 * @return
-	 */
-	private Response admin(Body body) {
-		return fromString(client.sendMultipartPostRequest(url, body),
-				Response.class);
-	}
-
-	/**
-	 * Add a new category to the Ushahidi deployment. This method requires
-	 * authentication. Set {@link #setAuthentication(String, String)} or set
-	 * {@link #getClient().setAuthentication()}
-	 * 
-	 * @param fields
-	 *            CategoryFields
-	 * @return response
-	 */
-	public Response add(CategoryFields fields) {
-
-		Body body = fields.getParameters(fields);
-		body.addField("action", "add");
-		return admin(body);
-	}
-
-	/**
-	 * Edit an existing category. Requires authentication
-	 * 
-	 * @param fields
-	 * @return
-	 */
-	public Response edit(CategoryFields fields) {
-		Body body = fields.getParameters(fields);
-		body.addField("action", "edit");
-		return admin(body);
-	}
-
-	/**
-	 * Delete an existing category in the Ushahidi deployment. This method
-	 * requires authentication. Perhaps set
-	 * {@link #setAuthentication(String, String)} or set {@link #getClient()
-	 * .setAuthentication()}
-	 * 
-	 * @param id
-	 *            Category ID
-	 * @return
-	 */
-	public Response delete(int id) {
-		return admin(id, "delete");
 	}
 
 }
