@@ -15,6 +15,9 @@ And to compile all the source codes, run
 ## Example
 
 ### Create UshahidiApi object
+The UshahidiApi class allows you to access the various task implemented by this SDK 
+through the object you will create.
+
 ```java
 UshahidiApi ushahidi = new UshahidiApi("http://demo.ushahidi.com");
 
