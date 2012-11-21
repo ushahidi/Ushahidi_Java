@@ -50,8 +50,7 @@ public class CategoriesAdminTaskTest extends BaseTaskTest {
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		task = factory.createCategoriesAdminTask();
-		task.setAuthentication(USERNAME, PASSWORD);
+		task = factory.createCategoriesAdminTask(USERNAME, PASSWORD);
 	}
 
 	/**
