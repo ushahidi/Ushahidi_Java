@@ -34,8 +34,9 @@ public class CategoriesAdminTask extends BaseTask {
 	 * 
 	 * @param url
 	 */
-	public CategoriesAdminTask(String url) {
+	public CategoriesAdminTask(String url, String username, String password) {
 		super(url, TASK);
+		setAuthentication(username, password);
 	}
 
 	/**
@@ -68,10 +69,7 @@ public class CategoriesAdminTask extends BaseTask {
 	}
 
 	/**
-	 * Delete an existing category in the Ushahidi deployment. This method
-	 * requires authentication. Perhaps set
-	 * {@link #setAuthentication(String, String)} or set {@link #getClient()
-	 * .setAuthentication()}
+	 * Delete an existing category in the Ushahidi deployment.
 	 * 
 	 * @param id
 	 *            Report ID

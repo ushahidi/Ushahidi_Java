@@ -123,10 +123,16 @@ public class UshahidiApiTaskFactory {
 	/**
 	 * Create the categories admin task
 	 * 
+	 * @param username
+	 *            The username of the Ushahidi deployment
+	 * @param password
+	 *            The password of the Ushahidi deployment
+	 * 
 	 * @return The admin task
 	 */
-	public CategoriesAdminTask createCategoriesAdminTask() {
-		return new CategoriesAdminTask(url);
+	public CategoriesAdminTask createCategoriesAdminTask(String username,
+			String password) {
+		return new CategoriesAdminTask(url, username, password);
 	}
 
 }
