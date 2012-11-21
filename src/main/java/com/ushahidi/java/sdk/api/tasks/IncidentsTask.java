@@ -22,11 +22,8 @@ package com.ushahidi.java.sdk.api.tasks;
 
 import java.util.List;
 
-import com.ushahidi.java.sdk.api.ReportFields;
 import com.ushahidi.java.sdk.api.json.Reports;
 import com.ushahidi.java.sdk.api.json.Reports.Payload.Incidents;
-import com.ushahidi.java.sdk.api.json.Response;
-import com.ushahidi.java.sdk.net.content.Body;
 
 /**
  * The ReportsTask implements all the task related to Reports task.
@@ -38,7 +35,7 @@ import com.ushahidi.java.sdk.net.content.Body;
  * @author eyedol
  * 
  */
-public class ReportsTask extends BaseTask {
+public class IncidentsTask extends BaseTask {
 
 	/**
 	 * The amount of reports to return at a time. 20 by default
@@ -52,7 +49,7 @@ public class ReportsTask extends BaseTask {
 	/**
 	 * Default constructor for ReportsTask. Sets the limit default value to 20.
 	 */
-	public ReportsTask(String url) {
+	public IncidentsTask(String url) {
 		super(url, TASK);
 		this.limit = 20;
 		setRequestParameters("comments", "1");

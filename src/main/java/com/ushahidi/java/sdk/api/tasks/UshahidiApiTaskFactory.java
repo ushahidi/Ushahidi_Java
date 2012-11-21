@@ -85,12 +85,12 @@ public class UshahidiApiTaskFactory {
 	}
 
 	/**
-	 * Create report task object
+	 * Create incidents task object
 	 * 
-	 * @return The report task
+	 * @return The incidents task
 	 */
-	public ReportsTask createReportsTask() {
-		return new ReportsTask(url);
+	public IncidentsTask createReportsTask() {
+		return new IncidentsTask(url);
 	}
 
 	/**

@@ -29,9 +29,9 @@ import org.junit.Test;
  * @author eyedol
  * 
  */
-public class ReportTaskTest extends BaseTaskTest {
+public class IncidentsTaskTest extends BaseTaskTest {
 
-	private ReportsTask task;
+	private IncidentsTask task;
 
 	private static final int SINCE_ID = 1;
 
@@ -66,7 +66,7 @@ public class ReportTaskTest extends BaseTaskTest {
 	}
 
 	/**
-	 * Test method for {@link com.ushahidi.java.sdk.api.tasks.ReportsTask#all()}
+	 * Test method for {@link com.ushahidi.java.sdk.api.tasks.IncidentsTask#all()}
 	 * .
 	 */
 	@Test
@@ -77,7 +77,7 @@ public class ReportTaskTest extends BaseTaskTest {
 
 	/**
 	 * Test method for
-	 * {@link com.ushahidi.java.sdk.api.tasks.ReportsTask#sinceId(int)}.
+	 * {@link com.ushahidi.java.sdk.api.tasks.IncidentsTask#sinceId(int)}.
 	 */
 	@Test
 	public void testSinceId() {
@@ -87,7 +87,7 @@ public class ReportTaskTest extends BaseTaskTest {
 
 	/**
 	 * Test method for
-	 * {@link com.ushahidi.java.sdk.api.tasks.ReportsTask#maxId(int)}.
+	 * {@link com.ushahidi.java.sdk.api.tasks.IncidentsTask#maxId(int)}.
 	 */
 	@Test
 	public void testMaxId() {
@@ -97,7 +97,7 @@ public class ReportTaskTest extends BaseTaskTest {
 
 	/**
 	 * Test method for
-	 * {@link com.ushahidi.java.sdk.api.tasks.ReportsTask#reportId(int)}.
+	 * {@link com.ushahidi.java.sdk.api.tasks.IncidentsTask#reportId(int)}.
 	 */
 	@Test
 	public void testReportId() {
@@ -108,7 +108,7 @@ public class ReportTaskTest extends BaseTaskTest {
 
 	/**
 	 * Test method for
-	 * {@link com.ushahidi.java.sdk.api.tasks.ReportsTask#locationName(java.lang.String)}
+	 * {@link com.ushahidi.java.sdk.api.tasks.IncidentsTask#locationName(java.lang.String)}
 	 * .
 	 */
 	@Test
@@ -120,7 +120,7 @@ public class ReportTaskTest extends BaseTaskTest {
 
 	/**
 	 * Test method for
-	 * {@link com.ushahidi.java.sdk.api.tasks.ReportsTask#locationId(int)}.
+	 * {@link com.ushahidi.java.sdk.api.tasks.IncidentsTask#locationId(int)}.
 	 */
 	@Test
 	public void testLocationId() {
@@ -130,7 +130,7 @@ public class ReportTaskTest extends BaseTaskTest {
 
 	/**
 	 * Test method for
-	 * {@link com.ushahidi.java.sdk.api.tasks.ReportsTask#categoryName(java.lang.String)}
+	 * {@link com.ushahidi.java.sdk.api.tasks.IncidentsTask#categoryName(java.lang.String)}
 	 * .
 	 */
 	@Test
@@ -141,7 +141,7 @@ public class ReportTaskTest extends BaseTaskTest {
 
 	/**
 	 * Test method for
-	 * {@link com.ushahidi.java.sdk.api.tasks.ReportsTask#categoryId(int)}.
+	 * {@link com.ushahidi.java.sdk.api.tasks.IncidentsTask#categoryId(int)}.
 	 */
 	@Test
 	public void testCategoryId() {
