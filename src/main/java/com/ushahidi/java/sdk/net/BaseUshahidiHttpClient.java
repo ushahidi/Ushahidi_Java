@@ -28,7 +28,10 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -304,16 +307,7 @@ public abstract class BaseUshahidiHttpClient {
 				}
 			}
 
-			HttpURLConnection request = (HttpURLConnection) apiUrl
-					.openConnection();
-			request.setConnectTimeout(getConnectionTimeout());
-			request.setReadTimeout(getSocketTimeout());
-
-			for (String headerName : requestHeaders.keySet()) {
-				request.setRequestProperty(headerName,
-						requestHeaders.get(headerName));
-			}
-
+			HttpURLConnection request = openConnection(apiUrl, "GET");
 			request.connect();
 
 			if (request.getResponseCode() != expected) {
@@ -347,17 +341,8 @@ public abstract class BaseUshahidiHttpClient {
 	protected InputStream postRequest(String apiUrl, Body body, int expected) {
 		try {
 			URL url = new URL(apiUrl);
-			HttpURLConnection request = (HttpURLConnection) url
-					.openConnection();
+			HttpURLConnection request = openConnection(url, "POST");
 			StringBuilder builder = new StringBuilder();
-			request.setConnectTimeout(getConnectionTimeout());
-			request.setReadTimeout(getSocketTimeout());
-
-			for (String headerName : requestHeaders.keySet()) {
-				request.setRequestProperty(headerName,
-						requestHeaders.get(headerName));
-			}
-
 			// for request header passed earlier on
 			final String strParams = getParametersString(requestParameters);
 			builder.append(strParams);
@@ -367,8 +352,6 @@ public abstract class BaseUshahidiHttpClient {
 				builder.append("&");
 			}
 			builder.append(getBodyString(body));
-			request.setRequestMethod("POST");
-			request.setDoOutput(true);
 
 			PrintStream out = new PrintStream(new BufferedOutputStream(
 					request.getOutputStream()));
@@ -411,18 +394,7 @@ public abstract class BaseUshahidiHttpClient {
 	protected InputStream postRequest(String apiUrl, int expected) {
 		try {
 			URL url = new URL(apiUrl);
-			HttpURLConnection request = (HttpURLConnection) url
-					.openConnection();
-			request.setConnectTimeout(getConnectionTimeout());
-			request.setReadTimeout(getSocketTimeout());
-
-			for (String headerName : requestHeaders.keySet()) {
-				request.setRequestProperty(headerName,
-						requestHeaders.get(headerName));
-			}
-
-			request.setRequestMethod("POST");
-			request.setDoOutput(true);
+			HttpURLConnection request = openConnection(url, "POST");
 
 			PrintStream out = new PrintStream(new BufferedOutputStream(
 					request.getOutputStream()));
@@ -517,19 +489,11 @@ public abstract class BaseUshahidiHttpClient {
 		try {
 
 			URL url = new URL(apiUrl);
-			HttpURLConnection request = (HttpURLConnection) url
-					.openConnection();
+			HttpURLConnection request = openConnection(url, "POST");
 			String boundary = "00content0boundary00";
-			request.setConnectTimeout(getConnectionTimeout());
-			request.setReadTimeout(getSocketTimeout());
-			for (String headerName : requestHeaders.keySet()) {
-				request.setRequestProperty(headerName,
-						requestHeaders.get(headerName));
-			}
 
 			request.setRequestProperty("Content-Type",
 					"multipart/form-data; boundary=" + boundary);
-			request.setDoOutput(true);
 
 			BufferedOutputStream output = new BufferedOutputStream(
 					request.getOutputStream());
@@ -639,19 +603,7 @@ public abstract class BaseUshahidiHttpClient {
 			String method, int expected) {
 		try {
 			URL url = new URL(apiUrl);
-			HttpURLConnection request = (HttpURLConnection) url
-					.openConnection();
-
-			request.setConnectTimeout(getConnectionTimeout());
-			request.setReadTimeout(getSocketTimeout());
-
-			for (String headerName : requestHeaders.keySet()) {
-				request.setRequestProperty(headerName,
-						requestHeaders.get(headerName));
-			}
-
-			request.setRequestMethod(method);
-			request.setDoOutput(true);
+			HttpURLConnection request = openConnection(url, method);
 
 			if (contentType != null) {
 				request.setRequestProperty("Content-Type", contentType);
@@ -766,5 +718,43 @@ public abstract class BaseUshahidiHttpClient {
 			logger.log(Level.SEVERE,
 					"An error occurred while disconnecting connection.", e);
 		}
+	}
+
+	public static Proxy createProxy(String ip, int port) {
+		return new Proxy(Proxy.Type.HTTP, new InetSocketAddress(ip, port));
+	}
+
+	private Proxy proxy;
+
+	public void setProxy(String ip, int port) {
+		setProxy(createProxy(ip, port));
+	}
+
+	public void setProxy(Proxy p) {
+		proxy = p;
+	}
+
+	private HttpURLConnection openConnection(URL u, String method)
+			throws IOException {
+		return openConnection(u, method, true);
+	}
+
+	private HttpURLConnection openConnection(URL u, String method,
+			boolean doOutput) throws IOException {
+		URLConnection ret = proxy == null ? u.openConnection() : u
+				.openConnection(proxy);
+		HttpURLConnection request = (HttpURLConnection) ret;
+
+		request.setConnectTimeout(getConnectionTimeout());
+		request.setReadTimeout(getSocketTimeout());
+
+		for (String headerName : requestHeaders.keySet()) {
+			request.setRequestProperty(headerName,
+					requestHeaders.get(headerName));
+		}
+
+		request.setDoOutput(doOutput);
+		request.setRequestMethod(method);
+		return request;
 	}
 }
