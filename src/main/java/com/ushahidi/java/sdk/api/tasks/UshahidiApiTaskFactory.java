@@ -30,6 +30,10 @@ public class UshahidiApiTaskFactory {
 	/** The Ushahidi deployment URL **/
 	private String url;
 
+	private String username;
+
+	private String password;
+
 	/**
 	 * Instantiates a new ushahidi api task factory
 	 * 
@@ -37,6 +41,42 @@ public class UshahidiApiTaskFactory {
 	 */
 	private UshahidiApiTaskFactory(String url) {
 		this.url = url;
+	}
+
+	/**
+	 * Get the username to be used for authentication
+	 * 
+	 * @return
+	 */
+	public String getUsername() {
+		return this.username;
+	}
+
+	/**
+	 * Get the password to be used for authentication
+	 * 
+	 * @return
+	 */
+	public String getPassword() {
+		return this.password;
+	}
+
+	/**
+	 * Set the username to be used for authentication
+	 * 
+	 * @param username
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	/**
+	 * Set the password to be used for authentication
+	 * 
+	 * @param password
+	 */
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	/**
@@ -63,7 +103,7 @@ public class UshahidiApiTaskFactory {
 	 * @return The comment task
 	 */
 	public CommentsTask createCommentTask() {
-		return new CommentsTask(url);
+		return new CommentsTask(url, getUsername(), getPassword());
 	}
 
 	/**
@@ -138,16 +178,12 @@ public class UshahidiApiTaskFactory {
 	/**
 	 * Create the reports admin task
 	 * 
-	 * @param username
-	 *            The username of the Ushahidi deployment
-	 * @param password
-	 *            The password of the Ushahidi deployment
 	 * 
 	 * @return The reports admin task
 	 */
 	public ReportsAdminTask createReportsAdminTask(String username,
 			String password) {
-		return new ReportsAdminTask(url, username, password);
+		return new ReportsAdminTask(url, getUsername(), getPassword());
 	}
 
 	/**

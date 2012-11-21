@@ -99,7 +99,6 @@ public class CategoriesAdminTaskTest extends BaseTaskTest {
 				color, fileBody);
 
 		Response response = task.edit(fields);
-		System.out.println(response.getErrorMessage());
 		assetNotNullOrZero(response.getErrorMessage(), response.getErrorCode());
 	}
 

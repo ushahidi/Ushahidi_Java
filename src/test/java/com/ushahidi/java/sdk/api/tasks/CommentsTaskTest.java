@@ -26,6 +26,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.ushahidi.java.sdk.api.Comment;
+import com.ushahidi.java.sdk.api.CommentFields;
+import com.ushahidi.java.sdk.api.json.Response;
 
 /**
  * This class tests Ushahidi API comments
@@ -39,7 +41,7 @@ public class CommentsTaskTest extends BaseTaskTest {
 	private CommentsTask task;
 
 	/** The default report ID to use in testing */
-	private static final int REPORT_ID = 68;
+	private static final int REPORT_ID = 476;
 
 	/**
 	 * @throws java.lang.Exception
@@ -47,8 +49,9 @@ public class CommentsTaskTest extends BaseTaskTest {
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
+		factory.setPassword("admin");
+		factory.setUsername("admin");
 		task = factory.createCommentTask();
-		task.getClient().setAuthentication(authentication);
 	}
 
 	/**
@@ -120,4 +123,23 @@ public class CommentsTaskTest extends BaseTaskTest {
 				comments);
 	}
 
+	/**
+	 * Test for {@link com.ushahidi.java.sdk.api.tasks.CommentsTask#submit()}
+	 * 
+	 */
+	@Test
+	public void testSubmit() {
+		Comment c = new Comment();
+		c.setAuthor("Henry Addo");
+		c.setReportId(REPORT_ID);
+		c.setDescription("Some sample comments");
+
+		CommentFields comment = new CommentFields();
+		comment.fill(c);
+		comment.setEmail("henry@ushahidi.com");
+		Response response = task.submit(comment);
+		System.out.println(response.getErrorMessage());
+		assertEquals("Comment couldn't be submitted", 0,
+				response.getErrorCode());
+	}
 }
