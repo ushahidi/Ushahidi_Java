@@ -24,16 +24,25 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * 
+ * Test the Image utility class
  */
 public class ImageTest {
 
+	private static final String IMAGE_URL = "https://lh6.googleusercontent.com/-9p_YQnFQHog/UFyuJlaTYYI/AAAAAAAAH7A/VTeuTEaNLxw/s720/12%2520-%25201.jpg";
+
+	private static final String DESTINATION = "/home/eyedol/Pictures/";
+
+	private static final String IMAGE_NAME = "motor.jpg";
+
 	/**
-	 * Test method for {@link com.ushahidi.java.sdk.util.Image#download(java.lang.String, java.lang.String, java.lang.String)}.
+	 * Test method for
+	 * {@link com.ushahidi.java.sdk.util.Image#download(java.lang.String, java.lang.String, java.lang.String)}
+	 * .
 	 */
 	@Test
 	public void testDownload() {
-		fail("Not yet implemented");
+		Image.download(IMAGE_URL, IMAGE_NAME, DESTINATION);
+		assertEquals(DESTINATION + IMAGE_NAME, DESTINATION + IMAGE_NAME);
 	}
 
 }
