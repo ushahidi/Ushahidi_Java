@@ -133,18 +133,38 @@ public class ReportsAdminTask extends BaseTask {
 				.getPayload().incidents;
 	}
 
+	/**
+	 * Get approved reports
+	 * 
+	 * @return The reports retrieved.
+	 */
 	public List<Incidents> approved() {
 		return byStatus("approved");
 	}
 
+	/**
+	 * Get unapproved reports
+	 * 
+	 * @return The reports retrieved.
+	 */
 	public List<Incidents> unapproved() {
 		return byStatus("unapproved");
 	}
 
+	/**
+	 * Get verified reports
+	 * 
+	 * @return The reports retrieved.
+	 */
 	public List<Incidents> verified() {
 		return byStatus("verified");
 	}
 
+	/**
+	 * Get unverified reports
+	 * 
+	 * @return The reports retrieved.
+	 */
 	public List<Incidents> unverified() {
 		return byStatus("unverified");
 	}

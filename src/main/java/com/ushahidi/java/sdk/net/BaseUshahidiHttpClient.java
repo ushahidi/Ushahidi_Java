@@ -720,25 +720,67 @@ public abstract class BaseUshahidiHttpClient {
 		}
 	}
 
+	/**
+	 * Helper method for creating a Proxy object
+	 * 
+	 * @param ip
+	 *            ip address
+	 * @param port
+	 *            port number
+	 * @return the created Proxy object
+	 */
 	public static Proxy createProxy(String ip, int port) {
 		return new Proxy(Proxy.Type.HTTP, new InetSocketAddress(ip, port));
 	}
 
 	private Proxy proxy;
 
+	/**
+	 * Set the proxy to use for HTTP requests
+	 * 
+	 * @param ip
+	 *            ip address
+	 * @param port
+	 *            port number
+	 */
 	public void setProxy(String ip, int port) {
 		setProxy(createProxy(ip, port));
 	}
 
+	/**
+	 * Set the proxy to use for HTTP requests
+	 * 
+	 * @param p
+	 */
 	public void setProxy(Proxy p) {
 		proxy = p;
 	}
 
+	/**
+	 * Convinient method for openConnection(u, method, true)
+	 * 
+	 * @param u
+	 * @param method
+	 * @return
+	 * @throws IOException
+	 */
 	private HttpURLConnection openConnection(URL u, String method)
 			throws IOException {
 		return openConnection(u, method, true);
 	}
 
+	/**
+	 * create a HttpURLConnection with default parameters
+	 * 
+	 * @param u
+	 *            url
+	 * @param method
+	 *            request method ("GET"/"POST")
+	 * @param doOutput
+	 *            passed to HttpURLConnection.doOutput()
+	 * @return the created HttpURLConnection
+	 * @throws IOException
+	 */
 	private HttpURLConnection openConnection(URL u, String method,
 			boolean doOutput) throws IOException {
 		URLConnection ret = proxy == null ? u.openConnection() : u
