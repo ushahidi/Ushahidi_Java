@@ -40,13 +40,6 @@ public class CategoriesTaskTest extends BaseTaskTest {
 
 	/** The default category ID used in testing */
 	private static final int CAT_ID = 1;
-	
-	/** The default category ID to use in testing category delete task */
-	private static final int CATEGORY_ID = 68;
-
-	private static final String USERNAME = "admin";
-
-	private static final String PASSWORD = "admin";
 
 	@Before
 	public void setUp() throws Exception {
