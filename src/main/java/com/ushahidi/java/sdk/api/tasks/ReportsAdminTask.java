@@ -34,7 +34,6 @@ public class ReportsAdminTask extends BaseTask {
 	 * @return
 	 */
 	private Body adminBody(int id, String action, Body body) {
-		body.addField("task", "reports");
 		body.addField("action", action);
 		body.addField("incident_id", String.valueOf(id));
 		return body;
@@ -129,7 +128,6 @@ public class ReportsAdminTask extends BaseTask {
 
 	private List<Incidents> byStatus(String status) {
 		Body body = new Body();
-		body.addField("task", "reports");
 		body.addField("by", status);
 		return fromString(sendPostRequest(url, body), Reports.class)
 				.getPayload().incidents;
