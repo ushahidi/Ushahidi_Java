@@ -135,4 +135,28 @@ public class UshahidiApiTaskFactory {
 		return new CategoriesAdminTask(url, username, password);
 	}
 
+	/**
+	 * Create the reports admin task
+	 * 
+	 * @param username
+	 *            The username of the Ushahidi deployment
+	 * @param password
+	 *            The password of the Ushahidi deployment
+	 * 
+	 * @return The reports admin task
+	 */
+	public ReportsAdminTask createReportsAdminTask(String username,
+			String password) {
+		return new ReportsAdminTask(url, username, password);
+	}
+
+	/**
+	 * Create the report task
+	 * 
+	 * @return The report task
+	 */
+	public ReportTask createReportTask() {
+		return new ReportTask(url);
+	}
+
 }
