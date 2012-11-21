@@ -17,6 +17,10 @@ And to compile all the source codes, run
 ### Create UshahidiApi object
 ```java
 UshahidiApi ushahidi = new UshahidiApi("http://demo.ushahidi.com");
+
+//set credentials for the admin APIs
+ushahidi.setUsername("username");
+ushahidi.setPassword("password");
 ```
 
 ### Fetch all categories
@@ -33,6 +37,43 @@ Add a news article to an existing report
 ```java
 TagNewsTask task = ushahidi.factory.createTagNewsTask();
 Response response = task.tagNews(4, "http://www.android.com/whatsnew/");
+```
+
+### Add comment
+Add a comment to an existing report. You need to know the report ID to be able 
+to add the comment
+
+```java
+Comment c = new Comment();
+c.setAuthor("Foo Bar");
+c.setReportId(64);
+c.setDescription("Some sample comments");
+
+CommentFields comment = new CommentFields();
+comment.fill(c);
+comment.setEmail("foo@bar.com");
+CommentsTask task = ushahidi.factory.createCommentsTask();
+Response response = task.submit(comment);
+```
+
+### Submit Report
+Submit a new report to the Ushahidi deployment
+
+```java
+ReportTask task = ushahidi.factory.createReportTask();
+Incident i = new Incident();
+i.setTitle("test title");
+i.setDescription("test desc");
+i.setDate(new Date());
+i.setLatitude(12.34);
+i.setLongitude(56.78);
+i.setLocationName("foobar");
+
+ReportFields fields = new ReportFields();
+fields.fill(i);
+fields.addCategory(7);
+fields.addPhotos(new File("/sdcard/photo0.jpg"));
+Response response = task.submit(fields);
 ```
 
 ## Javadoc 
