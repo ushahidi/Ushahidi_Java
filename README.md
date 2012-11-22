@@ -28,7 +28,7 @@ ushahidi.setPassword("password");
 ```
 
 ### Fetch all categories
-Pull all visible categories that havee been submitted to the Ushahidi platform
+Pull all visible categories that have been submitted to the Ushahidi platform
 
 ```java
 CategoriesTask task = ushahidi.factory.createCategoriesTask();
