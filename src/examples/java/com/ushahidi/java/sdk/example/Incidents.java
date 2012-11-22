@@ -64,16 +64,18 @@ public class Incidents {
 			}
 
 			// get comments
-			if((i.getComments() !=null)&&(!i.getComments().isEmpty())) {
+			if ((i.getComments() != null) && (!i.getComments().isEmpty())) {
 				System.out.println("Comments: ");
-				for(Comment c : i.getComments()) {
-					System.out.println("\t"+"ID: "+c.getId());
-					System.out.println("\t"+"Description: "+c.getDescription());
-					System.out.println("\t"+"Author: "+c.getAuthor());
-					System.out.println("\t"+"Date: "+c.getDate());
+				for (Comment c : i.getComments()) {
+					System.out.println("\t" + "ID: " + c.getId());
+					System.out.println("\t" + "Description: "
+							+ c.getDescription());
+					System.out.println("\t" + "Author: " + c.getAuthor());
+					System.out.println("\t" + "Date: " + c.getDate());
+					System.out.println("\t" + "Email: " + c.getEmail());
 				}
 			}
-			
+
 			System.out.println();
 		}
 	}

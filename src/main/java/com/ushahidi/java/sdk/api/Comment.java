@@ -65,35 +65,34 @@ public class Comment {
 	 */
 	@SerializedName("comment_date")
 	private String date;
-	
+
 	/**
 	 * The email address of the author
 	 */
 	@SerializedName("comment_email")
 	private String email;
-	
+
 	/**
 	 * The IP address that posted the comment
 	 */
 	@SerializedName("comment_ip")
 	private String ip;
-	
+
 	/**
 	 * The spam status of the comment
 	 */
 	@SerializedName("comment_spam")
 	private int spam;
-	
+
 	/**
 	 * The activness of the comment
 	 */
 	@SerializedName("comment_active")
 	private int active;
-	
-	
+
 	@SerializedName("comment_date_gmt")
 	private String gmt;
-	
+
 	/**
 	 * The ID of the user
 	 */
@@ -205,6 +204,20 @@ public class Comment {
 	 * Set the comment id
 	 */
 	public int setId(int id) {
+		return this.id = id;
+	}
+
+	/**
+	 * Get the comment email
+	 */
+	public int getEmail() {
+		return this.id;
+	}
+
+	/**
+	 * Set the comment email
+	 */
+	public int setEmail(int id) {
 		return this.id = id;
 	}
 }
