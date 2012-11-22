@@ -23,12 +23,13 @@ import java.util.List;
 
 import com.ushahidi.java.sdk.UshahidiApi;
 import com.ushahidi.java.sdk.api.Category;
+import com.ushahidi.java.sdk.api.Comment;
 import com.ushahidi.java.sdk.api.json.Reports;
 import com.ushahidi.java.sdk.api.tasks.IncidentsTask;
 
 /**
- * An example implementation to show how to fetch all reports / incidents
- * API call -- api?task=incidents
+ * An example implementation to show how to fetch all reports / incidents API
+ * call -- api?task=incidents
  */
 public class Incidents {
 
@@ -47,18 +48,31 @@ public class Incidents {
 			System.out.println("Description: " + i.incident.getDescription());
 			System.out.println("Latitude: " + i.incident.getLatitude());
 			System.out.println("Longitude: " + i.incident.getLongitude());
-			System.out.println("Location ID: "+i.incident.getLocationName());
-			System.out.println("Date: "+i.incident.getDate().toString());
+			System.out.println("Location ID: " + i.incident.getLocationName());
+			System.out.println("Date: " + i.incident.getDate().toString());
 			System.out.println("Mode: " + i.incident.getMode());
 			System.out.println("Active: " + i.incident.getActive());
 			System.out.println("Verified: " + i.incident.getVerified());
 
 			// get categories
-			System.out.println("Categories: ");
-			for (Category c : i.getCategories()) {
-				System.out.println("\t" + "ID: " + c.getId());
-				System.out.println("\t" + "Title: " + c.getTitle());
+			if ((i.getCategories() != null) && (!i.getCategories().isEmpty())) {
+				System.out.println("Categories: ");
+				for (Category c : i.getCategories()) {
+					System.out.println("\t" + "ID: " + c.getId());
+					System.out.println("\t" + "Title: " + c.getTitle());
+				}
 			}
+
+			// get comments
+			if((i.getComments() !=null)&&(!i.getComments().isEmpty())) {
+				System.out.println("Comments: ");
+				for(Comment c : i.getComments()) {
+					System.out.println("\t"+"ID: "+c.getId());
+					System.out.println("\t"+"Description: "+c.getDescription());
+					System.out.println("\t"+""+c.getAuthor());
+				}
+			}
+			
 			System.out.println();
 		}
 	}
