@@ -49,18 +49,51 @@ public class Reports extends Response {
 				public Comment comment;
 			}
 
+			public static class _Media {
+				public Media m;
+			}
+
 			public Incident incident;
 
 			public List<Incidents._Categories> categories;
 
-			public List<Media> media;
+			public List<Incidents._Media> media;
 
 			public List<Incidents._Comment> comments;
 
+			/**
+			 * Get categories
+			 * 
+			 * @return
+			 */
 			public List<Category> getCategories() {
 				ArrayList<Category> ret = new ArrayList<Category>();
 				for (_Categories c : categories) {
 					ret.add(c.category);
+				}
+				return ret;
+			}
+
+			/**
+			 * Get comments
+			 * 
+			 * @return
+			 */
+			public List<Comment> getComments() {
+				ArrayList<Comment> ret = new ArrayList<Comment>();
+				for (_Comment c : comments) {
+					ret.add(c.comment);
+				}
+				return ret;
+			}
+
+			/**
+			 * Get media
+			 */
+			public List<Media> getMedia() {
+				ArrayList<Media> ret = new ArrayList<Media>();
+				for (_Media med : media) {
+					ret.add(med.m);
 				}
 				return ret;
 			}

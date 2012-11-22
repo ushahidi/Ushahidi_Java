@@ -40,6 +40,7 @@ public class Incidents {
 		IncidentsTask task = ushahidi.factory.createReportsTask();
 
 		List<Reports.Payload.Incidents> incidents = task.all();
+		System.out.println("Fetching all reports/incidents...");
 		for (Reports.Payload.Incidents i : incidents) {
 			System.out.println("ID: " + i.incident.getId());
 			System.out.println("Title: " + i.incident.getTitle());
