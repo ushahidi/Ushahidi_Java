@@ -69,7 +69,8 @@ public class Incidents {
 				for(Comment c : i.getComments()) {
 					System.out.println("\t"+"ID: "+c.getId());
 					System.out.println("\t"+"Description: "+c.getDescription());
-					System.out.println("\t"+""+c.getAuthor());
+					System.out.println("\t"+"Author: "+c.getAuthor());
+					System.out.println("\t"+"Date: "+c.getDate());
 				}
 			}
 			
