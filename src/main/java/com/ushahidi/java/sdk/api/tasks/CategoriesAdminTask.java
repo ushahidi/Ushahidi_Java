@@ -42,7 +42,7 @@ public class CategoriesAdminTask extends BaseTask {
 	/**
 	 * Add a new category to the Ushahidi deployment. This method requires
 	 * authentication. Perhaps set {@link #setAuthentication(String, String)} or
-	 * set {@link #getClient().setAuthentication()}
+	 * set {@link #setAuthentication(com.ushahidi.java.sdk.net.Authentication)}
 	 * 
 	 * @param fields
 	 *            CategoryFields
@@ -59,7 +59,7 @@ public class CategoriesAdminTask extends BaseTask {
 	 * Edit an existing category. Requires authentication
 	 * 
 	 * @param fields
-	 * @return
+	 * @return The response received from the server
 	 */
 	public Response edit(CategoryFields fields) {
 		setRequestParameters("action", "edit");
@@ -73,7 +73,7 @@ public class CategoriesAdminTask extends BaseTask {
 	 * 
 	 * @param id
 	 *            Report ID
-	 * @return
+	 * @return The response received from the server
 	 */
 	public Response delete(int id) {
 		setRequestParameters("action", "delete");

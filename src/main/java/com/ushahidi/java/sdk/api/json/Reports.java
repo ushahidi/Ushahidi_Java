@@ -64,7 +64,7 @@ public class Reports extends Response {
 			/**
 			 * Get categories
 			 * 
-			 * @return
+			 * @return The list of categories
 			 */
 			public List<Category> getCategories() {
 				ArrayList<Category> ret = new ArrayList<Category>();
@@ -77,7 +77,7 @@ public class Reports extends Response {
 			/**
 			 * Get comments
 			 * 
-			 * @return
+			 * @return The list of comments
 			 */
 			public List<Comment> getComments() {
 				ArrayList<Comment> ret = new ArrayList<Comment>();

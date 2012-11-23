@@ -64,7 +64,7 @@ public class System extends Response {
 	/**
 	 * Get the domain associated with the domain
 	 * 
-	 * @return
+	 * @return The domain of the Ushahidi deployment
 	 */
 	public String getDomain() {
 		return payload.domain;

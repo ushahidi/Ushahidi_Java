@@ -105,7 +105,7 @@ public abstract class BaseTask extends UshahidiHttpClient {
 	 *            the json string to be converted
 	 * @param cls
 	 *            the class for the model
-	 * @return
+	 * @return The Object related to the Ushahidi API model
 	 */
 	protected static <T> T fromString(String json, Class<T> cls) {
 		return gson.fromJson(json, cls);

@@ -198,7 +198,10 @@ public class UshahidiHttpClient extends BaseUshahidiHttpClient {
 	/**
 	 * Set the request parameters
 	 * 
-	 * @param parameters
+	 * @param key
+	 *            The variable name
+	 * @param value
+	 *            The variable value
 	 */
 	public void setRequestParameters(String key, String value) {
 		requestParameters.put(key, value);

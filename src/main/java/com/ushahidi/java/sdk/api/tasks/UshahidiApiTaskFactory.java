@@ -46,7 +46,7 @@ public class UshahidiApiTaskFactory {
 	/**
 	 * Get the username to be used for authentication
 	 * 
-	 * @return
+	 * @return The username
 	 */
 	public String getUsername() {
 		return this.username;
@@ -55,7 +55,7 @@ public class UshahidiApiTaskFactory {
 	/**
 	 * Get the password to be used for authentication
 	 * 
-	 * @return
+	 * @return The password
 	 */
 	public String getPassword() {
 		return this.password;

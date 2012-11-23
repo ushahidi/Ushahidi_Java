@@ -1,45 +1,75 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project name="Ushahidi-SDK" default="compile" basedir=".">
-    <description>Ushahidi SDK build file</description>
-    <!-- Set global properties for this build -->
-    <property name="src" location="src/main/java"/>
-    <property name="bin" location="bin" />
-    <property name="doc" location="doc"/>
-    <property name="dist" location="dist"/>
-    <property name="libs" path="libs"/>
-    <property environment="env"/>
-    <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="1.6"/>
-    <property name="source" value="1.6"/>
-    <target name="init">
-        <tstamp/>
-        <mkdir dir="${bin}"/>
-    </target>
-    <path id="compile.classpath">
-        <pathelement location="bin"/>
-        <pathelement location="libs/gson-2.2.2.jar"/>
-    </path>
-    
-    <target name="compile" depends="init" description="Compile the Java code from ${src} into ${bin}">
-        <javac srcdir="${src}" destdir="${bin}">
-            <classpath refid="compile.classpath"/>   
-        </javac>
-    </target>
-    
-    <target name="javadoc" description="Generate Javadoc from source files in {$src}">
-        <javadoc sourcepath="${src}" destdir="${doc}">
-            <fileset dir="${src}" defaultexcludes="yes">
-                <include name="*/*.java"/>
-            </fileset>
-        </javadoc>
-    </target>
-    <target name="dist" depends="compile" description="Generate distributable jar file">
-        <mkdir dir="${dist}/lib"/>
-        <jar jarfile="${dist}/lib/Ushahidi_SDK.jar" basedir="${bin}/"/>
-    </target>
-    <target name="clean">
-        <delete dir="bin"/>
-        <delete dir="dist"/>
-        <delete dir="doc"/>
-    </target>
+	<description>Ushahidi SDK build file</description>
+	<!-- Set global properties for this build -->
+	<property name="src" location="src/main/java" />
+	<property name="egsrc" location="src/examples/java" />
+	<property name="bin" location="bin" />
+	<property name="doc" location="doc" />
+	<property name="dist" location="dist" />
+
+	<property environment="env" />
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="target" value="1.6" />
+	<property name="source" value="1.6" />
+	<target name="init">
+		<tstamp />
+		<mkdir dir="${bin}" />
+		<copy includeemptydirs="false" todir="bin">
+			<fileset dir="${egsrc}">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
+	<path id="compile.classpath">
+		<pathelement location="bin" />
+		<pathelement location="libs/gson-2.2.2.jar" />
+	</path>
+
+	<target name="compile" depends="init"
+		description="Compile the Java code from ${src} into ${bin}">
+		<javac destdir="${bin}" debug="true" debuglevel="${debuglevel}"
+			includeantruntime="false">
+			<src path="${src}" />
+			<src path="${egsrc}" />
+			<classpath refid="compile.classpath" />
+		</javac>
+	</target>
+
+	<target name="Incidents">
+		<java classname="com.ushahidi.java.sdk.example.Incidents"
+			failonerror="true" fork="yes">
+			<classpath refid="compile.classpath" />
+		</java>
+	</target>
+	<target name="Categories">
+		<java classname="com.ushahidi.java.sdk.example.Categories"
+			failonerror="true" fork="yes">
+			<classpath refid="compile.classpath" />
+		</java>
+	</target>
+	<target name="SubmitReport">
+		<java classname="com.ushahidi.java.sdk.example.SubmitReport"
+			failonerror="true" fork="yes">
+			<classpath refid="compile.classpath" />
+		</java>
+	</target>
+
+	<target name="javadoc" description="Generate Javadoc from source files in {$src}">
+		<javadoc sourcepath="${src}" destdir="${doc}">
+			<fileset dir="${src}" defaultexcludes="yes">
+				<include name="*/*.java" />
+			</fileset>
+			<classpath refid="compile.classpath" />
+		</javadoc>
+	</target>
+	<target name="dist" depends="compile" description="Generate distributable jar file">
+		<mkdir dir="${dist}/lib" />
+		<jar jarfile="${dist}/lib/Ushahidi_SDK.jar" basedir="${bin}/" />
+	</target>
+	<target name="clean">
+		<delete dir="bin" />
+		<delete dir="dist" />
+		<delete dir="doc" />
+	</target>
 </project>

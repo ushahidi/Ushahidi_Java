@@ -261,8 +261,6 @@ public abstract class BaseUshahidiHttpClient {
 	 * 
 	 * @param url
 	 *            The API URL
-	 * @param body
-	 *            The parameters to be passed to the URL
 	 * @return The input stream
 	 */
 	protected InputStream postRequest(String url) {
@@ -384,8 +382,7 @@ public abstract class BaseUshahidiHttpClient {
 	 * 
 	 * @param apiUrl
 	 *            The API URL
-	 * @param body
-	 *            The parameters
+	 * 
 	 * @param expected
 	 *            The expected
 	 * 
