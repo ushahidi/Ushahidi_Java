@@ -220,4 +220,14 @@ public class Comment {
 	public int setEmail(int id) {
 		return this.id = id;
 	}
+
+	@Override
+	public String toString() {
+		return "Comment [id:" + id + ", checkinId:" + checkinId
+				+ ", report_id:" + reportId + ", author:" + author
+				+ ", description:" + description + ", date:" + date
+				+ ", email:" + email + ", ip:" + ip + ", spam:" + spam
+				+ ", active:" + active + ", gmt:" + gmt + ", userId:" + userId
+				+ "]";
+	}
 }

@@ -192,4 +192,13 @@ public class Category {
 		return icon;
 	}
 
+	/**
+	 * Override toString method
+	 */
+	@Override
+	public String toString() {
+		return "Category [id:" + id + ", title:" + title + ", description:"
+				+ description + ", color:" + color + ", icon:" + icon
+				+ ", position:" + position + ", parentId:" + parentId + "]";
+	}
 }

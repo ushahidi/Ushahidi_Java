@@ -95,4 +95,11 @@ public class Media {
 	public String getThumbUrl() {
 		return this.thumbUrl;
 	}
+
+	@Override
+	public String toString() {
+		return "Media [id:" + id + ", type:" + type + ", link:" + link
+				+ ", thumb:" + thumb + ", thumbUrl:" + thumbUrl + ", link:"
+				+ linkUrl + "]";
+	}
 }

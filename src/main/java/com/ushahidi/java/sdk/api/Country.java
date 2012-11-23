@@ -166,4 +166,10 @@ public class Country {
 	public int setId(int id) {
 		return this.id = id;
 	}
+
+	@Override
+	public String toString() {
+		return "Country [id:" + id + ", name:" + name + ", country:" + country
+				+ ", capital:" + capital + ", cities:" + cities + "]";
+	}
 }

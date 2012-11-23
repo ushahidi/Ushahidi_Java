@@ -20,7 +20,8 @@
 package com.ushahidi.java.sdk.api;
 
 /**
- * The Location class has all the properties and methods of the Ushahidi API's location resource
+ * The Location class has all the properties and methods of the Ushahidi API's
+ * location resource
  * 
  * @author eyedol
  * 
@@ -105,5 +106,11 @@ public class Location {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Location [name:" + name + ", countryId:" + countryId
+				+ ", locationName" + ", latitude:" + latitude + ", longitude:"
+				+ longitude + ", date:" + date + "]";
+	}
 }

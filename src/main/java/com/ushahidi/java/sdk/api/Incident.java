@@ -101,7 +101,6 @@ public class Incident {
 	@SerializedName("incidentactive")
 	private int active;
 
-
 	/**
 	 * The default constructor. It initializes no variables.
 	 */
@@ -286,6 +285,15 @@ public class Incident {
 
 	public int getActive() {
 		return this.active;
+	}
+
+	@Override
+	public String toString() {
+		return "Incident [id:" + id + ", title:" + title + ", description:"
+				+ description + ", date:" + date + ", mode:" + mode
+				+ ", verified:" + verified + ", locationName:" + locationname
+				+ ", latitude:" + latitude + ", longitude:" + longitude
+				+ ", active:" + active + "]";
 	}
 
 	public static class Date extends java.util.Date {

@@ -24,4 +24,9 @@ public class Person {
 	public String getEmail() {
 		return email;
 	}
+
+	public String toString() {
+		return "Person [firstName:" + firstName + ", lastName:" + lastName
+				+ ", email:" + email + "]";
+	}
 }
