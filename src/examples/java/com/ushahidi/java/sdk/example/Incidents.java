@@ -43,7 +43,7 @@ public class Incidents {
 		List<Reports.Payload.Incidents> incidents = task.all();
 		System.out.println("Fetching all reports/incidents...");
 		for (Reports.Payload.Incidents i : incidents) {
-			System.out.println(i.incident);
+			System.out.println(i);
 
 			// get categories
 			if ((i.getCategories() != null) && (!i.getCategories().isEmpty())) {
