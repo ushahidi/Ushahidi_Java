@@ -35,13 +35,20 @@ public class Incidents {
 
 	public static void main(String args[]) {
 		UshahidiApi ushahidi = new UshahidiApi("http://demo.ushahidi.com");
+
+		// set login credentials
 		ushahidi.factory.setPassword("admin");
 		ushahidi.factory.setUsername("admin");
 
+		// create incidents task
 		IncidentsTask task = ushahidi.factory.createReportsTask();
 
+		// fetch all incidents / reports
 		List<Reports.Payload.Incidents> incidents = task.all();
+
 		System.out.println("Fetching all reports/incidents...");
+
+		// display the fetched categories
 		for (Reports.Payload.Incidents i : incidents) {
 			System.out.println(i);
 

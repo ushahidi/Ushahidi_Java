@@ -34,10 +34,13 @@ public class Categories {
 	public static void main(String args[]) {
 		UshahidiApi ushahidi = new UshahidiApi("http://demo.ushahidi.com");
 		
+		//create the categories task
 		CategoriesTask task = ushahidi.factory.createCategoriesTask();
 
+		//fetch all categories
 		List<Category> categories = task.all();
 
+		//display the categories
 		for (Category c : categories) {
 			System.out.println(c);
 		}
