@@ -20,6 +20,7 @@
 package com.ushahidi.java.sdk.api;
 
 import com.google.gson.annotations.SerializedName;
+import com.ushahidi.java.sdk.api.json.Date;
 
 /**
  * This Comment class has all properties and methods of the Ushahidi API's
@@ -64,7 +65,7 @@ public class Comment {
 	 * The date the comment was submitted.
 	 */
 	@SerializedName("comment_date")
-	private String date;
+	private Date date;
 
 	/**
 	 * The email address of the author
@@ -179,7 +180,7 @@ public class Comment {
 	 * 
 	 * @return The submission date
 	 */
-	public String getDate() {
+	public Date getDate() {
 		return this.date;
 	}
 
@@ -189,8 +190,8 @@ public class Comment {
 	 * @param date
 	 *            The submission date.
 	 */
-	public void setDate(String date) {
-		this.date = date;
+	public void setDate(java.util.Date date) {
+		this.date = new Date(date);
 	}
 
 	/**

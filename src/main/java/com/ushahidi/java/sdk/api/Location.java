@@ -19,6 +19,8 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api;
 
+import com.ushahidi.java.sdk.api.json.Date;
+
 /**
  * The Location class has all the properties and methods of the Ushahidi API's
  * location resource
@@ -57,7 +59,7 @@ public class Location {
 	/**
 	 * The date and time the location was saved. Eg. 2009-06-30 00:00:00
 	 */
-	private String date;
+	private Date date;
 
 	public int getCountryId() {
 		return countryId;
@@ -99,12 +101,12 @@ public class Location {
 		this.locationName = locationName;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return this.date;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setDate(java.util.Date date) {
+		this.date = new Date(date);
 	}
 
 	@Override
