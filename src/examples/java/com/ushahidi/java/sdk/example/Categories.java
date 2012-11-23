@@ -38,7 +38,7 @@ public class Categories {
 		List<Category> categories = task.all();
 
 		for (Category c : categories) {
-			System.out.println("Title: " + c.getTitle());
+			System.out.println(c);
 		}
 	}
 }

@@ -43,23 +43,13 @@ public class Incidents {
 		List<Reports.Payload.Incidents> incidents = task.all();
 		System.out.println("Fetching all reports/incidents...");
 		for (Reports.Payload.Incidents i : incidents) {
-			System.out.println("ID: " + i.incident.getId());
-			System.out.println("Title: " + i.incident.getTitle());
-			System.out.println("Description: " + i.incident.getDescription());
-			System.out.println("Latitude: " + i.incident.getLatitude());
-			System.out.println("Longitude: " + i.incident.getLongitude());
-			System.out.println("Location ID: " + i.incident.getLocationName());
-			System.out.println("Date: " + i.incident.getDate().toString());
-			System.out.println("Mode: " + i.incident.getMode());
-			System.out.println("Active: " + i.incident.getActive());
-			System.out.println("Verified: " + i.incident.getVerified());
+			System.out.println(i.incident);
 
 			// get categories
 			if ((i.getCategories() != null) && (!i.getCategories().isEmpty())) {
 				System.out.println("Categories: ");
 				for (Category c : i.getCategories()) {
-					System.out.println("\t" + "ID: " + c.getId());
-					System.out.println("\t" + "Title: " + c.getTitle());
+					System.out.println(c);
 				}
 			}
 
@@ -67,12 +57,8 @@ public class Incidents {
 			if ((i.getComments() != null) && (!i.getComments().isEmpty())) {
 				System.out.println("Comments: ");
 				for (Comment c : i.getComments()) {
-					System.out.println("\t" + "ID: " + c.getId());
-					System.out.println("\t" + "Description: "
-							+ c.getDescription());
-					System.out.println("\t" + "Author: " + c.getAuthor());
-					System.out.println("\t" + "Date: " + c.getDate());
-					System.out.println("\t" + "Email: " + c.getEmail());
+					System.out.println(c);
+
 				}
 			}
 
