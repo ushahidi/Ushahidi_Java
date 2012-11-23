@@ -19,27 +19,47 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.example;
 
-import java.util.List;
+import java.io.File;
+import java.util.Date;
 
 import com.ushahidi.java.sdk.UshahidiApi;
-import com.ushahidi.java.sdk.api.Category;
-import com.ushahidi.java.sdk.api.tasks.CategoriesTask;
+import com.ushahidi.java.sdk.api.Incident;
+import com.ushahidi.java.sdk.api.ReportFields;
+import com.ushahidi.java.sdk.api.json.Response;
+import com.ushahidi.java.sdk.api.tasks.ReportTask;
 
 /**
- * An example implementation to show how to fetch all categories
- * -- api?task=categories
+ * 
  */
-public class Categories {
+public class SubmitReport {
 
 	public static void main(String args[]) {
+		
 		UshahidiApi ushahidi = new UshahidiApi("http://demo.ushahidi.com");
 		
-		CategoriesTask task = ushahidi.factory.createCategoriesTask();
+		//create report task
+		ReportTask task = ushahidi.factory.createReportTask();
+		
+		//add incident details
+		Incident i = new Incident();
+		i.setTitle("Test title");
+		i.setDescription("Test desc");
+		i.setDate(new Date());
+		i.setLatitude(12.34);
+		i.setLongitude(56.78);
+		i.setLocationName("foobar");
 
-		List<Category> categories = task.all();
+		ReportFields fields = new ReportFields();
+		fields.fill(i);
+		//add categories
+		fields.addCategory(7);
+		//add photos
+		fields.addPhotos(new File("/sdcard/nophoto.jpg"));
+		
+		Response response = task.submit(fields);
 
-		for (Category c : categories) {
-			System.out.println(c);
-		}
+		// print response from server
+		System.out.println("Error: " + response.getErrorCode() + " Message: "
+				+ response.getErrorMessage());
 	}
 }
