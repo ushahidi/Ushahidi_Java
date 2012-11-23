@@ -50,7 +50,7 @@ public class Incidents {
 
 		// display the fetched categories
 		for (Reports.Payload.Incidents i : incidents) {
-			System.out.println(i);
+			System.out.println(i.incident);
 
 			// get categories
 			if ((i.getCategories() != null) && (!i.getCategories().isEmpty())) {

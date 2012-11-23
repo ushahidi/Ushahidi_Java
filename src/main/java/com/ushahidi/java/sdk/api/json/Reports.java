@@ -53,7 +53,7 @@ public class Reports extends Response {
 				public Media m;
 			}
 
-			public List<Incidents._Incident> incidents;
+			public Incident incident;
 
 			public List<Incidents._Categories> categories;
 
