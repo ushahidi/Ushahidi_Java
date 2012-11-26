@@ -31,7 +31,7 @@ public class UshahidiApi {
 
 	/** A factory object for creating the various Ushahidi API tasks */
 
-	private static final String VERSION = "1.0";
+	private String version = "1.0";
 
 	public UshahidiApiTaskFactory factory;
 
@@ -40,6 +40,6 @@ public class UshahidiApi {
 	}
 
 	public String getVersion() {
-		return VERSION;
+		return version;
 	}
 }
