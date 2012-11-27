@@ -1,7 +1,7 @@
 # Ushahidi Java SDK #
 
 A Java wrapper for the Ushahidi API. It's simply a Java library that wraps the raw HTTP calls to the Ushahidi APIs. 
-The goal of this SDK is to easy Ushahidi API integration into your applications and to support all the Ushahidi public and admin APIs that are there. 
+The goal of this SDK is to ease Ushahidi API integration into your applications and to support all the Ushahidi public and admin APIs that are there. 
 For more information on the Ushahidi API, see; https://wiki.ushahidi.com/display/WIKI/Ushahidi+REST+API
 
 ## Building
