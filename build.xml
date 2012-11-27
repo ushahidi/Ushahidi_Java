@@ -8,6 +8,7 @@
 	<property name="doc" location="doc" />
 	<property name="dist" location="dist" />
 	<property name="version" value="1.0" />
+	<property name="libs" location="libs/gson-2.2.2.jar" />
 
 	<property environment="env" />
 	<property name="debuglevel" value="source,lines,vars" />
@@ -24,7 +25,7 @@
 	</target>
 	<path id="compile.classpath">
 		<pathelement location="bin" />
-		<pathelement location="libs/gson-2.2.2.jar" />
+		<pathelement location="${libs}" />
 	</path>
 
 	<target name="compile" depends="init"
@@ -66,7 +67,9 @@
 	</target>
 	<target name="dist" depends="compile" description="Generate distributable jar file">
 		<mkdir dir="${dist}/lib" />
-		<jar jarfile="${dist}/lib/ushahidi_sdk-${version}.jar" basedir="${bin}/" />
+		<jar jarfile="${dist}/lib/ushahidi_sdk-${version}.jar" basedir="${bin}/">
+			<zipgroupfileset dir="libs" includes="**/*.jar" />
+		</jar>
 	</target>
 	<target name="clean">
 		<delete dir="bin" />
