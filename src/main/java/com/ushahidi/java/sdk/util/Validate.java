@@ -48,7 +48,7 @@ public class Validate {
 	 * @return true if is empty otherwise false
 	 */
 	public static boolean empty(String field) {
-		if (field == null || field.isEmpty())
+		if (field == null || field.length() == 0)
 			return true;
 		return false;
 	}

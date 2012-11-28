@@ -104,12 +104,12 @@ public abstract class BaseTask {
 	}
 
 	public void setAuthentication(String username, String password) {
-		if (username == null || username.isEmpty()) {
+		if (username == null || username.length() == 0) {
 			throw new IllegalArgumentException(
 					"Username may not be null or empty");
 		}
 
-		if (password == null || password.isEmpty()) {
+		if (password == null || password.length() == 0 ) {
 			throw new IllegalArgumentException(
 					"Password may not be null or empty");
 		}

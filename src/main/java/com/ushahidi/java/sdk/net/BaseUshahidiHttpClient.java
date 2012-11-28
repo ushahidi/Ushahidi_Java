@@ -346,7 +346,7 @@ public abstract class BaseUshahidiHttpClient {
 			builder.append(strParams);
 			// for request passed via body object
 			// couldn't figure out a better way of doing this
-			if (!strParams.isEmpty()) {
+			if (strParams.length() > 0) {
 				builder.append("&");
 			}
 			builder.append(getBodyString(body));
