@@ -22,6 +22,7 @@ package com.ushahidi.java.sdk.api.tasks;
 import java.util.List;
 import com.ushahidi.java.sdk.api.Country;
 import com.ushahidi.java.sdk.api.json.Countries;
+import com.ushahidi.java.sdk.net.UshahidiHttpClient;
 
 /**
  * Implements all tasks related to countries.
@@ -37,8 +38,26 @@ public class CountriesTask extends BaseTask {
 
 	private static final String TASK = "countries";
 
+	/**
+	 * The Ushahidi deployment URL
+	 * 
+	 * @param url
+	 *            The Ushahidi deployment URL
+	 */
 	public CountriesTask(String url) {
 		super(url, TASK);
+	}
+
+	/**
+	 * You can pre configure an HTTP client to be used by this task
+	 * 
+	 * @param url
+	 *            The Ushahidi deployment URL
+	 * @param client
+	 *            The HTTP client
+	 */
+	public CountriesTask(String url, UshahidiHttpClient client) {
+		super(url, TASK, client);
 	}
 
 	/**
@@ -50,7 +69,8 @@ public class CountriesTask extends BaseTask {
 	 */
 	public List<Country> all() {
 
-		return fromString(sendGetRequest(url), Countries.class).getCountries();
+		return fromString(client.sendGetRequest(url), Countries.class)
+				.getCountries();
 	}
 
 	/**
@@ -65,10 +85,11 @@ public class CountriesTask extends BaseTask {
 	 */
 	public List<Country> countryId(int id) {
 
-		setRequestParameters("by", "countryid");
-		setRequestParameters("id", String.valueOf(id));
+		client.setRequestParameters("by", "countryid");
+		client.setRequestParameters("id", String.valueOf(id));
 
-		return fromString(sendGetRequest(url), Countries.class).getCountries();
+		return fromString(client.sendGetRequest(url), Countries.class)
+				.getCountries();
 	}
 
 	/**
@@ -82,9 +103,10 @@ public class CountriesTask extends BaseTask {
 	 */
 	public List<Country> countryIso(String iso) {
 
-		setRequestParameters("by", "countryiso");
-		setRequestParameters("iso", iso);
-		return fromString(sendGetRequest(url), Countries.class).getCountries();
+		client.setRequestParameters("by", "countryiso");
+		client.setRequestParameters("iso", iso);
+		return fromString(client.sendGetRequest(url), Countries.class)
+				.getCountries();
 	}
 
 	/**
@@ -98,9 +120,10 @@ public class CountriesTask extends BaseTask {
 	 * @throws JSONException
 	 */
 	public List<Country> countryName(String name) {
-		setRequestParameters("by", "countryname");
-		setRequestParameters("name", name);
-		return fromString(sendGetRequest(url), Countries.class).getCountries();
+		client.setRequestParameters("by", "countryname");
+		client.setRequestParameters("name", name);
+		return fromString(client.sendGetRequest(url), Countries.class)
+				.getCountries();
 	}
 
 }

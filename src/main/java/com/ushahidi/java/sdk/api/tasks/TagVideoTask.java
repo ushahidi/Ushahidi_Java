@@ -21,6 +21,7 @@ package com.ushahidi.java.sdk.api.tasks;
 
 import com.ushahidi.java.sdk.api.TagMediaFields;
 import com.ushahidi.java.sdk.api.json.Response;
+import com.ushahidi.java.sdk.net.UshahidiHttpClient;
 
 /**
  * Implements all task related to tagging an existing report with news item
@@ -45,6 +46,10 @@ public class TagVideoTask extends BaseTask {
 		super(url, TASK);
 	}
 
+	public TagVideoTask(String url, UshahidiHttpClient client) {
+		super(url, TASK, client);
+	}
+
 	/**
 	 * Tag an existing report with a news article
 	 * 
@@ -58,7 +63,7 @@ public class TagVideoTask extends BaseTask {
 		tagVideoFields = new TagMediaFields(id, videoUrl);
 
 		return fromString(
-				sendPostRequest(url,
+				client.sendPostRequest(url,
 						tagVideoFields.getParameters(tagVideoFields)),
 				Response.class);
 

@@ -29,6 +29,7 @@ import org.junit.Before;
 import com.ushahidi.java.sdk.api.tasks.UshahidiApiTaskFactory;
 import com.ushahidi.java.sdk.net.Authentication;
 import com.ushahidi.java.sdk.net.PasswordAuthentication;
+import com.ushahidi.java.sdk.net.UshahidiHttpClient;
 
 /**
  * The base class for testing all the task supported by the Ushahidi API
@@ -58,6 +59,8 @@ public class BaseTaskTest extends TestCase {
 		super.setUp();
 		authentication = new PasswordAuthentication(USERNAME, PASSWORD);
 		factory = UshahidiApiTaskFactory.newInstance(DEMO_DEPLOYMENT);
+		factory.client = new UshahidiHttpClient();
+		factory.client.setAuthentication(authentication);
 	}
 
 	@After

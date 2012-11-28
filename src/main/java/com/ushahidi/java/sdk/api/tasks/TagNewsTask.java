@@ -21,6 +21,7 @@ package com.ushahidi.java.sdk.api.tasks;
 
 import com.ushahidi.java.sdk.api.TagMediaFields;
 import com.ushahidi.java.sdk.api.json.Response;
+import com.ushahidi.java.sdk.net.UshahidiHttpClient;
 
 /**
  * Implements all task related to tagging an existing report with news item
@@ -48,6 +49,10 @@ public class TagNewsTask extends BaseTask {
 		super(url, TASK);
 	}
 
+	public TagNewsTask(String url, UshahidiHttpClient client) {
+		super(url, TASK, client);
+	}
+
 	/**
 	 * Tag an existing report with a news article
 	 * 
@@ -61,7 +66,8 @@ public class TagNewsTask extends BaseTask {
 		tagNewsFields = new TagMediaFields(id, newsArticleUrl);
 
 		return fromString(
-				sendPostRequest(url, tagNewsFields.getParameters(tagNewsFields)),
+				client.sendPostRequest(url,
+						tagNewsFields.getParameters(tagNewsFields)),
 				Response.class);
 
 	}

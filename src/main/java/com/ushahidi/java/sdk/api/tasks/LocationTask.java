@@ -24,6 +24,7 @@ import java.util.List;
 
 import com.ushahidi.java.sdk.api.Location;
 import com.ushahidi.java.sdk.api.json.Locations;
+import com.ushahidi.java.sdk.net.UshahidiHttpClient;
 
 /**
  * The Location Task Implements all tasks related to the Location API.
@@ -43,6 +44,10 @@ public class LocationTask extends BaseTask {
 		super(url, TASK);
 	}
 
+	public LocationTask(String url, UshahidiHttpClient client) {
+		super(url, TASK, client);
+	}
+
 	/**
 	 * Gets all locations
 	 * 
@@ -53,7 +58,8 @@ public class LocationTask extends BaseTask {
 	 */
 	public List<Location> all() {
 
-		return fromString(sendGetRequest(url), Locations.class).getLocations();
+		return fromString(client.sendGetRequest(url), Locations.class)
+				.getLocations();
 	}
 
 	/**
@@ -68,9 +74,10 @@ public class LocationTask extends BaseTask {
 	 */
 	public List<Location> locationId(int id) {
 
-		setRequestParameters("by", "locid");
-		setRequestParameters("id", String.valueOf(id));
-		return fromString(sendGetRequest(url), Locations.class).getLocations();
+		client.setRequestParameters("by", "locid");
+		client.setRequestParameters("id", String.valueOf(id));
+		return fromString(client.sendGetRequest(url), Locations.class)
+				.getLocations();
 
 	}
 
@@ -85,9 +92,10 @@ public class LocationTask extends BaseTask {
 	 */
 	public List<Location> countryId(int id) {
 
-		setRequestParameters("by", "country");
-		setRequestParameters("id", String.valueOf(id));
-		return fromString(sendGetRequest(url), Locations.class).getLocations();
+		client.setRequestParameters("by", "country");
+		client.setRequestParameters("id", String.valueOf(id));
+		return fromString(client.sendGetRequest(url), Locations.class)
+				.getLocations();
 	}
 
 }

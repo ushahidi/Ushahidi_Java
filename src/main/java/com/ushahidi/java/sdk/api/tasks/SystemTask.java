@@ -20,6 +20,7 @@
 package com.ushahidi.java.sdk.api.tasks;
 
 import com.ushahidi.java.sdk.api.json.System;
+import com.ushahidi.java.sdk.net.UshahidiHttpClient;
 
 /**
  * The system info task
@@ -42,12 +43,24 @@ public class SystemTask extends BaseTask {
 	}
 
 	/**
+	 * You can pass a configured UshahidiHttpClient
+	 * 
+	 * @param url
+	 *            The Ushahidi deployment URL
+	 * @param client
+	 *            The ushahidi HTTP client
+	 */
+	public SystemTask(String url, UshahidiHttpClient client) {
+		super(url, TASK, client);
+	}
+
+	/**
 	 * Get the version task API call
 	 * 
 	 * @return The {@link com.ushahidi.java.sdk.api.json.System}
 	 */
 	public System fetch() {
 
-		return fromString(sendGetRequest(url), System.class);
+		return fromString(client.sendGetRequest(url), System.class);
 	}
 }

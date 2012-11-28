@@ -49,8 +49,6 @@ public class CommentsTaskTest extends BaseTaskTest {
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		factory.setPassword("admin");
-		factory.setUsername("admin");
 		task = factory.createCommentTask();
 	}
 

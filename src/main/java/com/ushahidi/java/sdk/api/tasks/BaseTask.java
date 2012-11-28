@@ -31,7 +31,7 @@ import com.ushahidi.java.sdk.net.UshahidiHttpClient;
  * @author eyedol
  * 
  */
-public abstract class BaseTask extends UshahidiHttpClient {
+public abstract class BaseTask {
 
 	private static Gson gson;
 	static {
@@ -50,6 +50,38 @@ public abstract class BaseTask extends UshahidiHttpClient {
 
 	private Authentication authentication;
 
+	protected final UshahidiHttpClient client;
+
+	/**
+	 * Create a the task using the default {@link UshahidiHttpClient}
+	 * 
+	 * @param url
+	 *            The Ushahidi deployment
+	 * @param task
+	 *            The task to be performed
+	 * @param client
+	 *            The HttpClient
+	 */
+	public BaseTask(String url, String task, UshahidiHttpClient client) {
+		if (url == null) {
+			throw new IllegalArgumentException("URL cannot be null");
+		}
+
+		if (task == null) {
+			throw new IllegalArgumentException("Task cannot be null");
+		}
+
+		if (client == null) {
+			throw new IllegalArgumentException("Client cannot be null");
+		}
+
+		this.url = url + API;
+		this.task = task;
+		this.client = client;
+		this.client.setRequestParameters("task", task);
+		this.client.setRequestParameters("resp", "json");
+	}
+
 	/**
 	 * Create a the task using the default {@link UshahidiHttpClient}
 	 * 
@@ -59,18 +91,7 @@ public abstract class BaseTask extends UshahidiHttpClient {
 	 *            The task to be performed
 	 */
 	public BaseTask(String url, String task) {
-		if (url == null) {
-			throw new IllegalArgumentException("URL cannot be null");
-		}
-
-		if (task == null) {
-			throw new IllegalArgumentException("Task cannot be null");
-		}
-
-		this.url = url + API;
-		this.task = task;
-		setRequestParameters("task", task);
-		setRequestParameters("resp", "json");
+		this(url, task, new UshahidiHttpClient());
 	}
 
 	/**
@@ -79,7 +100,7 @@ public abstract class BaseTask extends UshahidiHttpClient {
 	 * @return non-null client
 	 */
 	public UshahidiHttpClient getClient() {
-		return this.getClient();
+		return client;
 	}
 
 	public void setAuthentication(String username, String password) {
@@ -94,7 +115,7 @@ public abstract class BaseTask extends UshahidiHttpClient {
 		}
 
 		authentication = new PasswordAuthentication(username, password);
-		setAuthentication(authentication);
+		client.setAuthentication(authentication);
 	}
 
 	/**

@@ -40,9 +40,6 @@ public class CategoriesAdminTaskTest extends BaseTaskTest {
 	/** The default category ID to use in testing category delete task */
 	private static final int CATEGORY_ID = 68;
 
-	private static final String USERNAME = "admin";
-
-	private static final String PASSWORD = "admin";
 
 	/**
 	 * @throws java.lang.Exception
@@ -50,7 +47,7 @@ public class CategoriesAdminTaskTest extends BaseTaskTest {
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		task = factory.createCategoriesAdminTask(USERNAME, PASSWORD);
+		task = factory.createCategoriesAdminTask();
 	}
 
 	/**

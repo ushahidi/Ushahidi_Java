@@ -24,6 +24,7 @@ import java.util.List;
 
 import com.ushahidi.java.sdk.api.Category;
 import com.ushahidi.java.sdk.api.json.Categories;
+import com.ushahidi.java.sdk.net.UshahidiHttpClient;
 
 /**
  * Implements all tasks related to Categories.
@@ -50,6 +51,16 @@ public class CategoriesTask extends BaseTask {
 	}
 
 	/**
+	 * Create the Categories task
+	 * 
+	 * @param url
+	 *            The URL of the Ushahidi deployment
+	 */
+	public CategoriesTask(String url, UshahidiHttpClient client) {
+		super(url, TASK, client);
+	}
+
+	/**
 	 * Gets all visible categories submitted to the Ushahidi deployment.
 	 * 
 	 * 
@@ -59,7 +70,7 @@ public class CategoriesTask extends BaseTask {
 	 */
 	public List<Category> all() {
 
-		final Categories categories = fromString(sendGetRequest(url),
+		final Categories categories = fromString(client.sendGetRequest(url),
 				Categories.class);
 		return categories.getCategories();
 	}
@@ -73,9 +84,9 @@ public class CategoriesTask extends BaseTask {
 	 */
 	public Category catId(int id) {
 
-		setRequestParameters("by", "catid");
-		setRequestParameters("id", String.valueOf(id));
-		final Categories categories = fromString(sendGetRequest(url),
+		client.setRequestParameters("by", "catid");
+		client.setRequestParameters("id", String.valueOf(id));
+		final Categories categories = fromString(client.sendGetRequest(url),
 				Categories.class);
 		return categories.getCategory();
 	}

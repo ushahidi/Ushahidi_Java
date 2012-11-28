@@ -26,6 +26,7 @@ import com.ushahidi.java.sdk.api.Comment;
 import com.ushahidi.java.sdk.api.CommentFields;
 import com.ushahidi.java.sdk.api.json.Comments;
 import com.ushahidi.java.sdk.api.json.Response;
+import com.ushahidi.java.sdk.net.UshahidiHttpClient;
 import com.ushahidi.java.sdk.net.content.Body;
 
 /**
@@ -42,9 +43,12 @@ public class CommentsTask extends BaseTask {
 
 	private static final String TASK = "comments";
 
-	public CommentsTask(String url, String username, String password) {
+	public CommentsTask(String url) {
 		super(url, TASK);
-		setAuthentication(username, password);
+	}
+
+	public CommentsTask(String url, UshahidiHttpClient client) {
+		super(url, TASK, client);
 	}
 
 	/**
@@ -56,9 +60,10 @@ public class CommentsTask extends BaseTask {
 	 */
 	public List<Comment> all() {
 
-		setRequestParameters("by", "all");
+		client.setRequestParameters("by", "all");
 		// fetch all comments
-		Comments comments = fromString(sendGetRequest(url), Comments.class);
+		Comments comments = fromString(client.sendGetRequest(url),
+				Comments.class);
 		return comments.getComments();
 	}
 
@@ -71,11 +76,12 @@ public class CommentsTask extends BaseTask {
 	 */
 	public List<Comment> reportId(int id) {
 
-		setRequestParameters("by", "reportid");
-		setRequestParameters("id", String.valueOf(id));
+		client.setRequestParameters("by", "reportid");
+		client.setRequestParameters("id", String.valueOf(id));
 		// fetch all comment
 		// fetch all categories
-		Comments comments = fromString(sendGetRequest(url), Comments.class);
+		Comments comments = fromString(client.sendGetRequest(url),
+				Comments.class);
 		return comments.getComments();
 	}
 
@@ -91,9 +97,10 @@ public class CommentsTask extends BaseTask {
 	 */
 	public List<Comment> spam() {
 
-		setRequestParameters("by", "spam");
+		client.setRequestParameters("by", "spam");
 		// fetch all categories
-		Comments comments = fromString(sendGetRequest(url), Comments.class);
+		Comments comments = fromString(client.sendGetRequest(url),
+				Comments.class);
 		return comments.getComments();
 
 	}
@@ -109,9 +116,10 @@ public class CommentsTask extends BaseTask {
 	 */
 	public List<Comment> pending() {
 
-		setRequestParameters("by", "pending");
+		client.setRequestParameters("by", "pending");
 		// fetch all categories
-		Comments comments = fromString(sendGetRequest(url), Comments.class);
+		Comments comments = fromString(client.sendGetRequest(url),
+				Comments.class);
 		return comments.getComments();
 
 	}
@@ -127,9 +135,10 @@ public class CommentsTask extends BaseTask {
 	 */
 	public List<Comment> approved() {
 
-		setRequestParameters("by", "approved");
+		client.setRequestParameters("by", "approved");
 		// fetch all categories
-		Comments comments = fromString(sendGetRequest(url), Comments.class);
+		Comments comments = fromString(client.sendGetRequest(url),
+				Comments.class);
 		return comments.getComments();
 	}
 
@@ -139,8 +148,8 @@ public class CommentsTask extends BaseTask {
 	 * @return The response received from the server
 	 */
 	public Response submit(CommentFields comment) {
-		setRequestParameters("action", "add");
+		client.setRequestParameters("action", "add");
 		Body body = comment.getParameters(comment);
-		return fromString(sendPostRequest(url, body), Response.class);
+		return fromString(client.sendPostRequest(url, body), Response.class);
 	}
 }

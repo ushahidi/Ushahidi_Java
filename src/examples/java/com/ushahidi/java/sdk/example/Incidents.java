@@ -26,6 +26,8 @@ import com.ushahidi.java.sdk.api.Category;
 import com.ushahidi.java.sdk.api.Comment;
 import com.ushahidi.java.sdk.api.json.Reports;
 import com.ushahidi.java.sdk.api.tasks.IncidentsTask;
+import com.ushahidi.java.sdk.net.PasswordAuthentication;
+import com.ushahidi.java.sdk.net.UshahidiHttpClient;
 
 /**
  * An example implementation to show how to fetch all reports / incidents API
@@ -35,10 +37,9 @@ public class Incidents {
 
 	public static void main(String args[]) {
 		UshahidiApi ushahidi = new UshahidiApi("http://demo.ushahidi.com");
-
-		// set login credentials
-		ushahidi.factory.setPassword("admin");
-		ushahidi.factory.setUsername("admin");
+		ushahidi.factory.client = new UshahidiHttpClient();
+		ushahidi.factory.client.setAuthentication(new PasswordAuthentication(
+				"admin", "admin"));
 
 		// create incidents task
 		IncidentsTask task = ushahidi.factory.createReportsTask();

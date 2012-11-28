@@ -9,6 +9,7 @@ import com.ushahidi.java.sdk.api.ReportFields;
 import com.ushahidi.java.sdk.api.json.Reports;
 import com.ushahidi.java.sdk.api.json.Response;
 import com.ushahidi.java.sdk.api.json.Reports.Payload.Incidents;
+import com.ushahidi.java.sdk.net.UshahidiHttpClient;
 import com.ushahidi.java.sdk.net.content.Body;
 
 public class ReportsAdminTask extends BaseTask {
@@ -17,9 +18,12 @@ public class ReportsAdminTask extends BaseTask {
 	/**
 	 * Default constructor for AdminReportsTask.
 	 */
-	public ReportsAdminTask(String url, String username, String password) {
+	public ReportsAdminTask(String url) {
 		super(url, TASK);
-		setAuthentication(username, password);
+	}
+
+	public ReportsAdminTask(String url, UshahidiHttpClient client) {
+		super(url, TASK, client);
 	}
 
 	/**
@@ -50,8 +54,7 @@ public class ReportsAdminTask extends BaseTask {
 	 */
 	private Response admin(int id, String action) {
 		Body body = adminBody(id, action, new Body());
-		return fromString(this.sendPostRequest(url, body),
-				Response.class);
+		return fromString(client.sendPostRequest(url, body), Response.class);
 
 	}
 
@@ -122,14 +125,14 @@ public class ReportsAdminTask extends BaseTask {
 		// workaround for 2.1
 		body.addField("incident_verified", i.getVerified());
 		body.addField("incident_active", i.getActive());
-		return fromString(sendMultipartPostRequest(url, body),
+		return fromString(client.sendMultipartPostRequest(url, body),
 				Response.class);
 	}
 
 	private List<Incidents> byStatus(String status) {
 		Body body = new Body();
 		body.addField("by", status);
-		return fromString(sendPostRequest(url, body), Reports.class)
+		return fromString(client.sendPostRequest(url, body), Reports.class)
 				.getPayload().incidents;
 	}
 

@@ -21,6 +21,7 @@ package com.ushahidi.java.sdk.api.tasks;
 
 import com.ushahidi.java.sdk.api.CategoryFields;
 import com.ushahidi.java.sdk.api.json.Response;
+import com.ushahidi.java.sdk.net.UshahidiHttpClient;
 
 /**
  * Administrative tasks on categories
@@ -34,9 +35,12 @@ public class CategoriesAdminTask extends BaseTask {
 	 * 
 	 * @param url
 	 */
-	public CategoriesAdminTask(String url, String username, String password) {
+	public CategoriesAdminTask(String url) {
 		super(url, TASK);
-		setAuthentication(username, password);
+	}
+
+	public CategoriesAdminTask(String url, UshahidiHttpClient client) {
+		super(url, TASK, client);
 	}
 
 	/**
@@ -49,10 +53,10 @@ public class CategoriesAdminTask extends BaseTask {
 	 * @return response
 	 */
 	public Response add(CategoryFields fields) {
-		setRequestParameters("action", "add");
+		client.setRequestParameters("action", "add");
 		return fromString(
-				sendMultipartPostRequest(url, fields.getParameters(fields)),
-				Response.class);
+				client.sendMultipartPostRequest(url,
+						fields.getParameters(fields)), Response.class);
 	}
 
 	/**
@@ -62,10 +66,10 @@ public class CategoriesAdminTask extends BaseTask {
 	 * @return The response received from the server
 	 */
 	public Response edit(CategoryFields fields) {
-		setRequestParameters("action", "edit");
+		client.setRequestParameters("action", "edit");
 		return fromString(
-				sendMultipartPostRequest(url, fields.getParameters(fields)),
-				Response.class);
+				client.sendMultipartPostRequest(url,
+						fields.getParameters(fields)), Response.class);
 	}
 
 	/**
@@ -76,9 +80,9 @@ public class CategoriesAdminTask extends BaseTask {
 	 * @return The response received from the server
 	 */
 	public Response delete(int id) {
-		setRequestParameters("action", "delete");
-		setRequestParameters("category_id", String.valueOf(id));
-		return fromString(sendPostRequest(url), Response.class);
+		client.setRequestParameters("action", "delete");
+		client.setRequestParameters("category_id", String.valueOf(id));
+		return fromString(client.sendPostRequest(url), Response.class);
 	}
 
 }

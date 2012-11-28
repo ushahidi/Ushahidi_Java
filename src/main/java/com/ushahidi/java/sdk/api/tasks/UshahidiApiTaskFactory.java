@@ -19,6 +19,8 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.tasks;
 
+import com.ushahidi.java.sdk.net.UshahidiHttpClient;
+
 /**
  * A factory for creating Ushahidi API task objects.
  * 
@@ -30,9 +32,7 @@ public class UshahidiApiTaskFactory {
 	/** The Ushahidi deployment URL **/
 	private String url;
 
-	private String username;
-
-	private String password;
+	public UshahidiHttpClient client = null;
 
 	/**
 	 * Instantiates a new ushahidi api task factory
@@ -41,42 +41,6 @@ public class UshahidiApiTaskFactory {
 	 */
 	private UshahidiApiTaskFactory(String url) {
 		this.url = url;
-	}
-
-	/**
-	 * Get the username to be used for authentication
-	 * 
-	 * @return The username
-	 */
-	public String getUsername() {
-		return this.username;
-	}
-
-	/**
-	 * Get the password to be used for authentication
-	 * 
-	 * @return The password
-	 */
-	public String getPassword() {
-		return this.password;
-	}
-
-	/**
-	 * Set the username to be used for authentication
-	 * 
-	 * @param username
-	 */
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	/**
-	 * Set the password to be used for authentication
-	 * 
-	 * @param password
-	 */
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	/**
@@ -94,6 +58,9 @@ public class UshahidiApiTaskFactory {
 	 * @return The categories task
 	 */
 	public CategoriesTask createCategoriesTask() {
+		if (client != null)
+			return new CategoriesTask(url, client);
+
 		return new CategoriesTask(url);
 	}
 
@@ -103,7 +70,9 @@ public class UshahidiApiTaskFactory {
 	 * @return The comment task
 	 */
 	public CommentsTask createCommentTask() {
-		return new CommentsTask(url, getUsername(), getPassword());
+		if (client != null)
+			return new CommentsTask(url, client);
+		return new CommentsTask(url);
 	}
 
 	/**
@@ -112,6 +81,8 @@ public class UshahidiApiTaskFactory {
 	 * @return The countries task
 	 */
 	public CountriesTask createCountriesTask() {
+		if (client != null)
+			return new CountriesTask(url, client);
 		return new CountriesTask(url);
 	}
 
@@ -121,6 +92,8 @@ public class UshahidiApiTaskFactory {
 	 * @return The location task
 	 */
 	public LocationTask createLocationTask() {
+		if (client != null)
+			return new LocationTask(url, client);
 		return new LocationTask(url);
 	}
 
@@ -130,6 +103,8 @@ public class UshahidiApiTaskFactory {
 	 * @return The incidents task
 	 */
 	public IncidentsTask createReportsTask() {
+		if (client != null)
+			return new IncidentsTask(url, client);
 		return new IncidentsTask(url);
 	}
 
@@ -139,6 +114,9 @@ public class UshahidiApiTaskFactory {
 	 * @return The system task
 	 */
 	public SystemTask createSystemTask() {
+		if (client != null)
+			return new SystemTask(url, client);
+
 		return new SystemTask(url);
 	}
 
@@ -148,6 +126,8 @@ public class UshahidiApiTaskFactory {
 	 * @return The tag news task
 	 */
 	public TagNewsTask createTagNewsTask() {
+		if (client != null)
+			return new TagNewsTask(url, client);
 		return new TagNewsTask(url);
 	}
 
@@ -157,6 +137,8 @@ public class UshahidiApiTaskFactory {
 	 * @return The tag video task
 	 */
 	public TagVideoTask createTagVideoTask() {
+		if (client != null)
+			return new TagVideoTask(url, client);
 		return new TagVideoTask(url);
 	}
 
@@ -170,9 +152,10 @@ public class UshahidiApiTaskFactory {
 	 * 
 	 * @return The admin task
 	 */
-	public CategoriesAdminTask createCategoriesAdminTask(String username,
-			String password) {
-		return new CategoriesAdminTask(url, username, password);
+	public CategoriesAdminTask createCategoriesAdminTask() {
+		if (client != null)
+			return new CategoriesAdminTask(url, client);
+		return new CategoriesAdminTask(url);
 	}
 
 	/**
@@ -181,9 +164,10 @@ public class UshahidiApiTaskFactory {
 	 * 
 	 * @return The reports admin task
 	 */
-	public ReportsAdminTask createReportsAdminTask(String username,
-			String password) {
-		return new ReportsAdminTask(url, getUsername(), getPassword());
+	public ReportsAdminTask createReportsAdminTask() {
+		if (client != null)
+			return new ReportsAdminTask(url, client);
+		return new ReportsAdminTask(url);
 	}
 
 	/**
@@ -192,6 +176,9 @@ public class UshahidiApiTaskFactory {
 	 * @return The report task
 	 */
 	public ReportTask createReportTask() {
+		if (client != null) {
+			return new ReportTask(url, client);
+		}
 		return new ReportTask(url);
 	}
 
