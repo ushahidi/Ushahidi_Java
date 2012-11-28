@@ -23,8 +23,10 @@ through the object you will create.
 UshahidiApi ushahidi = new UshahidiApi("http://demo.ushahidi.com");
 
 //set credentials for the admin APIs
-ushahidi.factory.setUsername("username");
-ushahidi.factory.setPassword("password");
+ushahidi.factory.client = new UshahidiHttpClient();
+ushahidi.factory.client.setAuthentication(new PasswordAuthentication(
+				"username", "password"));
+
 ```
 
 ### Fetch all categories
