@@ -53,7 +53,7 @@ public class IncidentsTaskTest extends BaseTaskTest {
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		task = factory.createReportsTask();
+		task = factory.createIncidentsTask();
 	}
 
 	/**

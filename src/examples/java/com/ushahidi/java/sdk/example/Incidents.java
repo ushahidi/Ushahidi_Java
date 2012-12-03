@@ -42,7 +42,7 @@ public class Incidents {
 				"admin", "admin"));
 
 		// create incidents task
-		IncidentsTask task = ushahidi.factory.createReportsTask();
+		IncidentsTask task = ushahidi.factory.createIncidentsTask();
 
 		// fetch all incidents / reports
 		List<Reports.Payload.Incidents> incidents = task.all();
