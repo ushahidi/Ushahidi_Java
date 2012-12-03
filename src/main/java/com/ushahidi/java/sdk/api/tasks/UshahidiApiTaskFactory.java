@@ -102,7 +102,7 @@ public class UshahidiApiTaskFactory {
 	 * 
 	 * @return The incidents task
 	 */
-	public IncidentsTask createReportsTask() {
+	public IncidentsTask createIncidentsTask() {
 		if (client != null)
 			return new IncidentsTask(url, client);
 		return new IncidentsTask(url);
