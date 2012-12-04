@@ -26,6 +26,7 @@ import com.ushahidi.java.sdk.api.json.DateDeserializer;
 import com.ushahidi.java.sdk.net.Authentication;
 import com.ushahidi.java.sdk.net.PasswordAuthentication;
 import com.ushahidi.java.sdk.net.UshahidiHttpClient;
+import com.ushahidi.java.sdk.util.Validate;
 
 /**
  * @author eyedol
@@ -34,6 +35,7 @@ import com.ushahidi.java.sdk.net.UshahidiHttpClient;
 public abstract class BaseTask {
 
 	private static Gson gson;
+	
 	static {
 		GsonBuilder builder = new GsonBuilder();
 		builder.registerTypeAdapter(Date.class, new DateDeserializer());
@@ -41,7 +43,7 @@ public abstract class BaseTask {
 	}
 
 	/** The Ushahidi deployment URL */
-	protected String url;
+	public String url;
 
 	/** The task to be performed */
 	protected String task;
@@ -50,7 +52,7 @@ public abstract class BaseTask {
 
 	private Authentication authentication;
 
-	protected final UshahidiHttpClient client;
+	protected UshahidiHttpClient client;
 
 	/**
 	 * Create a the task using the default {@link UshahidiHttpClient}
@@ -75,7 +77,7 @@ public abstract class BaseTask {
 			throw new IllegalArgumentException("Client cannot be null");
 		}
 
-		this.url = url + API;
+		this.url = Validate.removeTrailingSlashes(url) + API;
 		this.task = task;
 		this.client = client;
 		this.client.setRequestParameters("task", task);
@@ -109,7 +111,7 @@ public abstract class BaseTask {
 					"Username may not be null or empty");
 		}
 
-		if (password == null || password.length() == 0 ) {
+		if (password == null || password.length() == 0) {
 			throw new IllegalArgumentException(
 					"Password may not be null or empty");
 		}

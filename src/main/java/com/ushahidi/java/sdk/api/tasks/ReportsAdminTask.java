@@ -4,11 +4,11 @@ import java.util.List;
 
 import com.ushahidi.java.sdk.api.Category;
 import com.ushahidi.java.sdk.api.Incident;
+import com.ushahidi.java.sdk.api.Incidents;
 import com.ushahidi.java.sdk.api.Person;
 import com.ushahidi.java.sdk.api.ReportFields;
 import com.ushahidi.java.sdk.api.json.Reports;
 import com.ushahidi.java.sdk.api.json.Response;
-import com.ushahidi.java.sdk.api.json.Reports.Payload.Incidents;
 import com.ushahidi.java.sdk.net.UshahidiHttpClient;
 import com.ushahidi.java.sdk.net.content.Body;
 
@@ -133,7 +133,7 @@ public class ReportsAdminTask extends BaseTask {
 		Body body = new Body();
 		body.addField("by", status);
 		return fromString(client.sendPostRequest(url, body), Reports.class)
-				.getPayload().incidents;
+				.getIncidents();
 	}
 
 	/**

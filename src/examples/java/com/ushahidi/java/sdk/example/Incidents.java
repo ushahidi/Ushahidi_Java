@@ -24,7 +24,6 @@ import java.util.List;
 import com.ushahidi.java.sdk.UshahidiApi;
 import com.ushahidi.java.sdk.api.Category;
 import com.ushahidi.java.sdk.api.Comment;
-import com.ushahidi.java.sdk.api.json.Reports;
 import com.ushahidi.java.sdk.api.tasks.IncidentsTask;
 import com.ushahidi.java.sdk.net.PasswordAuthentication;
 import com.ushahidi.java.sdk.net.UshahidiHttpClient;
@@ -45,26 +44,26 @@ public class Incidents {
 		IncidentsTask task = ushahidi.factory.createIncidentsTask();
 
 		// fetch all incidents / reports
-		List<Reports.Payload.Incidents> incidents = task.all();
+		List<com.ushahidi.java.sdk.api.Incidents> incidents = task.all();
 
 		System.out.println("Fetching all reports/incidents...");
 
 		// display the fetched categories
-		for (Reports.Payload.Incidents i : incidents) {
+		for (com.ushahidi.java.sdk.api.Incidents i : incidents) {
 			System.out.println(i.incident);
 
 			// get categories
-			if ((i.getCategories() != null) && (!i.getCategories().isEmpty())) {
+			if ((i.categories != null) && (!i.categories.isEmpty())) {
 				System.out.println("Categories: ");
-				for (Category c : i.getCategories()) {
+				for (Category c : i.categories) {
 					System.out.println(c);
 				}
 			}
 
 			// get comments
-			if ((i.getComments() != null) && (!i.getComments().isEmpty())) {
+			if ((i.comments != null) && (!i.comments.isEmpty())) {
 				System.out.println("Comments: ");
-				for (Comment c : i.getComments()) {
+				for (Comment c : i.comments) {
 					System.out.println(c);
 
 				}

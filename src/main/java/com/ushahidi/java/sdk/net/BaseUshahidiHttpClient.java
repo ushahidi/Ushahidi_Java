@@ -89,6 +89,8 @@ public abstract class BaseUshahidiHttpClient {
 	 */
 	private int socketTimeout = 0;
 
+	private int bufferSize = 8192;
+
 	/**
 	 * Sets the request headers.
 	 * 
@@ -203,18 +205,20 @@ public abstract class BaseUshahidiHttpClient {
 	 * 
 	 * @return the converted string
 	 */
-	protected static String streamToString(InputStream is) {
+	protected String streamToString(InputStream is) {
 		/*
 		 * To convert the InputStream to String we use the
 		 * BufferedReader.readLine() method. We iterate until the BufferedReader
 		 * return null which means there's no more data to read. Each line will
 		 * appended to a StringBuilder and returned as String.
 		 */
-		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		BufferedReader reader;
 		StringBuilder sb = new StringBuilder();
 
 		String line = null;
 		try {
+			reader = new BufferedReader(
+					new InputStreamReader(is, CHARSET_UTF8), bufferSize);
 			while ((line = reader.readLine()) != null) {
 				sb.append(line + "\n");
 			}
@@ -304,7 +308,7 @@ public abstract class BaseUshahidiHttpClient {
 							+ getParametersString(requestParameters));
 				}
 			}
-
+			
 			HttpURLConnection request = openConnection(apiUrl, "GET");
 			request.connect();
 
@@ -656,10 +660,10 @@ public abstract class BaseUshahidiHttpClient {
 	protected InputStream getWrappedInputStream(InputStream is, boolean gzip)
 			throws IOException {
 		if (gzip) {
-			return new BufferedInputStream(new GZIPInputStream(is));
-		} else {
-			return new BufferedInputStream(is);
+			return new BufferedInputStream(new GZIPInputStream(is), bufferSize);
 		}
+		return new BufferedInputStream(is, bufferSize);
+
 	}
 
 	/**

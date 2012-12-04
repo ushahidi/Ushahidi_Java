@@ -21,8 +21,8 @@ package com.ushahidi.java.sdk.api.tasks;
 
 import java.util.List;
 
+import com.ushahidi.java.sdk.api.Incidents;
 import com.ushahidi.java.sdk.api.json.Reports;
-import com.ushahidi.java.sdk.api.json.Reports.Payload.Incidents;
 import com.ushahidi.java.sdk.net.UshahidiHttpClient;
 
 /**
@@ -42,7 +42,7 @@ public class IncidentsTask extends BaseTask {
 	 */
 	public int limit;
 
-	public Reports reports;
+	public Incidents reports;
 
 	private static final String TASK = "incidents";
 
@@ -66,9 +66,9 @@ public class IncidentsTask extends BaseTask {
 	 * 
 	 */
 	public List<Incidents> all() {
-
+		
 		return fromString(client.sendGetRequest(url), Reports.class)
-				.getPayload().incidents;
+				.getIncidents();
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class IncidentsTask extends BaseTask {
 		client.setRequestParameters("by", "sinceid");
 		client.setRequestParameters("id", String.valueOf(id));
 		return fromString(client.sendGetRequest(url), Reports.class)
-				.getPayload().incidents;
+				.getIncidents();
 	}
 
 	/**
@@ -99,7 +99,7 @@ public class IncidentsTask extends BaseTask {
 		client.setRequestParameters("by", "maxid");
 		client.setRequestParameters("id", String.valueOf(id));
 		return fromString(client.sendGetRequest(url), Reports.class)
-				.getPayload().incidents;
+				.getIncidents();
 	}
 
 	/**
@@ -114,10 +114,10 @@ public class IncidentsTask extends BaseTask {
 
 		client.setRequestParameters("by", "incidentid");
 		client.setRequestParameters("id", String.valueOf(id));
-		reports = fromString(client.sendGetRequest(url), Reports.class);
-		if (reports.getPayload().incidents != null
-				&& reports.getPayload().incidents.size() > 0) {
-			return reports.getPayload().incidents.get(0);
+		List<Incidents> reports = fromString(client.sendGetRequest(url),
+				Reports.class).getIncidents();
+		if (reports != null && reports.size() > 0) {
+			return reports.get(0);
 		}
 		return null;
 	}
@@ -135,7 +135,7 @@ public class IncidentsTask extends BaseTask {
 		client.setRequestParameters("by", "locname");
 		client.setRequestParameters("name", name);
 		return fromString(client.sendGetRequest(url), Reports.class)
-				.getPayload().incidents;
+				.getIncidents();
 	}
 
 	/**
@@ -151,7 +151,7 @@ public class IncidentsTask extends BaseTask {
 		client.setRequestParameters("by", "locid");
 		client.setRequestParameters("id", String.valueOf(id));
 		return fromString(client.sendGetRequest(url), Reports.class)
-				.getPayload().incidents;
+				.getIncidents();
 	}
 
 	/**
@@ -167,7 +167,7 @@ public class IncidentsTask extends BaseTask {
 		client.setRequestParameters("by", "catname");
 		client.setRequestParameters("name", category);
 		return fromString(client.sendGetRequest(url), Reports.class)
-				.getPayload().incidents;
+				.getIncidents();
 	}
 
 	/**
@@ -182,7 +182,7 @@ public class IncidentsTask extends BaseTask {
 		client.setRequestParameters("by", "catid");
 		client.setRequestParameters("id", String.valueOf(id));
 		return fromString(client.sendGetRequest(url), Reports.class)
-				.getPayload().incidents;
+				.getIncidents();
 	}
 
 }

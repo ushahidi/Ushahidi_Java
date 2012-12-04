@@ -90,4 +90,17 @@ public class Validate {
 		return m.matches();
 	}
 
+	/**
+	 * Remove trailing slashes
+	 * 
+	 * @param url
+	 * @return 
+	 */
+	public static String removeTrailingSlashes(String url) {
+		if (url.endsWith("/")) {
+			return url.substring(0, url.length() - 1);
+		}
+		return url;
+	}
+
 }

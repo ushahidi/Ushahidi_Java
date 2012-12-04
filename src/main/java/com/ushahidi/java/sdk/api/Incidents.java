@@ -17,34 +17,20 @@
  ** Ushahidi developers at team@ushahidi.com.
  **
  *****************************************************************************/
-package com.ushahidi.java.sdk.api.json;
+package com.ushahidi.java.sdk.api;
 
 import java.util.List;
 
-import com.ushahidi.java.sdk.api.Incidents;
-
 /**
- * @author eyedol
  * 
  */
-public class Reports extends Response {
+public class Incidents {
+	
+	public Incident incident;
 
-	public static class Payload extends Response.Payload {
-		public List<Incidents> incidents;
+	public List<Category> categories;
 
-	}
+	public List<Media> media;
 
-	private Payload payload;
-
-	public Reports getReport() {
-		return this;
-	}
-
-	public List<Incidents> getIncidents() {
-		return payload.incidents;
-	}
-
-	public Payload getPayload() {
-		return payload;
-	}
+	public List<Comment> comments;
 }
