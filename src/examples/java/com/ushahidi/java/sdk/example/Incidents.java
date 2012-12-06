@@ -53,17 +53,17 @@ public class Incidents {
 			System.out.println(i.incident);
 
 			// get categories
-			if ((i.categories != null) && (!i.categories.isEmpty())) {
+			if ((i.getCategories() != null) && (i.getCategories().size() > 0)) {
 				System.out.println("Categories: ");
-				for (Category c : i.categories) {
+				for (Category c : i.getCategories()) {
 					System.out.println(c);
 				}
 			}
 
 			// get comments
-			if ((i.comments != null) && (!i.comments.isEmpty())) {
+			if ((i.getComments() != null) && (!i.getComments().isEmpty())) {
 				System.out.println("Comments: ");
-				for (Comment c : i.comments) {
+				for (Comment c : i.getComments()) {
 					System.out.println(c);
 
 				}

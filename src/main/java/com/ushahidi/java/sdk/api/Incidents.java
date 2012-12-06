@@ -19,18 +19,69 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 
  */
 public class Incidents {
-	
+
 	public Incident incident;
 
-	public List<Category> categories;
+	public static class _Categories {
+		public Category category;
+	}
 
-	public List<Media> media;
+	public static class _Comment {
+		public Comment comment;
+	}
 
-	public List<Comment> comments;
+	public static class _Media {
+		public Media m;
+	}
+
+	public List<Incidents._Media> media;
+
+	public List<Incidents._Comment> comments;
+
+	/**
+	 * Get comments
+	 * 
+	 * @return The list of comments
+	 */
+	public List<Comment> getComments() {
+		ArrayList<Comment> ret = new ArrayList<Comment>();
+		for (_Comment c : comments) {
+			ret.add(c.comment);
+		}
+		return ret;
+	}
+
+	/**
+	 * Get media
+	 */
+	public List<Media> getMedia() {
+		ArrayList<Media> ret = new ArrayList<Media>();
+		for (_Media med : media) {
+			ret.add(med.m);
+		}
+		return ret;
+	}
+
+	public List<Incidents._Categories> categories;
+
+	/**
+	 * Get categories
+	 * 
+	 * @return The list of categories
+	 */
+	public List<Category> getCategories() {
+		ArrayList<Category> ret = new ArrayList<Category>();
+		for (_Categories c : categories) {
+			ret.add(c.category);
+		}
+		return ret;
+	}
+
 }
