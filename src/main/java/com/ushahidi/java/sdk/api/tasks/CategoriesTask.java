@@ -40,6 +40,10 @@ public class CategoriesTask extends BaseTask {
 
 	private static final String TASK = "categories";
 
+	public Categories categories;
+	
+	public String response;
+
 	/**
 	 * Create the Categories task
 	 * 
@@ -69,9 +73,8 @@ public class CategoriesTask extends BaseTask {
 	 * @throws JSONException
 	 */
 	public List<Category> all() {
-
-		final Categories categories = fromString(client.sendGetRequest(url),
-				Categories.class);
+		response = client.sendGetRequest(url);
+		categories = fromString(response, Categories.class);
 		return categories.getCategories();
 	}
 
@@ -86,8 +89,7 @@ public class CategoriesTask extends BaseTask {
 
 		client.setRequestParameters("by", "catid");
 		client.setRequestParameters("id", String.valueOf(id));
-		final Categories categories = fromString(client.sendGetRequest(url),
-				Categories.class);
+		categories = fromString(client.sendGetRequest(url), Categories.class);
 		return categories.getCategory();
 	}
 

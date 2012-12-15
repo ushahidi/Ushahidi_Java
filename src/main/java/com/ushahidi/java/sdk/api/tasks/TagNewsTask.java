@@ -36,9 +36,6 @@ public class TagNewsTask extends BaseTask {
 
 	private static final String TASK = "tagnews";
 
-	/** The response received from the server as a result of making an API call. */
-	public Response response;
-
 	/**
 	 * Creates the tagnews task
 	 * 

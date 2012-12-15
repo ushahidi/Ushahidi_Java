@@ -21,28 +21,35 @@ package com.ushahidi.java.sdk.example;
 
 import java.util.List;
 
-import com.ushahidi.java.sdk.UshahidiApi;
 import com.ushahidi.java.sdk.api.Category;
 import com.ushahidi.java.sdk.api.tasks.CategoriesTask;
 
 /**
- * An example implementation to show how to fetch all categories
- * -- api?task=categories
+ * An example implementation to show how to fetch all categories --
+ * api?task=categories
  */
-public class Categories {
+public class Categories extends Ushahidi {
 
-	public static void main(String args[]) {
-		UshahidiApi ushahidi = new UshahidiApi("http://demo.ushahidi.com");
-		
-		//create the categories task
-		CategoriesTask task = ushahidi.factory.createCategoriesTask();
+	private CategoriesTask task;
 
-		//fetch all categories
+	public Categories() {
+		task = factory.createCategoriesTask();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.ushahidi.java.sdk.example.Ushahidi#execute()
+	 */
+	@Override
+	public void execute() {
+		// fetch all categories
 		List<Category> categories = task.all();
 
-		//display the categories
+		// display the categories
 		for (Category c : categories) {
 			System.out.println(c);
 		}
+
 	}
 }

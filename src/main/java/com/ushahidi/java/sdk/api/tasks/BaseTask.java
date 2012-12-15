@@ -35,7 +35,7 @@ import com.ushahidi.java.sdk.util.Validate;
 public abstract class BaseTask {
 
 	private static Gson gson;
-	
+
 	static {
 		GsonBuilder builder = new GsonBuilder();
 		builder.registerTypeAdapter(Date.class, new DateDeserializer());
@@ -43,10 +43,7 @@ public abstract class BaseTask {
 	}
 
 	/** The Ushahidi deployment URL */
-	public String url;
-
-	/** The task to be performed */
-	protected String task;
+	protected String url;
 
 	private static final String API = "/api";
 
@@ -78,7 +75,6 @@ public abstract class BaseTask {
 		}
 
 		this.url = Validate.removeTrailingSlashes(url) + API;
-		this.task = task;
 		this.client = client;
 		this.client.setRequestParameters("task", task);
 		this.client.setRequestParameters("resp", "json");

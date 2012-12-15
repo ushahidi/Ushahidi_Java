@@ -50,24 +50,30 @@ public class Categories extends Response {
 	/**
 	 * Get list of categories
 	 * 
-	 * @return The list of categories
+	 * @return The list of categories otherwise null
 	 */
 	public List<Category> getCategories() {
-		
+
 		List<Category> cat = new ArrayList<Category>();
-		for (Payload._Category c : payload.categories) {
-			Category category = c.category;
-			cat.add(category);
+		if (payload != null) {
+			for (Payload._Category c : payload.categories) {
+				Category category = c.category;
+				cat.add(category);
+			}
 		}
 		return cat;
+
 	}
 
 	/**
 	 * Get a particular category
 	 * 
-	 * @return The category
+	 * @return The category else return null
 	 */
 	public Category getCategory() {
-		return payload.category;
+		if (payload != null) {
+			return payload.category;
+		}
+		return null;
 	}
 }

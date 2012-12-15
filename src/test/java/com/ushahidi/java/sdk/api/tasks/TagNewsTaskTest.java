@@ -55,8 +55,7 @@ public class TagNewsTaskTest extends BaseTaskTest {
 
 	@Test
 	public void testTagNews() {
-		task.tagNews(REPORT_ID, URL);
-		assertNotNull("Category cannot be null ", task.response);
+		
+		assertNotNull("Category cannot be null ",task.tagNews(REPORT_ID, URL));
 	}
-
 }

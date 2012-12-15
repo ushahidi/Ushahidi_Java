@@ -22,7 +22,6 @@ package com.ushahidi.java.sdk.example;
 import java.io.File;
 import java.util.Date;
 
-import com.ushahidi.java.sdk.UshahidiApi;
 import com.ushahidi.java.sdk.api.Incident;
 import com.ushahidi.java.sdk.api.ReportFields;
 import com.ushahidi.java.sdk.api.json.Response;
@@ -31,16 +30,16 @@ import com.ushahidi.java.sdk.api.tasks.ReportTask;
 /**
  * 
  */
-public class SubmitReport {
+public class SubmitReport extends Ushahidi {
 
-	public static void main(String args[]) {
-		
-		UshahidiApi ushahidi = new UshahidiApi("http://demo.ushahidi.com");
-		
-		//create report task
-		ReportTask task = ushahidi.factory.createReportTask();
-		
-		//add incident details
+	private ReportTask task;
+
+	public SubmitReport() {
+		task = factory.createReportTask();
+	}
+
+	@Override
+	public void execute() {
 		Incident i = new Incident();
 		i.setTitle("Test title");
 		i.setDescription("Test desc");
@@ -51,15 +50,16 @@ public class SubmitReport {
 
 		ReportFields fields = new ReportFields();
 		fields.fill(i);
-		//add categories
+		// add categories
 		fields.addCategory(7);
-		//add photos
+		// add photos
 		fields.addPhotos(new File("/sdcard/nophoto.jpg"));
-		
+
 		Response response = task.submit(fields);
 
 		// print response from server
 		System.out.println("Error: " + response.getErrorCode() + " Message: "
 				+ response.getErrorMessage());
+
 	}
 }

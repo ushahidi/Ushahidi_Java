@@ -21,28 +21,24 @@ package com.ushahidi.java.sdk.example;
 
 import java.util.List;
 
-import com.ushahidi.java.sdk.UshahidiApi;
 import com.ushahidi.java.sdk.api.Category;
 import com.ushahidi.java.sdk.api.Comment;
+import com.ushahidi.java.sdk.api.Media;
 import com.ushahidi.java.sdk.api.tasks.IncidentsTask;
-import com.ushahidi.java.sdk.net.PasswordAuthentication;
-import com.ushahidi.java.sdk.net.UshahidiHttpClient;
 
 /**
  * An example implementation to show how to fetch all reports / incidents API
  * call -- api?task=incidents
  */
-public class Incidents {
+public class Incidents extends Ushahidi {
 
-	public static void main(String args[]) {
-		UshahidiApi ushahidi = new UshahidiApi("http://demo.ushahidi.com");
-		ushahidi.factory.client = new UshahidiHttpClient();
-		ushahidi.factory.client.setAuthentication(new PasswordAuthentication(
-				"admin", "admin"));
+	IncidentsTask task;
 
-		// create incidents task
-		IncidentsTask task = ushahidi.factory.createIncidentsTask();
+	public Incidents() {
+		task = factory.createIncidentsTask();
+	}
 
+	public void execute() {
 		// fetch all incidents / reports
 		List<com.ushahidi.java.sdk.api.Incidents> incidents = task.all();
 
@@ -68,8 +64,17 @@ public class Incidents {
 
 				}
 			}
+			
+			//get media
+			if((i.getMedia() !=null) && (!i.getMedia().isEmpty())) {
+				System.out.println("Media: ");
+				for(Media m : i.getMedia()) {
+					System.out.println(m);
+				}
+			}
 
 			System.out.println();
 		}
 	}
+
 }

@@ -40,6 +40,8 @@ public class LocationTask extends BaseTask {
 
 	private static final String TASK = "locations";
 
+	public Locations locations;
+
 	public LocationTask(String url) {
 		super(url, TASK);
 	}
@@ -57,9 +59,8 @@ public class LocationTask extends BaseTask {
 	 * @throws JSONException
 	 */
 	public List<Location> all() {
-
-		return fromString(client.sendGetRequest(url), Locations.class)
-				.getLocations();
+		locations = fromString(client.sendGetRequest(url), Locations.class);
+		return locations.getLocations();
 	}
 
 	/**
@@ -76,8 +77,8 @@ public class LocationTask extends BaseTask {
 
 		client.setRequestParameters("by", "locid");
 		client.setRequestParameters("id", String.valueOf(id));
-		return fromString(client.sendGetRequest(url), Locations.class)
-				.getLocations();
+		locations = fromString(client.sendGetRequest(url), Locations.class);
+		return locations.getLocations();
 
 	}
 
@@ -94,8 +95,8 @@ public class LocationTask extends BaseTask {
 
 		client.setRequestParameters("by", "country");
 		client.setRequestParameters("id", String.valueOf(id));
-		return fromString(client.sendGetRequest(url), Locations.class)
-				.getLocations();
+		locations = fromString(client.sendGetRequest(url), Locations.class);
+		return locations.getLocations();
 	}
 
 }

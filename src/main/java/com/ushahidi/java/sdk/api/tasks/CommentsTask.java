@@ -43,6 +43,8 @@ public class CommentsTask extends BaseTask {
 
 	private static final String TASK = "comments";
 
+	public Comments comments;
+
 	public CommentsTask(String url) {
 		super(url, TASK);
 	}
@@ -62,8 +64,7 @@ public class CommentsTask extends BaseTask {
 
 		client.setRequestParameters("by", "all");
 		// fetch all comments
-		Comments comments = fromString(client.sendGetRequest(url),
-				Comments.class);
+		comments = fromString(client.sendGetRequest(url), Comments.class);
 		return comments.getComments();
 	}
 
@@ -80,8 +81,7 @@ public class CommentsTask extends BaseTask {
 		client.setRequestParameters("id", String.valueOf(id));
 		// fetch all comment
 		// fetch all categories
-		Comments comments = fromString(client.sendGetRequest(url),
-				Comments.class);
+		comments = fromString(client.sendGetRequest(url), Comments.class);
 		return comments.getComments();
 	}
 
@@ -99,8 +99,7 @@ public class CommentsTask extends BaseTask {
 
 		client.setRequestParameters("by", "spam");
 		// fetch all categories
-		Comments comments = fromString(client.sendGetRequest(url),
-				Comments.class);
+		comments = fromString(client.sendGetRequest(url), Comments.class);
 		return comments.getComments();
 
 	}
@@ -118,8 +117,7 @@ public class CommentsTask extends BaseTask {
 
 		client.setRequestParameters("by", "pending");
 		// fetch all categories
-		Comments comments = fromString(client.sendGetRequest(url),
-				Comments.class);
+		comments = fromString(client.sendGetRequest(url), Comments.class);
 		return comments.getComments();
 
 	}
@@ -137,8 +135,7 @@ public class CommentsTask extends BaseTask {
 
 		client.setRequestParameters("by", "approved");
 		// fetch all categories
-		Comments comments = fromString(client.sendGetRequest(url),
-				Comments.class);
+		comments = fromString(client.sendGetRequest(url), Comments.class);
 		return comments.getComments();
 	}
 

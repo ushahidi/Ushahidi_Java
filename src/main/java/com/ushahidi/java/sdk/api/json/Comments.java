@@ -45,9 +45,11 @@ public class Comments extends Response {
 
 	public List<Comment> getComments() {
 		List<Comment> comt = new ArrayList<Comment>();
-		for (Payload._Comment item : payload.comments) {
-			Comment c = item.comment;
-			comt.add(c);
+		if (payload != null) {
+			for (Payload._Comment item : payload.comments) {
+				Comment c = item.comment;
+				comt.add(c);
+			}
 		}
 		return comt;
 	}

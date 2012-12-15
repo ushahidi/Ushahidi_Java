@@ -38,20 +38,8 @@
 		</javac>
 	</target>
 
-	<target name="Incidents">
-		<java classname="com.ushahidi.java.sdk.example.Incidents"
-			failonerror="true" fork="yes">
-			<classpath refid="compile.classpath" />
-		</java>
-	</target>
-	<target name="Categories">
-		<java classname="com.ushahidi.java.sdk.example.Categories"
-			failonerror="true" fork="yes">
-			<classpath refid="compile.classpath" />
-		</java>
-	</target>
-	<target name="SubmitReport">
-		<java classname="com.ushahidi.java.sdk.example.SubmitReport"
+	<target name="RunExamples">
+		<java classname="com.ushahidi.java.sdk.example.RunExamples"
 			failonerror="true" fork="yes">
 			<classpath refid="compile.classpath" />
 		</java>

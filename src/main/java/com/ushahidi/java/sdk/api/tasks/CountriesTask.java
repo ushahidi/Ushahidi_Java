@@ -38,6 +38,8 @@ public class CountriesTask extends BaseTask {
 
 	private static final String TASK = "countries";
 
+	public Countries countries;
+
 	/**
 	 * The Ushahidi deployment URL
 	 * 
@@ -68,9 +70,8 @@ public class CountriesTask extends BaseTask {
 	 * @throws JSONException
 	 */
 	public List<Country> all() {
-
-		return fromString(client.sendGetRequest(url), Countries.class)
-				.getCountries();
+		countries = fromString(client.sendGetRequest(url), Countries.class);
+		return countries.getCountries();
 	}
 
 	/**
@@ -87,9 +88,8 @@ public class CountriesTask extends BaseTask {
 
 		client.setRequestParameters("by", "countryid");
 		client.setRequestParameters("id", String.valueOf(id));
-
-		return fromString(client.sendGetRequest(url), Countries.class)
-				.getCountries();
+		countries = fromString(client.sendGetRequest(url), Countries.class);
+		return countries.getCountries();
 	}
 
 	/**
@@ -105,8 +105,8 @@ public class CountriesTask extends BaseTask {
 
 		client.setRequestParameters("by", "countryiso");
 		client.setRequestParameters("iso", iso);
-		return fromString(client.sendGetRequest(url), Countries.class)
-				.getCountries();
+		countries = fromString(client.sendGetRequest(url), Countries.class);
+		return countries.getCountries();
 	}
 
 	/**
@@ -122,8 +122,8 @@ public class CountriesTask extends BaseTask {
 	public List<Country> countryName(String name) {
 		client.setRequestParameters("by", "countryname");
 		client.setRequestParameters("name", name);
-		return fromString(client.sendGetRequest(url), Countries.class)
-				.getCountries();
+		countries = fromString(client.sendGetRequest(url), Countries.class);
+		return countries.getCountries();
 	}
 
 }
