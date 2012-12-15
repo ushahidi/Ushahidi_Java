@@ -25,7 +25,7 @@ package com.ushahidi.java.sdk.example;
 public class RunExamples {
 	public static void main(String args[]) {
 		new Incidents().execute();
-		new Categories().execute();
-		new SubmitReport().execute();
+		//new Categories().execute();
+		//new SubmitReport().execute();
 	}
 }

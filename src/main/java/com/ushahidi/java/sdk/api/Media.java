@@ -30,23 +30,19 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Media {
 
-	@SerializedName("id")
 	private int id;
 
-	@SerializedName("type")
 	private int type;
 
-	@SerializedName("link")
 	private String link;
 
-	@SerializedName("thumb")
 	private String thumb;
 
 	@SerializedName("thumb_url")
-	private transient String thumbUrl;
+	private String thumbUrl;
 
 	@SerializedName("link_url")
-	private transient String linkUrl;
+	private String linkUrl;
 
 	public void setId(int id) {
 		this.id = id;

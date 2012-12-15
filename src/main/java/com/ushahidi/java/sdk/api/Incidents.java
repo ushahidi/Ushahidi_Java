@@ -37,11 +37,7 @@ public class Incidents {
 		public Comment comment;
 	}
 
-	public static class _Media {
-		public Media m;
-	}
-
-	public List<Incidents._Media> media;
+	private List<Media> media;
 
 	public List<Incidents._Comment> comments;
 
@@ -62,11 +58,7 @@ public class Incidents {
 	 * Get media
 	 */
 	public List<Media> getMedia() {
-		ArrayList<Media> ret = new ArrayList<Media>();
-		for (_Media med : media) {
-			ret.add(med.m);
-		}
-		return ret;
+		return media;
 	}
 
 	public List<Incidents._Categories> categories;
