@@ -115,6 +115,14 @@ public abstract class BaseTask {
 		authentication = new PasswordAuthentication(username, password);
 		client.setAuthentication(authentication);
 	}
+	
+	/**
+	 * Return the configured URL
+	 * @return
+	 */
+	public String getUrl() {
+		return this.url;
+	}
 
 	/**
 	 * Deserialize the JSON string into Java objects representing the various

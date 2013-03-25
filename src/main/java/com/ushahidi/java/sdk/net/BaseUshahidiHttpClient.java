@@ -205,7 +205,7 @@ public abstract class BaseUshahidiHttpClient {
 	 * 
 	 * @return the converted string
 	 */
-	protected String streamToString(InputStream is) {
+	public String streamToString(InputStream is) {
 		/*
 		 * To convert the InputStream to String we use the
 		 * BufferedReader.readLine() method. We iterate until the BufferedReader
