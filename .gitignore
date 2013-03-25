@@ -1,6 +1,7 @@
-bin/
-out/
-gen/
+bin
+out
+gen
+dist
 *.swp
 .settings
 .DS_Store
