@@ -126,7 +126,7 @@ public abstract class BaseTask {
 	 *            the class for the model
 	 * @return The Object related to the Ushahidi API model
 	 */
-	protected static <T> T fromString(String json, Class<T> cls) {
+	public static <T> T fromString(String json, Class<T> cls) {
 		return gson.fromJson(json, cls);
 	}
 }
