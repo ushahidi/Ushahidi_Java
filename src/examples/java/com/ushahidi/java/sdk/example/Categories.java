@@ -37,12 +37,10 @@ public class Categories extends Ushahidi {
 	}
 
 	/*
-	 * (non-Javadoc)
+	 * Fetch all categories
 	 * 
-	 * @see com.ushahidi.java.sdk.example.Ushahidi#execute()
 	 */
-	@Override
-	public void execute() {
+	public void fetchAllCategories() {
 		// fetch all categories
 		List<Category> categories = task.all();
 

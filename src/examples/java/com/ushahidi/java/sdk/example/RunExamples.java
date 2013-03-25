@@ -26,14 +26,14 @@ import com.ushahidi.java.sdk.UshahidiException;
  */
 public class RunExamples {
 	public static void main(String args[]) {
-		new Incidents().execute();
-		new Categories().execute();
+		new Incidents().fetchAllReports();
+		new Categories().fetchAllCategories();
 		try {
-			//new SubmitReport().execute();
-		}catch(UshahidiException e){
+			new SubmitReport().submitReport();
+		} catch (UshahidiException e) {
 			System.out.println(e.getCause().getMessage());
 		}
-		
-		new AdminReports().execute();
+
+		new AdminReports().getVerifiedReport();
 	}
 }

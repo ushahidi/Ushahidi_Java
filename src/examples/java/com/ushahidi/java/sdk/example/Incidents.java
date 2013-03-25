@@ -35,7 +35,7 @@ public class Incidents extends Ushahidi {
 		task = factory.createIncidentsTask();
 	}
 
-	public void execute() {
+	public void fetchAllReports() {
 		// fetch all incidents / reports
 		List<com.ushahidi.java.sdk.api.Incidents> incidents = task.all();
 

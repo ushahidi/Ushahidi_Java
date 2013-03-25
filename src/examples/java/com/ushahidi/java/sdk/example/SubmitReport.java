@@ -38,8 +38,10 @@ public class SubmitReport extends Ushahidi {
 		task = factory.createReportTask();
 	}
 
-	@Override
-	public void execute() {
+	/**
+	 * Submit a report
+	 */
+	public void submitReport() {
 		Incident i = new Incident();
 		i.setTitle("Test title");
 		i.setDescription("Test desc");

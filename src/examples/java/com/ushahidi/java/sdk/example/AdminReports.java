@@ -35,13 +35,10 @@ public class AdminReports extends Ushahidi {
 		atask = factory.createReportsAdminTask();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.ushahidi.java.sdk.example.Ushahidi#execute()
+	/**
+	 * Fetch all verified reports
 	 */
-	@Override
-	public void execute() {
+	public void getVerifiedReport() {
 		List<com.ushahidi.java.sdk.api.Incidents> incidents = atask.verified();
 		displayReports(incidents);
 	}
