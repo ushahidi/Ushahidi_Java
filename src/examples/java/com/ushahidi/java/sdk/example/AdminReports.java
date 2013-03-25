@@ -19,21 +19,31 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.example;
 
-import com.ushahidi.java.sdk.UshahidiException;
+import java.util.List;
+
+import com.ushahidi.java.sdk.api.tasks.ReportsAdminTask;
 
 /**
  * 
  */
-public class RunExamples {
-	public static void main(String args[]) {
-		new Incidents().execute();
-		new Categories().execute();
-		try {
-			//new SubmitReport().execute();
-		}catch(UshahidiException e){
-			System.out.println(e.getCause().getMessage());
-		}
-		
-		new AdminReports().execute();
+public class AdminReports extends Ushahidi {
+
+	private ReportsAdminTask atask;
+
+	public AdminReports() {
+		super();
+		atask = factory.createReportsAdminTask();
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.ushahidi.java.sdk.example.Ushahidi#execute()
+	 */
+	@Override
+	public void execute() {
+		List<com.ushahidi.java.sdk.api.Incidents> incidents = atask.verified();
+		displayReports(incidents);
+	}
+
 }

@@ -39,7 +39,9 @@ public class Incidents {
 
 	private List<Media> media;
 
-	public List<Incidents._Comment> comments;
+	private List<Incidents._Comment> comments;
+
+	private List<Incidents._Categories> categories;
 
 	/**
 	 * Get comments
@@ -60,8 +62,6 @@ public class Incidents {
 	public List<Media> getMedia() {
 		return media;
 	}
-
-	public List<Incidents._Categories> categories;
 
 	/**
 	 * Get categories

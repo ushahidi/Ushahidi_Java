@@ -21,9 +21,6 @@ package com.ushahidi.java.sdk.example;
 
 import java.util.List;
 
-import com.ushahidi.java.sdk.api.Category;
-import com.ushahidi.java.sdk.api.Comment;
-import com.ushahidi.java.sdk.api.Media;
 import com.ushahidi.java.sdk.api.tasks.IncidentsTask;
 
 /**
@@ -43,38 +40,9 @@ public class Incidents extends Ushahidi {
 		List<com.ushahidi.java.sdk.api.Incidents> incidents = task.all();
 
 		System.out.println("Fetching all reports/incidents...");
-
-		// display the fetched categories
-		for (com.ushahidi.java.sdk.api.Incidents i : incidents) {
-			System.out.println(i.incident);
-
-			// get categories
-			if ((i.getCategories() != null) && (i.getCategories().size() > 0)) {
-				System.out.println("Categories: ");
-				for (Category c : i.getCategories()) {
-					System.out.println(c);
-				}
-			}
-
-			// get comments
-			if ((i.getComments() != null) && (!i.getComments().isEmpty())) {
-				System.out.println("Comments: ");
-				for (Comment c : i.getComments()) {
-					System.out.println(c);
-
-				}
-			}
-			
-			//get media
-			if((i.getMedia() !=null) && (!i.getMedia().isEmpty())) {
-				System.out.println("Media: ");
-				for(Media m : i.getMedia()) {
-					System.out.println(m);
-				}
-			}
-
-			System.out.println();
-		}
+		
+		displayReports(incidents);
+	
 	}
 
 }

@@ -43,7 +43,7 @@ public class BaseTaskTest extends TestCase {
 	protected UshahidiApiTaskFactory factory;
 
 	/** Use the Ushahidi demo deployment to test */
-	private static final String DEMO_DEPLOYMENT = "http://demo.ushahidi.com";
+	private static final String DEMO_DEPLOYMENT = "http://localhost/develop";
 
 	/** Test username */
 	protected static final String USERNAME = "admin";

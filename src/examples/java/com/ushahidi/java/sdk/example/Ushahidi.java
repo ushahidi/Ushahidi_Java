@@ -19,9 +19,15 @@
  **/
 package com.ushahidi.java.sdk.example;
 
+import java.util.List;
+
+import com.ushahidi.java.sdk.api.Category;
+import com.ushahidi.java.sdk.api.Comment;
+import com.ushahidi.java.sdk.api.Media;
 import com.ushahidi.java.sdk.api.tasks.UshahidiApiTaskFactory;
 import com.ushahidi.java.sdk.net.PasswordAuthentication;
 import com.ushahidi.java.sdk.net.UshahidiHttpClient;
+import com.ushahidi.java.sdk.api.Incidents;
 
 /**
  * The gateway to the Ushahidi API
@@ -38,13 +44,49 @@ public abstract class Ushahidi {
 	public int socketTimeout = 30000;
 
 	public Ushahidi() {
-		factory = UshahidiApiTaskFactory.newInstance("http://demo.ushahidi.com");
+		factory = UshahidiApiTaskFactory
+				.newInstance("http://demo.ushahidi.com");
 		factory.client = new UshahidiHttpClient();
 		factory.client.setAuthentication(new PasswordAuthentication("admin",
 				"admin"));
 		factory.client.setConnectionTimeout(connectionTimeout);
 		factory.client.setSocketTimeout(socketTimeout);
 	}
-	
-	public abstract void execute();
+
+	protected void displayReports(List<Incidents> incidents) {
+		// display the fetched categories
+		if (incidents != null) {
+			for (Incidents i : incidents) {
+				System.out.println(i.incident);
+
+				// get categories
+				if ((i.getCategories() != null)
+						&& (i.getCategories().size() > 0)) {
+					System.out.println("Categories: ");
+					for (Category c : i.getCategories()) {
+						System.out.println(c);
+					}
+				}
+
+				// get comments
+				if ((i.getComments() != null) && (!i.getComments().isEmpty())) {
+					System.out.println("Comments: ");
+					for (Comment c : i.getComments()) {
+						System.out.println(c);
+
+					}
+				}
+
+				// get media
+				if ((i.getMedia() != null) && (!i.getMedia().isEmpty())) {
+					System.out.println("Media: ");
+					for (Media m : i.getMedia()) {
+						System.out.println(m);
+					}
+				}
+
+				System.out.println();
+			}
+		}
+	}
 }
