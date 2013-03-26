@@ -19,8 +19,15 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api.tasks;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
 import com.ushahidi.java.sdk.api.json.Date;
 import com.ushahidi.java.sdk.api.json.DateDeserializer;
 import com.ushahidi.java.sdk.net.Authentication;
@@ -138,6 +145,33 @@ public abstract class BaseTask {
 		return gson.fromJson(json, cls);
 	}
 	
+	/**
+	 * Deserialize the JSON from a stream object 
+	 * 
+	 * @param s The stream
+	 * @param cls The class for the model
+	 * @return The related object
+	 */
+	public static <T> T fromStream(InputStream s, Class<T> cls) {
+		return gson.fromJson(new JsonReader(new InputStreamReader(s)), cls);
+
+	}
+
+	/**
+	 * Deserialize JSON from a URL
+	 * 
+	 * @param url The URL to the json string
+	 * @param cls The class for the model
+	 * 
+	 * @return The related object
+	 * 
+	 * @throws MalformedURLException
+	 * @throws IOException
+	 */
+	public static <T> T fromUrl(String url, Class<T> cls)
+			throws MalformedURLException, IOException {
+		return fromStream(new URL(url).openStream(), cls);
+	}
 	
 	/**
 	 * Get the configured Gson object.
