@@ -137,4 +137,13 @@ public abstract class BaseTask {
 	public static <T> T fromString(String json, Class<T> cls) {
 		return gson.fromJson(json, cls);
 	}
+	
+	
+	/**
+	 * Get the configured Gson object.
+	 * @return
+	 */
+	public Gson getGson() {
+		return gson;
+	}
 }

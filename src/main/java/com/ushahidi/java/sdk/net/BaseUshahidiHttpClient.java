@@ -64,6 +64,11 @@ public abstract class BaseUshahidiHttpClient {
 
 	/** The Constant REFERRER. */
 	private static final String REFERRER = "Referer";
+	
+	private static final String POST_METHOD = "POST";
+	
+	private static final String GET_METHOD = "GET";
+	
 
 	/** The request headers. */
 	protected Map<String, String> requestHeaders = new HashMap<String, String>();
@@ -108,6 +113,15 @@ public abstract class BaseUshahidiHttpClient {
 	 */
 	public Map<String, String> getRequestHeaders() {
 		return requestHeaders;
+	}
+	
+	/**
+	 * Get request paramenters
+	 * 
+	 * @return
+	 */
+	public Map<String, String> getRequestParameters() {
+		return requestParameters;
 	}
 
 	/**
@@ -309,7 +323,7 @@ public abstract class BaseUshahidiHttpClient {
 				}
 			}
 			
-			HttpURLConnection request = openConnection(apiUrl, "GET");
+			HttpURLConnection request = openConnection(apiUrl, GET_METHOD);
 			request.connect();
 
 			if (request.getResponseCode() != expected) {
@@ -343,7 +357,7 @@ public abstract class BaseUshahidiHttpClient {
 	protected InputStream postRequest(String apiUrl, Body body, int expected) {
 		try {
 			URL url = new URL(apiUrl);
-			HttpURLConnection request = openConnection(url, "POST");
+			HttpURLConnection request = openConnection(url, POST_METHOD);
 			StringBuilder builder = new StringBuilder();
 			// for request header passed earlier on
 			final String strParams = getParametersString(requestParameters);
@@ -395,7 +409,7 @@ public abstract class BaseUshahidiHttpClient {
 	protected InputStream postRequest(String apiUrl, int expected) {
 		try {
 			URL url = new URL(apiUrl);
-			HttpURLConnection request = openConnection(url, "POST");
+			HttpURLConnection request = openConnection(url, POST_METHOD);
 
 			PrintStream out = new PrintStream(new BufferedOutputStream(
 					request.getOutputStream()));
@@ -431,7 +445,7 @@ public abstract class BaseUshahidiHttpClient {
 	 * 
 	 * @return the parameters string
 	 */
-	protected String getParametersString(Map<String, String> parameters) {
+	public String getParametersString(Map<String, String> parameters) {
 		StringBuilder builder = new StringBuilder();
 		for (Iterator<Map.Entry<String, String>> iterator = parameters
 				.entrySet().iterator(); iterator.hasNext();) {
@@ -490,7 +504,7 @@ public abstract class BaseUshahidiHttpClient {
 		try {
 
 			URL url = new URL(apiUrl);
-			HttpURLConnection request = openConnection(url, "POST");
+			HttpURLConnection request = openConnection(url, POST_METHOD);
 			String boundary = "00content0boundary00";
 
 			request.setRequestProperty("Content-Type",
@@ -787,7 +801,7 @@ public abstract class BaseUshahidiHttpClient {
 		URLConnection ret = proxy == null ? u.openConnection() : u
 				.openConnection(proxy);
 		HttpURLConnection request = (HttpURLConnection) ret;
-
+		
 		request.setConnectTimeout(getConnectionTimeout());
 		request.setReadTimeout(getSocketTimeout());
 
@@ -795,8 +809,8 @@ public abstract class BaseUshahidiHttpClient {
 			request.setRequestProperty(headerName,
 					requestHeaders.get(headerName));
 		}
-
-		request.setDoOutput(doOutput);
+		if( method == POST_METHOD) 
+			request.setDoOutput(doOutput);
 		request.setRequestMethod(method);
 		return request;
 	}

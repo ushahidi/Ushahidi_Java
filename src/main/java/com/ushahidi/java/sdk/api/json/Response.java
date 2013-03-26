@@ -54,4 +54,9 @@ public class Response {
 	public String getErrorMessage() {
 		return error.message;
 	}
+	
+	// for api that returns -- {"code":"001","message":"Missing Parameter - task."}
+	public String code;
+	
+	public String message;
 }

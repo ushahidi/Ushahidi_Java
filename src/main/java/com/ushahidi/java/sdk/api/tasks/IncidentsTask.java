@@ -45,6 +45,7 @@ public class IncidentsTask extends BaseTask {
 	private static final String TASK = "incidents";
 
 	public Reports reports;
+	
 
 	/**
 	 * Default constructor for ReportsTask. Sets the limit default value to 20.
@@ -68,7 +69,7 @@ public class IncidentsTask extends BaseTask {
 	 * 
 	 */
 	public List<Incidents> all() {
-
+		
 		reports = fromString(client.sendGetRequest(url), Reports.class);
 		return reports.getIncidents();
 	}
