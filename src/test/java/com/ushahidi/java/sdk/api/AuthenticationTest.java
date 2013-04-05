@@ -1,7 +1,6 @@
 package com.ushahidi.java.sdk.api;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -38,12 +37,12 @@ public class AuthenticationTest extends BaseTaskTest {
 		} catch (UshahidiException ue) {
 			String json = ue.getCause().getMessage();
 			Reports r = BaseTask.fromString(json, Reports.class);
-			Assert.assertEquals(r.getErrorCode(), 5);
+			assertEquals(r.getErrorCode(), 5);
 			return;
 		} catch (Exception e) {
-			Assert.fail();
+			fail();
 		}
-		Assert.fail();
+		fail();
 	}
 
 	/**
@@ -55,7 +54,7 @@ public class AuthenticationTest extends BaseTaskTest {
 			task.setAuthentication(USERNAME, PASSWORD);
 			task.verified();
 		} catch (Exception e) {
-			Assert.fail();
+			fail();
 		}
 	}
 

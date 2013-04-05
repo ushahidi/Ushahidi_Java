@@ -39,7 +39,7 @@ public class CategoriesTaskTest extends BaseTaskTest {
 	private CategoriesTask task;
 
 	/** The default category ID used in testing */
-	private static final int CAT_ID = 1;
+	private static final int CAT_ID = 33;
 
 	@Before
 	public void setUp() throws Exception {

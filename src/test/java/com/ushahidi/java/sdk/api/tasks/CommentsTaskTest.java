@@ -41,7 +41,7 @@ public class CommentsTaskTest extends BaseTaskTest {
 	private CommentsTask task;
 
 	/** The default report ID to use in testing */
-	private static final int REPORT_ID = 476;
+	private static final int REPORT_ID = 1068;
 
 	/**
 	 * @throws java.lang.Exception
