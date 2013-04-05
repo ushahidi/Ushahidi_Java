@@ -4,6 +4,8 @@
 	<!-- Set global properties for this build -->
 	<property name="src" location="src/main/java" />
 	<property name="egsrc" location="src/examples/java" />
+	<property name="testsrc" location="src/test/java" />
+	<property name="junit.output.dir" value="junit"/>
 	<property name="bin" location="bin" />
 	<property name="doc" location="doc" />
 	<property name="dist" location="dist" />
@@ -44,7 +46,21 @@
 			<classpath refid="compile.classpath" />
 		</java>
 	</target>
-
+	
+	<target name="test" >
+	    <mkdir dir="${junit.output.dir}"/>
+	    <junit printsummary="withOutAndErr" haltonfailure="no">
+	        <classpath refid="compile.classpath" />
+	   		<formatter type="plain"/>
+      		<formatter type="xml"/>
+      		<batchtest fork="yes" todir="${junit.output.dir}">
+        	<fileset dir="${testsrc}">
+          		<include name="**/*.java"/>
+        	</fileset>
+      </batchtest>
+	   	</junit>
+	</target>
+	
 	<target name="javadoc" description="Generate Javadoc from source files in {$src}">
 		<javadoc sourcepath="${src}" destdir="${doc}">
 			<fileset dir="${src}" defaultexcludes="yes">
