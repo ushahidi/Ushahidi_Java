@@ -19,21 +19,32 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.util;
 
-import static org.junit.Assert.*;
-
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
+import com.ushahidi.java.sdk.api.tasks.BaseTaskTest;
 
 /**
  * Test the Image utility class
  */
-public class ImageTest {
+public class ImageTest extends BaseTaskTest {
 
 	private static final String IMAGE_URL = "https://lh6.googleusercontent.com/-9p_YQnFQHog/UFyuJlaTYYI/AAAAAAAAH7A/VTeuTEaNLxw/s720/12%2520-%25201.jpg";
 
-	private static final String DESTINATION = "/home/eyedol/Pictures/";
+	private static final String DESTINATION = "/tmp";
 
 	private static final String IMAGE_NAME = "motor.jpg";
+	
+	@Before
+	public void setUp() throws Exception {
+		super.setUp();
+	}
 
+	@After
+	public void tearDown() throws Exception {
+		super.tearDown();
+	}
 	/**
 	 * Test method for
 	 * {@link com.ushahidi.java.sdk.util.Image#download(java.lang.String, java.lang.String, java.lang.String)}

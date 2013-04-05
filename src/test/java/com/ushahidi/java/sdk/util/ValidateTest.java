@@ -19,15 +19,27 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.util;
 
-import static org.junit.Assert.*;
-
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
+import com.ushahidi.java.sdk.api.tasks.BaseTaskTest;
 
 /**
  * 
  */
-public class ValidateTest {
+public class ValidateTest extends BaseTaskTest {
 
+	@Before
+	public void setUp() throws Exception {
+		super.setUp();
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		super.tearDown();
+	}
+	
 	/**
 	 * Test method for
 	 * {@link com.ushahidi.java.sdk.util.Validate#email(java.lang.String)}.
