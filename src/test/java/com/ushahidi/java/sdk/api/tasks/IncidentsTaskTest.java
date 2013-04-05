@@ -35,15 +35,15 @@ public class IncidentsTaskTest extends BaseTaskTest {
 
 	private static final int SINCE_ID = 1;
 
-	private static final int MAX_ID = 126;
+	private static final int MAX_ID = 1083;
 
-	private static final int REPORT_ID = 475;
+	private static final int REPORT_ID = 1068;
 
-	private static final int LOCATION_ID = 476;
+	private static final int LOCATION_ID = 1083;
 
 	private static final int CATEGORY_ID = 1;
 
-	private static final String LOCATION_NAME = "accra";
+	private static final String LOCATION_NAME = "Adana/Adana Province, Turkey";
 
 	private static final String CATEGORY_NAME = "Category 1";
 

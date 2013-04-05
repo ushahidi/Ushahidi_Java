@@ -61,6 +61,8 @@ public class BaseTaskTest extends TestCase {
 		factory = UshahidiApiTaskFactory.newInstance(DEMO_DEPLOYMENT);
 		factory.client = new UshahidiHttpClient();
 		factory.client.setAuthentication(authentication);
+		factory.client.setConnectionTimeout(50000);
+		factory.client.setSocketTimeout(50000);
 	}
 
 	@After
