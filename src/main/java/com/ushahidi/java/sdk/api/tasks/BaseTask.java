@@ -167,7 +167,7 @@ public abstract class BaseTask {
 	 * 
 	 * @throws MalformedURLException
 	 * @throws IOException
-	 */
+	 *
 	public static <T> T fromUrl(String url, Class<T> cls)
 			throws MalformedURLException, IOException {
 		return fromStream(new URL(url).openStream(), cls);
