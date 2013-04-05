@@ -31,9 +31,9 @@ public class TagVideoTaskTest extends BaseTaskTest {
 
 	private TagVideoTask task;
 
-	private static final int REPORT_ID = 475;
+	private static final int REPORT_ID = 1068;
 
-	private static final String URL = "http://www.android.com/whatsnew/";
+	private static final String URL = "http://www.youtube.com/watch?v=Zr4JwPb99qU";
 
 	/**
 	 * @throws java.lang.Exception
@@ -54,9 +54,10 @@ public class TagVideoTaskTest extends BaseTaskTest {
 	}
 
 	@Test
-	public void testTagNews() {
+	public void testTagVideo() {
 
-		assertNotNull("Category cannot be null ", task.tagNews(REPORT_ID, URL));
+		assertNotNull("Tag video cannot be null ",
+				task.tagVideo(REPORT_ID, URL));
 	}
 
 }
