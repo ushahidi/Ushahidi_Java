@@ -31,7 +31,7 @@ public class TagNewsTaskTest extends BaseTaskTest {
 
 	private TagNewsTask task;
 
-	private static final int REPORT_ID = 475;
+	private static final int REPORT_ID = 1068;
 
 	private static final String URL = "http://www.android.com/whatsnew/";
 
