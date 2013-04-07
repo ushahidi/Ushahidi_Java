@@ -85,13 +85,15 @@ public class UshahidiHttpClient extends BaseUshahidiHttpClient {
 		try {
 			addRequestHeader("User-Agent", getUserAgent());
 			inputStream = getRequest(url);
-
+			
 			if (inputStream != null) {
 				return streamToString(inputStream);
 			} else {
+				
 				throw new UshahidiException(
 						"Unknown content found in response.");
 			}
+			
 		} catch (Exception e) {
 			throw new UshahidiException(e);
 		} finally {

@@ -64,11 +64,10 @@ public abstract class BaseUshahidiHttpClient {
 
 	/** The Constant REFERRER. */
 	private static final String REFERRER = "Referer";
-	
+
 	private static final String POST_METHOD = "POST";
-	
+
 	private static final String GET_METHOD = "GET";
-	
 
 	/** The request headers. */
 	protected Map<String, String> requestHeaders = new HashMap<String, String>();
@@ -114,7 +113,7 @@ public abstract class BaseUshahidiHttpClient {
 	public Map<String, String> getRequestHeaders() {
 		return requestHeaders;
 	}
-	
+
 	/**
 	 * Get request paramenters
 	 * 
@@ -322,10 +321,26 @@ public abstract class BaseUshahidiHttpClient {
 							+ getParametersString(requestParameters));
 				}
 			}
-			
+
 			HttpURLConnection request = openConnection(apiUrl, GET_METHOD);
 			request.connect();
+			
+			// follow, 3xx is redirect
+			int responseCode = request.getResponseCode();
+			boolean redirect = false;
+			if (responseCode != HttpURLConnection.HTTP_OK) {
+				if (responseCode == HttpURLConnection.HTTP_MOVED_TEMP
+						|| responseCode == HttpURLConnection.HTTP_MOVED_PERM
+						|| responseCode == HttpURLConnection.HTTP_SEE_OTHER)
+					redirect = true;
+			}
 
+			if(redirect) {
+				String location = request.getHeaderField("Location");
+				request = openConnection(new URL(location), GET_METHOD);
+				request.connect();
+			}
+			
 			if (request.getResponseCode() != expected) {
 				throw new UshahidiException(
 						streamToString(getWrappedInputStream(
@@ -801,7 +816,7 @@ public abstract class BaseUshahidiHttpClient {
 		URLConnection ret = proxy == null ? u.openConnection() : u
 				.openConnection(proxy);
 		HttpURLConnection request = (HttpURLConnection) ret;
-		
+
 		request.setConnectTimeout(getConnectionTimeout());
 		request.setReadTimeout(getSocketTimeout());
 
@@ -809,7 +824,7 @@ public abstract class BaseUshahidiHttpClient {
 			request.setRequestProperty(headerName,
 					requestHeaders.get(headerName));
 		}
-		if( method == POST_METHOD) 
+		if (method == POST_METHOD)
 			request.setDoOutput(doOutput);
 		request.setRequestMethod(method);
 		return request;

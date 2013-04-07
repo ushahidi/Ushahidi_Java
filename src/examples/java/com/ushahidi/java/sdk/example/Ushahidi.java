@@ -45,10 +45,10 @@ public abstract class Ushahidi {
 
 	public Ushahidi() {
 		factory = UshahidiApiTaskFactory
-				.newInstance("http://demo.ushahidi.com");
+				.newInstance("http://eyedol.crowdmap.com");
 		factory.client = new UshahidiHttpClient();
-		factory.client.setAuthentication(new PasswordAuthentication("admin",
-				"admin"));
+		factory.client.setAuthentication(new PasswordAuthentication("addhen25@gmail.com",
+				"godles"));
 		factory.client.setConnectionTimeout(connectionTimeout);
 		factory.client.setSocketTimeout(socketTimeout);
 	}

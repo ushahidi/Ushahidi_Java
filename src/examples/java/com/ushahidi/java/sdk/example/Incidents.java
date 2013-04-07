@@ -21,6 +21,7 @@ package com.ushahidi.java.sdk.example;
 
 import java.util.List;
 
+import com.ushahidi.java.sdk.UshahidiException;
 import com.ushahidi.java.sdk.api.tasks.IncidentsTask;
 
 /**
@@ -37,12 +38,16 @@ public class Incidents extends Ushahidi {
 
 	public void fetchAllReports() {
 		// fetch all incidents / reports
-		List<com.ushahidi.java.sdk.api.Incidents> incidents = task.all();
+		try {
+			List<com.ushahidi.java.sdk.api.Incidents> incidents = task.all();
 
-		System.out.println("Fetching all reports/incidents...");
-		
-		displayReports(incidents);
-	
+			System.out.println("Fetching all reports/incidents...");
+
+			displayReports(incidents);
+		} catch (UshahidiException e) {
+			//System.out.println(e.getMessage());
+		}
+
 	}
 
 }
