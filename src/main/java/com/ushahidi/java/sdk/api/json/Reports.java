@@ -41,8 +41,11 @@ public class Reports extends Response {
 	}
 
 	public List<Incidents> getIncidents() {
-		if(payload !=null) {
-			return payload.incidents;
+		if (payload != null) {
+			// check if There are no results to show.
+			if (!error.code.equals("007")) {
+				return payload.incidents;
+			}
 		}
 		return null;
 	}
@@ -50,5 +53,5 @@ public class Reports extends Response {
 	public Payload getPayload() {
 		return payload;
 	}
-	
+
 }

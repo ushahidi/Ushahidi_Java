@@ -45,11 +45,15 @@ public class Countries extends Response {
 
 	public List<Country> getCountries() {
 		List<Country> count = new ArrayList<Country>();
-		for (Payload._Country item : payload.countries) {
-			Country c = item.country;
-			count.add(c);
+		// check if There are no results to show.
+		if (!error.code.equals("007")) {
+			for (Payload._Country item : payload.countries) {
+				Country c = item.country;
+				count.add(c);
+			}
 		}
 		return count;
+
 	}
 
 	public Country getCountry() {

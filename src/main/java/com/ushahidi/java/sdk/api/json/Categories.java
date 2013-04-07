@@ -56,9 +56,12 @@ public class Categories extends Response {
 
 		List<Category> cat = new ArrayList<Category>();
 		if (payload != null) {
-			for (Payload._Category c : payload.categories) {
-				Category category = c.category;
-				cat.add(category);
+			// check if There are no results to show.
+			if (!error.code.equals("007")) {
+				for (Payload._Category c : payload.categories) {
+					Category category = c.category;
+					cat.add(category);
+				}
 			}
 		}
 		return cat;

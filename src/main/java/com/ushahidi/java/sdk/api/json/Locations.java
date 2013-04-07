@@ -44,9 +44,12 @@ public class Locations extends Response {
 
 	public List<Location> getLocations() {
 		List<Location> loc = new ArrayList<Location>();
-		for (Payload._Location item : payload.locations) {
-			Location l = item.location;
-			loc.add(l);
+		// check if There are no results to show.
+		if (!error.code.equals("007")) {
+			for (Payload._Location item : payload.locations) {
+				Location l = item.location;
+				loc.add(l);
+			}
 		}
 		return loc;
 	}
