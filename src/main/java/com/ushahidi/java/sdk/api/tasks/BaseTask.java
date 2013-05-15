@@ -153,7 +153,7 @@ public abstract class BaseTask {
 	 * @return The related object
 	 */
 	public static <T> T fromStream(InputStream s, Class<T> cls) {
-		return gson.fromJson(new JsonReader(new InputStreamReader(s)), cls);
+		return  cls.cast(gson.fromJson(new JsonReader(new InputStreamReader(s)), cls));
 
 	}
 
