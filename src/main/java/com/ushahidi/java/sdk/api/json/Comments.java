@@ -47,10 +47,12 @@ public class Comments extends Response {
 		List<Comment> comt = new ArrayList<Comment>();
 		if (payload != null) {
 			// check if There are no results to show.
-			if ( !error.code.equals("007")) {
-				for (Payload._Comment item : payload.comments) {
-					Comment c = item.comment;
-					comt.add(c);
+			if (!error.code.equals("007")) {
+				if ((payload.comments != null) && (payload.comments.size() > 0)) {
+					for (Payload._Comment item : payload.comments) {
+						Comment c = item.comment;
+						comt.add(c);
+					}
 				}
 			}
 		}
