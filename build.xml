@@ -35,8 +35,15 @@
 		<javac destdir="${bin}" debug="true" debuglevel="${debuglevel}"
 			includeantruntime="false">
 			<src path="${src}" />
-			<src path="${egsrc}" />
 			<classpath refid="compile.classpath" />
+		</javac>
+	</target>
+    <target name="compileexample" depends="init"
+		description="Compile the example code from ${src} into ${bin}">
+		<javac destdir="${bin}" debug="true" debuglevel="${debuglevel}"
+			includeantruntime="false">
+			<src path="${egsrc}" />
+			<classpath refid="compileexample.classpath" />
 		</javac>
 	</target>
 
