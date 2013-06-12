@@ -88,7 +88,7 @@ public abstract class BaseTask {
 	}
 
 	/**
-	 * Create a the task using the default {@link UshahidiHttpClient}
+	 * Create a task using the default {@link UshahidiHttpClient}
 	 * 
 	 * @param url
 	 *            The Ushahidi deployment
