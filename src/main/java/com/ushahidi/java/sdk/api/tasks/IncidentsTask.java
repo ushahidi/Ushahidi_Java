@@ -152,7 +152,9 @@ public class IncidentsTask extends BaseTask {
 
         client.setRequestParameters("by", "incidentid");
         client.setRequestParameters("id", String.valueOf(id));
-        reports = fromString(client.sendGetRequest(url), Reports.class);
+        String response = client.sendGetRequest(url);
+        System.out.println(response);
+        reports = fromString(response, Reports.class);
         List<Incidents> incidents = reports.getIncidents();
 
         if (incidents != null && incidents.size() > 0) {
