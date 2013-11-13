@@ -92,3 +92,7 @@ To generate recent version of the Javadoc, run
 ## Clean up
 To clean up the generated distribution file and Javadoc in the root folder, run 
 `ant clean`
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ushahidi/ushahidi_java/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
