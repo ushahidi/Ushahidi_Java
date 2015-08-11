@@ -21,6 +21,7 @@ package com.ushahidi.java.sdk.annotations;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.Map;
 
 import com.ushahidi.java.sdk.net.content.Body;
 
@@ -53,6 +54,13 @@ public class Form {
 						}
 						// add the form fields
 						body.addField(formField.name(), field.get(obj));
+					}else if (annotation instanceof FormCustomField) {
+						if (!field.isAccessible()) {
+							field.setAccessible(true);
+						}
+						Map<String,String> customFields = (Map<String,String>)(field.get(obj));
+						for(String id: customFields.keySet())
+							body.addField("custom_field["+id+"]", customFields.get(id));
 					}
 				}
 			} catch (IllegalArgumentException e) {

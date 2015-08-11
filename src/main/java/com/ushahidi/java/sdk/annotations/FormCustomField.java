@@ -17,51 +17,20 @@
  ** Ushahidi developers at team@ushahidi.com.
  **
  *****************************************************************************/
+package com.ushahidi.java.sdk.annotations;
 
-package com.ushahidi.java.sdk.api.json;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * The class represents the Main response returned as a result of 
- * an Ushahidi API call.
+ * FormField Annotation
  * 
  * @author eyedol
  *
  */
-public class Response {
-	
-	protected static class Payload {
-		protected String domain;
-	}
-	
-	/**
-	 * Error object
-	 * 
-	 * @author eyedol
-	 *
-	 */
-	protected static class Error {
-		protected String code;
-		protected String message;
-	}
-	
-	protected Error error;
-	
-	public int getErrorCode() {
-		if(error != null)
-			return Integer.valueOf(error.code);
-		else
-			return -666;
-	}
-	
-	public String getErrorMessage() {
-		if(error != null)
-			return error.message;
-		else
-			return null;
-	}
-	
-	// for api that returns -- {"code":"001","message":"Missing Parameter - task."}
-	public String code;
-	
-	public String message;
+@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface FormCustomField {
 }

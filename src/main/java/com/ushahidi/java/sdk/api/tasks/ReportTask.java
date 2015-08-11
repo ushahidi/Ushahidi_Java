@@ -26,6 +26,7 @@ public class ReportTask extends BaseTask {
 	 */
 	public Response submit(ReportFields report) {
 		Body body = report.getParameters(report);
+		System.out.println("Body: "+body);
 		return fromString(client.sendMultipartPostRequest(url, body),
 				Response.class);
 	}
