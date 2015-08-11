@@ -59,8 +59,9 @@ public class Form {
 							field.setAccessible(true);
 						}
 						Map<String,String> customFields = (Map<String,String>)(field.get(obj));
-						for(String id: customFields.keySet())
+						for(String id: customFields.keySet()) {
 							body.addField("custom_field["+id+"]", customFields.get(id));
+                        }
 					}
 				}
 			} catch (IllegalArgumentException e) {
