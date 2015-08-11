@@ -47,17 +47,12 @@ public class Response {
 	protected Error error;
 	
 	public int getErrorCode() {
-		if(error != null)
-			return Integer.valueOf(error.code);
-		else
-			return -666;
+		
+		return Integer.valueOf(error.code);
 	}
 	
 	public String getErrorMessage() {
-		if(error != null)
-			return error.message;
-		else
-			return null;
+		return error.message;
 	}
 	
 	// for api that returns -- {"code":"001","message":"Missing Parameter - task."}

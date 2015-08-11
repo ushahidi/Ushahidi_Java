@@ -5,13 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import com.ushahidi.java.sdk.annotations.Form;
-import com.ushahidi.java.sdk.annotations.FormCustomField;
 import com.ushahidi.java.sdk.annotations.FormField;
 
 public class ReportFields extends Form {
@@ -43,11 +40,6 @@ public class ReportFields extends Form {
 	private List<String> video = new ArrayList<String>();
 	@FormField(name = "incident_news[]")
 	private List<String> news = new ArrayList<String>();
-	@FormField(name = "form_id")
-	private String formId;
-	@FormCustomField
-	private Map<String,String> customFields= new HashMap<String, String>();
-	
 
 	// person
 	@FormField(name = "person_first")
@@ -113,16 +105,5 @@ public class ReportFields extends Form {
 
 	public void addPhotos(List<File> photos) {
 		photo.addAll(photos);
-	}
-
-	public void addCustomFields(Map<String,String> cfs) {
-		customFields.putAll(cfs);
-	}
-	public void addCustomField(String name, String value) {
-		customFields.put(name,value);
-	}
-
-	public void setFormId(String formId) {
-		this.formId = formId;
 	}
 }

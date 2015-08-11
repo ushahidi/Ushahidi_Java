@@ -19,8 +19,6 @@
  *****************************************************************************/
 package com.ushahidi.java.sdk.api;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
  * @author eyedol
  * 
@@ -60,7 +58,6 @@ public class Category {
 	/**
 	 * The parent category
 	 */
-	@SerializedName("parent_id")
 	private int parentId;
 
 	/**
