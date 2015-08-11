@@ -58,8 +58,9 @@ public class UshahidiApiTaskFactory {
 	 * @return The categories task
 	 */
 	public CategoriesTask createCategoriesTask() {
-		if (client != null)
+		if (client != null) {
 			return new CategoriesTask(url, client);
+        }
 
 		return new CategoriesTask(url);
 	}
@@ -70,8 +71,10 @@ public class UshahidiApiTaskFactory {
 	 * @return The comment task
 	 */
 	public CommentsTask createCommentTask() {
-		if (client != null)
+		if (client != null) {
 			return new CommentsTask(url, client);
+        }
+
 		return new CommentsTask(url);
 	}
 
@@ -81,8 +84,10 @@ public class UshahidiApiTaskFactory {
 	 * @return The countries task
 	 */
 	public CountriesTask createCountriesTask() {
-		if (client != null)
+		if (client != null) {
 			return new CountriesTask(url, client);
+        }
+
 		return new CountriesTask(url);
 	}
 
@@ -92,8 +97,10 @@ public class UshahidiApiTaskFactory {
 	 * @return The location task
 	 */
 	public LocationTask createLocationTask() {
-		if (client != null)
+		if (client != null) {
 			return new LocationTask(url, client);
+        }
+
 		return new LocationTask(url);
 	}
 
@@ -103,8 +110,10 @@ public class UshahidiApiTaskFactory {
 	 * @return The incidents task
 	 */
 	public IncidentsTask createIncidentsTask() {
-		if (client != null)
+		if (client != null) {
 			return new IncidentsTask(url, client);
+        }
+
 		return new IncidentsTask(url);
 	}
 
@@ -114,8 +123,9 @@ public class UshahidiApiTaskFactory {
 	 * @return The system task
 	 */
 	public SystemTask createSystemTask() {
-		if (client != null)
+		if (client != null) {
 			return new SystemTask(url, client);
+        }
 
 		return new SystemTask(url);
 	}
@@ -126,8 +136,10 @@ public class UshahidiApiTaskFactory {
 	 * @return The tag news task
 	 */
 	public TagNewsTask createTagNewsTask() {
-		if (client != null)
+		if (client != null) {
 			return new TagNewsTask(url, client);
+        }
+
 		return new TagNewsTask(url);
 	}
 
@@ -137,8 +149,10 @@ public class UshahidiApiTaskFactory {
 	 * @return The tag video task
 	 */
 	public TagVideoTask createTagVideoTask() {
-		if (client != null)
+		if (client != null) {
 			return new TagVideoTask(url, client);
+        }
+
 		return new TagVideoTask(url);
 	}
 
@@ -153,8 +167,10 @@ public class UshahidiApiTaskFactory {
 	 * @return The admin task
 	 */
 	public CategoriesAdminTask createCategoriesAdminTask() {
-		if (client != null)
+		if (client != null) {
 			return new CategoriesAdminTask(url, client);
+        }
+
 		return new CategoriesAdminTask(url);
 	}
 
@@ -165,8 +181,10 @@ public class UshahidiApiTaskFactory {
 	 * @return The reports admin task
 	 */
 	public ReportsAdminTask createReportsAdminTask() {
-		if (client != null)
+		if (client != null) {
 			return new ReportsAdminTask(url, client);
+        }
+
 		return new ReportsAdminTask(url);
 	}
 
@@ -179,6 +197,7 @@ public class UshahidiApiTaskFactory {
 		if (client != null) {
 			return new ReportTask(url, client);
 		}
+
 		return new ReportTask(url);
 	}
 	
@@ -188,8 +207,9 @@ public class UshahidiApiTaskFactory {
 	 * @return The categories task
 	 */
 	public CustomFormTask createCustomFormsTask() {
-		if (client != null)
+		if (client != null) {
 			return new CustomFormTask(url, client);
+        }
 
 		return new CustomFormTask(url);
 	}
