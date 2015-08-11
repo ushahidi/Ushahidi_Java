@@ -9,11 +9,7 @@
 	<property name="bin" location="bin" />
 	<property name="doc" location="doc" />
 	<property name="dist" location="dist" />
-<<<<<<< HEAD
 	<property name="version" value="1.1" />
-=======
-	<property name="version" value="1.1.1" />
->>>>>>> develop
 	<property name="libs" location="libs/gson-2.2.2.jar" />
 
 	<property environment="env" />

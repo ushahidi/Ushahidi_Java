@@ -181,17 +181,5 @@ public class UshahidiApiTaskFactory {
 		}
 		return new ReportTask(url);
 	}
-	
-	/**
-	 * Create Custom Form task object
-	 * 
-	 * @return The categories task
-	 */
-	public CustomFormTask createCustomFormsTask() {
-		if (client != null)
-			return new CustomFormTask(url, client);
-
-		return new CustomFormTask(url);
-	}
 
 }
