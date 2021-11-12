@@ -1,9 +1,0 @@
-bin
-out
-gen
-dist
-junit
-*.swp
-.settings
-.DS_Store
-.classpath
